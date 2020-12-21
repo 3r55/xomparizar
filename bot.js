@@ -72,7 +72,8 @@ client.on("guildMemberAdd", member => {
         .setThumbnail(h.avatarURL)
         .setAuthor(h.username,h.avatarURL)
         .addField(': تاريخ دخولك الدسكورد',`${moment(member.user.createdAt).format('D/M/YYYY h:mm a')} **\n** \`${moment(member.user.createdAt).fromNow()}\``,true)            
-         .addField(': تاريخ دخولك السيرفر',`${moment(member.joinedAt).format('D/M/YYYY h:mm a ')} \n\`\`${moment(member.joinedAt).startOf(' ').fromNow()}\`\``, true)      
+         .addField(': تاريخ دخولك السيرفر',`${moment(member.joinedAt).format('D/M/YYYY h:mm a ')} \n\`\`${moment(member.joinedAt).startOf(' ').fromNow()}\`\``, true)    
+         .setimage('')
          .setFooter(`${h.tag}`,"https://images-ext-2.discordapp.net/external/JpyzxW2wMRG2874gSTdNTpC_q9AHl8x8V4SMmtRtlVk/https/orcid.org/sites/default/files/files/ID_symbol_B-W_128x128.gif")
      welcomer.send({embed:heroo});          
          
@@ -653,7 +654,7 @@ const command = args.shift().toLowerCase();
         if(!message.member.hasPermission('ADMINISTRATOR')) return;
         if(!message.channel.guild) return;
         message.guild.fetchBans()
-        .then(bans => message.channel.send(`\`${bans.size}\` ***: عدد الاشخاص المحظورين من السيرفر ***`)).then(message => message.delete(5000))
+        .then(bans => message.channel.send(`\`${bans.size}\` ***: ژمارەی باند بوەکان ***`)).then(message => message.delete(5000))
 
   .catch(console.error);
 }
@@ -679,26 +680,6 @@ client.on('message', message => {
     }
 });
 
-
-client.on('message', msg => {
-  if (msg.author.bot) return;
-  if (!msg.content.startsWith(prefix)) return;
-  let command = msg.content.split(" ")[0];
-  command = command.slice(prefix.length);
-
-  let args = msg.content.split(" ").slice(1);
-
-
-if (command == "غرد") {
-    let embed = new Discord.RichEmbed()
-    .setColor('RANDOM')
-    .setAuthor(msg.author.username, msg.author.avatarURL)
-    .setDescription(args.join(" "))
-    .setFooter('© . :AG || Copyright')
-    msg.channel.sendEmbed(embed);
-    msg.delete();
-  }
-});
 
 
 
@@ -733,47 +714,7 @@ client.on("message", message => {
 
 
 
-const cuttweet = [
-     'كت تويت ‏- تخيّل لو أنك سترسم شيء وحيد فيصبح حقيقة، ماذا سترسم؟',
-     'كت تويت ‏- أكثر شيء يُسكِت الطفل برأيك؟',
-     'كت تويت ‏- الحرية لـ ... ؟',
-     'كت تويت ‏- قناة الكرتون المفضلة في طفولتك؟',
-     'كت تويت ‏- كلمة للصُداع؟',
-     'كت تويت ‏- ما الشيء الذي يُفارقك؟',
-     'كت تويت ‏- ما الشيء الذي يُفارقك؟',
-     'كت تويت ‏- موقف مميز فعلته مع شخص ولا يزال يذكره لك؟',
-     'كت تويت ‏- أيهما ينتصر، الكبرياء أم الحب؟',
-     'كت ��ويت| بعد ١٠ سنين ايش بتكون ؟',
 
-     'كت تويت ‏- مِن أغرب وأجمل الأسماء التي مرت عليك؟',
-     '‏كت تويت| عمرك شلت مصيبة عن شخص برغبتك ؟',
-'كت تويت ‏- أكثر سؤال وجِّه إليك مؤخرًا؟',
-     '‏كت تويت|ما هو الشيء الذي يجعلك تشعر بالخوف؟',
-     '‏كت تويت|وش يفسد الصداقة؟',
-     '‏كت ت��ي����|شخص ل��ترفض له طلبا ؟',
-     '‏كت تويت|كم مره خسرت شخص تحبه؟.',
-     '‏كت تويت|كيف تتعامل مع الاشخاص السلبيين ؟',
-     '‏كت تويت|كلمة تشعر بالخجل اذا قيلت لك؟',
-     '‏كت تويت|هل تُخفي نجاحك أو كت كت تويت | هل تخفي نجاحك أو أشيائك الجميلة خوفاً من العين والحسد؟',
-     '‏كت تويت|جسمك اكبر من عٌ��رك او ��لعكسّ ؟!',
-     '‏كت تويت|أقوى كذبة مشت عليك ؟',
-     '‏كت تويت|تتأثر بدموع شخص يبكي قدامك قبل تعرف السبب ؟',
-     'كت تويت|هل حدث وضحيت من أجل شخصٍ أحببت؟',
-     '‏كت تويت|أكثر تطبيق تستخدمه مؤخرًا؟',
-     '‏كت تويت|‏اكثر شي يرضيك اذا زعلت بدون تفكير ؟',
-     '‏كت تويت|وش محتاج عشان تكون مبسوط ؟',
-     '‏كت تويت|مطلبك الوحيد الحين ؟',
-     '‏كت تويت|- ه�� حدث وشعرت بأنك ارتكبت أحد الذنوب أثناء الصيام؟',
-]
-
-client.on('message', message => {
-  if (message.content === `-كت تويت`) {
-message.channel.sendMessage({embed: {
-  color: 3547003,
-  description: `${cuttweet[Math.floor(Math.random() * cuttweet.length)]}`
-}});
-};
-});
 
  client.on('message', message => { //jackeo جاكيو
     if (message.content.startsWith("تهكير")) {
@@ -1008,35 +949,7 @@ message.channel.send(embed500)
 
 
 
-client.on('message',async message => {
-  if(message.content.startsWith(prefix + "id")) {
-    if(message.author.bot) return;
-    if(message.channel.type === 'dm') return;
-      message.guild.fetchInvites().then(invs => {
-    let user = message.author;
-    let personalInvites = invs.filter(i => i.inviter.id === user.id);
-    let inviteCount = personalInvites.reduce((p, v) => v.uses + p, 0);
-    const millis = new Date().getTime() - message.author.createdAt.getTime();
-    const noww = new Date();
-    dateFormat(noww, 'dddd, mmmm dS, yyyy, h:MM:ss TT');
-    const created = millis / 1000 / 60 / 60 / 24;
-    const milliss = new Date().getTime() - message.guild.member(message.author).joinedAt.getTime();
-    const nows = new Date();
-    dateFormat(nows, 'dddd, mmmm dS, yyyy, h:MM:ss TT');
-    const joined = milliss / 1000 / 60 / 60 / 24;
-    let embed = new Discord.RichEmbed()
-    .setAuthor(message.author.username, message.author.avatarURL)
-    .setColor('#36393e')
-    .setThumbnail(message.author.avatarURL)
-    .addField('» مضى على دخولك الدسكورد', `${created.toFixed(0)} يومّا`,true)
-    .addField('» مضى على دخولك السيرفر', `${joined.toFixed(0)} يومّا`,true)
-    .addField('» دعوات',inviteCount,true)
-    .setFooter(' Premium Bot™ © | 2018.');
 
-    message.channel.send(embed);
-  });
-  }
-});
   
 
 
@@ -1116,25 +1029,6 @@ client.on("message", message => {
                           }
 });
 
-client.on('message', function(msg) {
-    const prefix = '-'
-    if(msg.content.startsWith (prefix  + 'server')) {
-      let embed = new Discord.RichEmbed()
-      .setColor('RANDOM')
-      .setThumbnail(msg.guild.iconURL)
-      .setTitle(`Showing Details Of  **${msg.guild.name}*`)
-      .addField('🌐** نوع السيرفر**',`[** __${msg.guild.region}__ **]`,true)
-      .addField('🏅** __الرتب__**',`[** __${msg.guild.roles.size}__ **]`,true)
-      .addField('👩‍👩‍👧‍👧 👨‍👨‍👦**__ عدد الاعضاء__**',`[** __${msg.guild.memberCount}__ **]`,true)
-      .addField('👁**__ عدد الاعضاء الاونلاين__**',`[** __${msg.guild.members.filter(m=>m.presence.status == 'online').size}__ **]`,true)
-      .addField('📝**__ الرومات الكتابية__**',`[** __${msg.guild.channels.filter(m => m.type === 'text').size}__** ]`,true)
-      .addField('🎤**__ رومات الصوت__**',`[** __${msg.guild.channels.filter(m => m.type === 'voice').size}__ **]`,true)
-      .addField('👑**__ الأونـر__**',`**${msg.guild.owner}**`,true)
-      .addField('🆔**__ ايدي السيرفر__**',`**${msg.guild.id}**`,true)
-      .addField('📅**__ تم عمل السيرفر في__**',msg.guild.createdAt.toLocaleString())
-      msg.channel.send({embed:embed});
-    }
-  });
 
   
     client.on('message', message => {
@@ -1160,22 +1054,7 @@ message.channel.sendEmbed(avatar)
 ////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\
 ////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\
 */
-var servers = [];
-var queue = [];
-var guilds = [];
-var queueNames = [];
-var isPlaying = false;
-var dispatcher = null;
-var voiceChannel = null;
-var skipReq = 0;
-var skippers = [];
-var now_playing = [];
-/*
-\\\\\\\\\\\\\\\\\\\\\\\\n3k4a/////////////////////////
-\\\\\\\\\\\\\\\\\\\\\\\\n3k4a/////////////////////////
-\\\\\\\\\\\\\\\\\\\\\\\\n3k4a/////////////////////////
-\\\\\\\\\\\\\\\\\\\\\\\\n3k4a/////////////////////////
-*/
+
 
 
 
