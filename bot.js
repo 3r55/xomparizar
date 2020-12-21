@@ -151,42 +151,16 @@ client.on("message", message => {
  }
 }); 
 
-client.on('message',message =>{
-    var prefix = "-";
-    if(message.content.startsWith(prefix + 'top')) {
-  message.guild.fetchInvites().then(i =>{
-  var invites = [];
-   
-  i.forEach(inv =>{
-    var [invs,i]=[{},null];
-     
-    if(inv.maxUses){
-        invs[inv.code] =+ inv.uses+"/"+inv.maxUses;
-    }else{
-        invs[inv.code] =+ inv.uses;
-    }
-        invites.push(`invite: ${inv.url} inviter: ${inv.inviter} \`${invs[inv.code]}\`;`);
-   
-  });
-  var embed = new Discord.RichEmbed()
-  .setColor("#000000")
-  .setDescription(`${invites.join(`\n`)+'\n\n**By:** '+message.author}`)
-  .setThumbnail("https://cdn.discordapp.com/attachments/462220624656334849/487684860442443787/ce5fb05919818916b5f598f3ee18afaa.png")
-           message.channel.send({ embed: embed });
-   
-  });
-   
-    }
-  });
+
 
 client.on("message", message => {
  if (message.content === "-support") {
   const embed = new Discord.RichEmbed()
-      .setTitle('Click here')
-      .setURL(' https://discord.gg/ZnPDHaA ')
+      .setTitle('Click HERE')
+      .setURL(' JOIN SERVER ')
       .setColor("RANDOM")
-      .setFooter('© Premium Bot :heart: جميع الحقوق محفوظة 2018 لــبوت')  
-      .addField('سيرفر الدعم الفني', ` https://discord.gg/ZnPDHaA  `)
+      .setFooter('BLACK BOT')  
+      .addField('SERVER', ` https://discord.gg/ZnPDHaA  `)
   message.author.send({embed});
 
  }
@@ -199,52 +173,22 @@ client.on("message", message => {
 
 
 
-client.on('message',async message => {
-    var p = "-"
-  function timeCon(time) {
-  let days = Math.floor(time % 31536000 / 86400)
-  let hours = Math.floor(time % 31536000 % 86400 / 3600)
-  let minutes = Math.floor(time % 31536000 % 86400 % 3600 / 60)
-  let seconds = Math.round(time % 31536000 % 86400 % 3600 % 60)
-  days = days > 9 ? days : '0' + days
-  hours = hours > 9 ? hours : '0' + hours
-  minutes = minutes > 9 ? minutes : '0' + minutes
-  seconds = seconds > 9 ? seconds : '0' + seconds
-  return `${days > 0 ? `${days}:` : ''}${(hours || days) > 0 ? `${hours}:` : ''}${minutes}:${seconds}`
-  };
-  if(message.content.startsWith( p + "botin")) {
-    const millis = new Date().getTime() - client.user.createdAt.getTime();
-    const noww = new Date();
-    dateFormat(noww, 'dddd, mmmm dS, yyyy, h:MM:ss TT');
-    const createdAT = millis / 1000 / 60 / 60 / 24;
-    var star = new Discord.RichEmbed() 
-    .setTitle(`${client.user.username} معلومات عن بوت`)
-    .setColor('#36393e')
-    .addField('💓 امر البوت', prefix, true)
-    .addField('🖥️ الرامات المستخدمة', `${(process.memoryUsage().rss / 1048576).toFixed()} ميجا بايت`,true)
-    .addField('🏍️ سرعة البوت', `${Math.round(client.ping)} ملي سكند`,true)
-    .addField('⏲️ تم تشغيل البوت منذ', `${timeCon(process.uptime())}`, true)
-    .addField('💚 السيرفرات', client.guilds.size,true)
-    .addField('💙 المستخدمين', client.users.size,true)
-    message.channel.send(star);
-  }
-});
 
 client.on('message', message => {
               if (!message.channel.guild) return;
-      if(message.content ==prefix + '-members')
-      var kayan = new Discord.RichEmbed()
+      if(message.content ==prefix + 'members')
+      var black = new Discord.RichEmbed()
       .setThumbnail(message.author.avatarURL)
       .setFooter(message.author.username, message.author.avatarURL) 
-      .setTitle('🙆| معلومات الأعضاء')
+      .setTitle('🙆| INFO MEMBER')
       .addBlankField(true)
-      .addField('🐸| متصل بالانترنت',
+      .addField('🐸| ONLINE MEMBER',
       `${message.guild.members.filter(m=>m.presence.status == 'online').size}`)
-      .addField('😡| مشغول',`${message.guild.members.filter(m=>m.presence.status == 'dnd').size}`)
-      .addField('🐨| وضع الخمول',`${message.guild.members.filter(m=>m.presence.status == 'idle').size}`)
-      .addField('😴|غير متصل على الانترنت',`${message.guild.members.filter(m=>m.presence.status == 'offline').size}`)
-      .addField('👨‍👨‍👧‍👧| اعضاء السيرفر',`${message.guild.memberCount}`)
-      message.channel.send(kayan);
+      .addField('😡| DND',`${message.guild.members.filter(m=>m.presence.status == 'dnd').size}`)
+      .addField('🐨| IDLE',`${message.guild.members.filter(m=>m.presence.status == 'idle').size}`)
+      .addField('😴| OFFLINE',`${message.guild.members.filter(m=>m.presence.status == 'offline').size}`)
+      .addField('👨‍👨‍👧‍👧| ALL MEMBERS',`${message.guild.memberCount}`)
+      message.channel.send(black);
     
     });
 
@@ -396,8 +340,8 @@ client.on('message', message => {
       const embed = new Discord.RichEmbed()
  
   .setColor("#FF0000")
-  .addField('``سرعة أتصال الــبوت`` ' , `${Date.now() - message.createdTimestamp}` + ' ms`')
-                 .setFooter(` Premium Bot
+  .addField('``خێرای خەتت`` ' , `${Date.now() - message.createdTimestamp}` + ' ms`')
+                 .setFooter(` BLACK BOT
  .`, 'https://aladdintravel.com/wp-content/uploads/2014/11/pinterest-logo-2-1074x1067.png')
 
   message.channel.sendEmbed(embed);
@@ -412,60 +356,6 @@ client.on('message', message => {
 
   
         
-client.on('message',  (message) => {
-        if(message.content.startsWith('-hug')) {
-  let user = message.mentions.users.first();
-  if (!user) {
-
-    return message.emit('commandUsage', message, this.help);
-  }
-  let hugs = [
-    'https://media.giphy.com/media/od5H3PmEG5EVq/giphy.gif',
-    'https://media.giphy.com/media/13YrHUvPzUUmkM/giphy.gif',
-    'https://media.giphy.com/media/wnsgren9NtITS/giphy.gif',
-    'https://media.giphy.com/media/qscdhWs5o3yb6/giphy.gif',
-    'https://media.giphy.com/media/hi0VuTUqLrmuc/giphy.gif',
-	'https://media.giphy.com/media/xJlOdEYy0r7ZS/giphy.gif',
-	'https://media.giphy.com/media/7WQQXPg6o3YNa/giphy.gif',
-	'https://media.giphy.com/media/LWTxLvp8G6gzm/giphy.gif',
-	'https://media.giphy.com/media/xZshtXrSgsRHy/giphy.gif',
-	'https://media.giphy.com/media/BXrwTdoho6hkQ/giphy.gif',
-	'https://media.giphy.com/media/10BcGXjbHOctZC/giphy.gif',
-	'https://media.giphy.com/media/49mdjsMrH7oze/giphy.gif',
-	'https://media.giphy.com/media/xUPGcgtKxm4PADy3Cw/giphy.gif',
-	'https://media.giphy.com/media/JTjSlqiz63j5m/giphy.gif',
-	'https://media.giphy.com/media/aD1fI3UUWC4/giphy.gif',
-	'https://media.giphy.com/media/5eyhBKLvYhafu/giphy.gif',
-	'https://media.giphy.com/media/ddGxYkb7Fp2QRuTTGO/giphy.gif',
-	'https://media.giphy.com/media/pXQhWw2oHoPIs/giphy.gif',
-	'https://media.giphy.com/media/ZRI1k4BNvKX1S/giphy.gif',
-	'https://media.giphy.com/media/ZQN9jsRWp1M76/giphy.gif',
-	'https://media.giphy.com/media/s31WaGPAmTP1e/giphy.gif',
-	'https://media.giphy.com/media/wSY4wcrHnB0CA/giphy.gif',
-	'https://media.giphy.com/media/aVmEsdMmCTqSs/giphy.gif',
-	'https://media.giphy.com/media/C4gbG94zAjyYE/giphy.gif',
-	'https://media.giphy.com/media/ArLxZ4PebH2Ug/giphy.gif',
-	'https://media.giphy.com/media/kFTKQfjK4ysZq/giphy.gif',
-	'https://media.giphy.com/media/vVA8U5NnXpMXK/giphy.gif',
-	'https://media.giphy.com/media/2q2qHJu838EyQ/giphy.gif',
-	'https://media.giphy.com/media/q3kYEKHyiU4kU/giphy.gif',
-	'https://media.giphy.com/media/3ZnBrkqoaI2hq/giphy.gif',
-	'https://media.giphy.com/media/ExQqjagJBoECY/giphy.gif',
-    'https://media.giphy.com/media/3o6Yg5fZCGeFArIcbm/giphy.gif'
-  ];
-
-  message.channel.send({
-    embed: {
-      description: `${message.author.username} اداك حضن او ضمه ${user.username}!`,
-      image: {
-        url: hugs[Math.floor(Math.random() * hugs.length)]
-      }
-    }
-  }).catch(e => {
-    client.log.error(e);
-  })
-        }  
-});
 
 
 
@@ -507,28 +397,13 @@ message.channel.sendEmbed(cat);
 
 client.on('message', message => {
 if(message.author.bot) return;
-if (message.content === 'السلام عليكم') {
+if (message.content === 'Slaw') {
 message.channel.sendFile("https://cdn.discordapp.com/attachments/462240606513659904/481475996122611712/images.jpg");
  }
 });
 
 
-client.on('message', message => {
-if(message.author.bot) return;
-if (message.content === 'حشيش') {
-message.channel.sendFile("https://cdn.discordapp.com/attachments/462240606513659904/481474963925106708/images.jpg");
-}
-});
-
-
-
-client.on('message', message => {
-if(message.author.bot) return;
-if (message.content === 'باك') {
- message.channel.sendFile("https://cdn.discordapp.com/attachments/462240606513659904/481473773959381021/download.png");
- }
- });
-         
+     
          
          
 client.on('message', message => {
@@ -540,103 +415,9 @@ message.channel.send("https://cdn.discordapp.com/attachments/486250425817890821/
 
 
 
-client.on("message", async message => {
-            if(!message.channel.guild) return;
-            var prefix = "-";
-        if(message.content.startsWith(prefix + 'invites')) {
-        var nul = 0
-        var guild = message.guild
-        await guild.fetchInvites()
-            .then(invites => {
-             invites.forEach(invite => {
-                if (invite.inviter === message.author) {
-                     nul+=invite.uses
-                    }
-                });
-            });
-          if (nul > 0) {
-              console.log(`\n${message.author.tag} has ${nul} invites in ${guild.name}\n`)
-              var embed = new Discord.RichEmbed()
-                  .setColor("#000000")
-                    .addField(`${message.author.username}`, `لقد قمت بدعوة **${nul}** شخص`)
-                          message.channel.send({ embed: embed });
-                      return;
-                    } else {
-                       var embed = new Discord.RichEmbed()
-                        .setColor("#000000")
-                        .addField(`${message.author.username}`, `لم تقم بدعوة أي شخص لهذة السيرفر`)
-
-                       message.channel.send({ embed: embed });
-                        return;
-                    }
-        }
-        if(message.content.startsWith(prefix + 'invite-codes')) {
-let guild = message.guild
-var codes = [""]
-message.channel.send(":postbox: **لقد قمت بأرسال جميع روابط الدعوات التي قمت بأنشائها في الخاص**")
-guild.fetchInvites()
-.then(invites => {
-invites.forEach(invite => {
-if (invite.inviter === message.author) {
-codes.push(`discord.gg/${invite.code}`)
-}
-})
-}).then(m => {
-if (codes.length < 0) {
-    var embed = new Discord.RichEmbed()
-.setColor("#000000")
-.addField(`Your invite codes in ${message.guild.name}`, `You currently don't have any active invites! Please create an invite and start inviting, then you will be able to see your codes here!`)
-message.author.send({ embed: embed });
-return;
-} else {
-    var embed = new Discord.RichEmbed()
-.setColor("#000000")
-.addField(`Your invite codes in ${message.guild.name}`, `Invite Codes:\n${codes.join("\n")}`)
-message.author.send({ embed: embed });
-return;
-}
-})
-}
-
-});
-
-client.on("message", async message => {
-  if(message.author.bot) return;
-  if(message.channel.type === "dm") return;
-
-  let prefix = "-";
-  let messageArray = message.content.split (" ");
-  let cmd = messageArray[0];
-  let args = messageArray.slice(1);
 
 
 
-    if(cmd === `${prefix}kick`){
-
-
-
-      let kUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
-      if(!kUser) return message.channel.send("فين العضو ؟");
-      let kReason = args.join(" ").slice(22);
-      if(!message.member.hasPermission("MANAGE_CHANNELS")) return message.channel.send("ما عندك برمشن");
-      if(kUser.hasPermission("MANAGE_CHANNELS")) return message.channel.send("ما تقدر تسوي كيك للأدمين")
-
-      let kickEmbed = new Discord.RichEmbed()
-      .setDescription("~Kick~")
-      .setColor("#e56b00")
-      .addField("Kicked User", `${kUser} with ID ${kUser.id}`)
-      .addField("Kicked By", `<@${message.author.id}> with the id ${message.author.id}`)
-      .addField("Kicked In", message.channel)
-      .addField("Time", message.createdAt)
-      .addField("Reason", kReason);
-
-      let kickChannel = message.guild.channels.find('name', 'kick-ban');
-      if(!kickChannel) return message.channel.send("لم اجد روم ال kick-ban");
-
-      message.guild.member(kUser).kick(kReason)
-      kickChannel.send(kickEmbed);
-    }
-    });
 
 
 
@@ -660,7 +441,23 @@ const command = args.shift().toLowerCase();
 }
 });
 
-
+client.on("message", msg => {
+    if(msg.content.startsWith(prefix + 'info guild')){
+      let embed = new Discord.RichEmbed()
+      .setThumbnail(msg.guild.iconURL)
+      .setColor("RANDOM")
+      .addField("Year📆",msg.guild.createdAt.getFullYear())
+      .addField("Hour📆", msg.guild.createdAt.getHours())
+      .addField("Day📆", msg.guild.createdAt.getDay())
+      .addField("Month📆", msg.guild.createdAt.getMonth())
+      .addField("Minutes📆", msg.guild.createdAt.getMinutes())
+      .addField("Seconds📆", msg.guild.createdAt.getSeconds())
+      .addField("Full📆", msg.guild.createdAt.toLocaleString())
+      .setTimestamp()
+      msg.channel.send(embed);
+    }
+  });
+//BJ
 
 
 client.on('message', message => {
@@ -686,29 +483,6 @@ client.on('message', message => {
 
 
 
-client.on("message", message => {
-    var prefix = "-";
- 
-            var args = message.content.substring(prefix.length).split(" ");
-            if (message.content.startsWith(prefix - "clear")) {
-				if(!message.channel.guild) return;
-   if(!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply('⚠ | *** ⚠ لا يوجد لك مانج ماسج ***');
-        var msg;
-        msg = parseInt();
-      
-      message.channel.fetchMessages({limit: msg}).then(messages => message.channel.bulkDelete(messages)).catch(console.error);
-      message.channel.sendMessage("", {embed: {
-        title: "Done | تــم",
-        color: 0x06DF00,
-        description: "تم مسح الرسائل بنجاح",
-        footer: {
-          text: "© Premium Bot ™."
-        }
-      }}).then(msg => {msg.delete(3000)});
-                          }
-
-     
-});
 
 
 
@@ -716,68 +490,13 @@ client.on("message", message => {
 
 
 
- client.on('message', message => { //jackeo جاكيو
-    if (message.content.startsWith("تهكير")) {
-  if(!message.channel.guild) return message.reply(' ');//jackeo جاكيو
-      if (message.author.bot) return//jackeo جاكيو
-           message.delete();//jackeo جاكيو
-             let args = message.content.split(' ').slice(1);//jackeo جاكيو
-                   let virusname = args.join(' ');//jackeo جاكيو
-                 if (virusname < 1) {//jackeo جاكيو//jackeo جاكيو
-                     return message.channel.send("** رجائاََ منشن من تريد تهكيرة ** ");//jackeo جاكيو
-                                     }//jackeo جاكيو
-                 message.channel.send({embed: new Discord.RichEmbed().setTitle('Loading ' + virusname + "...").setColor(0xFF0000)}).then(function(m) {
-             setTimeout(function() {
-               m.edit({embed: new Discord.RichEmbed().setTitle(`** Loading  [▓] 1%**`).setColor(0xFF0000)})
-             }, 5500)//jackeo جاكيو
-             setTimeout(function() {
-                m.edit({embed: new Discord.RichEmbed().setTitle(`** Loading [▓▓▓▓] 25%**`).setColor(0xFF0000)})
-              }, 10500)//jackeo جاكيو
-              setTimeout(function() {
-                 m.edit({embed: new Discord.RichEmbed().setTitle(`** Loading [▓▓▓▓▓▓▓▓] 50%**`).setColor(0xFF0000)})
-               }, 15500)//jackeo جاكيو
-               setTimeout(function() {
-                  m.edit({embed: new Discord.RichEmbed().setTitle(`** Loading [▓▓▓▓▓▓▓▓▓▓▓▓▓▓] 75%**`).setColor(0xFF0000)})
-                }, 25500)//jackeo جاكيو
-           setTimeout(function() {
-               m.edit({embed: new Discord.RichEmbed().setTitle(`** Hacking Done [▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓] 100%**`).setColor(0xFF0000)})
-             }, 30500)//jackeo جاكيو
-                setTimeout(function() {
-               m.edit({embed: new Discord.RichEmbed().setTitle(`** ..يتم الدخول للحساب** `).setColor(0xFF0000)})
-             }, 40500)//jackeo جاكيو
-                setTimeout(function() {
-               m.edit({embed: new Discord.RichEmbed().setTitle(`** ..يتم حفض بينات الحساب** `).setColor(0xFF0000)})
-             }, 45500)//jackeo جاكيو
-                setTimeout(function() {
-               m.edit({embed: new Discord.RichEmbed().setTitle(`** ..يتم رفع البينات** `).setColor(0xFF0000)})
-             }, 50500)//jackeo جاكيو
-              setTimeout(function() {
-               m.delete()//jackeo جاكيو
-           }, 55000)//jackeo جاكيو
-             setTimeout(function() {
-               message.channel.send('** تم الاختراق  __Done Hacking__ **').then(msg => msg.delete(25000));
-           }, 60500)//jackeo جاكيو
-           });//jackeo جاكيو
-         }//jackeo جاكيو
- });//jackeo جاكيو
-
-  client.on('message', message => {
-var prefix = "-";
-var cats = ["http://palestine-kitchen.ps/wp-content/uploads/2017/12/%D9%86%D9%83%D8%AA-%D8%AF%D8%A8%D8%A7%D9%86%D8%A9.png","http://www.i7lm.com/wp-content/uploads/2017/04/136769797816.jpg","https://4.bp.blogspot.com/-p62zmDIDXmI/WKzqNt9smaI/AAAAAAAAC4Q/sW_bSIB8OaQhwOYFeplc3uzz8PBN7l3YACEw/s1600/13602501135.jpg","https://www.universemagic.com/images/2016/03/7938-2-or-1457539273.jpg","https://1.bp.blogspot.com/-yFk-FzHSyE8/WR9fmPcsCUI/AAAAAAAAE6c/AmvjLadOiLY9GiCqMLHgA121bY2RS_dCwCLcB/s1600/%25D9%2586%25D9%2583%25D8%25AA%2B%25D9%2585%25D8%25B6%25D8%25AD%25D9%2583%25D8%25A9%2B1.jpg","https://l7zaat.com/wp-content/uploads/2018/02/423.jpg","https://www.petfinder.com/wp-content/uploads/2012/11/101438745-cat-conjunctivitis-causes.jpg","https://i.fatafeat.com/storage/attachments/15/image3_698123_large.jpg","http://www.shuuf.com/shof/uploads/2018/02/08/jpg/shof_97d686082bdb0a2.jpg"];
-        var args = message.content.split(" ").slice(1);
-    if(message.content.startsWith(prefix + 'نكت')) {
-         var cat = new Discord.RichEmbed()
-.setImage(cats[Math.floor(Math.random() * cats.length)])
-message.channel.sendEmbed(cat);
-    }
-});
 
 
 
 
 
 client.on('message', ra3d => {
-var prefix = "-";
+
                         let args = ra3d.content.split(" ").slice(1).join(" ")
 if(ra3d.content.startsWith(prefix + 'ccolors')) {
     if(!args) return ra3d.channel.send('`يرجي اختيار كم لون `');
@@ -801,7 +520,7 @@ if(ra3d.content.startsWith(prefix + 'ccolors')) {
 
 
   client.on('message', message => {
-if(message.content.startsWith("-slots")) {
+if(message.content.startsWith(prefix + "slots")) {
   let slot1 = ['🍏', '🍇', '🍒', '🍍', '🍅', '🍆', '🍑', '🍓'];
   let slots1 = `${slot1[Math.floor(Math.random() * slot1.length)]}`;
   let slots2 = `${slot1[Math.floor(Math.random() * slot1.length)]}`;
@@ -847,66 +566,7 @@ if (command == "embed") {
 
 });
 
-client.on('message',async msg => {
-     if(msg.channel.type === "old") return;
-  if(msg.author.bot) return;
-  var p = "-";
-  if(msg.content.startsWith(p + "setstats")) {
-  if(!msg.guild.member(msg.author).hasPermissions('MANAGE_CHANNELS')) return msg.reply('? **لا معك رتبه**');
-  if(!msg.guild.member(client.user).hasPermissions(['MANAGE_CHANNELS'])) return msg.reply('? **البوت لا يمتلك صلاحية**');
-  var ggg= msg.guild.createChannel('BLACK JACK', 'category').then(kk => {
-           var ccc =msg.guild.createChannel('n3k4a is one', 'voice').then(al => {
-                var aa =msg.guild.createChannel('n3k4a is one', 'voice').then(alp => {
-                   var aaa =msg.guild.createChannel('n3k4a is one ', 'voice').then(alph => {
-       al.setParent(kk);
-       alp.setParent(kk);
-       alph.setParent(kk);
-       
-     al.overwritePermissions(msg.guild.id, {
-      CONNECT: false,
-      SPEAK: false
-    });
-     alp.overwritePermissions(msg.guild.id, {
-      CONNECT: false,
-      SPEAK: false
-    });
-     alph.overwritePermissions(msg.guild.id, {
-      CONNECT: false,
-      SPEAK: false
-    });
 
-  setInterval(() => {
-      var currentTime = new Date(),
-hours = currentTime.getHours() + 2 ,
-minutes = currentTime.getMinutes(),
-Seconds = currentTime.getSeconds(),
-Year = currentTime.getFullYear(),
-Month = currentTime.getMonth() + 1,
-Dat = currentTime.getDate()
-if (minutes < 10) {
-minutes = "0" + minutes;
-}
-var suffix = "AM";
-if (hours >= 12) {
-suffix = "PM";
-hours = hours - 12;
-}
-if (hours == 0) {
-hours = 12;
-}
-     al.setName(`Voice Online :[ ${msg.guild.members.filter(m => m.voiceChannel).size} ]`);
-      alp.setName(`Time :[${hours} : ${minutes} : ${Seconds} ${suffix}]`);
-        alph.setName(`[ Date : [${Year} - ${Month} - ${Dat} ]`);
- },1000);
-                   })
-    
-                })
-           })
-  })
-           
-  }
- 
-});
 
 client.on('message', async message => {
     if(message.content.includes('discord.gg')){ 
@@ -954,100 +614,12 @@ message.channel.send(embed500)
 
 
 
-client.on('message', message => {
-     if (message.content === (prefix + "help")) {
-     let embed = new Discord.RichEmbed()
-  .setAuthor(message.author.username)
-  .setColor("#8650a7")
-  .addField("Done" , " تــــم ارســالك في الخــاص")
-  message.channel.sendEmbed(embed);
-    }
-});
 
 
-client.on('message', message => {
-	var prefix = "-";
-   if(!message.channel.guild) return;
-if(message.content.startsWith(prefix + 'clear')) {
-if(!message.channel.guild) return message.channel.send('**This Command is Just For Servers**').then(m => m.delete(5000));
-if(!message.member.hasPermission('MANAGE_MESSAGES')) return      message.channel.send('**You Do not have permission** `MANAGE_MESSAGES`' );
-let args = message.content.split(" ").join(" ").slice(2 + prefix.length);
-let request = `Requested By ${message.author.username}`;
-message.channel.send(`**Are You sure you want to clear the chat?**`).then(msg => {
-msg.react('✅')
-.then(() => msg.react('❌'))
-.then(() =>msg.react('✅'))
-
-let reaction1Filter = (reaction, user) => reaction.emoji.name === '✅' && user.id === message.author.id;
-let reaction2Filter = (reaction, user) => reaction.emoji.name === '❌' && user.id === message.author.id;
-
-let reaction1 = msg.createReactionCollector(reaction1Filter, { time: 12000 });
-let reaction2 = msg.createReactionCollector(reaction2Filter, { time: 12000 });
-reaction1.on("collect", r => {
-message.channel.send(`Chat will delete`).then(m => m.delete(5000));
-var msg;
-        msg = parseInt();
-
-      message.channel.fetchMessages({limit: msg}).then(messages => message.channel.bulkDelete(messages)).catch(console.error);
-      message.channel.sendMessage("", {embed: {
-        title: "`` Chat Deleted ``",
-        color: 0x06DF00,
-        footer: {
-
-        }
-      }}).then(msg => {msg.delete(3000)});
-
-})
-reaction2.on("collect", r => {
-message.channel.send(`**Chat deletion cancelled**`).then(m => m.delete(5000));
-msg.delete();
-})
-})
-}
-});
-
-client.on("message", message => {
-    var prefix = "-";
-            var args = message.content.substring(prefix.length).split(" ");
-            if (message.content.startsWith(prefix + "clear")) {
- if (!args[1]) {
-                                let x5bz1 = new Discord.RichEmbed()
-                                .setDescription("-clear <number>")
-                                .setColor("#0000FF")
-                                message.channel.sendEmbed(x5bz1);
-                            } else {
-                            let messagecount = parseInt(args[1]);
-                            message.channel.fetchMessages({limit: messagecount}).then(messages => message.channel.bulkDelete(messages));
-                                                          message.channel.fetchMessages({limit: messagecount}).then(messages => message.channel.bulkDelete(messages));
-                            message.channel.fetchMessages({limit: messagecount}).then(messages => message.channel.bulkDelete(messages));
-                            let x5bz2 = new Discord.RichEmbed()
-                                                            .setColor("#008000")
-                                .setDescription(":white_check_mark: | Delete " + args[1] + " Message!")
-                                                                                        message.delete("..");
-                                message.channel.sendEmbed(x5bz2);
-                            }
-                          }
-});
 
 
   
-    client.on('message', message => {
-    if(message.content.startsWith(prefix + '2avatar')) {
-         var men = message.mentions.users.first();
-   var heg;
-      if(men) {
-          heg = men
-      } else {
-          heg = message.author
-      }
-  var avatar = new Discord.RichEmbed()
-.setColor('RANDOM')
-.setTitle(heg.username)
-.setImage(heg.avatarURL)
-
-message.channel.sendEmbed(avatar)
-    }
-});
+    
 /*
 ////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\
 ////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\
