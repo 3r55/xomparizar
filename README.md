@@ -1,6 +1,6 @@
 
 
->هذا البوت بلغه العربيه فقط
+>PREMIUM BOT
 
 [![invite bot](https://cdn.discordapp.com/attachments/462283949087916033/521407515741650954/1.jpg)](https://premiumbot.netlify.com)
 
@@ -10,4 +10,4 @@
 
 [![Commands](https://cdn.discordapp.com/attachments/462283949087916033/521407565305872409/4.jpg)](https://hastebin.com/tisinaqubo.coffeescript)
 
->#Preimum bot open soruce by @ᵀᴳ n3k4a#0533  
+>#Preimum bot open soruce 
