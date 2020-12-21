@@ -13,16 +13,66 @@ const yt_api_key = "AIzaSyDeoIH0u1e72AtfpwSKKOSy3IPp2UHzqi4";
 
 
 
+client.on("ready", () => {
+  console.log('♔♔♔♔♔♔♔♔♔♔♔♔♔♔♔♔♔♔♔');
+  console.log('By black jack');/////BLACK JACK 
+console.log('♔♔♔♔♔♔♔♔♔♔♔♔♔♔♔♔♔♔♔');
+console.log(`Logged in as ${client.user.tag}!`);
+  client.user.setActivity(`${prefix}help | CREATED BY BLACK JACK ${client.guilds.size}`)///////shtek bnwsa
+ client.user.setStatus("dnd")/////ba dly xot statusek bnwsa
+  console.log(`Logined`)
+})
 
 
 
 
-
-
+client.on('message', message => {
+  if(message.author.bot) return undefined;
+let args = message.content.split(" ");
+let msg = args.slice(1)
+if(args.slice(0) == prefix + 'bc') {
+  if(!msg) return message.channel.send('⚠️ | Please Type The Message To Send The BC')
+client.users.forEach(m => {
+m.send(msg)
+})
+message.channel.send('Done chek brodcast ✅');
+}//////by black jack
+});
 
             
+client.on("message", (message) => {
+  if (message.content.startsWith(prefix + "create logs")) {
+    if (message.author.id !== message.guild.owner.user.id)
+      return message.channel.send(
+        "Tanha bo owner ship~"
+      );
+      message.guild.id.createChannel("Logs.", "category").then(catg =>{
+      message.guild.id.createChannel("log-pic", "text").then(chat => { chat.setParent(catg.id) })
+      message.guild.id.createChannel("log-message", "text").then(chat => { chat.setParent(catg.id) })
+      message.guild.id.createChannel("log-ban", "text").then(chat => { chat.setParent(catg.id) })
+      message.guild.id.createChannel("log-join", "text").then(chat => { chat.setParent(catg.id) })
+      message.guild.id.createChannel("log-leave", "text").then(chat => { chat.setParent(catg.id) })
+  message.channel.sendMessage(':white_check_mark: **Done Create.**')
+      })
+  }
+  });
+
+ 
 
 
+client.on('guildCreate', guild => {
+    var embed = new Discord.RichEmbed()
+    .setColor("BLACK")
+    .setDescription(`THANKS FOR INVITE YOU SERVER`)
+        guild.channel.send(embed)
+  });
+ client.on('guildDelete', guild => {
+    var embed = new Discord.RichEmbed()
+    .setColor("BLACK")
+    .setDescription(`THANKS FOR KICKED YOU SERVER`)
+        guild.owner.send(embed)
+  });
+ //////black jack new code v12```
 
 
 
@@ -171,7 +221,31 @@ client.on("message", message => {
 
   
 
-
+client.on('guildDelete', guild => {
+  let joinedbot = new Discord.RichEmbed()
+  .setColor('BLACK')
+  .setTitle(' | جۆینی سێرڤەر کرا')
+  .setFooter('CREATED BY BLACK JACK')
+  .setDescription(`
+  Server Name: [ ${guild.name} ]
+  Server Owner: [ ${guild.owner} ]
+  Server ID: [ ${guild.id} ]
+  Server Count: [ ${guild.memberCount} ]`)
+  client.channels.get("499657112041947136").send(joinedbot);
+});////BY BLACK JACK
+ 
+client.on('guildDelete', guild => {
+  let kickedbot = new Discord.RichEmbed()
+  .setColor('BLACK')
+  .setTitle('| دەرکرا لە سێرڤەر ')
+  .setFooter('CREATED BY BLACK JACK')
+  .setDescription(`
+  Server Name: [ ${guild.name} ]
+  Server Owner: [ ${guild.owner} ]
+  Server ID: [ ${guild.id} ]
+  Server Count: [ ${guild.memberCount} ]`)
+  client.channels.get("499657112041947136").send(kickedbot);
+});////BY BLACK JACK
 
 
 client.on('message', message => {
