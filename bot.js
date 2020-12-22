@@ -187,7 +187,33 @@ client.on("guildMemberAdd", member => {
 
 
 
-
+client.on("message", message => {
+  var addserver = `https://discordapp.com/oauth2/authorize?client_id=${client.user.id}&scope=bot&permissions=2080374975`;
+    var SUPPORT = `https://discord.gg/6ASrSeG`;
+  if (message.content === prefix + "help") { 
+    let embed = new Discord.RichEmbed()
+      .setAuthor(message.author.username)
+      .setURL("")
+      .settitle("")
+       .setThumbnail(message.author.avatarURL)
+       .setFooter("CREATED BY BLACK JACK")
+      .setColor("RANDOM").setDescription(` 
+**MODERTION**
+ b!mute
+ b!unmute
+ b!move,moveall
+ b!ban
+ b!unban
+ b!kick
+ b!
+ 
+ 
+** Created by ==> [<@670647563627659306>] **
+`);
+    message.channel.sendEmbed(embed);
+  }
+});
+ 
  
 
 client.on("message", message => {
@@ -400,23 +426,6 @@ message.channel.sendEmbed(cat);
 });
 
 
-client.on('message', message => {
-if(message.author.bot) return;
-if (message.content === 'Slaw') {
-message.channel.sendFile("https://cdn.discordapp.com/attachments/462240606513659904/481475996122611712/images.jpg");
- }
-});
-
-
-     
-         
-         
-client.on('message', message => {
-if(message.author.bot) return;
-if (message.content.startsWith('ترحيب')) {
-message.channel.send("https://cdn.discordapp.com/attachments/486250425817890821/487718238839504917/images.jpg")
-}
-});
 
 
 
@@ -465,22 +474,6 @@ client.on("message", msg => {
 //BJ
 
 
-client.on('message', message => {
-    if (message.content.startsWith("-avatar")) {
-        var mentionned = message.mentions.users.first();
-    var x5bzm;
-      if(mentionned){
-          var x5bzm = mentionned;
-      } else {
-          var x5bzm = message.author;
-          
-      }
-        const embed = new Discord.RichEmbed()
-        .setColor("RANDOM")
-        .setImage(`${x5bzm.avatarURL}`)
-      message.channel.sendEmbed(embed);
-    }
-});
 
 
 
@@ -616,6 +609,46 @@ message.channel.send(embed500)
 
 
   
+
+
+client.on('message', async message => {
+    if(message.content.includes('@everyone','@here')){ 
+        if(message.member.hasPermission("MANAGE_GUILD")) return;
+if(!message.channel.guild) return;
+message.delete()
+  var command = message.content.split(" ")[0];
+let muterole = message.guild.roles.find(`name`, "Muted");
+if(!muterole){
+try{
+muterole = await message.guild.createRole({
+  name: "Muted",
+  color: "#000000",
+  permissions:[]
+})
+message.guild.channels.forEach(async (channel, id) => {
+  await channel.overwritePermissions(muterole, {
+    SEND_MESSAGES: false,
+    ADD_REACTIONS: false
+  });
+});
+}catch(e){
+console.log(e.stack);
+}
+}
+   if(!message.channel.guild) return message.reply('** This command only for servers**');
+message.member.addRole(muterole);
+const embed500 = new Discord.RichEmbed()
+.setTitle("Muted Ads")
+    .addField(`**  You Have Been Muted **` , `**Reason : type here and everyone**`)
+    .setColor("c91616")
+    .setThumbnail(`${message.author.avatarURL}`)
+    .setAuthor(message.author.username, message.author.avatarURL)
+.setFooter(`${message.guild.name} `)
+message.channel.send(embed500)
+
+
+}
+})
 
 
 
