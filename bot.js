@@ -7,7 +7,7 @@ const ms = require("ms");
 const moment = require('moment');
 const request = require('request');
 const fs = require("fs");
-const prefix = '!'
+const prefix = 'b!'
 const getYoutubeID = require('get-youtube-id');
 const fetchVideoInfo = require('youtube-info');
 const yt_api_key = "AIzaSyDeoIH0u1e72AtfpwSKKOSy3IPp2UHzqi4";
@@ -19,7 +19,7 @@ client.on("ready", () => {
   console.log('By black jack');/////BLACK JACK 
 console.log('♔♔♔♔♔♔♔♔♔♔♔♔♔♔♔♔♔♔♔');
 console.log(`Logged in as ${client.user.tag}!`);
-  client.user.setActivity(`${prefix}help | CREATED BY BLACK JACK ${client.guilds.size}`)///////shtek bnwsa
+  client.user.setActivity(`${prefix}help | DASTKARE DAKRE CHAWARE BN ${client.guilds.size}`)///////shtek bnwsa
  client.user.setStatus("dnd")/////ba dly xot statusek bnwsa
   console.log(`Logined`)
 })
@@ -189,8 +189,6 @@ client.on("guildMemberAdd", member => {
 
 
 client.on("message", message => {
-  var addserver = `https://discordapp.com/oauth2/authorize?client_id=${client.user.id}&scope=bot&permissions=2080374975`;
-    var SUPPORT = `https://discord.gg/6ASrSeG`;
   if (message.content === prefix + "help") { 
     let embed = new Discord.RichEmbed()
       .setAuthor(message.author.username)
@@ -240,6 +238,38 @@ client.on("message", message => {
 ** Created by ==> [<@670647563627659306>] **
 `);
     message.channel.sendEmbed(embed);
+  }
+});
+
+client.on("message", message => {
+  if (message.content === prefix + "lock") {
+    if (!message.channel.guild)
+      return message.reply("** This command only for servers**");
+ 
+    if (!message.member.hasPermission("MANAGE_MESSAGES"))
+      return message.reply("Sorry you dont have permission");
+    message.channel
+      .overwritePermissions(message.guild.id, {
+        SEND_MESSAGES: false
+      })
+      .then(() => {
+        message.reply("**🔒 Locked chat**");
+      });
+  }
+  //BLACK JACK
+  if (message.content === prefix + "unlock") {
+    if (!message.channel.guild)
+      return message.reply("** This command only for servers**");
+ 
+    if (!message.member.hasPermission("MANAGE_MESSAGES"))
+      return message.reply("Sorry you donst have permisssion");
+    message.channel
+      .overwritePermissions(message.guild.id, {
+        SEND_MESSAGES: true
+      })
+      .then(() => {
+        message.reply("**🔓 Unlock chat**");
+      });
   }
 });
  client.on('message', message => { //Black jack
