@@ -62,7 +62,21 @@ client.on("message", (message) => {
   }
   });
 
- 
+ client.on('message', message => {
+  if(message.content === prefix + "user"){
+    var embed = new Discord.RichEmbed()
+     .setThumbnail(message.author.avatarURL)
+     .setFooter("CREATED BY BLACK JACK")
+    .setTitle(message.author.tag, message.author.avatarURL)
+    .addField(`User`, message.author.username)
+    .addField(`Ping` , `${Date.now() - message.createdTimestamp}` + ' ms`')
+    .addField(`tag`,`#`+ message.author.discriminator)
+    .addField(`Role`, message.member.colorRole)
+    .addField(`Status`,message.author.presence.status)
+    .setColor("RANDOM")
+    message.channel.send(embed);
+  }
+});
 
 
 client.on('guildCreate', guild => {
