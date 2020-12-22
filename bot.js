@@ -189,7 +189,7 @@ client.on("guildMemberAdd", member => {
 
 
 client.on("message", message => {
-  if (message.content === prefix + "help") { 
+  if (message.content == prefix + "help") { 
     let embed = new Discord.RichEmbed()
       .setAuthor(message.author.username)
       .setURL("")
@@ -286,7 +286,7 @@ message.channel.send(Black);
  
 
 client.on("message", message => {
- if (message.content === "-invite") {
+ if (message.content === prefix + 'invite") {
   const embed = new Discord.RichEmbed()
       .setColor("RANDOM")
       .setFooter()
@@ -299,7 +299,7 @@ client.on("message", message => {
 
 
 client.on("message", message => {
- if (message.content === prefix + "support"){
+ if (message.content === prefix + 'support'){
   const embed = new Discord.RichEmbed()
       .setTitle('Click HERE')
       .setURL(' JOIN SERVER ')
@@ -317,7 +317,7 @@ client.on("message", async message => {
   let messageArray = message.content.split(" ");
   let cmd = messageArray[0];
   let args = messageArray.slice(1);
-  if (cmd === `mute`){
+  if (cmd === `b!mute`){
     let tomute = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
     if(!tomute) return message.channel.send("**Could't Find User**");
     if(tomute.permissions.has("MUTE_MEMBERS")) return message.channel.send("**Can't Mute Him**");
@@ -382,7 +382,7 @@ client.on('guildDelete', guild => {
 
 client.on('message', message => {
               if (!message.channel.guild) return;
-      if(message.content ==prefix + 'members')
+      if(message.content == prefix + 'members')
       var black = new Discord.RichEmbed()
       .setThumbnail(message.author.avatarURL)
       .setFooter(message.author.username, message.author.avatarURL) 
@@ -408,7 +408,7 @@ client.on('message', message => {
 
 client.on('message', message => {
      if (message.author.bot) return;
-if (message.content.startsWith(prefix + "uptime")) {
+if (message.content == prefix + 'uptime') {
     let uptime = client.uptime;
 
     let days = 0;
@@ -453,7 +453,7 @@ if (message.content.startsWith(prefix + "uptime")) {
 
 client.on('message', message => {
      if(!message.channel.guild) return;
-                if(message.content.startsWith(prefix + 'allbots')) {
+                if(message.content == prefix + 'allbots') {
 
     
     if (message.author.bot) return;
@@ -473,7 +473,7 @@ message.channel.send(embed)
 });
 
 client.on('message', message => {
-     if (message.content === "-ping") {
+     if (message.content === prefix + "ping") {
       const embed = new Discord.RichEmbed()
  
   .setColor("#FF0000")
@@ -549,7 +549,7 @@ message.channel.sendEmbed(cat);
 client.on('message', message => {
     const args = message.content.slice(prefix.length).trim().split(/ +/g);
 const command = args.shift().toLowerCase();
-    if (command === "banlist") {
+    if (command === prefix + 'banlist') {
         message.delete(5000)
          if(!message.guild.member(client.user).hasPermission("ADMINISTRATOR")) return message.reply("Error : \` I Dont Have ADMINISTRATOR Permission\`").then(message => message.delete(5000));
         if(!message.member.hasPermission('ADMINISTRATOR')) return;
@@ -562,7 +562,7 @@ const command = args.shift().toLowerCase();
 });
 
 client.on("message", msg => {
-    if(msg.content.startsWith(prefix + 'info guild')){
+    if(msg.content == prefix + 'guild'){
       let embed = new Discord.RichEmbed()
       .setThumbnail(msg.guild.iconURL)
       .setColor("RANDOM")
