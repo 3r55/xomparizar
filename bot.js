@@ -204,7 +204,7 @@ client.on('message', message => {
 });  ///BY BLACK JACK
 
 client.on("message", (Black) => {
-  if (Black.content.startsWith(prefix + "c vc")) {
+  if (Black.content.startsWith(prefix + "help")) {
     var embed = new Discord.RichEmbed()
       .setAuthor(Black.author.username)
       .setURL("")
