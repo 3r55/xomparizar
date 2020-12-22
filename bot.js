@@ -269,7 +269,7 @@ client.on("message", message => {
 
 
 client.on("message", message => {
- if (message.content === prefix + "su {
+ if (message.content === prefix + "support"){
   const embed = new Discord.RichEmbed()
       .setTitle('Click HERE')
       .setURL(' JOIN SERVER ')
