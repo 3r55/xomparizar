@@ -187,14 +187,29 @@ client.on("guildMemberAdd", member => {
       });
 
 
+client.on('message', message => {  
+    if (message.author.bot) return; ///BLACK JACK
+    if (message.content.startsWith(prefix + 'clear')) { 
+    if(!message.channel.guild) return message.reply(`**ئەم فەرمانە تایبەتە بە سێرڤەر **`); 
+     if(!message.member.hasPermission('MANAGE_GUILD')) return message.channel.send(`** ببورە تۆ ئەم رۆلەت نیە!**`);
+     if(!message.guild.member(client.user).hasPermission('MANAGE_GUILD')) return message.channel.send(`**I don't have Permission!**`);
+    let args = message.content.split(" ").slice(1)
+    let messagecount = parseInt(args);
+    if (args > 100) return message.reply(`** The number can't be more than **100** .**`).then(messages => messages.delete(5000))
+    if(!messagecount) args = '100';
+    message.channel.fetchMessages({limit: messagecount}).then(messages => message.channel.bulkDelete(messages)).then(msgs => {
+    message.channel.send(`** Done , Deleted \`${msgs.size}\` messages.**`).then(messages => messages.delete(5000));
+    })
+  }
+});  ///BY BLACK JACK
 
-client.on("message", message => {
-  if (message.content == prefix + "help") { 
-    let embed = new Discord.RichEmbed()
-      .setAuthor(message.author.username)
+client.on("message", (Black) => {
+  if (Black.content.startsWith(prefix + "c vc")) {
+    var embed = new Discord.RichEmbed()
+      .setAuthor(Black.author.username)
       .setURL("")
       .settitle("")
-       .setThumbnail(message.author.avatarURL)
+       .setThumbnail(Black.author.avatarURL)
        .setFooter("CREATED BY BLACK JACK")
       .setColor("RANDOM").setDescription(` 
 **MODERTION**
@@ -207,6 +222,10 @@ client.on("message", message => {
  b!ban
  
  b!unban
+ 
+ b!c text
+ 
+ b!c vc
  
  b!kick
  
@@ -237,8 +256,27 @@ client.on("message", message => {
  
 ** Created by ==> [<@670647563627659306>] **
 `);
-    message.channel.sendEmbed(embed);
+    Black.channel.send(embed);
   }
+});
+
+client.on("message", (Black) => {
+if (Black.content.startsWith(prefix + "c text")) {
+            if (!Black.member.hasPermission('MANAGE_CHANNELS')) return Black.reply("You Don't Have `MANAGE_CHANNELS` Premissions ");
+        let args = Black.content.split(" ").slice(1);
+    Black.guild.createChannel(args.join(' '), 'text');
+Black.channel.sendMessage('Created text channel✅')
+ 
+}
+});
+client.on("message", (Black) => {
+if (Black.content.startsWith(prefix + "c vc")) {
+            if (!Black.member.hasPermission('MANAGE_CHANNELS')) return Black.reply("You Don't Have `MANAGE_CHANNELS` Premissions ");
+        let args = Black.content.split(" ").slice(1);
+    Black.guild.createChannel(args.join(' '), 'voice');
+    Black.channel.sendMessage('Created voice✅')
+ 
+}
 });
 
 client.on("message", message => {
@@ -286,10 +324,10 @@ message.channel.send(Black);
  
 
 client.on("message", message => {
- if (message.content === prefix + 'invite") {
+ if (message.content === prefix + 'invite') {
   const embed = new Discord.RichEmbed()
       .setColor("RANDOM")
-      .setFooter()
+      .setFooter('BLACK BOT')
       .addField('click here',`                          `)
   message.author.send({embed});
 
