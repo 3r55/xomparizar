@@ -14,6 +14,7 @@ const yt_api_key = "AIzaSyDeoIH0u1e72AtfpwSKKOSy3IPp2UHzqi4";
 
 
 
+
 client.on("ready", () => {
   console.log('♔♔♔♔♔♔♔♔♔♔♔♔♔♔♔♔♔♔♔');
   console.log('By black jack');/////BLACK JACK 
@@ -40,7 +41,10 @@ message.channel.send('Done chek brodcast ✅');
 }//////by black jack
 });
 
-            
+
+ 
+ 
+      
 client.on("message", (message) => {
   if (message.content.startsWith(prefix + "create logs")) {
     if (message.author.id !== message.guild.owner.user.id)
