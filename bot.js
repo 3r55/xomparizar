@@ -200,12 +200,23 @@ client.on("message", message => {
       .setColor("RANDOM").setDescription(` 
 **MODERTION**
  b!mute
+ 
  b!unmute
+ 
  b!move,moveall
+ 
  b!ban
+ 
  b!unban
+ 
  b!kick
- b!
+ 
+ b!clear <number>
+ 
+ b!lock
+ 
+ b!unlock
+ 
  
  
 ** Created by ==> [<@670647563627659306>] **
@@ -213,15 +224,25 @@ client.on("message", message => {
     message.channel.sendEmbed(embed);
   }
 });
- 
+ client.on('message', message => { //Black jack
+    if (!message.channel.guild) return;
+if(message.content == prefix + 'count') //Black jack
+var Black = new Discord.RichEmbed()
+.setThumbnail(message.author.avatarURL)
+.setFooter(message.author.username, message.author.avatarURL)
+.setTitle('🌍| زانیاری سێرڤەر ',`__${message.guild.name}__`)
+.addBlankField(true) //Black jack
+.addField('ژمارەی میبەرەکان',`__${message.guild.memberCount}__`)
+message.channel.send(Black);
+}); 
  
 
 client.on("message", message => {
  if (message.content === "-invite") {
   const embed = new Discord.RichEmbed()
       .setColor("RANDOM")
-      .setFooter('© Premium Bot :heart: جميع الحقوق محفوظة 2018 لــبوت')
-      .addField('شكرا لك لاستخدامك ل بروميوم بوت', `https://modest-lewin-146a75.netlify.com`)
+      .setFooter()
+      .addField('click here',`                          `)
   message.author.send({embed});
 
  }
