@@ -3,6 +3,7 @@ const bot = new Discord.Client();
 const dateFormat = require('dateformat');//npm i dateformat
 const client = new Discord.Client();
 const ytdl = require('ytdl-core');
+const ms = require("ms");
 const moment = require('moment');
 const request = require('request');
 const fs = require("fs");
@@ -217,7 +218,24 @@ client.on("message", message => {
  
  b!unlock
  
+ **GENERAL COMMAND**
  
+ b!count
+ 
+ b!roles
+ 
+ b!server
+ 
+ b!say
+ 
+ b!botinfo
+ 
+ b!about
+ 
+ b!invite
+ 
+ b!user
+ **FUNNY COMAND**
  
 ** Created by ==> [<@670647563627659306>] **
 `);
@@ -251,7 +269,7 @@ client.on("message", message => {
 
 
 client.on("message", message => {
- if (message.content === "-support") {
+ if (message.content === prefix + "su {
   const embed = new Discord.RichEmbed()
       .setTitle('Click HERE')
       .setURL(' JOIN SERVER ')
@@ -263,7 +281,44 @@ client.on("message", message => {
  }
 });
   
-
+client.on("message", async message => {
+ if(message.author.bot) return;
+  if(message.channel.type === "dm") return;
+  let messageArray = message.content.split(" ");
+  let cmd = messageArray[0];
+  let args = messageArray.slice(1);
+  if (cmd === `mute`){
+    let tomute = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
+    if(!tomute) return message.channel.send("**Could't Find User**");
+    if(tomute.permissions.has("MUTE_MEMBERS")) return message.channel.send("**Can't Mute Him**");
+    let muterole = message.guild.roles.cache.some(hama => hama.neme === "muted");
+    if(!muterole){
+    try{
+      muterole = await message.guild.roles.create({
+        name: "muted",
+        color: "#000000",
+        permissions:[]
+      })
+      message.guild.channels.forEach(async (channel, id) => {
+        await channel.overwritePermissions(muterole, {
+          SEND_MESSAGES: false,
+          ADD_REACTIONS: false
+        });
+      });
+    }catch(e){
+      console.log(e.stack);
+    }
+  }
+    let mutetime = args[1];
+    if(!mutetime) return message.channel.send("**Type Time!**")
+    await(tomute.roles.add(muterole.id));
+    message.channel.send(`**<@${tomute.id}> has been muted for ${ms(ms(mutetime))}**`);
+     setTimeout(function(){
+    tomute.roles.remove(muterole.id);
+    message.channel.send(`<@${tomute.id}> has been unmuted!`);
+  }, ms(mutetime));
+  }
+});
   
 
   
