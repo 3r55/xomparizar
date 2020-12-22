@@ -46,7 +46,7 @@ message.channel.send('Done chek brodcast ✅');
  
       
 client.on("message", (message) => {
-  if (message.content.startsWith(prefix + "create logs")) {
+  if (message.content.startsWith(prefix + "clog")) {
     if (message.author.id !== message.guild.owner.user.id)
       return message.channel.send(
         "Tanha bo owner ship~"
