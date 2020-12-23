@@ -31,51 +31,6 @@ console.log(`Logged in as ${client.user.tag}!`);
 })
 
 
-client["on"]("message", message => {
-db["ensure"]("Partners", {servers: []})
-if(message["author"]["bot"]) return undefined;
-let args = message["content"]["split"](" ");
-if(args[0]["toLowerCase"]() == prefix + "add-partner") {
-let link = message["content"]["split"](" ")["slice"](2)["join"](" ");
-let user = message["mentions"]["members"]["first"]();
-if(!link || !user) return message["channel"]["send"](`**✅ | Using: \`\`${prefix}add-partner [MentionUser] [ServerLink]\`\`**`)
-db["pushIn"]("Partners", "servers" , link)
-let role = message["guild"]["roles"]["find"](e => e.name === "Partner")
-if(!role) return message["channel"]["send"](`**✅ | Please Create Role With Name: \`\`Partner\`\`**`)
-role = role["id"]
-message["guild"]["member"](user)["addRole"](role)
-message["channel"]["send"](`**✅ | Done**`)
-}
-})
- 
-client["on"]("message", message => {
-db["ensure"]("Partners", {servers: []})
-if(message["author"]["bot"]) return undefined;
-let args = message["content"]["split"](" ");
-if(args[0]["toLowerCase"]() == prefix + "remove-partner") {
-let link = message["content"]["split"](" ")["slice"](2)["join"](" ");
-let user = message["mentions"]["members"]["first"]();
-if(!link || !user) return message["channel"]["send"](`**✅ | Using: \`\`${prefix}remove-partner [MentionUser] [ServerLink]\`\`**`)
-if(!db["get"]("Partners", "servers")["includes"](link)) return message["channel"]["send"](`**✅ | I can't find this partner link**`)
-db["removeFrom"]("Partners", "servers" , link)
-let role = message["guild"]["roles"]["find"](e => e.name === "Partner")
-if(!role) return message["channel"]["send"](`**✅ | Please Create Role With Name: \`\`Partner\`\`**`)
-role = role["id"]
-message["guild"]["member"](user)["removeRole"](role)
-message["channel"]["send"](`**✅ | Done**`)
-}
-})
- 
-client["on"]("message", message => {
-db["ensure"]("Partners", {servers: []})
-if(message["author"]["bot"]) return undefined;
-let args = message["content"]["split"](" ");
-if(args[0]["toLowerCase"]() == prefix + "partner-list") {
-let p = db["get"]("Partners", "servers")["join"]("\n")
-message["channel"]["send"](`**${p || "no partner"}**`)
-}
-})
-
 client.on('message', message => {
   if(message.author.bot) return undefined;
 let args = message.content.split(" ");
@@ -156,9 +111,20 @@ client["on"]("message", message => {
  
 ///by black jack
       
+//Best Rainbow Bot .
 
       
-    
+ client.on('message', message => {
+		if (message.content === prefix + "roles") {
+			if(!message.channel.guild) return;
+			var roles = message.guild.roles.map(roles => `${roles.name}, `).join(' ')
+			const embed = new Discord.RichEmbed()
+			.setColor('RANDOM')
+			.addField('Roles:',`**[${roles}]**`)
+			message.channel.sendEmbed(embed);
+		}
+	});
+	   
 
  client.on('message', message => {
   if(message.content === prefix + "user"){
