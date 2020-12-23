@@ -1383,6 +1383,7 @@ client.on("message", m => {
  b!count
  b!roles
  b!server
+ b!servers
  b!say,embed
  b!about
  b!invite
@@ -1650,6 +1651,57 @@ client.on('message',async message => {
       },1000);
     });
     }
+  });
+client.on("message", message => {
+  if (message.content.startsWith(prefix + "move")) {
+    let args = message.content.split(" ");
+    let user = message.guild.member(
+      message.mentions.users.first() || message.guild.members.cache.get(args[1])
+    );
+    if (!message.channel.guild || message.author.bot) return;
+    if (!message.guild.member(message.author).hasPermission("MOVE_MEMBERS"))
+      return message.channel.send("ببورە ئەم پێرمیشنەت نییە MOVE MEMBERS");
+    if (!message.guild.member(client.user).hasPermission("MOVE_MEMBERS"))
+      return message.channel.send("ببورە ئەم پێرمیشنەت نییە MOVE MEMBERS");
+    if (!message.member.voice.channel)
+      return message.channel.send("تکایە برۆ ڤۆیس ");
+    if (!user) return message.channel.send(`**>>> ${prefix}move <@mention or id>`);
+    if (!message.guild.member(user.id).voice.channel)
+      return message.channel.send(
+        `**${user.user.username}** Has not in Voice channel`
+      );
+    message.guild
+      .member(user.id)
+      .voice.setChannel(message.member.voice.channel.id)
+      .then(() => {
+        message.channel.send(
+          `**${user.user.username}** موڤ کرا✅ **${
+            message.guild.member(message.author).voice.channel.name
+          }**`
+        );
+      });
+  }
+  if (message.content.toLowerCase() === prefix + "help move") {
+    let move = new Discord.MessageEmbed()
+      .setTitle(`Command: move`)
+      .addField("Usage", `${prefix}move @user`)
+      .addField("Information", "move members");
+    message.channel.send(move);
+  }
+});////black jack
+
+////////2
+client.on('message', message => {
+  if (message.content.startsWith(prefix + "servers")) {
+  message.channel.send({
+  embed: new Discord.RichEmbed()
+  
+     .setColor('BLACK')
+     .addField('``Servers``', [client.guilds.size], true)
+     .addField('``Users``' ,`[ ${client.users.size} ]` , true)
+           
+  })
+  }
   });
 
 client.on("message", async message => {
