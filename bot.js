@@ -23,7 +23,7 @@ console.log('♔♔♔♔♔♔♔♔♔♔♔♔♔♔♔♔♔♔♔');
 console.log(`Logged in as ${client.user.tag}!`);
   console.log("بِسْمِ اللَّـهِ الرَّحْمَـٰنِ الرَّحِيمِ")
   client.user.setActivity(`${prefix}help | DASTKARE DAKRE CHAWARE BN ${client.guilds.size}`)///////shtek bnwsa
- client.user.setStatus("dnd")/////ba dly xot statusek bnwsa
+ client.user.setStatus("idle")/////ba dly xot statusek bnwsa
   console.log(`Logined`)
 })
 
@@ -1451,11 +1451,17 @@ client.on("message", message => {
 });
 //by black jack
 
-
-
-  
-  
-
+client.on('message', async message => {
+  if (!message.guild) return;
+  if (message.content.startsWith(prefix + 'pussywank')) {
+  const GIF = await neko.nsfw.pussyWankGif();
+  const embed = new Discord.RichEmbed()
+  .setColor('#202225')
+  .setTitle(`${message.author.tag} here's a random pussy wank gif`)
+  .setImage(GIF.url)
+  message.channel.send(embed);
+  }
+});
 
 
   client.on('message', message => {
