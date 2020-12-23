@@ -1349,6 +1349,7 @@ client.on("message", m => {
  b!mute,b!unmute
  b!move,moveall
  b!ban
+ b!unban all
  b!unban
  b!c text
  b!c vc  
@@ -1356,10 +1357,12 @@ client.on("message", m => {
  b!clear <number>
  b!lock
  b!role
+ b!banlist
  b!unlock
  b!setWelcomer <channel name>
  b!setCount
  b!setDate
+ b!setVc <channel name>
  b!setTime
  b!setbotv
  b!setmember
@@ -1415,7 +1418,18 @@ if (Black.content.startsWith(prefix + "c vc")) {
 }
 });
 
-
+client.on("message", async message => {
+    if(message.content.startsWith(prefix + "banslist")) {
+        if(!message.guild) return;
+                if(!message.member.hasPermission('BAN_MEMBERS')) return message.channel.send('**Sorry But You Dont Have Permission** `BAN_MEMBERS`' );
+        message.guild.fetchBans()
+        .then(bans => {
+            let b = bans.size;
+            let bb = bans.map(a => `${a}`).join(" - ");
+            message.channel.send(`**\`${b}\` | ${bb}**`);
+        });
+    }
+});
 
 client.on("message", message => {
   if (message.content === prefix + "lock") {
