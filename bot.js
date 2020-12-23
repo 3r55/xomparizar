@@ -11,7 +11,8 @@ const prefix = 'b!'
 const getYoutubeID = require('get-youtube-id');
 const fetchVideoInfo = require('youtube-info');
 const yt_api_key = "AIzaSyDeoIH0u1e72AtfpwSKKOSy3IPp2UHzqi4";
-
+const nekoclient = require('nekos.life');
+const neko = new nekoclient();
 
 
 
@@ -1389,7 +1390,7 @@ message.channel.sendEmbed(cat);
 client.on('message', message => {
     const args = message.content.slice(prefix.length).trim().split(/ +/g);
 const command = args.shift().toLowerCase();
-    if (command === prefix + 'banlist') {
+    if (command === prefix + 'list ban') {
         message.delete(5000)
          if(!message.guild.member(client.user).hasPermission("ADMINISTRATOR")) return message.reply("Error : \` I Dont Have ADMINISTRATOR Permission\`").then(message => message.delete(5000));
         if(!message.member.hasPermission('ADMINISTRATOR')) return;
@@ -1417,44 +1418,38 @@ client.on("message", msg => {
       msg.channel.send(embed);
     }
   });
-//BJ
+//BJ<BLACK/JACK>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-client.on('message', ra3d => {
-
-                        let args = ra3d.content.split(" ").slice(1).join(" ")
-if(ra3d.content.startsWith(prefix + 'ccolors')) {
-    if(!args) return ra3d.channel.send('`يرجي اختيار كم لون `');
-             if (!ra3d.member.hasPermission('MANAGE_ROLES')) return ra3d.channel.sendMessage('`**⚠ | `[MANAGE_ROLES]` YOU NEED PERMISSON**'); 
-              ra3d.channel.send(`**✅ |Created __${args}__ Colors**`);
-                  setInterval(function(){})
-                    let count = 0;
-                    let ecount = 0;
-          for(let x = 1; x < `${parseInt(args)+1}`; x++){
-            ra3d.guild.createRole({name:x,
-              color: 'RANDOM'})
-              }
-            }
-       });
+client.on("message", message => {
+if (!message.channel.guild) return;
+  if (message.content === prefix + "ccolor") {
+    if (message.member.hasPermission("MANAGE_ROLES")) {
+      setInterval(function() {});
+      message.delete(1000);
+      message.channel.send("50 colors were created | ✅").then(message => {
+        message.delete(5100);
+      });
+    } else {
+      message.channel.send("ببورە ئەم پێرمیشنەت نییەMANAGE ROLES |❌");
+    }
+  }
+});
+ 
+client.on("message", message => {
+  if (message.content === prefix + "ccolor") {
+    if (!message.channel.guild){return;}
+    if (message.member.hasPermission("MANAGE_ROLES")) {
+      setInterval(function() {});
+      let count = 0;
+      let ecount = 0;
+      for (let x = 1; x < 51; x++) {
+        message.guild.createRole({ name: x, color: "RANDOM" });
+      }
+    }
+  }
+});
+//by black jack
 
 
 
@@ -1591,8 +1586,8 @@ client.on('message',async message => {
   client.on('message',async message => {
     if(message.content.startsWith(prefix + "setTime")) {
     if(!message.guild.member(message.author).hasPermission('MANAGE_CHANNELS')) return message.reply('BBWRA ROLET NYA');
-    if(!message.guild.member(client.user).hasPermission(['MANAGE_CHANNELS','MANAGE_ROLES_OR_PERMISSIONS'])) return message.reply('B');
-    message.channel.send('?| **تم عمل الروم بنجاح**');
+    if(!message.guild.member(client.user).hasPermission(['MANAGE_CHANNELS','MANAGE_ROLES_OR_PERMISSIONS'])) return message.reply('BBWRA ROLET NYA');
+    message.channel.send('ZHWRAKA DRWST BW');
     message.guild.createChannel("?? - Time  00", 'voice').then((c) => {
       console.log(`Time channel setup for guild: \n ${message.guild.name}`);
       c.overwritePermissions(message.guild.id, {
@@ -1628,30 +1623,7 @@ client.on('message',async message => {
     }
   });
  
- client.on('ready',async () => {
-setInterval(function(){
-var currentTime = new Date(),
-hours = currentTime.getHours() + 3 ,
-ReBeeL = currentTime.getMinutes(),
-ReBeeeL = currentTime.getSeconds(),
-Codes = currentTime.getFullYear(),
-CodeS = currentTime.getMonth() + 1,
-CoDeS = currentTime.getDate()
-if (ReBeeL < 10) {
-ReBeeL = "0" + ReBeeL;
-}
-var suffix = "AM";
-if (hours >= 12) {
-suffix = "PM";
-hours = hours - 12;
-}
-if (hours == 0) {
-hours = 12;
-}
-client.channels.find('id', '790997666934554644').setName(`Time - ${hours} : ${ReBeeL} : ${ReBeeeL} ${suffix}`) 
-client.channels.find('id', '790997636110483476').setName(`Date : ${Codes} - ${CodeS} - ${CoDeS}`)
-}, 1000);
-});
+ 
  
   client.on('message',async message => {
     if(message.content.startsWith(prefix + "setDate")) {
