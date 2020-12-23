@@ -433,7 +433,7 @@ client.on("guildMemberAdd", member => {
     welcome[member.guild.id] = {
       onoff: "Off"
     };
-  if (welcome[member.guild.id].onoff === "Off") return;
+  if (welcome[member.guild. hy].onoff === "Off") return;
   let welcomer = member.guild.channels.find(
     "name",
     `${welcome[member.guild.id].channel}`
