@@ -19,6 +19,8 @@ const neko = new nekoclient();
 client.on("ready", () => {
   console.log('♔♔♔♔♔♔♔♔♔♔♔♔♔♔♔♔♔♔♔');
   console.log('By black jack');/////BLACK JACK 
+  console.log('BLACK BOT')
+  console.log('ALLA')
 console.log('♔♔♔♔♔♔♔♔♔♔♔♔♔♔♔♔♔♔♔');
 console.log(`Logged in as ${client.user.tag}!`);
   console.log("بِسْمِ اللَّـهِ الرَّحْمَـٰنِ الرَّحِيمِ")
@@ -1689,7 +1691,41 @@ client.on("message", message => {
     message.channel.send(move);
   }
 });////black jack
-
+client.on('message', message =>{
+  if(message.content === prefix + 'server') {
+    let botCount = message.guild.members.filter(m=>m.user.bot).size
+    let memberCount = [message.guild.memberCount] - [botCount]
+        if(!message.member.hasPermission('ADMINISTRATOR')) return message.reply('\`\`ADMINISTRATOR\`\` **YOU NEED PREMISION**').then(msg => msg.delete(3000));
+    message.guild.fetchBans().then(bans => {
+      var bansSize = bans.size;
+      var server = new Discord.RichEmbed()
+      .setTitle(`:books: [ **__${message.guild.name}__** ] **SERVER INFO**`)
+      .addField(`:crown: **__Server Owner__**`, `**?** [ ${message.guild.owner} ]`, true)
+      .addField(`:id: **__Server ID__**`, `**${message.guild.id}**`, true)
+      .addField(`:satellite: **__Server Type__**`, `**?** [ **${message.guild.region}** ]`, true)
+      .addField(`:date: **__Server Created At__**`, `**?** [ **${moment(message.guild.createdAt).format("LL")}** ]`, true)
+      .addField(`:first_place: **__Roles Amount__**`, `**?** [ **${message.guild.roles.size}** ]`, true)
+      .addField(`:name_badge: **__Bans Amount__**`, `**?** [ **${bansSize}** ]`, true)
+      .addField(`:bar_chart: **__Channels Amount__**`, `**?** [ **${message.guild.channels.size}** ]`, true)
+      .addField(`:pencil: **__Categores Amount__**`, `**?** [ **${message.guild.channels.filter(m=>m.type == 'category').size}** ]`, true)
+      .addField(`:pencil: **__Channels Text Amount__**`, `**?** [ **${message.guild.channels.filter(m=>m.type == 'text').size}** ]`, true)
+      .addField(`:microphone2: **__Channels Voice Amount__**`, `**?** [ **${message.guild.channels.filter(m=>m.type == 'voice').size}** ]`, true)
+      .addField(`:zzz: **__AFK Channel__**`, `**?** [ **${message.guild.afkChannel || 'AFK '}** ]`, true)
+      .addField(`:robot: **__Bots Count__**`, `**?** [ **${botCount}** ]`, true)
+      .addField(`:busts_in_silhouette: **__Members Count__**`, `**?** [ **${memberCount}** ]`, true)
+      .addField(`:green_heart: **__Online Members__**`, `**?** [ **${message.guild.members.filter(m=>m.presence.status == 'online').size}** ]`, true)
+      .addField(`:yellow_heart: **__Idle Members__**`, `**?** [ **${message.guild.members.filter(m=>m.presence.status == 'idle').size}** ]`, true)
+      .addField(`:red_circle: **__Dnd Members__**`, `**?** [**${message.guild.members.filter(m=>m.presence.status == 'dnd').size}** ]`, true)
+      .addField(`:black_circle: **__Offline Members__**`, `**?** [ **${message.guild.members.filter(m=>m.presence.status == 'offline').size}** ]`, true)
+      .addField(`:bust_in_silhouette: **__Last Member__**`, `**?** [ ${Array.from(message.channel.guild.members.values()).sort((a, b) => b.joinedAt - a.joinedAt).map(m => `<@!${m.id}>`).splice(0, 1)} ]`, true)
+      .setFooter(`This Bot was Developed For [${message.guild.name}]`, client.user.avatarURL)
+      .setTimestamp()
+      .setColor('RANDOM')
+      .setThumbnail(client.user.avatarURL)
+      message.channel.send(server)
+     })
+    }
+  });
 ////////2
 client.on('message', message => {
   if (message.content.startsWith(prefix + "servers")) {
