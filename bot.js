@@ -2021,7 +2021,95 @@ if (Black.content.startsWith(prefix + "c vc")) {
  
 }
 });
+let antibots = JSON.parse(fs.readFileSync("./antibots.json", "utf8")); //require antihack.json file
+client.on("message", message => {
+  if (message.content.startsWith(prefix + "antibots on")) {
+    if (!message.channel.guild) return;
+    if (!message.member.hasPermission("Ownership")) return;
+    antibots[message.guild.id] = {
+      onoff: "On"
+    };
+    message.channel.send(`**➕ | The antibots is \`ON\`.**`);
+    fs.writeFile("./antibots.json", JSON.stringify(antibots), err => {
+      if (err)
+        console.error(err).catch(err => {
+          console.error(err);
+        });
+    });
+  }
+});
 
+client.on("message", message => {
+  if (message.content.startsWith(prefix + "antibots off")) {
+    if (!message.channel.guild) return;
+    if (!message.member.hasPermission("Ownership")) return;
+    antibots[message.guild.id] = {
+      onoff: "Off"
+    };
+    message.channel.send(`**➖ | The antibots is \`OFF\`.**`);
+    fs.writeFile("./antibots.json", JSON.stringify(antibots), err => {
+      if (err)
+        console.error(err).catch(err => {
+          console.error(err);
+        });
+    });
+  }
+});
+
+client.on("guildMemberAdd", member => {
+  if (!antibots[member.guild.id])
+    antibots[member.guild.id] = {
+      onoff: "on"
+    };
+  if (antibots[member.guild.id].onoff === "Off") return;
+  if (member.user.bot) return member.kick();
+});
+
+fs.writeFile("./antibots.json", JSON.stringify(antibots), err => {
+  if (err)
+    console.error(err).catch(err => {
+      console.error(err);
+    });
+});
+client.on("message", message => {
+  if (message.content === prefix + "settings") {
+    if (!message.member.hasPermission("Ownership"))
+      if (!message.channel.guild) return;
+    if (message.content < 1023) return;
+    const black = new Discord.RichEmbed()
+      .setAuthor(client.user.username, client.user.avatarURL)
+      .setThumbnail(client.user.avatarURL).setDescription(`AntiBan
+Enabled:🟢 
+Maximum Ban : ${config[message.guild.id].banLimit}
+-
+AntiKick
+Enabled:🟢 
+Maximum Kick : ${config[message.guild.id].kickLimits}
+-
+AntiChannelD
+Enabled:🟢 
+Maximum Delete : ${config[message.guild.id].chaDelLimit}
+-
+AntiChannelC
+Enabled:🟢 
+Maximum Create : ${config[message.guild.id].chaCrLimit}
+-
+AntiRoleD
+Enabled:🟢 
+Maximum Delete : ${config[message.guild.id].roleDelLimit}
+-
+AntiRoleC
+Enabled:🟢 
+Maximum Create : ${config[message.guild.id].roleCrLimits}
+-
+AntiTime
+Enabled:🟢 
+Maximum Time : ${config[message.guild.id].time}
+`);
+
+    message.channel.sendEmbed(black);
+  }
+});
 client.on("message", message => {
   if (message.content === prefix + "lock") {
     if (!message.channel.guild)
