@@ -112,22 +112,9 @@ client["on"]("message", message => {
  
 ///by black jack
       
-client.on("message", (message) => {
-  if (message.content.startsWith(prefix + "clog")) {
-    if (message.author.id !== message.guild.owner.user.id)
-      return message.channel.send(
-        "Tanha bo owner ship~"
-      );
-      message.guild.createChannel("Logs", "category").then(catg =>{
-      message.guild.createChannel("log-unban", "text").then(chat => { chat.setParent(catg.id) })
-      message.guild.createChannel("log-message", "text").then(chat => { chat.setParent(catg.id) })
-      message.guild.createChannel("log-ban", "text").then(chat => { chat.setParent(catg.id) })
-      message.guild.createChannel("log-join", "text").then(chat => { chat.setParent(catg.id) })
-      message.guild.createChannel("log-leave", "text").then(chat => { chat.setParent(catg.id) })
-  message.channel.sendMessage(':white_check_mark: **Done Create.**')
-      })
-  }
-  });
+
+      
+    
 
  client.on('message', message => {
   if(message.content === prefix + "user"){
@@ -1802,7 +1789,8 @@ client.on("message", async message => {
       message.guild.channels.forEach(async (channel, id) => {
         await channel.overwritePermissions(muterole, {
           SEND_MESSAGES: false,
-          ADD_REACTIONS: false
+          ADD_REACTIONS: false,
+          READ_MESSAGES: false,
         });
       });
     }catch(e){
