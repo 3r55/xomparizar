@@ -1401,7 +1401,7 @@ client.on("message", m => {
 coming soon....
 
 Best Discord __AntiSpam__
-Best Discord __AntiShare Everyone & Here & Link .__`;
+Best Discord __AntiShare Everyone & Here &  .__`;
     var addserver = `https://discordapp.com/oauth2/authorize?client_id=${client.user.id}&scope=bot&permissions=2080374975`;
     var SUPPORT = `https://discord.gg/6ASrSeG`;
     let embed = new Discord.RichEmbed()
@@ -2147,44 +2147,7 @@ if (command == "embed") {
 
 
 
-client.on('message', async message => {
-    if(message.content.includes('discord.gg')){ 
-        if(message.member.hasPermission("MANAGE_GUILD")) return;
-if(!message.channel.guild) return;
-message.delete()
-  var command = message.content.split(" ")[0];
-let muterole = message.guild.roles.find(`name`, "Muted");
-if(!muterole){
-try{
-muterole = await message.guild.createRole({
-  name: "Muted",
-  color: "#000000",
-  permissions:[]
-})
-message.guild.channels.forEach(async (channel, id) => {
-  await channel.overwritePermissions(muterole, {
-    SEND_MESSAGES: false,
-    ADD_REACTIONS: false
-  });
-});
-}catch(e){
-console.log(e.stack);
-}
-}
-   if(!message.channel.guild) return message.reply('** This command only for servers**');
-message.member.addRole(muterole);
-const embed500 = new Discord.RichEmbed()
-.setTitle("Muted Ads")
-    .addField(`**  You Have Been Muted **` , `**Reason : Sharing Another Discord Link**`)
-    .setColor("c91616")
-    .setThumbnail(`${message.author.avatarURL}`)
-    .setAuthor(message.author.username, message.author.avatarURL)
-.setFooter(`${message.guild.name} `)
-message.channel.send(embed500)
 
-
-}
-})
 
 client.on('message',async message => {
     if(message.content.startsWith(prefix + "setVoice")) {
@@ -2314,7 +2277,7 @@ var end   = moment([2019, 9, 6]);
   let embed = new Discord.RichEmbed()
   .setColor("BLACK")
   .setDescription(`Today is: \`${moment().format("dddd, MMMM Do YYYY")}\`
-School Date: \`2019/9/1\`
+School Date: \`2021/1/7\`
 Time left: \`${moment("20190901", "YYYYMMDD", true).fromNow()}\``)
   message.channel.send(embed)
 }
