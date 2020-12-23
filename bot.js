@@ -157,100 +157,13 @@ client.on('guildCreate', guild => {
   });
  //////black jack new code v12```
 
-client.on('message', message => {
-if (message.content.startsWith(prefix + "help")) {
-    let pages = [`
-**MODERTION**
- b!mute
- 
- b!unmute
- 
- b!move,moveall
- 
- b!ban
- 
- b!unban
- 
- b!c text
- 
- b!c vc
- 
- b!kick
- 
- b!clear <number>
- 
- b!lock
- 
- b!unlock
- 
- **GENERAL COMMAND**
- 
- b!count
- 
- b!roles
- 
- b!server
- 
- b!say
- 
- b!botinfo
- 
- b!about
- 
- b!invite
- 
- b!user
- **FUNNY COMAND**
-   
-`]
-    let page = 1;
-
-    let embed = new Discord.RichEmbed()
-    .setColor('RANDOM')
-    .setFooter(`Page ${page} of ${pages.length}`)
-    .setDescription(pages[page-1])
-
-    message.author.sendEmbed(embed).then(msg => {
-
-        msg.react('◀').then( r => {
-            msg.react('▶')
-
-
-        const backwardsFilter = (reaction, user) => reaction.emoji.name === '◀' && user.id === message.author.id;
-        const forwardsFilter = (reaction, user) => reaction.emoji.name === '▶' && user.id === message.author.id;
-
-
-        const backwards = msg.createReactionCollector(backwardsFilter, { time: 2000000});
-        const forwards = msg.createReactionCollector(forwardsFilter, { time: 2000000});
-
-
-
-        backwards.on('collect', r => {
-            if (page === 1) return;
-            page--;
-            embed.setDescription(pages[page-1]);
-            embed.setFooter(`Page ${page} of ${pages.length}`);
-            msg.edit(embed)
-        })
-        forwards.on('collect', r => {
-            if (page === pages.length) return;
-      
-      page++;
-            embed.setDescription(pages[page-1]);
-            embed.setFooter(`Page ${page} of ${pages.length}`);
-            msg.edit(embed)
-        })
-        })
-    })
-    }
-});
 
 
 client.on('message', message=> {
     if (message.author.bot) return;
     if (message.isMentioned(client.user))
     {
-    message.reply(" what do you need ?");
+    message.reply("MY PREFIX b!");
     }
 });
 
@@ -1091,9 +1004,8 @@ client.on('message', message => {
     })
   }
 });  ///BY BLACK JACK
-
 client.on("message", (Black) => {
-  if (Black.content.startsWith(prefix + "help")) {
+  if (Black.content.startsWith(prefix + "helps")) {
     var embed = new Discord.RichEmbed()
       .setAuthor(Black.author.username)
       .setURL("")
@@ -1148,6 +1060,7 @@ client.on("message", (Black) => {
     Black.channel.send(embed);
   }
 });
+
 
 client.on("message", (Black) => {
 if (Black.content.startsWith(prefix + "c text")) {
@@ -1640,9 +1553,9 @@ message.channel.send(embed500)
 
 client.on('message',async message => {
     if(message.content.startsWith(prefix + "setVoice")) {
-    if(!message.guild.member(message.author).hasPermissions('MANAGE_CHANNELS')) return message.reply('? **ليس لديك الصلاحيات الكافية**');
-    if(!message.guild.member(client.user).hasPermissions(['MANAGE_CHANNELS','MANAGE_ROLES_OR_PERMISSIONS'])) return message.reply('? **ليس معي الصلاحيات الكافية**');
-    message.channel.send('?| **تم عمل الروم بنجاح**');
+    if(!message.guild.member(message.author).hasPermissions('MANAGE_CHANNELS')) return message.reply('BBWRA ROLET NYA');
+    if(!message.guild.member(client.user).hasPermissions(['MANAGE_CHANNELS','MANAGE_ROLES_OR_PERMISSIONS'])) return message.reply('BBWRA ROLET NYA');
+    message.channel.send('ZHWRAKA DRWST BW');
     message.guild.createChannel(`Voice Online : [ ${message.guild.members.filter(m => m.voiceChannel).size} ]` , 'voice').then(c => {
       console.log(`Voice online channel setup for guild: \n ${message.guild.name}`);
       c.overwritePermissions(message.guild.id, {
@@ -1677,8 +1590,8 @@ client.on('message',async message => {
  
   client.on('message',async message => {
     if(message.content.startsWith(prefix + "setTime")) {
-    if(!message.guild.member(message.author).hasPermission('MANAGE_CHANNELS')) return message.reply('? **ليس لديك الصلاحيات الكافية**');
-    if(!message.guild.member(client.user).hasPermission(['MANAGE_CHANNELS','MANAGE_ROLES_OR_PERMISSIONS'])) return message.reply('? **ليس معي الصلاحيات الكافية**');
+    if(!message.guild.member(message.author).hasPermission('MANAGE_CHANNELS')) return message.reply('BBWRA ROLET NYA');
+    if(!message.guild.member(client.user).hasPermission(['MANAGE_CHANNELS','MANAGE_ROLES_OR_PERMISSIONS'])) return message.reply('B');
     message.channel.send('?| **تم عمل الروم بنجاح**');
     message.guild.createChannel("?? - Time  00", 'voice').then((c) => {
       console.log(`Time channel setup for guild: \n ${message.guild.name}`);
