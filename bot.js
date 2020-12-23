@@ -1358,20 +1358,9 @@ client.on('message', message => {
 
 
 
-  
-
-    
-
-
-    
-        
-
-
-
 client.on("message", m => {
   if (m.content === prefix + "help") {
     let Dashboard = `
-
 **MODERATION**
  b!mute,b!unmute
  b!move,moveall
@@ -1384,6 +1373,12 @@ client.on("message", m => {
  b!lock
  b!role
  b!unlock
+ b!setWelcomer <channel name>
+ b!setCount
+ b!setDate
+ b!setTime
+ b!setbotv
+ b!setmember
  **GENERAL COMMAND**
  b!count
  b!roles
@@ -1393,6 +1388,13 @@ client.on("message", m => {
  b!invite
  b!user
  **FUNNY COMAND**
+ slap
+ hug
+ tickle
+ pat
+ poke
+ cuddle
+ **MUSIC COMMAND**
 coming soon....
 
 Best Discord __AntiSpam__
@@ -1472,20 +1474,209 @@ var Black = new Discord.RichEmbed()
 .addField('ژمارەی میبەرەکان',`__${message.guild.memberCount}__`)
 message.channel.send(Black);
 }); 
- 
+ client.on('message', async message => {
+  if (!message.guild) return;
+  if (message.content.startsWith(prefix + 'pat')) {
+  if (message.mentions.members.size === 0) {
+  const GIF = await neko.sfw.pat();
+  const embed = new Discord.RichEmbed()
+  .setColor('#202225')
+  .setTitle(`${message.author.tag} patted themsselves`)
+  .setImage(GIF.url)
+  message.channel.send(embed);
+  }
+  const member = message.mentions.members.first();
+  const GIF = await neko.sfw.pat();
+  const embed = new Discord.RichEmbed()
+  .setColor('#202225')
+  .setTitle(`${message.author.tag} patted ${member.user.tag}`)
+  .setImage(GIF.url)
+  message.channel.send(embed);
+  }
+});
+
+// Slap
+client.on('message', async message => {
+  if (!message.guild) return;
+  if (message.content.startsWith(prefix + 'slap')) {
+  if (message.mentions.members.size === 0) {
+  const GIF = await neko.sfw.slap();
+  const embed = new Discord.RichEmbed()
+  .setColor('#202225')
+  .setTitle(`${message.author.tag} slapped themsselves`)
+  .setImage(GIF.url)
+  message.channel.send(embed);
+  }
+  const member = message.mentions.members.first();
+  const GIF = await neko.sfw.slap();
+  const embed = new Discord.RichEmbed()
+  .setColor('#202225')
+  .setTitle(`${message.author.tag} slapped ${member.user.tag}`)
+  .setImage(GIF.url)
+  message.channel.send(embed);
+  }
+});
+
+// Tickle
+client.on('message', async message => {
+  if (!message.guild) return;
+  if (message.content.startsWith(prefix + 'tickle')) {
+  if (message.mentions.members.size === 0) {
+  const GIF = await neko.sfw.tickle();
+  const embed = new Discord.MessageEmbed()
+  .setColor('#202225')
+  .setTitle(`${message.author.tag} tickled themsselves`)
+  .setImage(GIF.url)
+  message.channel.send(embed);
+  }
+  const member = message.mentions.members.first();
+  const GIF = await neko.sfw.tickle();
+  const embed = new Discord.RichEmbed()
+  .setColor('#202225')
+  .setTitle(`${message.author.tag} tickled ${member.user.tag}`)
+  .setImage(GIF.url)
+  message.channel.send(embed);
+  }
+});
+
+// Poke
+client.on('message', async message => {
+  if (!message.guild) return;
+  if (message.content.startsWith(prefix + 'poke')) {
+  if (message.mentions.members.size === 0) {
+  const GIF = await neko.sfw.poke();
+  const embed = new Discord.RichEmbed()
+  .setColor('#202225')
+  .setTitle(`${message.author.tag} poked themsselves`)
+  .setImage(GIF.url)
+  message.channel.send(embed);
+  }
+  const member = message.mentions.members.first();
+  const GIF = await neko.sfw.poke();
+  const embed = new Discord.MessageEmbed()
+  .setColor('#202225')
+  .setTitle(`${message.author.tag} poked ${member.user.tag}`)
+  .setImage(GIF.url)
+  message.channel.send(embed);
+  }
+});
+
+// Cuddle
+client.on('message', async message => {
+  if (!message.guild) return;
+  if (message.content.startsWith(prefix + 'cuddle')) {
+  if (message.mentions.members.size === 0) {
+  const GIF = await neko.sfw.cuddle();
+  const embed = new Discord.RichEmbed()
+  .setColor('#202225')
+  .setTitle(`${message.author.tag} cuddled themsselves`)
+  .setImage(GIF.url)
+  message.channel.send(embed);
+  }
+  const member = message.mentions.members.first();
+  const GIF = await neko.sfw.cuddle();
+  const embed = new Discord.RichEmbed()
+  .setColor('#202225')
+  .setTitle(`${message.author.tag} cuddled ${member.user.tag}`)
+  .setImage(GIF.url)
+  message.channel.send(embed);
+  }
+});
+
+// Feed
+client.on('message', async message => {
+  if (!message.guild) return;
+  if (message.content.startsWith(prefix + 'feed')) {
+  if (message.mentions.members.size === 0) {
+  const GIF = await neko.sfw.feed();
+  const embed = new Discord.RichEmbed()
+  .setColor('#202225')
+  .setTitle(`${message.author.tag} feeded themsselves`)
+  .setImage(GIF.url)
+  message.channel.send(embed);
+  }
+  const member = message.mentions.members.first();
+  const GIF = await neko.sfw.feed();
+  const embed = new Discord.RichEmbed()
+  .setColor('#202225')
+  .setTitle(`${message.author.tag} feeded ${member.user.tag}`)
+  .setImage(GIF.url)
+  message.channel.send(embed);
+  }
+});
+client.on('message', async message => {
+  if (!message.guild) return;
+  if (message.content.startsWith(prefix + 'hug')) {
+  if (message.mentions.members.size === 0) {
+  const GIF = await neko.sfw.hug();
+  const embed = new Discord.RichEmbed()
+  .setColor('#202225')
+  .setTitle(`${message.author.tag} hugged themselves`)
+  .setImage(GIF.url)
+  message.channel.send(embed);
+  }
+  const member = message.mentions.members.first();
+  const GIF = await neko.sfw.hug();
+  const embed = new Discord.RichEmbed()
+  .setColor('#202225')
+  .setTitle(`${message.author.tag} hugged ${member.user.tag}`)
+  .setImage(GIF.url)
+  message.channel.send(embed);
+  }
+});
 
 client.on("message", message => {
  if (message.content === prefix + 'invite') {
   const embed = new Discord.RichEmbed()
       .setColor("RANDOM")
       .setFooter('BLACK BOT')
-      .addField('click here',`                          `)
+      .addField('click here',`https://discordapp.com/oauth2/authorize?client_id=${client.user.id}&scope=bot&permissions=2080374975`)
   message.author.send({embed});
 
  }
 }); 
+client.on('message',async message => {
+    if(message.content.startsWith(prefix + "setbotv")) {
+    if(!message.guild.member(message.author).hasPermissions('MANAGE_CHANNELS')) return message.reply('**بداخۆ پێرمیشنەمەت MANAGE CHANNEL نیە**');
+    message.channel.send('✅| **بە سەرکەوتوی دروست بوو**');
+    message.guild.createChannel(`Online : [ ${message.guild.members.filter(m => m.user.bot).size} `  , 'voice').then(c => {
+      console.log(`Done make room in: \n ${message.guild.name}`);
+      c.overwritePermissions(message.guild.id, {
+        CONNECT: false,
+        SPEAK: false
+      });
+      setInterval(() => {
+        c.setName(`Bots:  ${message.guild.members.filter(m => m.user.bot).size} `) 
+      },1000);
+    });
+    }
+  });
 
-
+client.on("message", async message => {
+  if (message.content.startsWith(prefix + "setmember")) {
+    if (!message.guild.member(message.author).hasPermissions("MANAGE_CHANNELS"))
+      return message.reply("❌ **بداخۆ ئەو رۆلەو نییە**");
+    if (
+      !message.guild
+        .member(client.user)
+        .hasPermissions(["MANAGE_CHANNELS", "MANAGE_ROLES_OR_PERMISSIONS"])
+    )
+      return message.reply("❌ **بداخۆ ئەو رۆلەو نیە**");
+    message.channel.send("✅| **ژورەکە دروست بوو**");
+    message.guild
+      .createChannel(`Members [${message.guild.members.size}]`, "voice")
+      .then(c => {
+        console.log(`Done make room in: \n ${message.guild.name}`);
+        c.overwritePermissions(message.guild.id, {
+          CONNECT: false,
+          SPEAK: false
+        });
+        setInterval(() => {
+          c.setName(`Members [${message.guild.members.size}]`);
+        }, 1000);
+      });
+  }
+});
 
 client.on("message", message => {
  if (message.content === prefix + 'support'){
