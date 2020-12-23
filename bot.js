@@ -24,7 +24,7 @@ client.on("ready", () => {
 console.log('♔♔♔♔♔♔♔♔♔♔♔♔♔♔♔♔♔♔♔');
 console.log(`Logged in as ${client.user.tag}!`);
   console.log("بِسْمِ اللَّـهِ الرَّحْمَـٰنِ الرَّحِيمِ")
-  client.user.setActivity(`${prefix}help | DASTKARE DAKRE CHAWARE BN ${client.guilds.size}`)///////shtek bnwsa
+  client.user.setActivity(`${prefix}help | BLACK BOT IS HERE: SERVERS ${client.guilds.size}`)///////shtek bnwsa
  client.user.setStatus("idle")/////ba dly xot statusek bnwsa
   console.log(`Logined`)
 })
