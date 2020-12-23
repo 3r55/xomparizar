@@ -1951,62 +1951,6 @@ client.on("guildMemberRemove", async member => {
   }
 });
 
-client.on("message", (Black) => {
-  if (Black.content.startsWith(prefix + "helps")) {
-    var embed = new Discord.RichEmbed()
-      .setAuthor(Black.author.username)
-      .setURL("")
-      .settitle("")
-       .setThumbnail(Black.author.avatarURL)
-       .setFooter("CREATED BY BLACK JACK")
-      .setColor("RANDOM").setDescription(` 
-**MODERTION**
- b!mute
- 
- b!unmute
- 
- b!move,moveall
- 
- b!ban
- 
- b!unban
- 
- b!c text
- 
- b!c vc
- 
- b!kick
- 
- b!clear <number>
- 
- b!lock
- 
- b!unlock
- 
- **GENERAL COMMAND**
- 
- b!count
- 
- b!roles
- 
- b!server
- 
- b!say
- 
- b!botinfo
- 
- b!about
- 
- b!invite
- 
- b!user
- **FUNNY COMAND**
- 
-** Created by ==> [<@670647563627659306>] **
-`);
-    Black.channel.send(embed);
-  }
-});
 
 
 client.on("message", m => {
@@ -2022,47 +1966,28 @@ anti time [number]
 antibots [on / off]
 settings
 
-b!mute
- 
- b!unmute
- 
+**MODERATION**
+ b!mute,b!unmute
  b!move,moveall
- 
  b!ban
- 
  b!unban
- 
  b!c text
- 
- b!c vc
- 
+ b!c vc  
  b!kick
- 
  b!clear <number>
- 
  b!lock
- 
  b!unlock
- 
  **GENERAL COMMAND**
- 
  b!count
- 
  b!roles
- 
  b!server
- 
- b!say
- 
+ b!say,embed
  b!botinfo
- 
  b!about
- 
  b!invite
- 
  b!user
  **FUNNY COMAND**
-
+coming soon....
 
 Best Discord __AntiSpam__
 Best Discord __AntiShare Everyone & Here & Link .__`;
