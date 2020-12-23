@@ -1266,6 +1266,44 @@ if (
     logChannel.send(voiceLeave);
   }
 });
+let warnings = JSON.parse(fs.readFileSync('./warnings.json' , 'utf8'));
+client.on('message',  async  message  =>  {
+    var channellog = message.guild.channels.find('name', `${log[message.guild.id].channel}`)
+    var  user  =  message.mentions.users.first();
+    var  reason  =  message.content.split(' ').slice(2).join(' ');
+if(message.content.startsWith(prefix  +  'warn'))  {
+    if(!message.member.hasPermission('MUTE_MEMBERS')) return message.channel.send('**Sorry But You Dont Have Permission** `MUTE_MEMBERS`' );
+    if(!channellog) return message.channel.send('cant find log channel , to set the log channel type >setLog Aand then type the channel name')
+    if(!user)  return  message.channel.send("**Mention The Target**")
+    if(!reason)  return  message.channel.send("** Type The Reason**")
+    let  warnembed  =  new  Discord.RichEmbed()
+    .setTitle(`**New  Warned  User  !**`)
+.addField("**-  Warned  User:**",  `${user}  with  ID  ${user.id}`)
+.addField('**-  Warned  By:**',`${message.author.tag}`)
+.addField('**-  Reason:**',  `${reason}`,  true)
+.addField("**-  Warned  in:**",`${message.channel.name}`)
+.addField("**-  Time & Date:**",`${message.createdAt}`)
+.setFooter(client.user.avatarURL, client.user.username)
+.setColor('#060c37')
+message.delete()
+warnings[message.guild.id] = {
+      moderator: message.author,
+    warning: message.createdAt,
+    member: user,
+    },
+    channellog.sendEmbed(warnembed)
+    message.channel.send(`**__${user} Has Been Warned __**`)
+    fs.writeFile("./warnings.json", JSON.stringify(warnings), (err) => {
+    if (err) console.error(err)
+  })
+ 
+}})
+client.on('message',  async  message  =>  {
+    if(message.content.startsWith(prefix  +  'listwarns'))  {
+        if(!message.member.hasPermission('MANAGE_GUILD')) return message.channel.send('**Sorry But You Dont Have Permission** `MANAGE_GUILD`' );
+        message.channel.send(`Moderator:${warnings[message.guild.id].moderator} Warned Member: ${warnings[message.guild.id].member} Time & Date:${warnings[message.guild.id].warning}`)
+    }})
+
 
 var stopReacord = true;
 var reactionRoles = [];
@@ -1357,6 +1395,9 @@ client.on("message", m => {
  b!clear <number>
  b!lock
  b!role
+ b!botinfo
+ b!warn
+ b!listwarn
  b!banlist
  b!unlock
  b!setWelcomer <channel name>
@@ -1430,6 +1471,29 @@ client.on("message", async message => {
         });
     }
 });
+
+client.on('message', message => {
+  if (message.content.startsWith(prefix + "botinfo")) {
+  message.channel.send({
+  embed: new Discord.RichEmbed()
+     .setAuthor(client.user.username,client.user.avatarURL)
+     .setThumbnail(client.user.avatarURL)
+     .setColor('RANDOM')
+     .setTitle('``INFO  BLACK BOT`` ')
+     .addField('``My Ping``' , [`${Date.now() - message.createdTimestamp}` + 'MS'], true)
+     .addField('``servers``', [client.guilds.size], true)
+     .addField('``channels``' , `[ ${client.channels.size} ]` , true)
+     .addField('``Users``' ,`[ ${client.users.size} ]` , true)
+     .addField('``My Name``' , `[ ${client.user.tag} ]` , true)
+     .addField('``My ID``' , `[ ${client.user.id} ]` , true)
+           .addField('``My Prefix``' , `[ > ]` , true)
+           .addField('``My Language``' , `[ JavaScript ]` , true)
+           .addField('``Bot Version``' , `[ v12 ]` , true)
+           .setFooter('By | <@670647563627659306>')
+  })
+  }
+  });
+ 
 
 client.on("message", message => {
   if (message.content === prefix + "lock") {
