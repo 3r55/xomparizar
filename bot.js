@@ -2065,7 +2065,7 @@ client.on("message", m => {
         "click here",
         `https://discordapp.com/oauth2/authorize?client_id=${client.user.id}&scope=bot&permissions=2080374975`
       );
-    m.author.send({ embed });
+    m.channel.send({ embed });
   }
 });
 client.on("message", async message => {
@@ -2300,15 +2300,15 @@ client.on("message", async message => {
   }
 });
 
-client.on("message", message => {
-  if (message.content === prefix + "support") {
+client.on("message", m => {
+  if (m.content === prefix + "support") {
     const embed = new Discord.RichEmbed()
       .setTitle("Click HERE")
       .setURL(" JOIN SERVER ")
       .setColor("RANDOM")
       .setFooter("BLACK BOT")
       .addField("SERVER", ` https://discord.gg/ZnPDHaA  `);
-    message.author.send({ embed });
+    m.channel.send({ embed });
   }
 });
 
