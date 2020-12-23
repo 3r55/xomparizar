@@ -8,6 +8,7 @@ const moment = require('moment');
 const request = require('request');
 const fs = require("fs");
 const prefix = 'b!'
+const db = require('quick.db');
 const getYoutubeID = require('get-youtube-id');
 const fetchVideoInfo = require('youtube-info');
 const yt_api_key = "AIzaSyDeoIH0u1e72AtfpwSKKOSy3IPp2UHzqi4";
@@ -20,7 +21,7 @@ client.on("ready", () => {
   console.log('♔♔♔♔♔♔♔♔♔♔♔♔♔♔♔♔♔♔♔');
   console.log('By black jack');/////BLACK JACK 
   console.log('BLACK BOT')
-  console.log('ALLA')
+  console.log('ALLAH AKBAR')
 console.log('♔♔♔♔♔♔♔♔♔♔♔♔♔♔♔♔♔♔♔');
 console.log(`Logged in as ${client.user.tag}!`);
   console.log("بِسْمِ اللَّـهِ الرَّحْمَـٰنِ الرَّحِيمِ")
@@ -30,7 +31,50 @@ console.log(`Logged in as ${client.user.tag}!`);
 })
 
 
-
+client["on"]("message", message => {
+db["ensure"]("Partners", {servers: []})
+if(message["author"]["bot"]) return undefined;
+let args = message["content"]["split"](" ");
+if(args[0]["toLowerCase"]() == prefix + "add-partner") {
+let link = message["content"]["split"](" ")["slice"](2)["join"](" ");
+let user = message["mentions"]["members"]["first"]();
+if(!link || !user) return message["channel"]["send"](`**✅ | Using: \`\`${prefix}add-partner [MentionUser] [ServerLink]\`\`**`)
+db["pushIn"]("Partners", "servers" , link)
+let role = message["guild"]["roles"]["find"](e => e.name === "Partner")
+if(!role) return message["channel"]["send"](`**✅ | Please Create Role With Name: \`\`Partner\`\`**`)
+role = role["id"]
+message["guild"]["member"](user)["addRole"](role)
+message["channel"]["send"](`**✅ | Done**`)
+}
+})
+ 
+client["on"]("message", message => {
+db["ensure"]("Partners", {servers: []})
+if(message["author"]["bot"]) return undefined;
+let args = message["content"]["split"](" ");
+if(args[0]["toLowerCase"]() == prefix + "remove-partner") {
+let link = message["content"]["split"](" ")["slice"](2)["join"](" ");
+let user = message["mentions"]["members"]["first"]();
+if(!link || !user) return message["channel"]["send"](`**✅ | Using: \`\`${prefix}remove-partner [MentionUser] [ServerLink]\`\`**`)
+if(!db["get"]("Partners", "servers")["includes"](link)) return message["channel"]["send"](`**✅ | I can't find this partner link**`)
+db["removeFrom"]("Partners", "servers" , link)
+let role = message["guild"]["roles"]["find"](e => e.name === "Partner")
+if(!role) return message["channel"]["send"](`**✅ | Please Create Role With Name: \`\`Partner\`\`**`)
+role = role["id"]
+message["guild"]["member"](user)["removeRole"](role)
+message["channel"]["send"](`**✅ | Done**`)
+}
+})
+ 
+client["on"]("message", message => {
+db["ensure"]("Partners", {servers: []})
+if(message["author"]["bot"]) return undefined;
+let args = message["content"]["split"](" ");
+if(args[0]["toLowerCase"]() == prefix + "partner-list") {
+let p = db["get"]("Partners", "servers")["join"]("\n")
+message["channel"]["send"](`**${p || "no partner"}**`)
+}
+})
 
 client.on('message', message => {
   if(message.author.bot) return undefined;
@@ -1304,7 +1348,53 @@ client.on('message',  async  message  =>  {
         message.channel.send(`Moderator:${warnings[message.guild.id].moderator} Warned Member: ${warnings[message.guild.id].member} Time & Date:${warnings[message.guild.id].warning}`)
     }})
 
-
+const vojson = JSON.parse(fs.readFileSync('vojson.json', 'utf8'))
+client.on('message', message => {
+    if(message.content.startsWith(prefix + "setVc")) {
+let channel = message.content.split(" ").slice(1).join(" ")
+let channelfind = message.guild.channels.find('name', `${channel}`)
+if(!channel) return message.channel.send('Please Type The Voice Channel Name Example: !setVc <Channel name>')
+if(!channelfind) return message.channel.send('Please Type The Voice Channel Name Example: !setVc <Channel name>')
+vojson[message.guild.id] = {
+stats: 'enable',
+chid: channelfind.id,
+guild: message.guild.id
+ 
+}
+channelfind.setName(`Voice online「${message.guild.members.filter(m => m.voiceChannel).size}」`)
+message.channel.send('**Done The Voice Online  Is Turned On**')
+}
+    if(message.content.startsWith(prefix + "vc off")) {
+      message.guild.channels.find('id', `${vojson[message.guild.id].chid}`).delete()
+    vojson[message.guild.id] = {
+        stats: 'disable',
+        chid: 'undefined',
+        guild: message.guild.id
+        }
+        message.channel.send('**Done The Voice Online Is Turned Off**')
+ 
+}
+fs.writeFile("./vojson.json", JSON.stringify(vojson), (err) => {
+    if (err) console.error(err)
+  })
+})
+ 
+client.on('voiceStateUpdate', (oldMember , newMember) => {
+            if(!vojson[oldMember.guild.id]) vojson[oldMember.guild.id] = {
+                stats: 'disable',
+                chid: 'undefined',
+                guild: 'undefined'
+            }
+                    if (vojson[oldMember.guild.id].stats === 'enable') {
+                        let ch = vojson[oldMember.guild.id].chid
+                        let channel = oldMember.guild.channels.get(ch)
+                        let guildid = vojson[oldMember.guild.id].guild
+                        channel.setName(`Voice online「${oldMember.guild.members.filter(m => m.voiceChannel).size}」`)
+                    };
+                    if (vojson[oldMember.guild.id].stats === 'disable') {
+                    return;
+                    }
+        });
 var stopReacord = true;
 var reactionRoles = [];
 var definedReactionRole = null;
