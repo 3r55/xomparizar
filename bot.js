@@ -2039,7 +2039,7 @@ Time left: \`${moment("20190901", "YYYYMMDD", true).fromNow()}\``)
 
 
 client.on('message', async message => {
-    if(message.content.includes('@everyone','@here')){ 
+    if(message.content.includes('@everyone','@here','maza','qn','qwn','daykt','dakt','daikt','bgem','دایکت')){ 
         if(message.member.hasPermission("MANAGE_GUILD")) return;
 if(!message.channel.guild) return;
 message.delete()
@@ -2066,7 +2066,7 @@ console.log(e.stack);
 message.member.addRole(muterole);
 const embed500 = new Discord.RichEmbed()
 .setTitle("Muted Ads")
-    .addField(`**  You Have Been Muted **` , `**Reason : type here and everyone**`)
+    .addField(`**  You Have Been Muted **` , `**Reason : type meniton everyone or bad word**`)
     .setColor("c91616")
     .setThumbnail(`${message.author.avatarURL}`)
     .setAuthor(message.author.username, message.author.avatarURL)
