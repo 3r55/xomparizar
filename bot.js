@@ -1727,6 +1727,13 @@ client.on('message', message =>{
     }
   });
 ////////2
+
+ 
+ 
+////black jack
+
+ 
+
 client.on('message', message => {
   if (message.content.startsWith(prefix + "servers")) {
   message.channel.send({
