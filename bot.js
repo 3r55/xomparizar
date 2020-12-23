@@ -1665,7 +1665,6 @@ client.on("message", m => {
  b!kick
  b!clear <number>
  b!lock
- b!role
  b!botinfo
  b!warn
  b!listwarn
@@ -1693,6 +1692,8 @@ client.on("message", m => {
  hug
  tickle
  pat
+ cat
+ dog
  poke
  cuddle
  **MUSIC COMMAND**
@@ -1780,6 +1781,9 @@ client.on("message", Black => {
     Black.channel.sendMessage("Created text channel✅");
   }
 });
+
+
+
 client.on("message", Black => {
   if (Black.content.startsWith(prefix + "c vc")) {
     if (!Black.member.hasPermission("MANAGE_CHANNELS"))
@@ -1802,6 +1806,32 @@ client.on("message", async message => {
       let bb = bans.map(a => `${a}`).join(" - ");
       message.channel.send(`**\`${b}\` | ${bb}**`);
     });
+  }
+});
+
+client.on('message', async message => {
+  if (!message.guild) return;
+  if (message.content.startsWith(prefix + 'cat')) {
+  if (message.content.includes("cattext")) return undefined;
+  const GIF = await neko.sfw.meow();
+  const embed = new Discord.RichEmbed()
+  .setColor('#202225')
+  .setTitle(`${message.author.tag} here's a random cat image/gif`)
+  .setImage(GIF.url)
+  message.channel.send(embed);
+  }
+});
+
+// Dog
+client.on('message', async message => {
+  if (!message.guild) return;
+  if (message.content.startsWith(prefix + 'dog')) {
+  const GIF = await neko.sfw.woof();
+  const embed = new Discord.RichEmbed()
+  .setColor('#202225')
+  .setTitle(`${message.author.tag} here's a random dog image/gif`)
+  .setImage(GIF.url)
+  message.channel.send(embed);
   }
 });
 
@@ -2026,8 +2056,8 @@ client.on("message", async message => {
   }
 });
 
-client.on("message", message => {
-  if (message.content === prefix + "invite") {
+client.on("message", m => {
+  if (m.content === prefix + "invite") {
     const embed = new Discord.RichEmbed()
       .setColor("RANDOM")
       .setFooter("BLACK BOT")
@@ -2035,7 +2065,7 @@ client.on("message", message => {
         "click here",
         `https://discordapp.com/oauth2/authorize?client_id=${client.user.id}&scope=bot&permissions=2080374975`
       );
-    message.author.send({ embed });
+    m.author.send({ embed });
   }
 });
 client.on("message", async message => {
@@ -2463,34 +2493,6 @@ client.on("message", message => {
   }
 });
 
-var cats = [
-  "https://static.pexels.com/photos/104827/cat-pet-animal-domestic-104827.jpeg",
-  "https://www.petfinder.com/wp-content/uploads/2012/11/101438745-cat-conjunctivitis-causes.jpg",
-  "http://www.i-love-cats.com/images/2015/04/12/cat-wallpaper-38.jpg",
-  "https://www.aspca.org/sites/default/files/cat-care_urine-marking_main-image.jpg",
-  "https://vignette1.wikia.nocookie.net/houseofnight/images/8/8b/Cats.jpg/revision/latest?cb=20130812053537",
-  "https://images.pexels.com/photos/1022158/pexels-photo-1022158.jpeg?cs=srgb&dl=adorable-animal-animal-photography-1022158.jpg&fm=jpg",
-  "https://images.pexels.com/photos/248280/pexels-photo-248280.jpeg?cs=srgb&dl=adorable-animal-animal-photography-248280.jpg&fm=jpg",
-  "https://images.pexels.com/photos/156934/pexels-photo-156934.jpeg?cs=srgb&dl=adorable-animal-cat-156934.jpg&fm=jpg",
-  "https://images.pexels.com/photos/385960/pexels-photo-385960.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-  "https://images.pexels.com/photos/39255/cat-favorite-relaxation-rest-39255.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-  "https://images.pexels.com/photos/569170/pexels-photo-569170.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-  "https://images.pexels.com/photos/735423/pexels-photo-735423.jpeg?cs=srgb&dl=adorable-animal-animal-photography-735423.jpg&fm=jpg",
-  "https://images.pexels.com/photos/923360/pexels-photo-923360.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-  "https://images.pexels.com/photos/96938/pexels-photo-96938.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-  "https://images.pexels.com/photos/225406/pexels-photo-225406.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-  "https://s-media-cache-ak0.pinimg.com/originals/f0/3b/76/f03b7614dfadbbe4c2e8f88b69d12e04.jpg",
-  "http://www.rd.com/wp-content/uploads/sites/2/2016/04/15-cat-wants-to-tell-you-attention.jpg"
-];
-client.on("message", message => {
-  var args = message.content.split(" ").slice(1);
-  if (message.content.startsWith(prefix + "cat")) {
-    var cat = new Discord.RichEmbed().setImage(
-      cats[Math.floor(Math.random() * cats.length)]
-    );
-    message.channel.sendEmbed(cat);
-  }
-});
 
 client.on("message", message => {
   const args = message.content
