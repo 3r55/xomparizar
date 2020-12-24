@@ -2067,6 +2067,7 @@ client.on("message", m => {
  b!join
  b!setDate
  b!setVc <channel name>
+ b!autorole <role name>
  b!setTime
  b!setbotv
  b!setmember
