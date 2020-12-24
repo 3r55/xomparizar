@@ -2417,6 +2417,7 @@ client.on("message", message => {
       .setFooter(message.author.username, message.author.avatarURL)
       .setTitle("🌍| زانیاری سێرڤەر ", `__${message.guild.name}__`)
       .addBlankField(true) //Black jack
+      .addField("ژمارەی بۆتەکان",`__${message.guild.members.filter(m => m.user.bot).size}__`)
       .addField("ژمارەی میبەرەکان", `__${message.guild.memberCount}__`);
   message.channel.send(Black);
 });
