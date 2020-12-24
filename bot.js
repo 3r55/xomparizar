@@ -1573,6 +1573,8 @@ client.on("message", message => {
             config[message.guild.id].roleCrLimits = num;
             message.channel.send(`**⇏ | changed to : ${config[message.guild.id].roleCrLimits}**`)
         }
+          
+    
         if (message.content.startsWith(prefix + "anti channelD")) {
                         if (!num) return message.channel.send("**⇏ | send a number ! ! **");
                         if (isNaN(num)) return message.channel.send("**⇏ | numbers only ! **");
@@ -2031,22 +2033,22 @@ client.on("message", m => {
  b!invite
  b!user
  **SECURITY COMMAND**
-anti ban[number]
-anti kick [number]
-anti roleC [number]
-anti roleD [number]
-anti channelD [number]
-anti time [number]
+b!anti ban[number]
+b!anti kick [number]
+b!anti roleC [number]
+b!anti roleD [number]
+b!anti channelD [number]
+b!anti time [number]
  
  **FUNNY COMAND**
- slap
- hug
- tickle
- pat
- cat
- dog
- poke
- cuddle
+ b!slap
+ b!hug
+ b!tickle
+ b!pat
+ b!cat
+ b!dog
+ b!poke
+ b!cuddle
  **MUSIC COMMAND**
 coming soon....
 
