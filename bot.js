@@ -1546,9 +1546,9 @@ client.on("message", message => {
         time: 30
     }
     if (message.content.startsWith(prefix + "anti")) {
-
-
-        if (!message.member.hasPermission('MANAGE_GUILD')) return;
+     if (message.author.id !== message.guild.owner.user.id) return message.channel.send(
+        "**| JUST FOR OWNER SHIP.**"
+      );
         if (message.content.startsWith(prefix + "anti ban")) {
             if (!num) return message.channel.send("**⇏ | send a number ! ! **");
             if (isNaN(num)) return message.channel.send("**⇏ | numbers only ! **");
@@ -2143,7 +2143,7 @@ client.on("message", m => {
  b!lock
  b!botinfo
  b!warn
- b!listwarn
+ b!listwarns
  b!nick,help nick
  b!banlist
  b!unlock
@@ -2157,6 +2157,7 @@ client.on("message", m => {
  **GENERAL COMMAND**
  b!count
  b!roles
+ b!support
  b!server
  b!servers
  b!say,embed
@@ -2172,6 +2173,9 @@ b!anti channelD [number]
 b!anti channelC [number]
 b!anti time [number]
  
+b!antibots off/on
+
+JUST FOR OWNER SHIP COMAND SECURITY
  **FUNNY COMAND**
  b!slap
  b!hug
@@ -2190,7 +2194,7 @@ coming soon....
 Best Discord __AntiSpam__
 Best Discord __AntiShare Everyone & Here &  .__`;
     var addserver = `https://discordapp.com/oauth2/authorize?client_id=${client.user.id}&scope=bot&permissions=2080374975`;
-    var SUPPORT = `https://discord.gg/6ASrSeG`;
+    var SUPPORT = `https://discord.gg/GmSYVCQMRU`;
     let embed = new Discord.RichEmbed()
       .setTitle(`${m.author.username}`)
       .setDescription(
@@ -2201,6 +2205,17 @@ Best Discord __AntiShare Everyone & Here &  .__`;
     m.channel.send(embed);
   }
 });
+
+client.on("message", Black => {
+if(Black.author.bot) return;
+if(Black.content.startsWith(prefix + "support")) {
+Black.author.send(`https://discord.gg/tgcrhfT3dY`)///link server
+Black.author.send(``)///link bot
+Black.channel.send(`**CHEK YOUR DM**`)
+Black.react("✅")
+}
+})
+////by black jack
 
 client.on("message", message => {
   if (message.content.startsWith(prefix + "nick")) {
@@ -2256,6 +2271,29 @@ client.on("message", message => {
     message.channel.send(nick);
   }
 });
+
+client.on("message", message => {
+  let command = message.content.split(" ")[0];
+  if (command == prefix + "about") {
+    const bot = new Discord.RichEmbed()
+      .setAuthor(client.user.username, client.user.avatarURL)
+      .setColor("RANDOM")
+      .addField(
+        "**Bot Ping** : ",
+        `» ${Date.now() - message.createdTimestamp}` + " ms",
+        true
+      )
+      .addField("**Servers** :  ", `» ${client.guilds.size}`, true)
+      .addField("**Channels** : ", `» ${client.channels.size} `, true)
+      .addField("**Users** : ", `» ${client.users.size} `, true)
+      .addField("**Bot Name** :  ", `» ${client.user.tag} `, true)
+      .addField("**Bot Owner** :  ", `» <@670647563627659306>`, true) // تعديل مهم عدل هذا الرقم لايدي حسابك
+      .setImage("")
+      .setFooter(message.author.username, message.author.avatarURL);
+    message.channel.send(bot);
+  }
+});
+
 
 client.on("message", Black => {
   if (Black.content.startsWith(prefix + "c text")) {
