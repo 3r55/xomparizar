@@ -399,7 +399,7 @@ client.on('guildMemberAdd',async member => {
     if(welcome[member.guild.id].onoff === 'Off') return;
     const Canvas = require('canvas');
     const jimp = require('jimp');
-    const w = ['welcome_4.png'];
+    const w = ['./welcome_4.png'];
           let Image = Canvas.Image,
               canvas = new Canvas(800, 300),
               ctx = canvas.getContext('2d');
@@ -2092,10 +2092,7 @@ b!anti roleD [number]
 b!anti channelD [number]
 b!anti channelC [number]
 b!anti time [number]
- 
 b!antibots off/on
-
-JUST FOR OWNER SHIP COMAND SECURITY
  **FUNNY COMAND**
  b!slap
  b!hug
