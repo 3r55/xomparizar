@@ -2124,6 +2124,7 @@ Best Discord __AntiShare Everyone & Here &  .__`;
 });
 
 
+
 const rWlc = JSON.parse(fs.readFileSync("./AutoRole.json", "utf8"));
 client.on('message', message => {
 if(message.channel.type === "dm") return;
@@ -2286,7 +2287,14 @@ client.on("message", message => {
   }
 });
 
-
+client.on("guildCreate", guild => {
+        client.users.get('670647563627659306').send('  BOT  Join To [ ' + `${guild.name}` + ' ]  ,   **  Owner  **  ' + ' ***[ ' + '<@' + `${guild.owner.user.id}` + '>' + ' ]')
+        });
+ 
+        client.on("guildDelete", guild => {
+        client.users.get('670647563627659306').send('   BOT  Leave From  [ ' + `${guild.name}` + ' ]   ,    Owner    ' + ' [ ' + '<@' + `${guild.owner.user.id}` + '>' + ' ]')
+      });
+ ////by black jack
 client.on("message", Black => {
   if (Black.content.startsWith(prefix + "c text")) {
     if (!Black.member.hasPermission("MANAGE_CHANNELS"))
