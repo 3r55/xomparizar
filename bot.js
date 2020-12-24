@@ -1971,6 +1971,26 @@ client.on("message", message => {
       });
   }
 }); ///BY BLACK JACK
+let antihack = JSON.parse(fs.readFileSync('./antihack.json' , 'utf8'));
+client.on('message', message => { 
+    if(message.content.startsWith(prefix + "antihack")) { 
+        if(!message.channel.guild) return message.reply('**This Command Only For Servers**'); 
+        if(!message.member.hasPermission('MANAGE_GUILD')) return message.channel.send('**Sorry But You Dont Have Permission** `MANAGE_GUILD`' ); 
+        if(!antihack[message.guild.id]) antihack[message.guild.id] = { 
+          onoff: 'Off'
+        } 
+          if(antihack[message.guild.id].onoff === 'Off') return [message.channel.send(`**✅ The AntiHack Is __𝐎𝐍__ !**`), antihack[message.guild.id].onoff = 'On']
+          if(antihack[message.guild.id].onoff === 'On') return [message.channel.send(`**⛔ The AntiHack Is __𝐎𝐅𝐅__ !**`), antihack[message.guild.id].onoff = 'Off']
+          fs.writeFile("./antihack.json", JSON.stringify(antihack), (err) => {
+            if (err) console.error(err)
+            .catch(err => {
+              console.error(err);
+          });
+            });
+          }
+ 
+        })
+
 let antibots = JSON.parse(fs.readFileSync("./antibots.json", "utf8")); //require antihack.json file
 client.on("message", message => {
   if (message.content.startsWith(prefix + "antibots on")) {
@@ -2105,6 +2125,39 @@ Best Discord __AntiShare Everyone & Here &  .__`;
   }
 });
 
+
+const rWlc = JSON.parse(fs.readFileSync("./AutoRole.json", "utf8"));
+client.on('message', message => {
+if(message.channel.type === "dm") return;
+if(message.author.bot) return;
+   if(!rWlc[message.guild.id]) rWlc[message.guild.id] = {
+    role: "member"
+  }
+const channel = rWlc[message.guild.id].role
+  if (message.content.startsWith(prefix + "autorole")) {
+    if(!message.member.hasPermission(`MANAGE_GUILD`)) return;
+    let newrole = message.content.split(' ').slice(1).join(" ")
+    if(!newrole) return message.reply(`**${prefix}autorole <role name>**`)
+    rWlc[message.guild.id].role = newrole
+    message.channel.send(`**${message.guild.name}'s role has been changed to ${newrole}**`);
+  }
+fs.writeFile("./AutoRole.json", JSON.stringify(rWlc), function(e){
+    if (e) throw e;
+})
+});
+client.on("guildMemberAdd", member => {
+      if(!rWlc[member.guild.id]) rWlc[member.guild.id] = {
+    role: "member"
+  }
+    const sRole = rWlc[member.guild.id].role
+    let Rrole = member.guild.roles.find('name', sRole);
+  member.addRole(Rrole);
+ 
+ 
+ 
+      });
+ 
+ 
 
 client.on('message', message => {
 if(message.content.startsWith(prefix + "stone")) {
