@@ -2160,6 +2160,9 @@ client.on("message", m => {
  b!roles
  b!support
  b!server
+ b!stone
+ b!paper
+ b!scissors
  b!servers
  b!say,embed
  b!about
@@ -2207,6 +2210,48 @@ Best Discord __AntiShare Everyone & Here &  .__`;
   }
 });
 
+
+client.on('message', message => {
+if(message.content.startsWith(prefix + "stone")) {
+let slot1 = ['✂paper📄', '🗿stone🗿', '✂scissors📄'];
+let slots1 = `${slot1[Math.floor(Math.random() * slot1.length)]}`;
+let we;
+if(slots1) {
+we = "🎮Play Again🎮"
+} else {
+we = "😣She lost the luck of Over😣"
+}
+message.channel.send(`${slots1} - ${we}`)
+}
+});
+
+client.on('message', message => {
+if(message.content.startsWith(prefix + "scissors")) {
+  let slot1 = ['✂paper📄', '🗿stone🗿', '✂scissors📄'];
+  let slots1 = `${slot1[Math.floor(Math.random() * slot1.length)]}`;
+let we;
+if(slots1) {
+we = "🎮Play Again🎮"
+} else {
+we = "😣She lost the luck of Over😣"
+}
+message.channel.send(`${slots1} - ${we}`)
+}
+});
+
+client.on('message', message => {
+if(message.content.startsWith(prefix + "paper")) {
+  let slot1 = ['✂paper📄', '🗿stone🗿', '✂scissors📄'];
+  let slots1 = `${slot1[Math.floor(Math.random() * slot1.length)]}`;
+let we;
+if(slots1) {
+we = "🎮Play Again🎮"
+} else {
+we = "😣She lost the luck of Over😣"
+}
+message.channel.send(`${slots1} - ${we}`)
+}
+});
 client.on("message", Black => {
 if(Black.author.bot) return;
 if(Black.content.startsWith(prefix + "support")) {
