@@ -3398,6 +3398,8 @@ client.on("message", async message => {
 client.commands = new Discord.Collection();
 client.aliases = new Discord.Collection();
  
+const GUILDID = ''; // اي دي السيرفر  
+const CHANNELID = ''; // اي دي الروم
  
 let cmds = {
   play: { cmd: 'play', a: ['p'] },
@@ -3413,27 +3415,7 @@ let cmds = {
   nowplaying: { cmd: 'Nowplaying', a: ['np'] }
 };
  
-client.on('ready',async () => {
-  setInterval(() => {
-client.channels.find(ch => ch.id === CHANNELID && ch.type === 'voice').join();
-},1000); 
- voiceStay(GUILDID, CHANNELID);
-  function voiceStay(guildid, channelid) {
-    if(!guildid) throw new Error('Syntax: voiceStay function requires guildid');
-    if(!channelid) throw new Error('Syntax: voiceStay function requires channelid');
- 
-    let guild = client.guilds.get(guildid);
-    let channel = guild.channels.get(channelid);
- 
-    if(channel.type === 'voice') {
-      channel.join().catch(e => {
-        console.log(`Failed To Join :: ${e.message}`);
-      });
-    } else {
-      console.log(`Channel Type ::  ${channel.type}, It must be Voice.`);
-    }
-  }
-});
+
  
  
 Object.keys(cmds).forEach(key => {
@@ -3448,11 +3430,11 @@ var value = cmds[key];
   }
 })
 
-const getYoutubeID = require('get-youtube-id');
-const fetchVideoInfo = require('youtube-info');
+
+
 const YouTube = require('simple-youtube-api');
 const youtube = new YouTube("AIzaSyAdORXg7UZUo7sePv97JyoDqtQVi3Ll0b8");
- 
+const converter = require('number-to-words');
  
 let active = new Map();
  
@@ -3959,40 +3941,7 @@ client.on('message', message => {
  
  
  
-client.on('message', message => {
- 
- 
- 
-    let argresult = message.content.split(` `).slice(1).join(' ');
-    if (message.content.startsWith(prefix + 'setStreaming')) {
-      if (!ownerID.includes(message.author.id)) return;
-      message.delete();
-      client.user.setGame(argresult, 'https://twitch.tv/Kahrbaa');
- 
-    } else if(message.content.startsWith(prefix + 'setWatching')) {
-        client.user.setActivity(argresult,{type: 'WATCHING'});
- 
-      } else if(message.content.startsWith(prefix + 'setListening')) {
-        client.user.setActivity(argresult,{type: 'LISTENING'});
- 
-      } else if(message.content.startsWith(prefix + 'setPlaying')) {
-        client.user.setActivity(argresult,{type: 'PLAYING'});
- 
-      } else if(message.content.startsWith(prefix + 'setName')) {
-        client.user.setUsername(argresult);
- 
-      } else if(message.content.startsWith(prefix + 'setAvatar')) {
-        client.user.setAvatar(argresult);
- 
- 
-      } else if(message.content.startsWith(prefix + 'setStatus')) {
-        if(!argresult) return message.channel.send('`online`, `DND(Do not Distrub),` `idle`, `invisible(Offline)` :notes: أختر أحد الحالات');
-        client.user.setStatus(argresult);
- 
- 
-    }
- 
-  });
+
  
 client.on('message', message => {
   var helplist = `**:notes:  قائمة الاوامر:  
@@ -4023,20 +3972,7 @@ K-MUSIC BOT - CODE BY : KAHRBAA
 }
 });
  
-client.on('message', message => {
-      if (!ownerID.includes(message.author.id)) return;
-  var helplist = `**:gear: | اوامر الادارة:  
-> setStreaming : لجعل وضع البوت ستريمنق
-> setWatching : لجعل وضع البوت واتشنق
-> setListening : لجعل وضع البوت ليستننق
-> setName :  لتغيير أسم البوت
-> setAvatar : لتغيير صورة البوت
-> setStatus : لتغيير حالة البوت
-**`
-  if(message.content === prefix + 'help') {
-    message.author.send(helplist);
-  }
-  });
+
 
 
 
