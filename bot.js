@@ -1573,7 +1573,18 @@ client.on("message", message => {
             config[message.guild.id].roleCrLimits = num;
             message.channel.send(`**⇏ | changed to : ${config[message.guild.id].roleCrLimits}**`)
         }
-          
+         if (message.content.startsWith(prefix + "anti channelC")) {
+      if (!num)
+        return message.channel.send(
+          "**❌ | Type A `Number` After Commands .**"
+        ); ////////////////mrfix
+      if (isNaN(num))
+        return message.channel.send("**❌ | Only Type `Number` .**");
+      config[message.guild.id].chaCrLimit = num;
+      message.channel.send(
+        `**✔️ | Changed \`Channel Create\` To : ${config[message.guild.id].chaCrLimit}**`
+      );
+    } 
     
         if (message.content.startsWith(prefix + "anti channelD")) {
                         if (!num) return message.channel.send("**⇏ | send a number ! ! **");
@@ -1640,7 +1651,77 @@ client.on("channelDelete", async channel => {
         if (e) throw e;
     });
 });
+client.on("channelCreate", async channel => {
+  if (!["text", "category", "voice"].includes(channel.type.toLowerCase()))
+    return;
+  if (!config[channel.guild.id])
+    config[channel.guild.id] = {
+      banLimit: 3,
+      chaDelLimit: 3,
+      chaCrLimit: 3,
+      roleDelLimit: 3,
+      kickLimits: 3,
+      roleCrLimits: 3,
+      time: 0.1
+    };
+  const entry1 = await channel.guild
+    .fetchAuditLogs({
+      type: "CHANNEL_CREATE"
+    })
+    .then(audit => audit.entries.first());
+  console.log(entry1.executor.username);
+  const entry = entry1.executor;
 
+  if (!anti[channel.guild.id + entry.id]) {
+    anti[channel.guild.id + entry.id] = {
+      actions: 1
+    };
+    setTimeout(() => {
+      anti[channel.guild.id + entry.id].actions = "0";
+    }, config[channel.guild.id].time * 1000);
+  } else {
+    anti[channel.guild.id + entry.id].actions = Math.floor(
+      anti[channel.guild.id + entry.id].actions + 1
+    );
+    console.log("TETS");
+    setTimeout(() => {
+      anti[channel.guild.id + entry.id].actions = "0";
+    }, config[channel.guild.id].time * 1000);
+    if (
+      anti[channel.guild.id + entry.id].actions >=
+      config[channel.guild.id].chaCrLimit
+    ) {
+      channel.guild.members
+        .get(entry.id)
+        .ban()
+        .catch(e =>
+          channel.guild.owner.send(
+            `**❗️ | ${entry.username} Has \`Create\` Many Channels .**`
+          )
+        );
+      anti[channel.guild.id + entry.id].actions = "0";
+      fs.writeFile("./config.json", JSON.stringify(config, null, 2), function(
+        e
+      ) {
+        if (e) throw e;
+      });
+      fs.writeFile("./antigreff.json", JSON.stringify(anti, null, 2), function(
+        e
+      ) {
+        if (e) throw e;
+      });
+    }
+    ////////////////mrfix
+    fs.writeFile("./config.json", JSON.stringify(config, null, 2), function(e) {
+      if (e) throw e;
+    });
+    fs.writeFile("./antigreff.json", JSON.stringify(anti, null, 2), function(
+      e
+    ) {
+      if (e) throw e;
+    });
+  }
+});
 client.on("roleDelete", async channel => {
     const entry1 = await channel.guild.fetchAuditLogs({
         type: 'ROLE_DELETE'
@@ -1995,6 +2076,56 @@ client.on("message", message => {
       });
   }
 }); ///BY BLACK JACK
+let antibots = JSON.parse(fs.readFileSync("./antibots.json", "utf8")); //require antihack.json file
+client.on("message", message => {
+  if (message.content.startsWith(prefix + "antibots on")) {
+    if (!message.channel.guild) return;
+    if (!message.member.hasPermission("Ownership")) return;
+    antibots[message.guild.id] = {
+      onoff: "On"
+    };
+    message.channel.send(`**➕ | The antibots is \`ON\`.**`);
+    fs.writeFile("./antibots.json", JSON.stringify(antibots), err => {
+      if (err)
+        console.error(err).catch(err => {
+          console.error(err);
+        });
+    });
+  }
+});
+client.on("message", message => {
+  if (message.content.startsWith(prefix + "antibots off")) {
+    if (!message.channel.guild) return;
+    if (!message.member.hasPermission("Ownership")) return;
+    antibots[message.guild.id] = {
+      onoff: "Off"
+    };
+    message.channel.send(`**➖ | The antibots is \`OFF\`.**`);
+    fs.writeFile("./antibots.json", JSON.stringify(antibots), err => {
+      if (err)
+        console.error(err).catch(err => {
+          console.error(err);
+        });
+    });
+  }
+});
+
+client.on("guildMemberAdd", member => {
+  if (!antibots[member.guild.id])
+    antibots[member.guild.id] = {
+      onoff: "on"
+    };
+  if (antibots[member.guild.id].onoff === "Off") return;
+  if (member.user.bot) return member.kick();
+});
+////////////////mrfix
+fs.writeFile("./antibots.json", JSON.stringify(antibots), err => {
+  if (err)
+    console.error(err).catch(err => {
+      console.error(err);
+    });
+});
+
 
 client.on("message", m => {
   if (m.content === prefix + "help") {
@@ -2038,6 +2169,7 @@ b!anti kick [number]
 b!anti roleC [number]
 b!anti roleD [number]
 b!anti channelD [number]
+b!anti channelC [number]
 b!anti time [number]
  
  **FUNNY COMAND**
