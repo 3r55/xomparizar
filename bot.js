@@ -387,6 +387,7 @@ client.on("guildMemberAdd", member => {
         .setAuthor(h.username,h.avatarURL)
         .addField('  ناو   ',`${member}`)
         .addField('  بەخێربێی بۆ سێرڤەر' , `Welcome to the server, ${member}`)
+        .addField(' تۆ کەسی ژمارە',`${member.guild.memberCount}`)
         .addField('  ئایدی ئەکاونت :', "**[" + `${member.id}` + "]**" )
         .addField(' سێرڤەر', `${member.guild.name}`,true)
         .addField('کاتی جۆینکردنت', member.guild.joinedAt ,)
