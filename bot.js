@@ -391,7 +391,8 @@ client.on("guildMemberAdd", member => {
         .addField('  ئایدی ئەکاونت :', "**[" + `${member.id}` + "]**" )
         .addField(' سێرڤەر', `${member.guild.name}`,true)
         .addField('کاتی جۆینکردنت', member.guild.joinedAt ,)
-        .addField(' کاتی دروست کردنی ئەکاونت',`${moment(member.user.createdAt).format('D/M/YYYY h:mm a')} **\n** \`${moment(member.user.createdAt).fromNow()}\``,true)
+        .addField("کاتی دروستکردنی ئەکاونتەکەت✅:", member.user.createdAt ,)
+        .setImage("https://media.discordapp.net/attachments/761543760395501598/791698176176422942/image0.gif")
         .setFooter(`${h.tag}`,"https://images-ext-2.discordapp.net/external/JpyzxW2wMRG2874gSTdNTpC_q9AHl8x8V4SMmtRtlVk/https/orcid.org/sites/default/files/files/ID_symbol_B-W_128x128.gif")
      welcomer.send({embed:heroo});
       }})
