@@ -98,6 +98,10 @@ client["on"]("message", message => {
   }
 });
 
+ 
+
+ 
+
 client.on("message", message => {
   let command = message.content.split(" ")[0];
   if (command == prefix + "unban") {
@@ -2893,7 +2897,7 @@ client.on("guildDelete", guild => {
   Server Owner: [ ${guild.owner} ]
   Server ID: [ ${guild.id} ]
   Server Count: [ ${guild.memberCount} ]`);
-  client.channels.get("499657112041947136").send(joinedbot);
+  client.channels.get("792426159367127061").send(joinedbot);
 }); ////BY BLACK JACK
 
 client.on("guildDelete", guild => {
@@ -2905,7 +2909,7 @@ client.on("guildDelete", guild => {
   Server Owner: [ ${guild.owner} ]
   Server ID: [ ${guild.id} ]
   Server Count: [ ${guild.memberCount} ]`);
-  client.channels.get("499657112041947136").send(kickedbot);
+  client.channels.get("792426159367127061").send(kickedbot);
 }); ////BY BLACK JACK
 
 client.on("message", message => {
