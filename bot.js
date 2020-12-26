@@ -2003,7 +2003,7 @@ client.on("message", m => {
  b!warn
  b!listwarns
  b!nick,help nick
- b!banlist
+ b!banslist
  b!unlock
  b!setWelcomer <channel name>
  b!setCount
