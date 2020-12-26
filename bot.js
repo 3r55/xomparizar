@@ -164,14 +164,9 @@ client.on("guildCreate", guild => {
   var embed = new Discord.RichEmbed()
     .setColor("BLACK")
     .setDescription(`THANKS FOR INVITE YOU SERVER`);
-  guild.channel.send(embed);
+  guild.channel.sendEmbed(embed);
 });
-client.on("guildDelete", guild => {
-  var embed = new Discord.RichEmbed()
-    .setColor("BLACK")
-    .setDescription(`THANKS FOR KICKED YOU SERVER`);
-  guild.owner.send(embed);
-});
+
 //////black jack new code v12```
 
 client.on("message", message => {
