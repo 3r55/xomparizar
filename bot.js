@@ -1999,7 +1999,6 @@ client.on("message", m => {
  b!kick
  b!clear <number>
  b!lock
- b!botinfo
  b!warn
  b!listwarns
  b!nick,help nick
@@ -2017,6 +2016,7 @@ client.on("message", m => {
  **GENERAL COMMAND**
  b!count
  b!roles
+ b!botinfo
  b!support
  b!server
  b!stone
@@ -2047,12 +2047,7 @@ b!antibots off/on
  b!cuddle
  **MUSIC COMMAND**
 coming soon....
-
-
-
-
-Best Discord __AntiSpam__
-Best Discord __AntiShare Everyone & Here &  .__`;
+ `;
     var addserver = `https://discordapp.com/oauth2/authorize?client_id=${client.user.id}&scope=bot&permissions=2080374975`;
     var SUPPORT = `https://discord.gg/GmSYVCQMRU`;
     let embed = new Discord.RichEmbed()
@@ -2386,7 +2381,7 @@ client.on("message", message => {
         .addField("``Users``", `[ ${client.users.size} ]`, true)
         .addField("``My Name``", `[ ${client.user.tag} ]`, true)
         .addField("``My ID``", `[ ${client.user.id} ]`, true)
-        .addField("``My Prefix``", `[ > ]`, true)
+        .addField("``My Prefix``", `[ b! ]`, true)
         .addField("``My Language``", `[ JavaScript ]`, true)
         .addField("``Bot Version``", `[ v12 ]`, true)
         .setFooter("By | <@670647563627659306>")
