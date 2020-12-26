@@ -1300,71 +1300,8 @@ client.on("message", async message => {
   }
 });
 
-const vojson = JSON.parse(fs.readFileSync("vojson.json", "utf8"));
-client.on("message", message => {
-  if (message.content.startsWith(prefix + "setVc")) {
-    let channel = message.content
-      .split(" ")
-      .slice(1)
-      .join(" ");
-    let channelfind = message.guild.channels.find("name", `${channel}`);
-    if (!channel)
-      return message.channel.send(
-        "Please Type The Voice Channel Name Example: !setVc <Channel name>"
-      );
-    if (!channelfind)
-      return message.channel.send(
-        "Please Type The Voice Channel Name Example: !setVc <Channel name>"
-      );
-    vojson[message.guild.id] = {
-      stats: "enable",
-      chid: channelfind.id,
-      guild: message.guild.id
-    };
-    channelfind.setName(
-      `Voice online「${
-        message.guild.members.filter(m => m.voiceChannel).size
-      }」`
-    );
-    message.channel.send("**Done The Voice Online  Is Turned On**");
-  }
-  if (message.content.startsWith(prefix + "vc off")) {
-    message.guild.channels
-      .find("id", `${vojson[message.guild.id].chid}`)
-      .delete();
-    vojson[message.guild.id] = {
-      stats: "disable",
-      chid: "undefined",
-      guild: message.guild.id
-    };
-    message.channel.send("**Done The Voice Online Is Turned Off**");
-  }
-  fs.writeFile("./vojson.json", JSON.stringify(vojson), err => {
-    if (err) console.error(err);
-  });
-});
 
-client.on("voiceStateUpdate", (oldMember, newMember) => {
-  if (!vojson[oldMember.guild.id])
-    vojson[oldMember.guild.id] = {
-      stats: "disable",
-      chid: "undefined",
-      guild: "undefined"
-    };
-  if (vojson[oldMember.guild.id].stats === "enable") {
-    let ch = vojson[oldMember.guild.id].chid;
-    let channel = oldMember.guild.channels.get(ch);
-    let guildid = vojson[oldMember.guild.id].guild;
-    channel.setName(
-      `Voice online「${
-        oldMember.guild.members.filter(m => m.voiceChannel).size
-      }」`
-    );
-  }
-  if (vojson[oldMember.guild.id].stats === "disable") {
-    return;
-  }
-});
+
 
 let anti = JSON.parse(fs.readFileSync("./antigreff.json", "UTF8"));
 let config = JSON.parse(fs.readFileSync("./config.json", "UTF8"));
@@ -1984,6 +1921,48 @@ fs.writeFile("./antibots.json", JSON.stringify(antibots), err => {
     });
 });
 
+client.on("message", async function (message) {
+if(message.author.bot) return;
+if(!message.guild) return;
+var args = message.content.split(" ");
+var cmd = args[0].slice(prefix.length).toLowerCase();
+if(!message.content.startsWith(prefix)) return;
+switch (cmd) {
+case 'mute':
+let tomute = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[1]));
+if(!tomute) return message.reply("**❌ | Couldn't find user**");
+if(tomute.hasPermission("MANAGE_MESSAGES")) return message.reply("**❌ | Can't mute them!**");
+if(!message.member.hasPermission('MUTE_MEMBERS')) return message.channel.send(`**❌ | You don\'t have permission**`)
+if(!message.guild.member(client.user).hasPermission("MUTE_MEMBERS")) return message.channel.send(`**❌ | I don\'t have permission**`)
+let muterole = message.guild.roles.find(`name`, "Shutted");
+if(!muterole){
+try{
+muterole = await message.guild.createRole({
+name: "DAM DAXRAW",
+color: "#000000",
+permissions:[]
+})
+message.guild.channels.forEach(async (channel, id) => {
+await channel.overwritePermissions(muterole, {
+SEND_MESSAGES: false,
+ADD_REACTIONS: false
+});
+});
+}catch(e){
+console.log(e.stack);
+}
+}
+let mutetime = args[2];
+if(!mutetime) return message.reply("**❌ | Please type time**");
+await(tomute.addRole(muterole.id));
+message.reply(`**<@${tomute.id}> has been muted for ${ms(ms(mutetime))} **`);
+setTimeout(function(){
+tomute.removeRole(muterole.id);
+message.channel.send(`**<@${tomute.id}> has been unmuted!**`);
+}, ms(mutetime));
+break;
+}
+});
 
 client.on("message", m => {
   if (m.content === prefix + "help") {
@@ -2008,7 +1987,6 @@ client.on("message", m => {
  b!setCount
  b!join
  b!setDate
- b!setVc <channel name>
  b!autorole <role name>
  b!setTime
  b!setbotv
@@ -2841,52 +2819,7 @@ client.on("message", m => {
   }
 });
 
-client.on("message", async message => {
-  if (message.author.bot) return;
-  if (message.channel.type === "dm") return;
-  let messageArray = message.content.split(" ");
-  let cmd = messageArray[0];
-  let args = messageArray.slice(1);
-  if (cmd === `b!mute`) {
-    let tomute = message.guild.member(
-      message.mentions.users.first() || message.guild.members.get(args[0])
-    );
-    if (!tomute) return message.channel.send("**Could't Find User**");
-    if (tomute.permissions.has("MUTE_MEMBERS"))
-      return message.channel.send("**Can't Mute Him**");
-    let muterole = message.guild.roles.cache.some(
-      hama => hama.neme === "muted"
-    );
-    if (!muterole) {
-      try {
-        muterole = await message.guild.roles.create({
-          name: "muted",
-          color: "#000000",
-          permissions: []
-        });
-        message.guild.channels.forEach(async (channel, id) => {
-          await channel.overwritePermissions(muterole, {
-            SEND_MESSAGES: false,
-            ADD_REACTIONS: false,
-            READ_MESSAGES: false
-          });
-        });
-      } catch (e) {
-        console.log(e.stack);
-      }
-    }
-    let mutetime = args[1];
-    if (!mutetime) return message.channel.send("**Type Time!**");
-    await tomute.roles.add(muterole.id);
-    message.channel.send(
-      `**<@${tomute.id}> has been muted for ${ms(ms(mutetime))}**`
-    );
-    setTimeout(function() {
-      tomute.roles.remove(muterole.id);
-      message.channel.send(`<@${tomute.id}> has been unmuted!`);
-    }, ms(mutetime));
-  }
-});
+
 
 client.on("guildDelete", guild => {
   let joinedbot = new Discord.RichEmbed()
