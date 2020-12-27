@@ -3050,7 +3050,7 @@ client.on("message", message => {
 
     message.channel.send(
       "`" +
-        `${days} days, ${hours} hrs, ${minutes} , ${seconds} sec` +
+        `${days} days, ${hours} hrs, $p{minutes} , ${seconds} sec` +
         "`**🎛 **"
     );
   }
