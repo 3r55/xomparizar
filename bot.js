@@ -2041,39 +2041,14 @@ client.on("message", m => {
   if (m.content === prefix + "help") {
     let Dashboard = `    
 
- **GENERAL COMMAND**
- b!count
- b!roles
- b!botinfo
- b!support
- b!stone
- b!paper
- b!scissors
- b!servers
- b!say,embed
- b!about
- b!invite
- b!user
- **SECURITY COMMAND**
-b!anti ban[number]
-b!anti kick [number]
-b!anti roleC [number]
-b!anti roleD [number]
-b!anti channelD [number]
-b!anti channelC [number]
-b!anti time [number]
-b!antibots off/on
- **FUNNY COMAND**
- b!slap
- b!hug
- b!tickle
- b!pat
- b!cat
- b!dog
- b!poke
- b!cuddle
- **MUSIC COMMAND**
-coming soon....
+b!help1 => MODERATION COMMAND
+b!help2 => GENERAL COMMAND
+b!help3 => SECURITY COMMAND
+b!help4 => FUNNY COMMAND
+
+commanig soon for help 5 music code
+
+
  `;
     var addserver = `https://discordapp.com/oauth2/authorize?client_id=${client.user.id}&scope=bot&permissions=2080374975`;
     var SUPPORT = `https://discord.gg/GmSYVCQMRU`;
@@ -2087,39 +2062,72 @@ coming soon....
     m.channel.send(embed);
   }
 });
-
 client.on("message", message => {
-  if (message.content === prefix + "help1") { 
+  if (message.content === prefix + "help4") { 
     let embed = new Discord.RichEmbed()
       .setAuthor(message.author.username)
        .setThumbnail(message.author.avatarURL)
        .setFooter("CREATED BY BLACK JACK")
       .setColor("RANDOM").setDescription(` 
- **MODERATION**
- b!mute,b!unmute
- b!move,moveall
- b!ban
- b!unban all
- b!unban
- b!c text
- b!c vc  
- b!kick
- b!clear <number>
- b!lock
- b!server
- b!warn
- b!listwarns
- b!nick,help nick
- b!banslist
- b!unlock
- b!setWelcomer <channel name>
- b!setCount
- b!join
- b!setDate
- b!autorole <role name>
- b!setTime
- b!setbotv
- b!setmember
+   **FUNNY COMAND**
+ b!slap
+ b!hug
+ b!tickle
+ b!pat
+ b!cat
+ b!dog
+ b!poke
+ b!cuddle
+   
+
+** Created by ==> [<@670647563627659306>] **
+`);
+    message.channel.sendEmbed(embed);
+  }
+});
+client.on("message", message => {
+  if (message.content === prefix + "help3") { 
+    let embed = new Discord.RichEmbed()
+      .setAuthor(message.author.username)
+       .setThumbnail(message.author.avatarURL)
+       .setFooter("CREATED BY BLACK JACK")
+      .setColor("RANDOM").setDescription(` 
+   
+ **SECURITY COMMAND**
+b!anti ban[number]
+b!anti kick [number]
+b!anti roleC [number]
+b!anti roleD [number]
+b!anti channelD [number]
+b!anti channelC [number]
+b!anti time [number]
+b!antibots off/on
+
+** Created by ==> [<@670647563627659306>] **
+`);
+    message.channel.sendEmbed(embed);
+  }
+});
+client.on("message", message => {
+  if (message.content === prefix + "help2") { 
+    let embed = new Discord.RichEmbed()
+      .setAuthor(message.author.username)
+       .setThumbnail(message.author.avatarURL)
+       .setFooter("CREATED BY BLACK JACK")
+      .setColor("RANDOM").setDescription(` 
+  **GENERAL COMMAND**
+ b!count
+ b!roles
+ b!botinfo
+ b!support
+ b!stone
+ b!paper
+ b!scissors
+ b!servers
+ b!say,embed
+ b!about
+ b!invite
+ b!user
 
 ** Created by ==> [<@670647563627659306>] **
 `);
