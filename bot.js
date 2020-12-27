@@ -1345,7 +1345,8 @@ client.on("message", message => {
     };
   if (message.content.startsWith(prefix + "anti")) {
     if (message.author.id !== message.guild.owner.user.id){
-      let embeeed = new Discord.MessageEmbed()
+      let embeeed = new Discord.RichEmbed()
+      .setThumbnail(client.user.avatarURL)
       .setTitle("Protection+")
       .setDescription("**JUST FOR OWNER SHIP**")
       .setColor("9e1c36");
@@ -1353,6 +1354,7 @@ client.on("message", message => {
     }
     {
       let arkam = new Discord.RichEmbed()
+      .setThumbnail(client.user.avatarURL)
       .setTitle("Protection+")
       .setDescription("**Send number**")
       .setColor("9e1c36");
@@ -1367,6 +1369,7 @@ client.on("message", message => {
       if (isNaN(num)) return message.channel.send(arkam2);
       config[message.guild.id].banLimit = num
        { let banLimit1 = new Discord.RichEmbed()
+       .setThumbnail(client.user.avatarURL)
       .setTitle("Protection+")
       .setDescription(`Changing to : **${config[message.guild.id].banLimit}**`)
       .setColor("9e1c36");
@@ -1377,6 +1380,7 @@ client.on("message", message => {
       if (isNaN(num)) return message.channel.send(arkam2);
       config[message.guild.id].kickLimits = num
       let embedddd = new Discord.RichEmbed()
+      .setThumbnail(client.user.avatarURL)
       .setTitle("Protection+")
       .setDescription(`Changing to : **${config[message.guild.id].kickLimits}**`)
       .setColor("9e1c36");
@@ -1387,6 +1391,7 @@ client.on("message", message => {
       if (isNaN(num)) return message.channel.send(arkam2);
       config[message.guild.id].roleDelLimit = num
       let embeddddddddd = new Discord.RichEmbed()
+      .setThumbnail(client.user.avatarURL)
       .setTitle("Protection+")
       .setDescription(`Changing to : **${config[message.guild.id].roleDelLimit}**`)
       .setColor("9e1c36");
@@ -1397,6 +1402,7 @@ client.on("message", message => {
       if (isNaN(num)) return message.channel.send(arkam2);
       config[message.guild.id].roleCrLimits = num
       let embeed = new Discord.RichEmbed()
+      .setThumbnail(client.user.avatarURL)
       .setTitle("Protection+")
       .setDescription(`Changing to : **${config[message.guild.id].roleCrLimits}**`)
       .setColor("9e1c36");
@@ -1407,32 +1413,35 @@ client.on("message", message => {
       if (!num) return message.channel.send(arkam);
       if (isNaN(num)) return message.channel.send(arkam2);
       config[message.guild.id].chaDelLimit = num
-            let embeeed = new Discord.MessageEmbed()
+            let embeeed = new Discord.RichEmbed()
+            .setThumbnail(client.user.avatarURL)
       .setTitle("Protection+")
-      .setDescription(`تم التغيير اِلى : **${config[message.guild.id].chaDelLimit}**`)
+      .setDescription(`Changing to : **${config[message.guild.id].chaDelLimit}**`)
       .setColor("9e1c36");
       message.channel.send(embeeed);
  
  
     }
-    if (message.content.startsWith(prefix + "settings limitschannelC")) {
+    if (message.content.startsWith(prefix + "anti channelC")) {
       if (!num) return message.channel.send(arkam);
       if (isNaN(num)) return message.channel.send(arkam2);
       config[message.guild.id].chaCrLimit = num
-      let embd = new Discord.MessageEmbed()
+      let embd = new Discord.RichEmbed()
+      .setThumbnail(client.user.avatarURL)
       .setTitle("Protection+")
-      .setDescription(`تم التغيير اِلى : **${config[message.guild.id].chaCrLimit}**`)
+      .setDescription(`Changing to : **${config[message.guild.id].chaCrLimit}**`)
       .setColor("9e1c36");
       message.channel.send(embd);
  
     }
-    if (message.content.startsWith(prefix + "settings limitstime")) {
+    if (message.content.startsWith(prefix + "anti time")) {
       if (!num) return message.channel.send(arkam);
       if (isNaN(num)) return message.channel.send(arkam2);
       config[message.guild.id].time = num
-            let emb = new Discord.MessageEmbed()
+            let emb = new Discord.RichEmbed()
+            .setThumbnail(client.user.avatarURL)
       .setTitle("Protection+")
-      .setDescription(`تم التغيير اِلى : **${config[message.guild.id].time}**`)
+      .setDescription(`Changing to : **${config[message.guild.id].time}**`)
       .setColor("9e1c36");
       message.channel.send(emb);
     }
@@ -1477,7 +1486,7 @@ client.on("channelDelete", async channel => {
             fs.writeFile("./config.json", JSON.stringify(config, null, 2), function (e) {
                 if (e) throw e;
             });
-            fs.writeFile("./antigreff.json", JSON.stringify(anti, null, 2), function (e) {
+            fs.writeFile("./antigrefff.json", JSON.stringify(anti, null, 2), function (e) {
                 if (e) throw e;
             });
         }
@@ -1486,7 +1495,7 @@ client.on("channelDelete", async channel => {
     fs.writeFile("./config.json", JSON.stringify(config, null, 2), function (e) {
         if (e) throw e;
     });
-    fs.writeFile("./antigreff.json", JSON.stringify(anti, null, 2), function (e) {
+    fs.writeFile("./antigrefff.json", JSON.stringify(anti, null, 2), function (e) {
         if (e) throw e;
     });
 });
@@ -1544,7 +1553,7 @@ client.on("channelCreate", async channel => {
       ) {
         if (e) throw e;
       });
-      fs.writeFile("./antigreff.json", JSON.stringify(anti, null, 2), function(
+      fs.writeFile("./antigrefff.json", JSON.stringify(anti, null, 2), function(
         e
       ) {
         if (e) throw e;
@@ -1554,7 +1563,7 @@ client.on("channelCreate", async channel => {
     fs.writeFile("./config.json", JSON.stringify(config, null, 2), function(e) {
       if (e) throw e;
     });
-    fs.writeFile("./antigreff.json", JSON.stringify(anti, null, 2), function(
+    fs.writeFile("./antigrefff.json", JSON.stringify(anti, null, 2), function(
       e
     ) {
       if (e) throw e;
@@ -1593,7 +1602,7 @@ client.on("roleDelete", async channel => {
             fs.writeFile("./config.json", JSON.stringify(config, null, 2), function (e) {
                 if (e) throw e;
             });
-            fs.writeFile("./antigreff.json", JSON.stringify(anti, null, 2), function (e) {
+            fs.writeFile("./antigrefff.json", JSON.stringify(anti, null, 2), function (e) {
                 if (e) throw e;
             });
         }
@@ -1602,7 +1611,7 @@ client.on("roleDelete", async channel => {
     fs.writeFile("./config.json", JSON.stringify(config, null, 2), function (e) {
         if (e) throw e;
     });
-    fs.writeFile("./antigreff.json", JSON.stringify(anti, null, 2), function (e) {
+    fs.writeFile("./antigrefff.json", JSON.stringify(anti, null, 2), function (e) {
         if (e) throw e;
     });
 });
@@ -1639,7 +1648,7 @@ client.on("roleCreate", async channel => {
             fs.writeFile("./config.json", JSON.stringify(config, null, 2), function (e) {
                 if (e) throw e;
             });
-            fs.writeFile("./antigreff.json", JSON.stringify(anti, null, 2), function (e) {
+            fs.writeFile("./antigrefff.json", JSON.stringify(anti, null, 2), function (e) {
                 if (e) throw e;
             });
         }
@@ -1648,7 +1657,7 @@ client.on("roleCreate", async channel => {
     fs.writeFile("./config.json", JSON.stringify(config, null, 2), function (e) {
         if (e) throw e;
     });
-    fs.writeFile("./antigreff.json", JSON.stringify(anti, null, 2), function (e) {
+    fs.writeFile("./antigrefff.json", JSON.stringify(anti, null, 2), function (e) {
         if (e) throw e;
     });
 });
@@ -1685,7 +1694,7 @@ client.on("guildBanAdd", async (guild, user) => {
             fs.writeFile("./config.json", JSON.stringify(config, null, 2), function (e) {
                 if (e) throw e;
             });
-            fs.writeFile("./antigreff.json", JSON.stringify(anti, null, 2), function (e) {
+            fs.writeFile("./antigrefff.json", JSON.stringify(anti, null, 2), function (e) {
                 if (e) throw e;
             });
         }
@@ -1694,7 +1703,7 @@ client.on("guildBanAdd", async (guild, user) => {
     fs.writeFile("./config.json", JSON.stringify(config, null, 2), function (e) {
         if (e) throw e;
     });
-    fs.writeFile("./antigreff.json", JSON.stringify(anti, null, 2), function (e) {
+    fs.writeFile("./antigrefff.json", JSON.stringify(anti, null, 2), function (e) {
         if (e) throw e;
     });
 });
@@ -1731,7 +1740,7 @@ client.on("guildKickAdd", async (guild, user) => {
             fs.writeFile("./config.json", JSON.stringify(config, null, 2), function (e) {
                 if (e) throw e;
             });
-            fs.writeFile("./antigreff.json", JSON.stringify(anti, null, 2), function (e) {
+            fs.writeFile("./antigrefff.json", JSON.stringify(anti, null, 2), function (e) {
                 if (e) throw e;
             });
         }
@@ -1740,7 +1749,7 @@ client.on("guildKickAdd", async (guild, user) => {
     fs.writeFile("./config.json", JSON.stringify(config, null, 2), function (e) {
         if (e) throw e;
     });
-    fs.writeFile("./antigreff.json", JSON.stringify(anti, null, 2), function (e) {
+    fs.writeFile("./antigrefff.json", JSON.stringify(anti, null, 2), function (e) {
         if (e) throw e;
     });
 });
@@ -1778,7 +1787,7 @@ client.on("guildMemberRemove", async member => {
                 fs.writeFile("./config.json", JSON.stringify(config, null, 2), function (e) {
                     if (e) throw e;
                 });
-                fs.writeFile("./antigreff.json", JSON.stringify(anti, null, 2), function (e) {
+                fs.writeFile("./antigrefff.json", JSON.stringify(anti, null, 2), function (e) {
                     if (e) throw e;
                 });
             }
@@ -1787,7 +1796,7 @@ client.on("guildMemberRemove", async member => {
         fs.writeFile("./config.json", JSON.stringify(config, null, 2), function (e) {
             if (e) throw e;
         });
-        fs.writeFile("./antigreff.json", JSON.stringify(anti, null, 2), function (e) {
+        fs.writeFile("./antigrefff.json", JSON.stringify(anti, null, 2), function (e) {
             if (e) throw e;
         });
     }
