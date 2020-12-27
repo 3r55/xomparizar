@@ -184,12 +184,12 @@ client.on("message", message => {
       .setColor("black")
       .setDescription(
         ` ✽  **Hi I'm Black Bot **  
-✽  **Support Server** [ https://discord.gg/aKdCRSX ] 
-✽  **Video explained ** [ https://youtu.be/pD52f5iWk-A ] 
-✽  **Bot orders** [ • **b!help:b!help1:b!help2:b!help** • ]   `
+✽  **Support Server** [ https://discord.gg/GmSYVCQMRU ] 
+✽  **Add bot ** [ https://discordapp.com/oauth2/authorize?client_id=${client.user.id}&scope=bot&permissions=2080374975 ] 
+✽  **Bot orders** [ • **b!help** • ]   `
       )
  
-      .setImage("");
+      .setImage("https://images-ext-1.discordapp.net/external/RXd_Kc0_Ji0JNg67qAZcHPUOL8o60DLt3qecFb5FuC4/https/media.discordapp.net/attachments/777510905041911819/792459601193992202/image0.gif");
     message.channel.send(mention);
   }
 });
@@ -2130,15 +2130,7 @@ we = "😣She lost the luck of Over😣"
 message.channel.send(`${slots1} - ${we}`)
 }
 });
-client.on("message", Black => {
-if(Black.author.bot) return;
-if(Black.content.startsWith(prefix + "support")) {
-Black.author.send(`https://discord.gg/tgcrhfT3dY`)///link server
-Black.author.send(``)///link bot
-Black.channel.send(`**CHEK YOUR DM**`)
-Black.react("✅")
-}
-})
+
 ////by black jack
 
 
@@ -2831,6 +2823,18 @@ client.on("message", m => {
       .setFooter("BLACK BOT")
       .addField("SERVER", ` https://discord.gg/ZnPDHaA  `);
     m.channel.send({ embed });
+  }
+});
+
+client.on("message", message => {
+  if (message.content === prefix + "support") {
+    let embed = new Discord.RichEmbed()
+      .setAuthor(message.author.username)
+      .setColor("#9B59B6")
+      .setImage("https://images-ext-1.discordapp.net/external/RXd_Kc0_Ji0JNg67qAZcHPUOL8o60DLt3qecFb5FuC4/https/media.discordapp.net/attachments/777510905041911819/792459601193992202/image0.gif")
+      .addField(" ** CLICK HERE **", "  **https://discord.gg/tgcrhfT3dY*");
+ 
+    message.channel.sendEmbed(embed);
   }
 });
 
