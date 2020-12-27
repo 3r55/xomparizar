@@ -399,7 +399,7 @@ client.on("guildMemberAdd", member => {
         .setColor('RANDOM')
         .setThumbnail(h.avatarURL)
         .setAuthor(h.username,h.avatarURL)
-        .addField('  ناو   ',`${member}`)
+        .addField('  نـاو  ',`${member}`)
         .addField('  بەخێربێی بۆ سێرڤەر' , `Welcome to the server, ${member}`)
         .addField(' تۆ کەسی ژمارە',`${member.guild.memberCount}`)
         .addField('  ئایدی ئەکاونت :', "**[" + `${member.id}` + "]**" )
@@ -2040,31 +2040,7 @@ break;
 client.on("message", m => {
   if (m.content === prefix + "help") {
     let Dashboard = `    
-**MODERATION**
- b!mute,b!unmute
- b!move,moveall
- b!ban
- b!unban all
- b!unban
- b!c text
- b!c vc  
- b!kick
- b!clear <number>
- b!lock
- b!server
- b!warn
- b!listwarns
- b!nick,help nick
- b!banslist
- b!unlock
- b!setWelcomer <channel name>
- b!setCount
- b!join
- b!setDate
- b!autorole <role name>
- b!setTime
- b!setbotv
- b!setmember
+
  **GENERAL COMMAND**
  b!count
  b!roles
@@ -2112,7 +2088,84 @@ coming soon....
   }
 });
 
+client.on("message", message => {
+  if (message.content === prefix + "help1") { 
+    let embed = new Discord.RichEmbed()
+      .setAuthor(message.author.username)
+       .setThumbnail(message.author.avatarURL)
+       .setFooter("CREATED BY BLACK JACK")
+      .setColor("RANDOM").setDescription(` 
+ **MODERATION**
+ b!mute,b!unmute
+ b!move,moveall
+ b!ban
+ b!unban all
+ b!unban
+ b!c text
+ b!c vc  
+ b!kick
+ b!clear <number>
+ b!lock
+ b!server
+ b!warn
+ b!listwarns
+ b!nick,help nick
+ b!banslist
+ b!unlock
+ b!setWelcomer <channel name>
+ b!setCount
+ b!join
+ b!setDate
+ b!autorole <role name>
+ b!setTime
+ b!setbotv
+ b!setmember
 
+** Created by ==> [<@670647563627659306>] **
+`);
+    message.channel.sendEmbed(embed);
+  }
+});
+
+client.on("message", message => {
+  if (message.content === prefix + "help1") { 
+    let embed = new Discord.RichEmbed()
+      .setAuthor(message.author.username)
+       .setThumbnail(message.author.avatarURL)
+       .setFooter("CREATED BY BLACK JACK")
+      .setColor("RANDOM").setDescription(` 
+ **MODERATION**
+ b!mute,b!unmute
+ b!move,moveall
+ b!ban
+ b!unban all
+ b!unban
+ b!c text
+ b!c vc  
+ b!kick
+ b!clear <number>
+ b!lock
+ b!server
+ b!warn
+ b!listwarns
+ b!nick,help nick
+ b!banslist
+ b!unlock
+ b!setWelcomer <channel name>
+ b!setCount
+ b!join
+ b!setDate
+ b!autorole <role name>
+ b!setTime
+ b!setbotv
+ b!setmember
+
+** Created by ==> [<@670647563627659306>] **
+`);
+    message.channel.sendEmbed(embed);
+  }
+});
+ 
 
 const rWlc = JSON.parse(fs.readFileSync("./AutoRole.json", "utf8"));
 client.on('message', message => {
