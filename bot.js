@@ -148,23 +148,7 @@ client.on("message", message => {
   }
 });
 
-client.on("message", message => {
-  if (message.content === prefix + "user") {
-    var embed = new Discord.RichEmbed()
-      .setThumbnail(message.author.avatarURL)
-      .setFooter("CREATED BY BLACK JACK")
-      .setTitle(message.author.tag, message.author.avatarURL)
-      .addField(`User`, message.author.username)
-      .addField(`Ping`, `${Date.now() - message.createdTimestamp}` + " ms`")
-      .addField(`Joined discord`, message.user.createdAt ,)
-      .addField(`Joined server`, message.guild.joinedAt ,)  
-      .addField(`tag`, `#` + message.author.discriminator)
-      .addField(`Role`, message.member.colorRole)
-      .addField(`Status`, message.author.presence.status)
-      .setColor("RANDOM");
-    message.channel.send(embed);
-  }
-});
+
 
 client.on("guildCreate", guild => {
   var embed = new Discord.RichEmbed()
@@ -191,6 +175,23 @@ client.on("message", message => {
  
       .setImage("https://images-ext-1.discordapp.net/external/RXd_Kc0_Ji0JNg67qAZcHPUOL8o60DLt3qecFb5FuC4/https/media.discordapp.net/attachments/777510905041911819/792459601193992202/image0.gif");
     message.channel.send(mention);
+  }
+});
+
+client.on("message", message => {
+  if (message.content === prefix + "user") {
+    var user = new Discord.RichEmbed()
+      .setThumbnail(message.author.avatarURL)
+      .setFooter("CREATED BY BLACK JACK")
+      .setTitle(message.author.tag, message.author.avatarURL)
+      .addField(`User`, message.author.username)
+      .addField(`Ping`, `${Date.now() - message.createdTimestamp}` + " ms`")
+      .addField(`Joined server`, message.guild.joinedAt ,)  
+      .addField(`tag`, `#` + message.author.discriminator)
+      .addField(`Role`, message.member.colorRole)
+      .addField(`Status`, message.author.presence.status)
+      .setColor("RANDOM");
+    message.channel.send(user);
   }
 });
 
