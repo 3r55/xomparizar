@@ -156,6 +156,7 @@ client.on("message", message => {
       .setTitle(message.author.tag, message.author.avatarURL)
       .addField(`User`, message.author.username)
       .addField(`Ping`, `${Date.now() - message.createdTimestamp}` + " ms`")
+          
       .addField(`tag`, `#` + message.author.discriminator)
       .addField(`Role`, message.member.colorRole)
       .addField(`Status`, message.author.presence.status)
