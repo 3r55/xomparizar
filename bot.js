@@ -156,7 +156,8 @@ client.on("message", message => {
       .setTitle(message.author.tag, message.author.avatarURL)
       .addField(`User`, message.author.username)
       .addField(`Ping`, `${Date.now() - message.createdTimestamp}` + " ms`")
-          
+      .addField(`Joined discord`, message.user.createdAt ,)
+      .addField(`Joined server`, message.guild.joinedAt ,)  
       .addField(`tag`, `#` + message.author.discriminator)
       .addField(`Role`, message.member.colorRole)
       .addField(`Status`, message.author.presence.status)
@@ -174,12 +175,25 @@ client.on("guildCreate", guild => {
 
 //////black jack new code v12```
 
+
+
 client.on("message", message => {
-  if (message.author.bot) return;
-  if (message.isMentioned(client.user)) {
-    message.reply("MY PREFIX b!");
+  if (message.content.startsWith(`<@${client.user.id}>`)) {
+    if (message.author.bot || message.channel.type == "dm") return;
+    let mention = new Discord.RichEmbed()
+      .setColor("black")
+      .setDescription(
+        ` ✽  **Hi I'm Black Bot **  
+✽  **Support Server** [ https://discord.gg/aKdCRSX ] 
+✽  **Video explained ** [ https://youtu.be/pD52f5iWk-A ] 
+✽  **Bot orders** [ • **b!help:b!help1:b!help2:b!help** • ]   `
+      )
+ 
+      .setImage("");
+    message.channel.send(mention);
   }
 });
+
 const welcome = JSON.parse(fs.readFileSync('./welcomer.json' , 'utf8'));
 client.on('message', async message => {
     let messageArray = message.content.split(" ");
@@ -1979,6 +1993,7 @@ client.on("message", m => {
  b!kick
  b!clear <number>
  b!lock
+ b!server
  b!warn
  b!listwarns
  b!nick,help nick
@@ -1997,7 +2012,6 @@ client.on("message", m => {
  b!roles
  b!botinfo
  b!support
- b!server
  b!stone
  b!paper
  b!scissors
@@ -2985,6 +2999,69 @@ client.on("message", message => {
       .catch(console.error);
   }
 });
+
+client.on("message", message => {
+  if (message.author.bot) return;
+ 
+  let command = message.content.split(" ")[0];
+ 
+  if (command === prefix + "unmute") {
+    if (!message.member.hasPermission("MANAGE_ROLES"))
+      return message
+        .reply("** پێرمیشن نییە 'Manage Roles' **")
+        .catch(console.error);
+    let user = message.mentions.users.first();
+    let modlog = client.channels.find("name", "log");
+    let muteRole = client.guilds
+      .get(message.guild.id)
+      .roles.find("name", "Muted");
+    if (!muteRole)
+      return message
+        .reply("** ڕۆڵی میوتت نییە 'Muted' **")
+        .catch(console.error);
+    if (message.mentions.users.size < 1)
+      return message
+        .reply("** ئەبێت سەرەتا ناوی کەسەکە تاگ بکەی**")
+        .catch(console.error);
+    const embed = new Discord.RichEmbed()
+      .setColor(0x00ae86)
+      .setTimestamp()
+      .addField("بەکارھێنان:", " بێدەنگ بە/قسەبکو")
+      .addField(
+        "میوتەکە کرایەوە لە:",
+        `${user.username}#${user.discriminator} (${user.id})`
+      )
+      .addField(
+        "لە ڕێگەی:",
+        `${message.author.username}#${message.author.discriminator}`
+      );
+ 
+    if (
+      !message.guild
+        .member(client.user)
+        .hasPermission("MANAGE_ROLES_OR_PERMISSIONS")
+    )
+      return message
+        .reply("** پێرمیشنت نییە Manage Roles **")
+        .catch(console.error);
+ 
+    if (message.guild.member(user).removeRole(muteRole.id)) {
+      return message
+        .reply("**:white_check_mark: .. میوتەکە لابرا لەسەر کەسەکە **")
+        .catch(console.error);
+    } else {
+      message.guild
+        .member(user)
+        .removeRole(muteRole)
+        .then(() => {
+          return message
+            .reply("**:white_check_mark: .. میوتەکە لابرا لەسەر کەسەکە **")
+            .catch(console.error);
+        });
+    }
+  }
+});
+
 
 client.on("message", msg => {
   if (msg.content == prefix + "guild") {
