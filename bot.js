@@ -2123,6 +2123,7 @@ client.on("message", message => {
  b!role all <role name>
  b!warn
  b!listwarns
+ b!bc
  b!nick,help nick
  b!banslist
  b!unlock
@@ -2311,7 +2312,7 @@ client.on("message", message => {
       });
     message.channel.send(
       `\`${
-        message.guild.members.filter(m => m.presence.status !== "online","dnd").size
+        message.guild.members.filter(m => m.presence.status !== "online","dnd","idle").size
       }\` : ** ژمارەی ۆنلاینەکان** `
     );
     message.delete();
