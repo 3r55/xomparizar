@@ -35,21 +35,7 @@ client.on("ready", () => {
   console.log(`Logined`);
 });
 
-client.on("message", message => {
-  if (message.author.bot) return undefined;
-  let args = message.content.split(" ");
-  let msg = args.slice(1);
-  if (args.slice(0) == prefix + "bc") {
-    if (!msg)
-      return message.channel.send(
-        "⚠️ | Please Type The Message To Send The BC"
-      );
-    client.users.forEach(m => {
-      m.send(msg);
-    });
-    message.channel.send("Done chek brodcast ✅");
-  } //////by black jack
-});
+
 
 client["on"]("message", message => {
   if (message["author"]["bot"]) return undefined;
@@ -162,7 +148,6 @@ client.on("guildCreate", guild => {
   guild.channel.sendEmbed(embed);
 });
 
-//////black jack new code v12```
 
 
 
