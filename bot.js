@@ -2117,6 +2117,10 @@ client.on("message", message => {
  b!clear <number>
  b!lock
  b!server
+ b!role <role name>
+ b!role bots <role name>
+ b!role humans <role name>
+ b!role all <role name>
  b!warn
  b!listwarns
  b!nick,help nick
@@ -2137,7 +2141,86 @@ client.on("message", message => {
   }
 });
  
-
+client.on("message", msg => {
+  if (msg.author.bot) return;
+  if (msg.content.startsWith(prefix + "role")) {
+    let params = msg.content
+      .slice(prefix.length)
+      .trim()
+      .split(/ +/g);
+    if (!params[0])
+      return msg.channel.send(
+        `**syntax: ${prefix}role <all/humans/bots/@user> <name role/@role>`
+      );
+    if (params[0] === "all") {
+      if (!params[1])
+        return msg.channel.send(
+          `**ڕۆڵەکەی یان ناوەکەی تاگ بکە \n syntax: ${prefix}role all <@role / name role>**`
+        );
+      let role =
+        msg.mentions.roles.first() ||
+        msg.guild.roles.find(r =>
+          r.name.toLowerCase().startsWith(params[1].toLowerCase())
+        );
+      if (!role) return msg.channel.send(`**ئەم ڕۆڵە نە دۆزرایەوە**`);
+      msg.guild.members.forEach(m => {
+        if (m.roles.some(r => r.id == role.id)) return;
+        m.addRole(role);
+      });
+      msg.channel.send(`**done give all role @${role.name}**`);
+    } else if (params[0] === "bots") {
+      if (!params[1])
+        return msg.channel.send(
+          `**ڕۆڵەکەی یان ناوەکەی تاگ بکە \n syntax: ${prefix}role bots <@role / name role>**`
+        );
+      let role =
+        msg.mentions.roles.first() ||
+        msg.guild.roles.find(r =>
+          r.name.toLowerCase().startsWith(params[1].toLowerCase())
+        );
+      if (!role) return msg.channel.send(`**ناتوانیت ئەم ڕۆڵە بدۆزیتەوە**`);
+      let bots = msg.guild.members.filter(m => m.user.bot);
+      bots.forEach(bot => {
+        if (bot.roles.some(r => r.id == role.id)) return;
+        bot.addRole(role);
+      });
+      msg.channel.send(`**done give all bots role @${role.name}**`);
+    } else if (params[0] === "humans") {
+      if (!params[1])
+        return msg.channel.send(
+          `**ڕۆڵەکەی یان ناوەکەی تاگ بکە \n syntax: ${prefix}role humans <@role / name role>**`
+        );
+      let role =
+        msg.mentions.roles.first() ||
+        msg.guild.roles.find(r =>
+          r.name.toLowerCase().startsWith(params[1].toLowerCase())
+        );
+      if (!role) return msg.channel.send(`**ناتوانیت ئەم ڕۆڵە بدۆزیتەوە**`);
+      let humans = msg.guild.members.filter(m => !m.user.bot);
+      humans.forEach(h => {
+        if (h.roles.some(r => r.id == role.id)) return;
+        h.addRole(role);
+      });
+      msg.channel.send(`**done give all humans role @${role.name}**`);
+    } else {
+      if (!params[1])
+        return msg.channel.send(
+          `**ڕۆڵەکەی یان ناوەکەی تاگ بکە \n syntax: ${prefix}role @user <@role / name role>**`
+        );
+      let role =
+        msg.mentions.roles.first() ||
+        msg.guild.roles.find(r =>
+          r.name.toLowerCase().startsWith(params[1].toLowerCase())
+        );
+      if (!role) return msg.channel.send(`** ناتوانیت ئەم ڕۆڵە بدۆزیتەوە**`);
+      let userID = params[0].slice(2, -1);
+      let user = msg.guild.members.get(userID);
+      if (!user) return;
+      user.addRole(role);
+      msg.channel.send(`**Done give ${user} @${role.name}**`);
+    }
+  }
+});
 const rWlc = JSON.parse(fs.readFileSync("./AutoRole.json", "utf8"));
 client.on('message', message => {
 if(message.channel.type === "dm") return;
@@ -2215,8 +2298,28 @@ message.channel.send(`${slots1} - ${we}`)
 
 ////by black jack
 
+
 client.on("message", message => {
-  var prefix = "b!";
+  if (message.content.startsWith(prefix + "bc")) {
+    if (!message.member.hasPermission("ADMINISTRATOR")) return;
+    let args = message.content.split(" ").slice(1);
+    var argresult = args.join(" ");
+    message.guild.members
+      .filter(m => m.presence.status !== "offline")
+      .forEach(m => {
+        m.send(`${argresult}\n ${m}`);
+      });
+    message.channel.send(
+      `\`${
+        message.guild.members.filter(m => m.presence.status !== "online","dnd").size
+      }\` : ** ژمارەی ۆنلاینەکان** `
+    );
+    message.delete();
+  }
+});
+ 
+
+client.on("message", message => {
   if (message.content.startsWith(prefix + "moveall")) {
     if (!message.member.hasPermission("MOVE_MEMBERS"))
       return message.channel.send("**:x: You Dont Have Perms `MOVE_MEMBERS`**");
