@@ -8,6 +8,7 @@ const moment = require("moment");
 const request = require("request");
 const fs = require("fs");
 const prefix = "b!";
+const Enmap = require('enmap')
 const db = require('quick.db');
 const getYoutubeID = require("get-youtube-id");
 const fetchVideoInfo = require("youtube-info");
