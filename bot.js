@@ -8,7 +8,7 @@ const moment = require("moment");
 const request = require("request");
 const fs = require("fs");
 const prefix = "b!";
-const db = require("quick.db");
+const db = require('quick.db');
 const getYoutubeID = require("get-youtube-id");
 const fetchVideoInfo = require("youtube-info");
 const yt_api_key = "AIzaSyAdORXg7UZUo7sePv97JyoDqtQVi3Ll0b8";
@@ -1948,47 +1948,6 @@ client.on('message', message => {
 
 
 
-var Enmap = require("enmap");
-client.antibots = new Enmap({ name: "chat" });
-var antibots = client.antibots;
-var julian = client;
-julian.on("message", codes => {
-  if (codes.content.startsWith(prefix + "antibot on")) {
-    if (
-      codes.author.bot ||
-      !codes.channel.guild ||
-      codes.author.id != codes.guild.ownerID
-    )
-      return;
-    antibots.set(`${codes.guild.id}`, {
-      onoff: "On"
-    });
-
-    codes.channel.send("ئــەنتی بۆت کــاراکرا☑️");
-  }
-  if (codes.content.startsWith(prefix + "antibot off")) {
-    if (
-      codes.author.bot ||
-      !codes.channel.guild ||
-      codes.author.id != codes.guild.ownerID
-    )
-      return;
-    antibots.set(`${codes.guild.id}`, {
-      onoff: "Off"
-    });
-    codes.channel.send("ئـەنتـی بــۆت لادرا❌");
-  }
-});
-
-julian.on("guildMemberAdd", member => {
-  if (!antibots.get(`${member.guild.id}`)) {
-    antibots.set(`${member.guild.id}`, {
-      onoff: "Off"
-    });
-  }
-  if (antibots.get(`${member.guild.id}`).onoff == "Off") return;
-  if (member.user.bot) return member.kick();
-});
 ////////////////mrfix
 
 client.on("message", async function (message) {
