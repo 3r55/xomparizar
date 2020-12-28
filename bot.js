@@ -2107,7 +2107,34 @@ client.on("message", message => {
        .setThumbnail(message.author.avatarURL)
        .setFooter("CREATED BY BLACK JACK")
       .setColor("RANDOM").setDescription(` 
-   **FUNNY COMAND**
+
+ 
+ 
+ **GENERAL COMMAND**
+ b!count
+ b!roles
+ b!botinfo
+ b!support
+ b!stone
+ b!avatar
+ b!report
+ b!paper
+ b!scissors
+ b!servers
+ b!say,embed
+ b!about
+ b!invite
+ b!user
+**SECURITY COMMAND**
+b!anti ban[number]
+b!anti kick [number]
+b!anti roleC [number]
+b!anti roleD [number]
+b!anti channelD [number]
+b!anti channelC [number]
+b!anti time [number]
+b!antibots off/on 
+ **FUNNY COMAND**
  b!slap
  b!hug
  b!tickle
