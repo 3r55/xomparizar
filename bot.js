@@ -406,7 +406,7 @@ client.on("guildMemberAdd", member => {
         .setThumbnail(h.avatarURL)
         .setAuthor(h.username,h.avatarURL)
         .addField('  نـاو  ',`${member}`)
-        .addField('  بەخێربێی بۆ سێرڤەر' , `Welcome to the server, ${member}`)
+        .addField('  بەخێربێی بۆ سێرڤەر' , `Welcome to the server ${member.guild.name}, ${member}`)
         .addField(' تۆ کەسی ژمارە',`${member.guild.memberCount}`)
         .addField('  ئایدی ئەکاونت :', "**[" + `${member.id}` + "]**" )
         .addField(' سێرڤەر', `${member.guild.name}`,true)
