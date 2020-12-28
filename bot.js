@@ -517,48 +517,30 @@ client.on("message", message => {
 });
 
 client.on("guildMemberAdd", member => {
-  if (!sWlc[member.guild.id])
-    sWlc[member.guild.id] = {
-      channel: "welcome"
-    };
-  const channel = sWlc[member.guild.id].channel;
-  const sChannel = sWlc[member.guild.id].channel;
-  let welcomer = member.guild.channels.find("name", sChannel);
-  let memberavatar = member.user.avatarURL;
-  if (!welcomer) return;
-  if (welcomer) {
-    moment.locale("ar-ly");
-    var h = member.user;
-    let heroo = new Discord.RichEmbed()
-      .setColor("RANDOM")
-      .setThumbnail(h.avatarURL)
-      .setAuthor(h.username, h.avatarURL)
-      .addField(" | name : ", `${member}`)
-      .addField("| Your are the member", `${member.guild.memberCount}`)
-      .addField(
-        ": Joined discord",
-        `${moment(member.user.createdAt).format(
-          "D/M/YYYY h:mm a"
-        )} **\n** \`${moment(member.user.createdAt).fromNow()}\``,
-        true
-      )
-      .addField(
-        ": Joined server",
-        `${moment(member.joinedAt).format("D/M/YYYY h:mm a ")} \n\`\`${moment(
-          member.joinedAt
-        )
-          .startOf(" ")
-          .fromNow()}\`\``,
-        true
-      )
-      .setimage(
-        "https://media.discordapp.net/attachments/778541949900423189/791213512876752906/image0.gif"
-      )
-      .setFooter(
-        `${h.tag}`,
-        "https://images-ext-2.discordapp.net/external/JpyzxW2wMRG2874gSTdNTpC_q9AHl8x8V4SMmtRtlVk/https/orcid.org/sites/default/files/files/ID_symbol_B-W_128x128.gif"
-      );
-    welcomer.send({ embed: heroo });
+            if(!welcome[member.guild.id]) welcome[member.guild.id] = {
+          onoff: 'Off'
+        }
+        if(welcome[member.guild.id].onoff === 'Off') return;
+    let welcomer = member.guild.channels.find('name', `${welcome[member.guild.id].channel}`)
+    let memberavatar = member.user.avatarURL
+      if (!welcomer) return;
+      if(welcomer) {
+         moment.locale('ar-ly');
+         var h = member.user;
+        let heroo = new Discord.RichEmbed()
+        .setColor('RANDOM')
+        .setThumbnail(h.avatarURL)
+        .setAuthor(h.username,h.avatarURL)
+         .addField('  نــاو  ',`${member}`)
+        .addField(' تۆ کەسی ژمارە',`${member.guild.memberCount}`)
+        .addField('  ئایدی ئەکاونت :', "**[" + `${member.id}` + "]**" )
+        .addField(' سێرڤەر', `${member.guild.name}`,true)
+        .addField('کاتی جۆینکردنت', member.guild.joinedAt ,)
+        .addField("کاتی دروستکردنی ئەکاونتەکەت", member.user.createdAt ,)
+        .setImage("https://media.discordapp.net/attachments/765236779225055252/792462641980375070/20201226_214229.gif")
+        .setFooter(`${h.tag}`,"https://images-ext-2.discordapp.net/external/JpyzxW2wMRG2874gSTdNTpC_q9AHl8x8V4SMmtRtlVk/https/orcid.org/sites/default/files/files/ID_symbol_B-W_128x128.gif")
+     welcomer.send({embed:heroo});
+      }})
 
     var Canvas = require("canvas");
     var jimp = require("jimp");
