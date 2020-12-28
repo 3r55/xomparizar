@@ -1794,6 +1794,59 @@ client.on("guildMemberRemove", async member => {
 
 })
 
+var antibots = JSON.parse(fs.readFileSync("./KickBots.json", "utf8"));
+let saveSteve = () => {
+  fs.writeFileSync(
+    "./KickBots.json",
+    JSON.stringify(antibots, null, 2),
+    err => {
+      if (err) throw err;
+    }
+  );
+};
+client.on("message", message => {
+  if (!message.guild) return;
+  if (!antibots[message.guild.id])
+    config[message.guild.id] = {
+      onoff: true
+    };
+  if (message.content.startsWith(prefix + "antibots on")) {
+    if (message.author.bot || !message.channel.guild) return;
+    if (message.author.id !== message.guild.owner.user.id)
+      return message.channel.send(
+        "**:closed_lock_with_key: JUST FOR OWNER SHIP**"
+      );
+    antibots[message.guild.id] = {
+      onoff: true
+    };
+    saveSteve();
+    message.channel.send("**AntiBots Join Is On :closed_lock_with_key: **");
+  }
+  if (message.content.startsWith(prefix + "antibots off")) {
+    if (message.author.bot || !message.channel.guild) return;
+    if (message.author.id !== message.guild.owner.user.id)
+      return message.channel.send(
+        "**:closed_lock_with_key: JUST FOR OWNER SHIP**"
+      );
+    antibots[message.guild.id] = {
+      onoff: false
+    };
+    saveSteve();
+    message.channel.send("**AntiBots Join Is Off :unlock: **");
+  }
+  saveSteve();
+});
+
+client.on("guildMemberAdd", member => {
+  if (!antibots[member.guild.id])
+    config[member.guild.id] = {
+      onoff: true
+    };
+  if (antibots[member.guild.id].onoff == false) return;
+  if (member.user.bot) return member.ban("Protection from Bots.");
+  saveSteve();
+});
+
 
 var stopReacord = true;
 var reactionRoles = [];
