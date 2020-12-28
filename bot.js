@@ -419,7 +419,7 @@ client.on("guildMemberAdd", member => {
         .setColor('RANDOM')
         .setThumbnail(h.avatarURL)
         .setAuthor(h.username,h.avatarURL)
-        .addField('  نــاو  ',`${member}`)
+         .addField('  نــاو  ',`${member}`)
         .addField(' تۆ کەسی ژمارە',`${member.guild.memberCount}`)
         .addField('  ئایدی ئەکاونت :', "**[" + `${member.id}` + "]**" )
         .addField(' سێرڤەر', `${member.guild.name}`,true)
@@ -432,6 +432,9 @@ client.on("guildMemberAdd", member => {
 
 
 
+
+   
+                
 
   const invites = {};
 
@@ -479,15 +482,14 @@ Your Member Number ${member.guild.memberCount} `)
 
 
 
+            
+    
 
 
+        
 
-   
-
-
-
-
-
+        
+    
 
 const sWlc = {};
 client.on("message", message => {
