@@ -2082,6 +2082,7 @@ client.on("message", message => {
  b!botinfo
  b!support
  b!stone
+ b!avatar
  b!paper
  b!scissors
  b!servers
@@ -2109,6 +2110,7 @@ client.on("message", message => {
  b!ban
  b!unban all
  b!unban
+ b!ccolor
  b!c text
  b!c vc  
  b!kick
@@ -2213,7 +2215,50 @@ message.channel.send(`${slots1} - ${we}`)
 
 ////by black jack
 
+client.on("message", message => {
+  var prefix = "b!";
+  if (message.content.startsWith(prefix + "moveall")) {
+    if (!message.member.hasPermission("MOVE_MEMBERS"))
+      return message.channel.send("**:x: You Dont Have Perms `MOVE_MEMBERS`**");
+    if (!message.guild.member(client.user).hasPermission("MOVE_MEMBERS"))
+      return message.reply("**:x: I Dont Have Perms `MOVE_MEMBERS`**");
+    if (message.member.voiceChannel == null)
+      return message.channel.send(`**You Have To Be In Room Voice**`);
+    var author = message.member.voiceChannelID;
+    var m = message.guild.members.filter(m => m.voiceChannel);
+    message.guild.members
+      .filter(m => m.voiceChannel)
+      .forEach(m => {
+        m.setVoiceChannel(author);
+      })
+      .setTitle(`✽ **Black bot**`)
+      .setImage("");
+ 
+    message.channel.send(
+      `**:white_check_mark: Success Moved All To Your Channel**`
+    );
+  }
+});
 
+client.on("message", message => {
+  if (message.content.startsWith(prefix + "avatar")) {
+    if (message.author.bot || message.channel.type == "dm") return;
+    var args = message.content.split(" ")[1];
+    var avt = args || message.author.id;
+    client
+      .fetchUser(avt)
+      .then(user => {
+        avt = user;
+        let avtEmbed = new Discord.RichEmbed()
+          .setColor("#36393e")
+          .setAuthor(`${avt.username}'s Avatar`, message.author.avatarURL)
+          .setImage(avt.avatarURL)
+          .setFooter(`BLACK BOT`, message.client.user.avatarURL);
+        message.channel.send(avtEmbed);
+      })
+      .catch(() => message.channel.send(`Error`));
+  } // 
+}); // 
 client.on("message", async msg => {
   if (msg.channel.type === "dm") return;
   if (msg.author.bot) return;
