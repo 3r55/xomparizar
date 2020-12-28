@@ -2075,41 +2075,44 @@ break;
 }
 });
 
-client.on("message", m => {
-  if (m.content === prefix + "help") {
-    let Dashboard = `    
 
-b!help1 => MODERATION COMMAND
-b!help2 => GENERAL COMMAND
-b!help3 => SECURITY COMMAND
-b!help4 => FUNNY COMMAND
-
-commanig soon for help 5 music code
-
-
- `;
-    var addserver = `https://discordapp.com/oauth2/authorize?client_id=${client.user.id}&scope=bot&permissions=2080374975`;
-    var SUPPORT = `https://discord.gg/GmSYVCQMRU`;
-    let embed = new Discord.RichEmbed()
-      .setTitle(`${m.author.username}`)
-      .setDescription(
-        `**${Dashboard}**
-  **[Add To Your Server ](${addserver})** | **[ Server Support](${SUPPORT})**`
-      )
-      .setImage("");
-    m.channel.send(embed);
-  }
-});
 client.on("message", message => {
-  if (message.content === prefix + "help4") { 
+  if (message.content === prefix + "help") { 
     let embed = new Discord.RichEmbed()
       .setAuthor(message.author.username)
        .setThumbnail(message.author.avatarURL)
        .setFooter("CREATED BY BLACK JACK")
-      .setColor("RANDOM").setDescription(` 
-
- 
- 
+      .setColor("BLACK").setDescription(` 
+ **MODERATION**
+ b!mute,b!unmute
+ b!move,moveall
+ b!ban
+ b!unban all
+ b!unban
+ b!ccolor
+ b!c text
+ b!c vc  
+ b!kick
+ b!clear <number>
+ b!lock
+ b!server
+ b!role <role name>
+ b!role bots <role name>
+ b!role humans <role name>
+ b!role all <role name>
+ b!warn,b!listwarns
+ b!bc
+ b!nick,help nick
+ b!banslist
+ b!unlock
+ b!setWelcomer <channel name>
+ b!setCount
+ b!join
+ b!setDate
+ b!autorole <role name>
+ b!setTime
+ b!setbotv
+ b!setmember
  **GENERAL COMMAND**
  b!count
  b!roles
@@ -2142,110 +2145,16 @@ b!antibots off/on
  b!cat
  b!dog
  b!poke
- b!cuddle
-   
-
-** Created by ==> [<@670647563627659306>] **
-`);
-    message.channel.sendEmbed(embed);
-  }
-});
-client.on("message", message => {
-  if (message.content === prefix + "help3") { 
-    let embed = new Discord.RichEmbed()
-      .setAuthor(message.author.username)
-       .setThumbnail(message.author.avatarURL)
-       .setFooter("CREATED BY BLACK JACK")
-      .setColor("RANDOM").setDescription(` 
-   
- **SECURITY COMMAND**
-b!anti ban[number]
-b!anti kick [number]
-b!anti roleC [number]
-b!anti roleD [number]
-b!anti channelD [number]
-b!anti channelC [number]
-b!anti time [number]
-b!antibots off/on
-
-** Created by ==> [<@670647563627659306>] **
-`);
-    message.channel.sendEmbed(embed);
-  }
-});
-client.on("message", message => {
-  if (message.content === prefix + "help2") { 
-    let embed = new Discord.RichEmbed()
-      .setAuthor(message.author.username)
-       .setThumbnail(message.author.avatarURL)
-       .setFooter("CREATED BY BLACK JACK")
-      .setColor("RANDOM").setDescription(` 
-  **GENERAL COMMAND**
- b!count
- b!roles
- b!botinfo
- b!support
- b!stone
- b!avatar
- b!report
- b!paper
- b!scissors
- b!servers
- b!say,embed
- b!about
- b!invite
- b!user
-
+ b!cuddle   
 ** Created by ==> [<@670647563627659306>] **
 `);
     message.channel.sendEmbed(embed);
   }
 });
 
-client.on("message", message => {
-  if (message.content === prefix + "help1") { 
-    let embed = new Discord.RichEmbed()
-      .setAuthor(message.author.username)
-       .setThumbnail(message.author.avatarURL)
-       .setFooter("CREATED BY BLACK JACK")
-      .setColor("RANDOM").setDescription(` 
- **MODERATION**
- b!mute,b!unmute
- b!move,moveall
- b!ban
- b!unban all
- b!unban
- b!ccolor
- b!c text
- b!c vc  
- b!kick
- b!clear <number>
- b!lock
- b!server
- b!role <role name>
- b!role bots <role name>
- b!role humans <role name>
- b!role all <role name>
- b!warn
- b!listwarns
- b!bc
- b!nick,help nick
- b!banslist
- b!unlock
- b!setWelcomer <channel name>
- b!setCount
- b!join
- b!setDate
- b!autorole <role name>
- b!setTime
- b!setbotv
- b!setmember
 
-** Created by ==> [<@670647563627659306>] **
-`);
-    message.channel.sendEmbed(embed);
-  }
-});
+
+
  
 
 client.on('message', function(message) {
