@@ -3699,12 +3699,60 @@ Time left: \`${moment("20190901", "YYYYMMDD", true).fromNow()}\``);
     message.channel.send(embed);
   }
 });
-
 client.on("message", async message => {
   if (
     message.content.includes(
       "@everyone",
       "@here",
+   
+    )
+  ) {
+    if (message.member.hasPermission("MANAGE_GUILD")) return;
+    if (!message.channel.guild) return;
+    message.delete();
+    var command = message.content.split(" ")[0];
+    let muterole = message.guild.roles.find(`name`, "Muted");
+    if (!muterole) {
+      try {
+        muterole = await message.guild.createRole({
+          name: "Muted",
+          color: "#000000",
+          permissions: []
+        });
+        message.guild.channels.forEach(async (channel, id) => {
+          await channel.overwritePermissions(muterole, {
+            SEND_MESSAGES: false,
+            ADD_REACTIONS: false
+          });
+        });
+      } catch (e) {
+        console.log(e.stack);
+      }
+    }
+    if (!message.channel.guild)
+      return message.reply("** This command only for servers**");
+    message.member.addRole(muterole);
+    const embed500 = new Discord.RichEmbed()
+      .setTitle("Muted Ads")
+      .addField(
+        `**  You Have Been Muted **`,
+        `**Reason : type meniton everyone**`
+      )
+      .setColor("c91616")
+      .setThumbnail(`${message.author.avatarURL}`)
+      .setAuthor(message.author.username, message.author.avatarURL)
+      .setFooter(`${message.guild.name} `);
+    message.channel.send(embed500);
+  }
+});
+
+
+client.on("message", async message => {
+  if (
+    message.content.includes(
+      "ker",
+      "Kerm",
+      "kerm",
       "maza",
       "qn",
       "qwn",
@@ -3744,7 +3792,7 @@ client.on("message", async message => {
       .setTitle("Muted Ads")
       .addField(
         `**  You Have Been Muted **`,
-        `**Reason : type meniton everyone or bad word**`
+        `**Reason : Using  bad word**`
       )
       .setColor("c91616")
       .setThumbnail(`${message.author.avatarURL}`)
@@ -3754,17 +3802,6 @@ client.on("message", async message => {
   }
 });
 
-client.on('message',async msg => {//tex codes
-  var p = "@";//tex codes
-  if(msg.content.startsWith(p + "setuser")) {//tex codes
-  if(!msg.guild.member(msg.author).hasPermissions('MANAGE_CHANNELS')) return msg.reply('❌ **ليس لديك صلاحيه**');//tex codes
-  if(!msg.guild.member(client.user).hasPermissions(['MANAGE_CHANNELS'])) return msg.reply('❌ **البوت لا يمتلك صلاحية**');//tex codes
-  msg.guild.createChannel(`Members : ◤ → ${client.members.size} ← ◢` , 'voice').then(time => {//tex codes
-    });//tex codes
- 
-  }
- 
-});
 
 /*
 ////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\
