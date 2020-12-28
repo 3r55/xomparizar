@@ -1,12 +1,8 @@
 {
-  "552424572692201493": {
+  "783677903376220180": {
     "onoff": true
   },
-  "783677903376220180": {
-    "banLimit": 3,
-    "chaDelLimit": 3,
-    "roleDelLimit": 3,
-    "kickLimits": 3,
-    "roleCrLimits": 3
+  "760898699697848350": {
+    "onoff": true
   }
 }
