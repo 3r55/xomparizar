@@ -1340,6 +1340,7 @@ client.on("message", message => {
       .setThumbnail(client.user.avatarURL)
       .setTitle("Protection+")
       .setDescription("**JUST FOR OWNER SHIP**")
+      .setFooter("BLACK BOT")
       .setColor("9e1c36");
       return message.channel.send(embeeed);
     }
@@ -1348,11 +1349,13 @@ client.on("message", message => {
       .setThumbnail(client.user.avatarURL)
       .setTitle("Protection+")
       .setDescription("**Send number**")
+      .setFooter("BLACK BOT")
       .setColor("9e1c36");
  
       { let arkam2 = new Discord.RichEmbed()
       .setTitle("Protection+")
       .setDescription("**JUST SEND NUMBER**")
+      .setFooter("BLACK BOT")
       .setColor("9e1c36");
  
       if (message.content.startsWith(prefix + "anti ban")) {
@@ -1363,6 +1366,7 @@ client.on("message", message => {
        .setThumbnail(client.user.avatarURL)
       .setTitle("Protection+")
       .setDescription(`Changing to : **${config[message.guild.id].banLimit}**`)
+       .setFooter("BLACK BOT")
       .setColor("9e1c36");
         message.channel.send(banLimit1);}
     }
@@ -1374,6 +1378,7 @@ client.on("message", message => {
       .setThumbnail(client.user.avatarURL)
       .setTitle("Protection+")
       .setDescription(`Changing to : **${config[message.guild.id].kickLimits}**`)
+      .setFooter("BLACK BOT")
       .setColor("9e1c36");
       message.channel.send(embedddd);
     }
@@ -1385,6 +1390,7 @@ client.on("message", message => {
       .setThumbnail(client.user.avatarURL)
       .setTitle("Protection+")
       .setDescription(`Changing to : **${config[message.guild.id].roleDelLimit}**`)
+      .setFooter("BLACK BOT")
       .setColor("9e1c36");
       message.channel.send(embeddddddddd);
     }
@@ -1396,6 +1402,7 @@ client.on("message", message => {
       .setThumbnail(client.user.avatarURL)
       .setTitle("Protection+")
       .setDescription(`Changing to : **${config[message.guild.id].roleCrLimits}**`)
+      .setFooter("BLACK BOT")
       .setColor("9e1c36");
       message.channel.send(embeed);
  
@@ -1408,6 +1415,7 @@ client.on("message", message => {
             .setThumbnail(client.user.avatarURL)
       .setTitle("Protection+")
       .setDescription(`Changing to : **${config[message.guild.id].chaDelLimit}**`)
+      .setFooter("BLACK BOT")
       .setColor("9e1c36");
       message.channel.send(embeeed);
  
@@ -1421,6 +1429,7 @@ client.on("message", message => {
       .setThumbnail(client.user.avatarURL)
       .setTitle("Protection+")
       .setDescription(`Changing to : **${config[message.guild.id].chaCrLimit}**`)
+      .setFooter("BLACK BOT")
       .setColor("9e1c36");
       message.channel.send(embd);
  
@@ -1433,6 +1442,7 @@ client.on("message", message => {
             .setThumbnail(client.user.avatarURL)
       .setTitle("Protection+")
       .setDescription(`Changing to : **${config[message.guild.id].time}**`)
+      .setFooter("BLACK BOT")
       .setColor("9e1c36");
       message.channel.send(emb);
     }
