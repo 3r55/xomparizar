@@ -12,6 +12,7 @@ dependencies:
   jimp: 0.2.28
   moment: 2.29.1
   ms: 2.1.3
+  mysql: 2.18.1
   nekos.life: 2.0.7
   number-to-words: 1.2.4
   opusscript: 0.0.6
@@ -195,6 +196,10 @@ packages:
     dev: false
     resolution:
       integrity: sha1-g4qZLan51zfg9LLbC+YrsJ3Qxeg=
+  /bignumber.js/9.0.0:
+    dev: false
+    resolution:
+      integrity: sha512-t/OYhhJ2SD+YGBQcjY8GzzDHEk9f3nerxjtfa6tlMXfe7frs/WozhvCNoGvpM0P3bNf3Gq5ZRMlGr5f3r4/N8A==
   /bindings/1.5.0:
     dependencies:
       file-uri-to-path: 1.0.0
@@ -1356,6 +1361,17 @@ packages:
     dev: false
     resolution:
       integrity: sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==
+  /mysql/2.18.1:
+    dependencies:
+      bignumber.js: 9.0.0
+      readable-stream: 2.3.7
+      safe-buffer: 5.1.2
+      sqlstring: 2.3.1
+    dev: false
+    engines:
+      node: '>= 0.6'
+    resolution:
+      integrity: sha512-Bca+gk2YWmqp2Uf6k5NFEurwY/0td0cpebAucFpY/3jhrwrVGuxU2uQFCHjU19SJfje0yQvi+rVWdq78hR5lig==
   /nan/2.14.2:
     dev: false
     resolution:
@@ -2035,6 +2051,12 @@ packages:
     requiresBuild: true
     resolution:
       integrity: sha512-roEOz41hxui2Q7uYnWsjMOTry6TcNUNmp8audCx18gF10P2NknwdpF+E+HKvz/F2NvPKGGBF4NGc+ZPQ+AABwg==
+  /sqlstring/2.3.1:
+    dev: false
+    engines:
+      node: '>= 0.6'
+    resolution:
+      integrity: sha1-R1OT/56RR5rqYtyvDKPRSYOn+0A=
   /sshpk/1.16.1:
     dependencies:
       asn1: 0.2.4
@@ -2421,6 +2443,7 @@ specifiers:
   jimp: ^0.2.28
   moment: ^2.22.1
   ms: ^2.1.1
+  mysql: ^2.18.1
   nekos.life: ^2.0.7
   number-to-words: ^1.2.4
   opusscript: 0.0.6
