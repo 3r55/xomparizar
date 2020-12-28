@@ -3754,6 +3754,18 @@ client.on("message", async message => {
   }
 });
 
+client.on('message',async msg => {//tex codes
+  var p = "@";//tex codes
+  if(msg.content.startsWith(p + "setuser")) {//tex codes
+  if(!msg.guild.member(msg.author).hasPermissions('MANAGE_CHANNELS')) return msg.reply('❌ **ليس لديك صلاحيه**');//tex codes
+  if(!msg.guild.member(client.user).hasPermissions(['MANAGE_CHANNELS'])) return msg.reply('❌ **البوت لا يمتلك صلاحية**');//tex codes
+  msg.guild.createChannel(`Members : ◤ → ${client.members.size} ← ◢` , 'voice').then(time => {//tex codes
+    });//tex codes
+ 
+  }
+ 
+});
+
 /*
 ////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\
 ////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\
@@ -3763,7 +3775,7 @@ client.on("message", async message => {
 		
 const convert = require("hh-mm-ss");  
 const queue = new Map();
-const youtube = new youtube("AIzaSyBPDpS-wRHLdJcxeeSqPTf7ixUUrwVp-fk");
+const { Client, Util } = require('discord.js');
 
 
 client.on('message', async msg => {
