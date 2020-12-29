@@ -17,20 +17,6 @@ const nekoclient = require("nekos.life");
 const neko = new nekoclient();
 
 
-
-var con = mysql.createConnection({
-  host: process.env.host,
-  user: process.env.user,
-  password: process.env.password,
-  database: process.env.database
-});
-
-con.connect(err => {
-    if(err) throw err;
-    console.log("Connected to database!");
-    con.query("SHOW TABLES", console.log);
-});
-
 client.on("ready", () => {
   console.log("♔♔♔♔♔♔♔♔♔♔♔♔♔♔♔♔♔♔♔");
   console.log("By black jack"); /////BLACK JACK
@@ -47,23 +33,7 @@ client.on("ready", () => {
 });
 
  
-client.on("message", (message) => {
-  if (message.content.startsWith(prefix + "create logs")) {
-    if (message.author.id !== message.guild.owner.user.id)
-      return message.channel.send(
-        "Tanha bo owner ship~"
-      );
-      message.guild.id.createChannel("Logs.", "category").then(catg =>{
-      message.guild.id.createChannel("log-pic", "text").then(chat => { chat.setParent(catg.id) })
-      message.guild.id.createChannel("log-message", "text").then(chat => { chat.setParent(catg.id) })
-      message.guild.id.createChannel("log-ban", "text").then(chat => { chat.setParent(catg.id) })
-      message.guild.id.createChannel("log-join", "text").then(chat => { chat.setParent(catg.id) })
-      message.guild.id.createChannel("log-leave", "text").then(chat => { chat.setParent(catg.id) })
-  message.channel.sendMessage(':white_check_mark: **Done Create.**')
-      })
-  }
-  });
- 
+
 client.on('message', msg => {//tex codes
   if(msg.content.startsWith(prefix + "setuser")) {//tex codes
   if(!msg.guild.member(msg.author).hasPermissions('MANAGE_CHANNELS')) return msg.reply('❌ **ليس لديك صلاحيه**');//tex codes
