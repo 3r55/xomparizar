@@ -12,7 +12,7 @@ const Enmap = require('enmap')
 const db = require('quick.db');
 const getYoutubeID = require("get-youtube-id");
 const fetchVideoInfo = require("youtube-info");
-const yt_api_key = "AIzaSyDeoIH0u1e72AtfpwSKKOSy3IPp2UHzqi4";
+const yt_api_key = "AIzaSyCph46_IiKDkYIJVMou_WA_6PxfgZWi4vA";
 const nekoclient = require("nekos.life");
 const neko = new nekoclient();
 
@@ -2095,9 +2095,9 @@ client.on("message", message => {
  b!botinfo
  b!support
  b!stone
+ b!guild
  b!avatar
  b!report
- b!join
  b!paper
  b!scissors
  b!servers
@@ -2123,7 +2123,14 @@ b!antibots off/on
  b!dog
  b!poke
  b!cuddle   
- 
+ **MUSIC COMMAND**
+b!play <link>
+b!skip
+b!volume
+b!pause
+b!resume
+b!leave
+b!join 
 ** Created by ==> [<@670647563627659306>] **
 `);
     message.channel.sendEmbed(embed);
@@ -3903,7 +3910,7 @@ ${videoInfo.title}
 
         if (!message.member.voiceChannel) return message.channel.send('**❌ You have to be in a voice channel to use this command.**');
 
-        // console.log(args)
+         console.log(args)
 
         if (args > 100) return message.channel.send('**100-1**')
 
@@ -4116,235 +4123,6 @@ function isYoutube(str) {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-const developers = ["457174878530043907","another id","another another id"]
-
-const adminprefix = prefix
-
-client.on('message', message => {
-
-    var argresult = message.content.split(` `).slice(1).join(' ');
-
-      if (!developers.includes(message.author.id)) return;
-
-      
-
-  if (message.content.startsWith(adminprefix + 'playing')) {
-
-    client.user.setGame(argresult);
-
-          if(!message.channel.guild) return;
-
-                            var msg = `${Date.now() - message.createdTimestamp}`
-
-                            var api = `${Math.round(client.ping)}`
-
-                            if (message.author.bot) return;
-
-                        let embed = new Discord.RichEmbed()
-
-                        .setAuthor(message.author.username,message.author.avatarURL)
-
-                        .setColor('RANDOM')
-
-                 .addField("**PLAYING 🎮 **","** **")
-
-         message.channel.send({embed:embed});
-
-                        }
-
-  
-
-     if (message.content === (adminprefix + "leaveserver")) {
-
-    message.guild.leave(); 
-
-  } else 
-
-  if (message.content.startsWith(adminprefix + 'watching')) {
-
-  client.user.setActivity(argresult, {type:'WATCHING'});
-
-         if(!message.channel.guild) return;
-
-                            var msg = `${Date.now() - message.createdTimestamp}`
-
-                            var api = `${Math.round(client.ping)}`
-
-                            if (message.author.bot) return;
-
-                        let embed = new Discord.RichEmbed()
-
-                        .setAuthor(message.author.username,message.author.avatarURL)
-
-                        .setColor('RANDOM')
-
-                        .addField("**WATCHING 📹 **","** **")
-
-         message.channel.send({embed:embed});
-
-                        }
-
-  
-
-  if (message.content.startsWith(adminprefix + 'listening')) {
-
-  client.user.setActivity(argresult , {type:'LISTENING'});
-
-       if(!message.channel.guild) return;
-
-                            var msg = `${Date.now() - message.createdTimestamp}`
-
-                            var api = `${Math.round(client.ping)}`
-
-                            if (message.author.bot) return;
-
-                        let embed = new Discord.RichEmbed()
-
-                        .setAuthor(message.author.username,message.author.avatarURL)
-
-                        .setColor('RANDOM')
-
-                        .addField("**LISTENING 🎼 **","** **")
-
-         message.channel.send({embed:embed});
-
-                        }
-
-  
-
-  if (message.content.startsWith(adminprefix + 'streaming')) {
-
-    client.user.setGame(argresult, "https://www.twitch.tv/idk");
-
-        if(!message.channel.guild) return;
-
-                            var msg = `${Date.now() - message.createdTimestamp}`
-
-                            var api = `${Math.round(client.ping)}`
-
-                            if (message.author.bot) return;
-
-                        let embed = new Discord.RichEmbed()
-
-                        .setAuthor(message.author.username,message.author.avatarURL)
-
-                        .setColor('RANDOM')
-
-                        .addField("**STREAMING 👾 **","** **")
-
-         message.channel.send({embed:embed});
-
-                        }
-
-  if (message.content.startsWith(adminprefix + 'setname')) {
-
-  client.user.setUsername(argresult).then
-
-      message.channel.send(`**Changing The Name To , ⚡ ****${argresult}** `)
-
-} else
-
-if (message.content.startsWith(adminprefix + 'setavatar')) {
-
-  client.user.setAvatar(argresult);
-
-    message.channel.send(`**Changing The Avatar To , ⚡ ****${argresult}** `);
-
-}
-
-});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-client.on('message', message => {
-
-    if (message.author.bot) return;
-
-     if (message.content === (prefix + "help")) {
-
-  let embed = new Discord.RichEmbed()
-
-          .setAuthor(message.author.username, message.author.avatarURL)
-
-           .setThumbnail(message.author.avatarURL)
-
-                 .setTimestamp()
-
-    .setDescription(`
-	 ** اوامر الموسيقى 🎶 **
-**${prefix}play** : لتشغيل الاغاني
-**${prefix}skip** : لتخطي الاغنية
-**${prefix}volume** : لتحديد مستوى الصوت
-**${prefix}pause** : للأيقاف المؤقت
-**${prefix}resume** : للأستئناف
-**${prefix}join** : لكي ينضم البوت للروم الصوتي
-**${prefix}leave** : لكي يخرج البوت من الروم الصوتي
-`)
-
-.setColor('RANDOM')
-
-message.author.sendEmbed(embed)
-
-}
-
-});
-
-
-client.on('message', msg => {
-
-      if(!msg.channel.guild) return;
-
-    if(msg.content.startsWith (prefix + 'help')) {
-
-    msg.reply('`تم أرسال المساعدة في الخاص`');
-
-  }
-
-});
-
-
-client.on('message', message => {
-  if (!message.guild) return;
-  if (message.content === prefix + 'join') {
-    if (message.member.voiceChannel) {
-      message.member.voiceChannel.join()
-        .then(connection => { 
-          message.reply('HATM');
-        })
-        .catch(console.log);
-    } else {
-      message.reply('LA VC NYT');
-    }
-  }
-});
  
  
  
