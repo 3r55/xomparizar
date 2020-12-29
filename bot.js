@@ -2123,6 +2123,7 @@ b!antibots off/on
  b!dog
  b!poke
  b!cuddle   
+ 
  **MUSIC COMMAND**
 b!play <link>
 b!skip
@@ -2131,7 +2132,7 @@ b!pause
 b!resume
 b!leave
 b!join 
-** Created by ==> [<@670647563627659306>] **
+
 `);
     message.channel.sendEmbed(embed);
   }
