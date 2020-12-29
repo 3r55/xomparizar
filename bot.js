@@ -2068,6 +2068,66 @@ client.on('message',async msg => {
 
 
 
+   client.on('message',async msg => {
+        if(msg.channel.type === "dm") return;
+     if(msg.author.bot) return;
+     if(msg.content.startsWith(prefix + "settimes")) {
+     if(!msg.guild.member(msg.author).hasPermissions('MANAGE_CHANNELS')) return msg.reply('❌ **لا تملك رتبه لذلك**');
+     if(!msg.guild.member(client.user).hasPermissions(['MANAGE_CHANNELS'])) return msg.reply('❌ **البوت لا يمتلك صلاحية**');
+     var ggg= msg.guild.createChannel('SERVER STATS', 'category').then(kk => {
+              var ccc =msg.guild.createChannel('SERVER STATS', 'voice').then(bl => {
+                   var aa =msg.guild.createChannel('SERVER STATS', 'voice').then(bla => {
+                      var aaa =msg.guild.createChannel('SERVER STATS', 'voice').then(black => {
+          bl.setParent(kk);
+          bla.setParent(kk);
+          black.setParent(kk);
+
+        bl.overwritePermissions(msg.guild.id, {
+         CONNECT: false,
+         SPEAK: false
+       });
+        bla.overwritePermissions(msg.guild.id, {
+         CONNECT: false,
+         SPEAK: false
+       });
+        black.overwritePermissions(msg.guild.id, {
+         CONNECT: false,
+         SPEAK: false
+       });
+     setInterval(() => {
+         var currentTime = new Date(),
+   hours = currentTime.getHours() + 0 ,
+   minutes = currentTime.getMinutes(),
+   Seconds = currentTime.getSeconds(),
+   Year = currentTime.getFullYear(),
+   Month = currentTime.getMonth() + 1,
+   Dat = currentTime.getDate()
+   if (minutes < 10) {
+   minutes = "0" + minutes;
+   }
+   var suffix = "AM";
+   if (hours >= 12) {
+   suffix = "PM";
+   hours = hours - 12;
+   }
+   if (hours == 0) {
+   hours = 12;
+   }
+        bl.setName(`Voice Online :[ ${msg.guild.members.filter(m => m.voiceChannel).size} ]`);
+         bla.setName(`Time :[${hours} : ${minutes} : ${Seconds} ${suffix}]`);
+           black.setName(`[ Date : [${Year} - ${Month} - ${Dat} ]`);
+    },1000);
+                      })
+
+                   })
+              })
+     })
+
+     }
+
+   });
+
+
 client.on("message", message => {
   if (message.content === prefix + "help") { 
     let embed = new Discord.RichEmbed()
@@ -2139,6 +2199,7 @@ b!antibots off/on
  b!dog
  b!poke
  b!cuddle   
+ 
 ** Created by ==> [<@670647563627659306>] **
 `);
     message.channel.sendEmbed(embed);
