@@ -2013,11 +2013,11 @@ client.on('message',async msg => {
            var cc =msg.guild.createChannel('SERVER STATS', 'voice').then(b => {
               var ccc =msg.guild.createChannel('SERVER STATS', 'voice').then(bl => {
                    var aa =msg.guild.createChannel('SERVER STATS', 'voice').then(bla => {
-                      var aaa =msg.guild.createChannel('SERVER STATS', 'voice').then(black => {
+                
           b.setParent(kk);     
           bl.setParent(kk);
           bla.setParent(kk);
-          black.setParent(kk);
+          
     
          b.overwritePermissions(msg.guild.id, {
          CONNECT: false,
@@ -2031,21 +2031,18 @@ client.on('message',async msg => {
          CONNECT: false,
          SPEAK: false
        });
-        black.overwritePermissions(msg.guild.id, {
-         CONNECT: false,
-         SPEAK: false
-       });
+        
      
        b.setName(`All member : ${msg.guild.memberCount}`);
         bl.setName(`Member : ${msg.members.size}`);
          bla.setName(`Bot : ${msg.guild.members.filter(m => m.user.bot).size}`);
-           black.setName(`Roles : ${msg.guild.roles.size}`);
+           
     },1000);
                       })
 
                    })
               })
-           })
+           
 
            }
 
