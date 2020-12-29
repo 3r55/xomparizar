@@ -216,55 +216,7 @@ client.on("message", message => {
 
 const welcome = JSON.parse(fs.readFileSync('./welcomer.json' , 'utf8'));
 client.on('message', async message => {
-    let messageArray = message.content.split(" ");
-   if(message.content.startsWith(prefix + "setLeave")) {
-             
-    let filter = m => m.author.id === message.author.id;
-    let thisMessage;
-    let thisFalse;
 
-    if(!message.member.hasPermission("MANAGE_GUILD")) return message.channel.send('You don\'t have permission').then(msg => {
-       msg.delete(4500);
-       message.delete(4500);
-    });
-    
-    message.channel.send(':pencil: **| Now write the message... :pencil2: **').then(msg => {
-
-        message.channel.awaitMessages(filter, {
-          max: 1,
-          time: 90000,
-          errors: ['time']
-        })
-        .then(collected => {
-            collected.first().delete();
-            thisMessage = collected.first().content;
-            let boi;
-            msg.edit(':scroll: **| Now write the channel name... :pencil2: **').then(msg => {
-      
-                message.channel.awaitMessages(filter, {
-                  max: 1,
-                  time: 90000,
-                  errors: ['time']
-                })
-                .then(collected => {
-                    collected.first().delete();
-                    boi = collected.first().content;
-                    msg.edit('✅ **| Done successfully..  **').then(msg => {
-        
-                      message.channel.awaitMessages(filter, {
-                        max: 1,
-                        time: 90000,
-                        errors: ['time']
-                      })
-                      let embed = new Discord.RichEmbed()
-                      .setTitle('**Done The Leave Msg Code Has Been Setup**')
-                      .addField('Message:', `${thisMessage}`)
-                      .addField('Channel:', `${boi}`)
-                      .setThumbnail(message.author.avatarURL)
-                      .setFooter(`${client.user.username}`)
-                     message.channel.sendEmbed(embed)
-    welcome[message.guild.id] = {
-leavechannel: boi,
 leavemsg: thisMessage,
 onoff: 'On',
 leave: 'On'
@@ -419,12 +371,12 @@ client.on("guildMemberAdd", member => {
         .setColor('RANDOM')
         .setThumbnail(h.avatarURL)
         .setAuthor(h.username,h.avatarURL)
-         .addField('  نــاو  ',`${member}`)
-        .addField(' تۆ کەسی ژمارە',`${member.guild.memberCount}`)
-        .addField('  ئایدی ئەکاونت :', "**[" + `${member.id}` + "]**" )
-        .addField(' سێرڤەر', `${member.guild.name}`,true)
-        .addField('کاتی جۆینکردنت', member.guild.joinedAt ,)
-        .addField("کاتی دروستکردنی ئەکاونتەکەت", member.user.createdAt ,)
+        .addField(':bust_in_silhouette: | name : ', `${member}`)
+        .addField(':microphone2: | Welcome!', `Welcome to the server, ${member}`)
+        .addField(':id: | User :', "**[" + `${member.id}` + "]**")
+        .addField(':family_mwgb: | Your are the member', `${member.guild.memberCount}`)
+        .addField("Name", `<@` + `${member.id}` + `>`, true)
+        .addField('Server', `${member.guild.name}`, true )
         .setImage("https://media.discordapp.net/attachments/765236779225055252/792462641980375070/20201226_214229.gif")
         .setFooter(`${h.tag}`,"https://images-ext-2.discordapp.net/external/JpyzxW2wMRG2874gSTdNTpC_q9AHl8x8V4SMmtRtlVk/https/orcid.org/sites/default/files/files/ID_symbol_B-W_128x128.gif")
      welcomer.send({embed:heroo});
