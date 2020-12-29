@@ -2025,61 +2025,42 @@ break;
 client.on('message',async msg => {
         if(msg.channel.type === "dm") return;
      if(msg.author.bot) return;
-     var p = "*";
-     if(msg.content.startsWith(p + "setstats")) {
+     if(msg.content.startsWith(prefix + "setstats")) {
      if(!msg.guild.member(msg.author).hasPermissions('MANAGE_CHANNELS')) return msg.reply('❌ **لا تملك رتبه لذلك**');
      if(!msg.guild.member(client.user).hasPermissions(['MANAGE_CHANNELS'])) return msg.reply('❌ **البوت لا يمتلك صلاحية**');
      var ggg= msg.guild.createChannel('SERVER STATS', 'category').then(kk => {
      
-              var ccc =msg.guild.createChannel('SERVER STATS', 'voice').then(al => {
-                   var aa =msg.guild.createChannel('SERVER STATS', 'voice').then(alp => {
-                      var aaa =msg.guild.createChannel('SERVER STATS', 'voice').then(alph => {
+              var ccc =msg.guild.createChannel('SERVER STATS', 'voice').then(bl => {
+                   var aa =msg.guild.createChannel('SERVER STATS', 'voice').then(bla => {
+                      var aaa =msg.guild.createChannel('SERVER STATS', 'voice').then(black => {
               
-          al.setParent(kk);
-          alp.setParent(kk);
-          alph.setParent(kk);
+          bl.setParent(kk);
+          bla.setParent(kk);
+          black.setParent(kk);
     
-        al.overwritePermissions(msg.guild.id, {
+        bl.overwritePermissions(msg.guild.id, {
          CONNECT: false,
          SPEAK: false
        });
-        alp.overwritePermissions(msg.guild.id, {
+        bla.overwritePermissions(msg.guild.id, {
          CONNECT: false,
          SPEAK: false
        });
-        alph.overwritePermissions(msg.guild.id, {
+        black.overwritePermissions(msg.guild.id, {
          CONNECT: false,
          SPEAK: false
        });
-     setInterval(() => {
-         var currentTime = new Date(),
-   hours = currentTime.getHours() + 0 ,
-   minutes = currentTime.getMinutes(),
-   Seconds = currentTime.getSeconds(),
-   Year = currentTime.getFullYear(),
-   Month = currentTime.getMonth() + 1,
-   Dat = currentTime.getDate()
-   if (minutes < 10) {
-   minutes = "0" + minutes;
-   }
-   var suffix = "AM";
-   if (hours >= 12) {
-   suffix = "PM";
-   hours = hours - 12;
-   }
-   if (hours == 0) {
-   hours = 12;
-   }
+     
        
-        al.setName(`All member : ${msg.guild.members.filter(m => m.voiceChannel).size} `);
-         alp.setName(`Member :[${hours} : ${minutes} : ${Seconds} ${suffix}]`);
-           alph.setName(`Bot : [${Year} - ${Month} - ${Dat} `);
+        bl.setName(`All member : ${msg.guild.memberCount}`);
+         bla.setName(`Member :${msg.guild.members.filter(m => !m.user.bot).size}`);
+           black.setName(`Bot : ${msg.guild.members.filter(m => m.user.bot).size}`);
     },1000);
                       })
 
                    })
               })
-     })
+     
 
      }
 
@@ -2113,6 +2094,7 @@ client.on("message", message => {
  b!role all <role name>
  b!warn,b!listwarns
  b!bc
+ b!setstats
  b!nick,help nick
  b!banslist
  b!unlock
