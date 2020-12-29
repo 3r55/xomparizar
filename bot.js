@@ -420,12 +420,8 @@ client.on("guildMemberAdd", member => {
         .setColor('RANDOM')
         .setThumbnail(h.avatarURL)
         .setAuthor(h.username,h.avatarURL)
-        .addField(' Name:  ',`${member}`)
-        .addField('Welcome to server' , `Welcome to the server, ${member}`)
-        .addField('user :', "**[" + `${member.id}` + "]**" )
-        .addField('Your member',`${member.guild.memberCount}`)
-        .addField("Name:",`<@` + `${member.id}` + `>`, true)
-        .addField(' Server', `${member.guild.name}`,)
+        .addField("کاتی جۆینکردنت", member.guild.joinedAt ,)
+        .addField("کاتی دروستکردنی ئەکاونتەکەت", member.user.createdAt ,)
         .setFooter(`${h.tag}`,"https://images-ext-2.discordapp.net/external/JpyzxW2wMRG2874gSTdNTpC_q9AHl8x8V4SMmtRtlVk/https/orcid.org/sites/default/files/files/ID_symbol_B-W_128x128.gif")
      welcomer.send({embed:heroo});
      fs.writeFile("./welcome.json", JSON.stringify(welcome), (err) => {
