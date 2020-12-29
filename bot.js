@@ -3731,8 +3731,10 @@ client.on("message", async message => {
 ////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\
 ////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\
 */
+client.commands = new Discord.Collection();
+client.aliases = new Discord.Collection();
 
- var servers = [];
+var servers = [];
 
 var queue = [];
 
@@ -3749,6 +3751,8 @@ var voiceChannel = null;
 var skipReq = 0;
 
 var skippers = [];
+
+var videoInfo = [];
 
 var now_playing = [];
 
@@ -3874,7 +3878,7 @@ ${videoInfo.title}
                         .setThumbnail(videoInfo.thumbnailUrl)
 
 
-                    // .setDescription('?')
+                     .setDescription('?')
 
                     message.channel.sendEmbed(play_info)
 
