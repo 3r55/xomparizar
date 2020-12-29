@@ -35,7 +35,7 @@ client.on("ready", () => {
  
 
 client.on('message', msg => {//tex codes
-  if(msg.content.startsWith(prefix + "setuser")) {//tex codes
+  if(msg.content.startsWith("setuser")) {//tex codes
   if(!msg.guild.member(msg.author).hasPermissions('MANAGE_CHANNELS')) return msg.reply('❌ **ليس لديك صلاحيه**');//tex codes
   if(!msg.guild.member(client.user).hasPermissions(['MANAGE_CHANNELS'])) return msg.reply('❌ **البوت لا يمتلك صلاحية**');//tex codes
   msg.guild.createChannel(`Members : ◤ → ${client.members.size} ← ◢` , 'voice').then(time => {//tex codes
@@ -2010,15 +2010,19 @@ client.on('message',async msg => {
      if(!msg.guild.member(msg.author).hasPermissions('MANAGE_CHANNELS')) return msg.reply('❌ **لا تملك رتبه لذلك**');
      if(!msg.guild.member(client.user).hasPermissions(['MANAGE_CHANNELS'])) return msg.reply('❌ **البوت لا يمتلك صلاحية**');
      var ggg= msg.guild.createChannel('SERVER STATS', 'category').then(kk => {
-     
+           var cc =msg.guild.createChannel('SERVER STATS', 'voice').then(b => {
               var ccc =msg.guild.createChannel('SERVER STATS', 'voice').then(bl => {
                    var aa =msg.guild.createChannel('SERVER STATS', 'voice').then(bla => {
                       var aaa =msg.guild.createChannel('SERVER STATS', 'voice').then(black => {
-              
+          b.setParent(kk);     
           bl.setParent(kk);
           bla.setParent(kk);
           black.setParent(kk);
     
+         b.overwritePermissions(msg.guild.id, {
+         CONNECT: false,
+         SPEAK: false
+       });                 
         bl.overwritePermissions(msg.guild.id, {
          CONNECT: false,
          SPEAK: false
@@ -2032,20 +2036,20 @@ client.on('message',async msg => {
          SPEAK: false
        });
      
-       
-        bl.setName(`All member : ${msg.guild.memberCount}`);
-         bla.setName(`Member :${msg.guild.members.filter(m => !m.user.bot).size}`);
-           black.setName(`Bot : ${msg.guild.members.filter(m => m.user.bot).size}`);
+       b.setName(`All member : ${msg.guild.memberCount}`);
+        bl.setName(`Member : ${msg.members.size}`);
+         bla.setName(`Bot : ${msg.guild.members.filter(m => m.user.bot).size}`);
+           black.setName(`Roles : ${msg.guild.roles.size}`);
     },1000);
                       })
 
                    })
               })
-     
+           })
 
-     }
+           }
 
-   });
+        } );
 
 
 
@@ -2107,7 +2111,7 @@ client.on('message',async msg => {
      }
 
    });
-
+///${message.guild.roles.size}
 
 client.on("message", message => {
   if (message.content === prefix + "help") { 
