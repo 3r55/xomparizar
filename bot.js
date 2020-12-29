@@ -18,7 +18,18 @@ const neko = new nekoclient();
 
 
 
+var con = mysql.createConnection({
+  host: process.env.host,
+  user: process.env.user,
+  password: process.env.password,
+  database: process.env.database
+});
 
+con.connect(err => {
+    if(err) throw err;
+    console.log("Connected to database!");
+    con.query("SHOW TABLES", console.log);
+});
 
 client.on("ready", () => {
   console.log("♔♔♔♔♔♔♔♔♔♔♔♔♔♔♔♔♔♔♔");
