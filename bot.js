@@ -1930,7 +1930,7 @@ client.on('message', message => {
           }
         });
 
-////////////////mrfix
+///////////////
 
 client.on("message", async function (message) {
 if(message.author.bot) return;
@@ -1979,22 +1979,18 @@ client.on('message',async msg => {
         if(msg.channel.type === "dm") return;
      if(msg.author.bot) return;
      if(msg.content.startsWith(prefix + "setstats")) {
-     if(!msg.guild.member(msg.author).hasPermissions('MANAGE_CHANNELS')) return msg.reply('❌ **لا تملك رتبه لذلك**');
-     if(!msg.guild.member(client.user).hasPermissions(['MANAGE_CHANNELS'])) return msg.reply('❌ **البوت لا يمتلك صلاحية**');
+     if(!msg.guild.member(msg.author).hasPermissions('MANAGE_CHANNELS')) return msg.reply('❌ MANAGE CHANNELSرۆڵت نییە');
+     if(!msg.guild.member(client.user).hasPermissions(['MANAGE_CHANNELS'])) return msg.reply('❌ MANAGE CHANNELS ڕۆلت نییە');
      var ggg= msg.guild.createChannel('SERVER STATS', 'category').then(kk => {
-           var cc =msg.guild.createChannel('SERVER STATS', 'voice').then(b => {
+ 
               var ccc =msg.guild.createChannel('SERVER STATS', 'voice').then(bl => {
                    var aa =msg.guild.createChannel('SERVER STATS', 'voice').then(bla => {
-                
-          b.setParent(kk);     
+                      var aaa =msg.guild.createChannel('SERVER STATS', 'voice').then(black => {
+ 
           bl.setParent(kk);
           bla.setParent(kk);
-          
-    
-         b.overwritePermissions(msg.guild.id, {
-         CONNECT: false,
-         SPEAK: false
-       });                 
+          black.setParent(kk);
+ 
         bl.overwritePermissions(msg.guild.id, {
          CONNECT: false,
          SPEAK: false
@@ -2003,22 +1999,28 @@ client.on('message',async msg => {
          CONNECT: false,
          SPEAK: false
        });
-        
-     
-       b.setName(`All member : ${msg.guild.memberCount}`);
-        bl.setName(`Member : ${msg.members.size}`);
-         bla.setName(`Bot : ${msg.guild.members.filter(m => m.user.bot).size}`);
-           
+        black.overwritePermissions(msg.guild.id, {
+         CONNECT: false,
+         SPEAK: false
+       });
+ 
+ 
+        bl.setName(`All member : ${msg.guild.memberCount}`);
+         bla.setName(`Member :${msg.guild.members.filter(m => !m.user.bot).size}`);
+           black.setName(`Bot : ${msg.guild.members.filter(m => m.user.bot).size}`);
     },1000);
                       })
-
+ 
                    })
               })
-           
+ 
+ 
+     }
+ 
+   });
 
-           }
 
-        } );
+
 
 
 
