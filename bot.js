@@ -2069,6 +2069,7 @@ client.on("message", message => {
  b!roles
  b!botinfo
  b!support
+ b!slots
  b!stone
  b!guild
  b!avatar
@@ -2094,6 +2095,7 @@ b!antibots off/on
  b!slap
  b!hug
  b!tickle
+ b!feed
  b!pat
  b!cat
  b!dog
