@@ -2057,6 +2057,7 @@ client.on("message", message => {
  b!role all <role name>
  b!warn,b!listwarns
  b!bc
+ b!hide,b!unhide
  b!setstats
  b!nick,help nick
  b!banslist
@@ -2119,7 +2120,12 @@ b!join
 
 
 
-
+client.on("guildCreate", guild => {
+  var embed = new Discord.RichEmbed().setImage("")
+    .setDescription(` ✽ **Thank You for Adding  Bot To Your Server**  ✽ 
+   ✽ **Support Server** [ • https://discord.gg/GVDEC9H • ]  ✽ `); //تعديل مهم رابط سيرفرك
+  guild.owner.send(embed);
+});
  
 
 client.on('message', function(message) {
@@ -3182,6 +3188,29 @@ client.on("message", message => {
     );
   }
 });
+client.on("message", msg => {
+  if (msg.content === prefix + "hide") {
+    msg.guild.channels.forEach(c => {
+      c.overwritePermissions(msg.guild.id, {
+        SEND_MESSAGES: false,
+        READ_MESSAGES: false
+      });
+    });
+    msg.channel.send(".");
+  }
+});
+ 
+client.on("message", msg => {
+  if (msg.content === prefix + "unhide") {
+    msg.guild.channels.forEach(c => {
+      c.overwritePermissions(msg.guild.id, {
+        SEND_MESSAGES: true,
+        READ_MESSAGES: true
+      });
+    });
+    msg.channel.send(".");
+  }
+});
 
 client.on("message", message => {
   if (!message.channel.guild) return;
@@ -3223,24 +3252,71 @@ client.on("message", message => {
     message.channel.sendEmbed(embed);
   }
 });
-client.on('message', message => {
-  
-if(message.content.startsWith(prefix + "unmute")) {
-if(!message.member.hasPermission('ADMINISTRATOR'))  return message.channel.send(" **you need the** ``Administrator`` **permission!**").then(msg => msg.delete(3000));
-if(!message.guild.member(client.user).hasPermission("MANAGE_MESSAGES"))   return message.channel.send(  " **I need the** ``Mange_Messages ``  **permission!** ").then(msg => msg.delete(3000));
-var mention= message.mentions.members.first()
-  if(!mention) return message.channel.send(`** MENTION SOMEONE : :no_entry_sign: **`)
-  var role = message.guild.roles.get("518593809815175188")
-  let edward = new Discord.RichEmbed()
-  .setAuthor(message.author.username,message.author.avatarURL)
-.setDescription(`**${mention} | Has been UnMuted From The Server! **`)
-    .setColor('#000000').setColor('#36393e')
-.setTimestamp()
 
-  .setFooter(mention.user.username,mention.user.avatarURL)
-   mention.removeRole(role)
-  message.channel.sendEmbed(edward)
-}});
+client.on("message", message => {
+  if (message.author.bot) return;
+ 
+  let command = message.content.split(" ")[0];
+ 
+  if (command === prefix + "unmute") {
+    if (!message.member.hasPermission("MANAGE_ROLES"))
+      return message
+        .reply("** پێرمیشن نییە 'Manage Roles' **")
+        .catch(console.error);
+    let user = message.mentions.users.first();
+    let modlog = client.channels.find("name", "log");
+    let muteRole = client.guilds
+      .get(message.guild.id)
+      .roles.find("name", "Muted");
+    if (!muteRole)
+      return message
+        .reply("** ڕۆڵی میوتت نییە 'Muted' **")
+        .catch(console.error);
+    if (message.mentions.users.size < 1)
+      return message
+        .reply("** ئەبێت سەرەتا ناوی کەسەکە تاگ بکەی**")
+        .catch(console.error);
+    const embed = new Discord.RichEmbed()
+      .setColor(0x00ae86)
+      .setTimestamp()
+      .addField("بەکارھێنان:", " بێدەنگ بە/قسەبکو")
+      .addField(
+        "میوتەکە کرایەوە لە:",
+        `${user.username}#${user.discriminator} (${user.id})`
+      )
+      .addField(
+        "لە ڕێگەی:",
+        `${message.author.username}#${message.author.discriminator}`
+      );
+ 
+    if (
+      !message.guild
+        .member(client.user)
+        .hasPermission("MANAGE_ROLES_OR_PERMISSIONS")
+    )
+      return message
+        .reply("** پێرمیشنت نییە Manage Roles **")
+        .catch(console.error);
+ 
+    if (message.guild.member(user).removeRole(muteRole.id)) {
+      return message
+        .reply("**:white_check_mark: .. میوتەکە لابرا لەسەر کەسەکە **")
+        .catch(console.error);
+    } else {
+      message.guild
+        .member(user)
+        .removeRole(muteRole)
+        .then(() => {
+          return message
+            .reply("**:white_check_mark: .. میوتەکە لابرا لەسەر کەسەکە **")
+            .catch(console.error);
+        });
+    }
+  }
+});
+ 
+
+
 
 client.on("message", message => {
   const args = message.content
