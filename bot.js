@@ -406,69 +406,8 @@ client.on("guildMemberAdd", member => {
 
 
 
-client.on('guildMemberAdd',async member => {
-            if(!welcome[member.guild.id]) welcome[member.guild.id] = {
-          onoff: 'Off'
-        }
-    if(welcome[member.guild.id].onoff === 'Off') return;
-    const Canvas = require('canvas');
-    const jimp = require('jimp');
-    const w = ['./welcome_4.png'];
-          let Image = Canvas.Image,
-              canvas = new Canvas(800, 300),
-              ctx = canvas.getContext('2d');
-          ctx.patternQuality = 'bilinear';
-          ctx.filter = 'bilinear';
-          ctx.antialias = 'subpixel';
-          ctx.shadowColor = 'rgba(0, 0, 0, 0.4)';
-          ctx.shadowOffsetY = 2;
-          ctx.shadowBlur = 2;
-          ctx.stroke();
-          ctx.beginPath();
-   
-          fs.readFile(`${w[Math.floor(Math.random() * w.length)]}`, function (err, Background) {
-              if (err) return console.log(err);
-              let BG = Canvas.Image;
-              let ground = new Image;
-              ground.src = Background;
-              ctx.drawImage(ground, 0, 0, 800, 300);
-   
-  })
-   
-                  let url = member.user.displayAvatarURL.endsWith(".webp") ? member.user.displayAvatarURL.slice(5, -20) + ".png" : member.user.displayAvatarURL;
-                  jimp.read(url, (err, ava) => {
-                      if (err) return console.log(err);
-                      ava.getBuffer(jimp.MIME_PNG, (err, buf) => {
-                   if (err) return console.log(err);
-   
-            ctx.font = '36px Arial';
-            ctx.fontSize = '72px';
-            ctx.fillStyle = "#ffffff";
-            ctx.textAlign = "center";
-            ctx.fillText(member.user.username, 545, 177);
-           
-            ctx.font = '16px Arial Bold';
-            ctx.fontSize = '72px';
-            ctx.fillStyle = "#ffffff";
-            ctx.textAlign = "center";
-            ctx.fillText(`Your The Member ${member.guild.memberCount}`, 580, 200);
-           
-            let Avatar = Canvas.Image;
-            let ava = new Avatar;
-            ava.src = buf;
-            ctx.beginPath();
-            ctx.arc(169.5, 148, 126.9, -100, Math.PI * 2, true);
-            ctx.closePath();
-            ctx.clip();
-            ctx.drawImage(ava, 36, 21, 260, 260);
-             
-            let c = member.guild.channels.find('name', `${welcome[member.guild.id].channel}`)
-            if(!c) return;
-            c.sendFile(canvas.toBuffer());
-   
-  });
-  });
-  });
+
+                  
 
   const invites = {};
 
@@ -3284,7 +3223,24 @@ client.on("message", message => {
     message.channel.sendEmbed(embed);
   }
 });
+client.on('message', message => {
+  
+if(message.content.startsWith(prefix + "unmute")) {
+if(!message.member.hasPermission('ADMINISTRATOR'))  return message.channel.send(" **you need the** ``Administrator`` **permission!**").then(msg => msg.delete(3000));
+if(!message.guild.member(client.user).hasPermission("MANAGE_MESSAGES"))   return message.channel.send(  " **I need the** ``Mange_Messages ``  **permission!** ").then(msg => msg.delete(3000));
+var mention= message.mentions.members.first()
+  if(!mention) return message.channel.send(`** MENTION SOMEONE : :no_entry_sign: **`)
+  var role = message.guild.roles.get("518593809815175188")
+  let edward = new Discord.RichEmbed()
+  .setAuthor(message.author.username,message.author.avatarURL)
+.setDescription(`**${mention} | Has been UnMuted From The Server! **`)
+    .setColor('#000000').setColor('#36393e')
+.setTimestamp()
 
+  .setFooter(mention.user.username,mention.user.avatarURL)
+   mention.removeRole(role)
+  message.channel.sendEmbed(edward)
+}});
 
 client.on("message", message => {
   const args = message.content
@@ -3292,7 +3248,7 @@ client.on("message", message => {
     .trim()
     .split(/ +/g);
   const command = args.shift().toLowerCase();
-  if (command === prefix + "list ban") {
+  if (command === prefix + "banslist") {
     message.delete(5000);
     if (!message.guild.member(client.user).hasPermission("ADMINISTRATOR"))
       return message
@@ -3311,67 +3267,6 @@ client.on("message", message => {
   }
 });
 
-client.on("message", message => {
-  if (message.author.bot) return;
- 
-  let command = message.content.split(" ")[0];
- 
-  if (command === prefix + "unmute") {
-    if (!message.member.hasPermission("MANAGE_ROLES"))
-      return message
-        .reply("** پێرمیشن نییە 'Manage Roles' **")
-        .catch(console.error);
-    let user = message.mentions.users.first();
-    let modlog = client.channels.find("name", "log");
-    let muteRole = client.guilds
-      .get(message.guild.id)
-      .roles.find("name", "Muted");
-    if (!muteRole)
-      return message
-        .reply("** ڕۆڵی میوتت نییە 'Muted' **")
-        .catch(console.error);
-    if (message.mentions.users.size < 1)
-      return message
-        .reply("** ئەبێت سەرەتا ناوی کەسەکە تاگ بکەی**")
-        .catch(console.error);
-    const embed = new Discord.RichEmbed()
-      .setColor(0x00ae86)
-      .setTimestamp()
-      .addField("بەکارھێنان:", " بێدەنگ بە/قسەبکو")
-      .addField(
-        "میوتەکە کرایەوە لە:",
-        `${user.username}#${user.discriminator} (${user.id})`
-      )
-      .addField(
-        "لە ڕێگەی:",
-        `${message.author.username}#${message.author.discriminator}`
-      );
- 
-    if (
-      !message.guild
-        .member(client.user)
-        .hasPermission("MANAGE_ROLES_OR_PERMISSIONS")
-    )
-      return message
-        .reply("** پێرمیشنت نییە Manage Roles **")
-        .catch(console.error);
- 
-    if (message.guild.member(user).removeRole(muteRole.id)) {
-      return message
-        .reply("**:white_check_mark: .. میوتەکە لابرا لەسەر کەسەکە **")
-        .catch(console.error);
-    } else {
-      message.guild
-        .member(user)
-        .removeRole(muteRole)
-        .then(() => {
-          return message
-            .reply("**:white_check_mark: .. میوتەکە لابرا لەسەر کەسەکە **")
-            .catch(console.error);
-        });
-    }
-  }
-});
 
 
 client.on("message", msg => {
@@ -3803,6 +3698,15 @@ var now_playing = [];
 \\\\\\\\\\\\\\\\\\\\\\\\V/////////////////////////
 */
 
+
+
+ 
+ 
+             
+ 
+ 
+
+
 client.on('ready', () => {});
 
 var download = function(uri, filename, callback) {
@@ -3819,7 +3723,6 @@ var download = function(uri, filename, callback) {
     });
 
 };
-
 
 client.on('message', function(message) {
 
@@ -3853,6 +3756,7 @@ client.on('message', function(message) {
         }
 
         if (queue.length > 0 || isPlaying) {
+
 
             getID(args, function(id) {
 
