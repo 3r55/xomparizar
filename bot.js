@@ -3741,25 +3741,29 @@ client.aliases = new Discord.Collection();
 
 var servers = [];
 
-var queue = [];
-
 var guilds = [];
 
 var queueNames = [];
 
-var isPlaying = false;
-
-var dispatcher = null;
-
-var voiceChannel = null;
-
 var skipReq = 0;
-
-var skippers = [];
 
 var videoInfo = [];
 
 var now_playing = [];
+
+let queue = [];
+let songsQueue = [];
+let isPlaying = false;
+let dispatcher = null;
+let voiceChannel = null;
+let skipRequest = 0;
+let skippers = [];
+let ytResultList = [];
+let ytResultAdd = [];
+let re = /^(?:[1-5]|0[1-5]|10)$/;
+let regVol = /^(?:([1][0-9][0-9])|200|([1-9][0-9])|([0-9]))$/;
+let youtubeSearched = false;
+let selectUser;
 
 /*
 \\\\\\\\\\\\\\\\\\\\\\\\V/////////////////////////
