@@ -17,6 +17,7 @@
     "enmap": "^5.0.0",
     "fs": "0.0.2",
     "mysql": "^2.18.1",
+    "anti-spam": "^0.2.7",
     "discord.js-musicbot-addon": "^12.0.6",
     "get-youtube-id": "^1.0.0",
     "quick.db": "^6.2.0",

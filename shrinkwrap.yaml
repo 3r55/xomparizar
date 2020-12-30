@@ -1,4 +1,5 @@
 dependencies:
+  anti-spam: 0.2.7
   ascii-data-table: 2.1.1
   canvas: 1.6.13
   dateformat: 3.0.3
@@ -89,6 +90,10 @@ packages:
       node: '>=4'
     resolution:
       integrity: sha1-7QMXwyIGT3lGbAKWa922Bas32Zg=
+  /anti-spam/0.2.7:
+    dev: false
+    resolution:
+      integrity: sha512-dWAFCHWRvG+AJxJgpbUhSUH92xtC1wo6m3oXqIusvyamLUrTHEsX+HgLM+vH++GGg4JD02s7ai5uSWRCQOcH7A==
   /aproba/1.2.0:
     dev: false
     resolution:
@@ -2681,6 +2686,7 @@ registry: 'https://registry.npmjs.org/'
 shrinkwrapMinorVersion: 9
 shrinkwrapVersion: 3
 specifiers:
+  anti-spam: ^0.2.7
   ascii-data-table: ^2.1.1
   canvas: ^1.6.10
   dateformat: ^3.0.3
