@@ -2123,7 +2123,7 @@ b!join
 client.on("guildCreate", guild => {
   var embed = new Discord.RichEmbed().setImage("")
     .setDescription(` ✽ **Thank You for Adding  Bot To Your Server**  ✽ 
-   ✽ **Support Server** [ • https://discord.gg/GVDEC9H • ]  ✽ `); //تعديل مهم رابط سيرفرك
+   ✽ **Support Server** [ • https://discord.gg/YtF35CVvQR • ]  ✽ `); //تعديل مهم رابط سيرفرك
   guild.owner.send(embed);
 });
  
