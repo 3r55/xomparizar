@@ -34,16 +34,7 @@ client.on("ready", () => {
 
  
 
-client.on('message', msg => {//tex codes
-  if(msg.content.startsWith("setuser")) {//tex codes
-  if(!msg.guild.member(msg.author).hasPermissions('MANAGE_CHANNELS')) return msg.reply('❌ **ليس لديك صلاحيه**');//tex codes
-  if(!msg.guild.member(client.user).hasPermissions(['MANAGE_CHANNELS'])) return msg.reply('❌ **البوت لا يمتلك صلاحية**');//tex codes
-  msg.guild.createChannel(`Members : ◤ → ${client.members.size} ← ◢` , 'voice').then(time => {//tex codes
-  
-  
-      })
-  }
-  });
+
     
     
 
