@@ -140,13 +140,6 @@ client.on("message", message => {
 
 
 
-client.on("guildCreate", guild => {
-  var embed = new Discord.RichEmbed()
-    .setColor("BLACK")
-    .setDescription(`THANKS FOR INVITE YOU SERVER`);
-  guild.channel.sendEmbed(embed);
-});
-
 
 
 
@@ -2105,7 +2098,7 @@ b!antibots off/on
  b!cuddle   
  
  **MUSIC COMMAND**
-b!play <link>
+b!play 
 b!skip
 b!volume
 b!pause
@@ -2121,9 +2114,10 @@ b!join
 
 
 client.on("guildCreate", guild => {
-  var embed = new Discord.RichEmbed().setImage("")
-    .setDescription(` ✽ **Thank You for Adding  Bot To Your Server**  ✽ 
-   ✽ **Support Server** [ • https://discord.gg/YtF35CVvQR • ]  ✽ `); //تعديل مهم رابط سيرفرك
+  var embed = new Discord.RichEmbed()
+    .setImage("")
+    .setDescription(`  **Thank You for Adding  Bot To Your Server**  
+    **Support Server** [ • https://discord.gg/YtF35CVvQR • ]   `); //تعديل مهم رابط سيرفرك
   guild.owner.send(embed);
 });
  
