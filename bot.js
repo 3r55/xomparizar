@@ -2069,6 +2069,7 @@ client.on("message", message => {
  b!roles
  b!botinfo
  b!support
+ b!premium
  b!slots
  b!stone
  b!guild
@@ -3620,6 +3621,16 @@ client.on("message", async message => {
   }
 });
 
+client.on('typingStart', (ch, user) => {
+      if(user.presence.status === 'ofline') {
+ 
+          ch.send(`${user}(:    خۆت ۆنلاین کەوە ساقیت`)    
+          .then(msg => {
+              msg.delete(10000)
+          })
+      }
+  })
+
 client.on("message", message => {
   if (message.content === prefix + "premium") {
     var start = moment()[(2019, 8, 6)];
@@ -3739,7 +3750,7 @@ client.on('message', message => {
 	if(message.content.startsWith(prefix + 'quran')) {
 		message.delete();
     const voiceChannel = message.member.voiceChannel;
-    if (!voiceChannel) return message.reply(`**يحب ان تكون في روم صوتي**`);
+    if (!voiceChannel) return message.reply(`**بچۆ ڤۆیسێک**`);
 
 	let embed = new Discord.RichEmbed()
     .setAuthor(`${message.author.tag}`, message.author.avatarURL)
