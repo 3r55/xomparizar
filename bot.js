@@ -1553,7 +1553,7 @@ client.on("guildKickAdd", async (guild, user) => {
         .ban()
         .catch(e =>
           guild.owner.send(
-            `**❗️ | ${entry.username} Has \`Kick\` Many Members .**`
+            `** | ${entry.username} Has \`Kick\` Many Members .**`
           )
         );
       anti[guild.id + entry.id].actions = 0;
@@ -1577,6 +1577,7 @@ client.on("guildKickAdd", async (guild, user) => {
     if (e) throw e;
   });
 }); ////////////////mrfix
+var guild = []
 
 client.on("guildMemberRemove", async member => {
   const entry1 = await member.guild
@@ -1593,18 +1594,16 @@ client.on("guildMemberRemove", async member => {
       config[guild.id] = {
         banLimit: 3,
         chaDelLimit: 3,
-        chaCrLimit: 3,
         roleDelLimit: 3,
         kickLimits: 3,
-        roleCrLimits: 3,
-        time: 0.1
+        roleCrLimits: 3
       };
     if (!anti[member.guild.id + entry.id]) {
       anti[member.guild.id + entry.id] = {
         actions: 1
-      }; 
+      };
       setTimeout(() => {
-        anti[member.guild.id + entry.id].actions = 0;
+        anti[member.guild.id + entry.id].actions = "0";
       }, config[member.guild.id].time * 1000);
     } else {
       anti[member.guild.id + entry.id].actions = Math.floor(
@@ -1612,21 +1611,21 @@ client.on("guildMemberRemove", async member => {
       );
       console.log("TETS");
       setTimeout(() => {
-        anti[member.guild.id + entry.id].actions = 0;
-      }, config[member.guild.id].time * 1000 || 30000);
+        anti[member.guild.id + entry.id].actions = "0";
+      }, config[member.guild.id].time * 1000);
       if (
         anti[member.guild.id + entry.id].actions >=
         config[member.guild.id].kickLimits
       ) {
-        member.guild.members
+        member.members
           .get(entry.id)
           .ban()
           .catch(e =>
             member.owner.send(
-              `** | ${entry.username} Has \`Kick\` Many Members .**`
+              `**⇏ | ${entry.username} حاول حظر جميع الأعضاء **`
             )
           );
-        anti[member.guild.id + entry.id].actions = 0;
+        anti[member.guild.id + entry.id].actions = "0";
         fs.writeFile("./config.json", JSON.stringify(config, null, 2), function(
           e
         ) {
@@ -1640,8 +1639,8 @@ client.on("guildMemberRemove", async member => {
           }
         );
       }
-    } 
-
+    }
+ 
     fs.writeFile("./config.json", JSON.stringify(config, null, 2), function(e) {
       if (e) throw e;
     });
@@ -1652,6 +1651,8 @@ client.on("guildMemberRemove", async member => {
     });
   }
 });
+ 
+
 
 
  
