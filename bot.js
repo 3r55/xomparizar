@@ -2128,7 +2128,8 @@ client.on("message", message => {
  b!warn,b!listwarns
  b!bc
  b!mutevoice
- !
+ b!undeafen
+ b!deafen
  b!unmute voice
  b!hide,b!unhide
  b!setstats
@@ -2206,6 +2207,27 @@ client.on("guildCreate", guild => {
   guild.owner.send(embed);
 });
  
+client.on('message', message => {
+        if(message.content.startsWith(prefix + 'deafen')) {
+      if (message.mentions.users.size === 0 && message.mentions.roles.size === 0) {
+        return message.reply('**کەسەکە دیاری بکە**❌').catch(console.error);
+      }
+      if (!message.guild.member(client.user).hasPermission('DEAFEN_MEMBERS')) {
+        return message.reply('ناتوانم میوتی بکەم**❌').catch(console.error);
+      }
+ 
+      const deafenMember = (member) => {
+        if (!member || !member.voiceChannel) return;
+        if (member.serverDeaf) return message.channel.send(`${member} **دیفێند کرا**:x:`);
+        member.setDeaf(true).catch(console.error);
+        if(!message.member.hasPermission("DEAFEN_MEMBERS")) return message.channel.sendMessage("**ببورە ئەو رۆلەت نیە DEAFEN_MEMBER**❌ ").then(m => m.delete(5000));
+      };
+ 
+      message.mentions.users.forEach(user => deafenMember(message.guild.member(user)));
+      message.mentions.roles.forEach(role => role.members.forEach(member => deafenMember(member)));
+        }
+ 
+    });
 
 
 client.on('message', async message =>{
@@ -2243,15 +2265,15 @@ client.on('message', async message =>{
         if(!message.guild.member(client.user).hasPermission("MUTE_MEMBERS")) return message.reply("**من ئەو پێرمیشنەم نیە `MUTE_MEMBERS` Permission**").then(msg => msg.delete(6000))
  
       if(message.mentions.users.size === 0) {
-        return message.reply("Please mention a user to mute.");
+        return message.reply("کەسەکە تاگ بکە");
       }
       let muteMember = message.guild.member(message.mentions.users.first());
       if(!muteMember) {
-        return message.reply("Try again.");
+        return message.reply("دووبارە");
       }
       muteMember.setMute(false);
       if(muteMember) {
-        message.channel.sendMessage("User muted successfully.");
+        message.channel.sendMessage("بەسەرکەوتوی میوت لادرا");
       }
     }
   });
