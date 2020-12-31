@@ -2039,7 +2039,7 @@ client.on('message',async msg => {
 
 const weather = require('weather-js');
  client.on('message', message => {
-     if(message.content.startsWith(prefix + "w")) {
+     if(message.content.startsWith(prefix + "weather")) {
          var args = message.content.split(" ").slice(1);
  weather.find({search: args.join(" "), degreeType: 'C'}, function(err, result) {
       if (err) message.channel.send(err);
@@ -2146,11 +2146,12 @@ client.on("message", message => {
  **GENERAL COMMAND**
  b!count
  b!roles
+ b!rooms
  b!botinfo
  b!support
  b!premium
  b!slots
- b!w
+ b!weather <location name>
  b!stone
  b!guild
  b!avatar
@@ -2301,7 +2302,21 @@ client.on('message', async message =>{
       }
     });
  
-
+ 
+  client.on('message', message => {
+    if (message.content === prefix + "rooms") {
+                      if (!message.guild) return;
+ 
+        var channels = message.guild.channels.map(channels => `${channels.name}, `).join(' ')
+        const embed = new Discord.RichEmbed()
+        .setColor('RANDOM')
+        .addField(`${message.guild.name}`,`**Rooms:white_check_mark:**`)
+        .addField(':arrow_down: Rooms Number. :heavy_check_mark:',`** ${message.guild.channels.size}**`)
+ 
+.addField(':arrow_down:Rooms  Name. :heavy_check_mark::',`**[${channels}]**`)
+        message.channel.sendEmbed(embed);
+    }
+});
 client.on('message', function(message) {
     if(message.content.startsWith(prefix + "report")) {
         let messageArgs = message.content.split(" ").slice(1).join(" ");
