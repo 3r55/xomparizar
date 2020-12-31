@@ -1185,10 +1185,8 @@ client.on("message", message => {
         time: 30
     }
     if (message.content.startsWith(prefix + "anti")) {
- 
-        if (!message.member.hasPermission("Ownership")) return message.channel.send(
-        "**❌ | Only `OwnerShip` Can Use This Command .**"
-      );
+      if(!message.member.hasPermission('ADMINISTRATOR')) return; 
+        
         if (message.content.startsWith(prefix + "anti ban")) {
             if (!num) return message.channel.send("**⇏ | Type Number**");
             if (isNaN(num)) return message.channel.send("**⇏ | Number Only**");
