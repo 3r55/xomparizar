@@ -1185,7 +1185,7 @@ client.on("message", message => {
         time: 30
     }
     if (message.content.startsWith(prefix + "anti")) {
-      if(!message.member.hasPermission('ADMINISTRATOR')) return message.channel.send('Bbwra adminstatort nya')
+      if(!message.member.hasPermission('ADMINISTRATOR')) return message.channel.send('**Bbwra adminstatort nya**')
         
         if (message.content.startsWith(prefix + "anti ban")) {
             if (!num) return message.channel.send("**⇏ | Type Number**");
@@ -2025,7 +2025,7 @@ client.on('message',async msg => {
  
         bl.setName(`All member : ${msg.guild.memberCount}`);
          bla.setName(`Member :${msg.guild.members.filter(m=> !m.user.bot).size}`);
-           black.setName(`Bot : ${msg.guild.members.filter(m => m.user.bot).size}`);
+           black.setName(`Bot : ${msg.guild.bots}`);
     },1000);
                       })
  
