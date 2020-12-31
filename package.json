@@ -23,6 +23,7 @@
     "quick.db": "^6.2.0",
     "jimp": "^0.2.28",
     "number-to-words": "^1.2.4",
+    "weather-js": "2.0.0",
     "discord-anti-spam": "^2.0.0",
     "moment": "^2.22.1",
     "ms": "^2.1.1",

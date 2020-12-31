@@ -2036,6 +2036,34 @@ client.on('message',async msg => {
  
    });
 
+
+const weather = require('weather-js');
+ client.on('message', message => {
+     if(message.content.startsWith(prefix + "w")) {
+         var args = message.content.split(" ").slice(1);
+ weather.find({search: args.join(" "), degreeType: 'C'}, function(err, result) {
+      if (err) message.channel.send(err);
+      if (result === undefined || result.length === 0) {
+          message.channel.send('**Please enter a location!**')
+          return;
+      }
+      var current = result[0].current;
+      var location = result[0].location;
+      const embed = new Discord.RichEmbed()
+          .setDescription(`**${current.skytext}**`)
+          .setAuthor(`Weather for ${current.observationpoint}`)
+          .setThumbnail(current.imageUrl)
+          .setColor(0x00AE86)
+          .addField('Timezone',`UTC${location.timezone}`, true)
+          .addField('Degree Type',location.degreetype, true)
+          .addField('Temperature',`${current.temperature} Degrees`, true)
+          .addField('Feels Like', `${current.feelslike} Degrees`, true)
+          .addField('Winds',current.winddisplay, true)
+          .addField('Humidity', `${current.humidity}%`, true)
+          message.channel.send({embed});
+  })
+}
+ });
    client.on("message", message => {
   if (message.content.startsWith(prefix + "sug")) {
     if (message.author.bot) return;
@@ -2099,6 +2127,9 @@ client.on("message", message => {
  b!role all <role name>
  b!warn,b!listwarns
  b!bc
+ b!mutevoice
+ !
+ b!unmute voice
  b!hide,b!unhide
  b!setstats
  b!nick,help nick
@@ -2118,6 +2149,7 @@ client.on("message", message => {
  b!support
  b!premium
  b!slots
+ b!w
  b!stone
  b!guild
  b!avatar
@@ -2173,6 +2205,79 @@ client.on("guildCreate", guild => {
     **Support Server** [ • https://discord.gg/YtF35CVvQR • ]   `); //تعديل مهم رابط سيرفرك
   guild.owner.send(embed);
 });
+ 
+
+
+client.on('message', async message =>{
+      if(message.content.startsWith(prefix + 'undeafen')) {
+ 
+    if (message.mentions.users.size === 0 && message.mentions.roles.size === 0) {
+      return message.reply('**تکایە کەسەکە تاگ بکە**❌').catch(console.error);
+    }
+    if (!message.guild.member(client.user).hasPermission('DEAFEN_MEMBERS')) {
+      return message.reply('**ناتوانم دیفەیندی بکەم**❌ ').catch(console.error);
+      if(!message.member.hasPermission("DEAFEN_MEMBERS")) return message.channel.sendMessage("**ناتوانی ئەو کارە بکەی**❌ ").then(m => m.delete(5000));
+    }
+ 
+    const undeafenMember = (member) => {
+      if (!member || !member.voiceChannel) return;
+      if (!member.serverDeaf) return message.channel.send(`${member} `);
+      member.setDeaf(false).catch(console.error);
+    };
+ 
+    message.mentions.users.forEach(user => undeafenMember(message.guild.member(user)));
+    message.mentions.roles.forEach(role => role.members.forEach(member => undeafenMember(member)));
+    }
+    });
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+	client.on('message', message => {
+      
+      if(message.content.startsWith(prefix + 'unmute voice')) {
+        if(!message.member.hasPermission("MUTE_MEMBERS")) return message.channel.sendMessage("**MUTE MEMBER ببورە ئەو رۆلەت نیە**❌ ").then(m => m.delete(5000));
+        if(!message.guild.member(client.user).hasPermission("MUTE_MEMBERS")) return message.reply("**من ئەو پێرمیشنەم نیە `MUTE_MEMBERS` Permission**").then(msg => msg.delete(6000))
+ 
+      if(message.mentions.users.size === 0) {
+        return message.reply("Please mention a user to mute.");
+      }
+      let muteMember = message.guild.member(message.mentions.users.first());
+      if(!muteMember) {
+        return message.reply("Try again.");
+      }
+      muteMember.setMute(false);
+      if(muteMember) {
+        message.channel.sendMessage("User muted successfully.");
+      }
+    }
+  });
+ 
+ 
+ 
+ 
+ 
+	client.on('message', message => {
+        if(message.content.startsWith(prefix + 'mutevoice')) {
+          if(!message.member.hasPermission("MUTE_MEMBERS")) return message.channel.sendMessage("**ليس لديك صلاحية لاعطاء ميوت صوتي**❌ ").then(m => m.delete(5000));
+          if(!message.guild.member(client.user).hasPermission("MUTE_MEMBERS")) return message.reply("**I Don't Have `MUTE_MEMBERS` Permission**").then(msg => msg.delete(6000))
+ 
+        if(message.mentions.users.size === 0) {
+          return message.reply("کەسەکە تاگ بکە");
+        }
+        let muteMember = message.guild.member(message.mentions.users.first());
+        if(!muteMember) {
+          return message.reply("دووبارە");
+        }
+        muteMember.setMute(true);
+        if(muteMember) {
+          message.channel.sendMessage("بە سەرکەوتوی میوت کرا");
+        }
+      }
+    });
  
 
 client.on('message', function(message) {
