@@ -2180,6 +2180,8 @@ client.on("message", message => {
  b!clear <number>
  b!lock
  b!server
+ b!uvb
+ b!vb
  b!role <role name>
  b!role bots <role name>
  b!role humans <role name>
@@ -2361,7 +2363,7 @@ client.on('message', async message =>{
       }
     });
  client.on('message', rw => {
-  if (rw.content.startsWith('#vb')) {
+  if (rw.content.startsWith(prefix + 'vb')) {
 if (!rw.member.hasPermission("MOVE_MEMBERS")) return rw.channel.send("**YOU DONT HAVE PERMISSION** | ❎ ");
 let men = rw.mentions.users.first()
 let mas = rw.author
