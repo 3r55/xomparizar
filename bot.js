@@ -1185,7 +1185,7 @@ client.on("message", message => {
         time: 30
     }
     if (message.content.startsWith(prefix + "anti")) {
-      if(!message.member.hasPermission('ADMINISTRATOR')) return; 
+      if(!message.member.hasPermission('ADMINISTRATOR')) return message.channel.send('Bbwra adminstatort nya')
         
         if (message.content.startsWith(prefix + "anti ban")) {
             if (!num) return message.channel.send("**⇏ | Type Number**");
@@ -1451,158 +1451,224 @@ client.on("roleCreate", async channel => {
         if (e) throw e;
     });
 });
- 
-client.on("guildBanAdd", async (guild, user) => {
-    const entry1 = await guild.guild.fetchAuditLogs({
-        type: 'MEMBER_BAN_ADD'
-    }).then(audit => audit.entries.first())
-    console.log(entry1.executor.username)
-    const entry = entry1.executor
-    if (!config[guild.id]) config[guild.id] = {
-        banLimit: 3,
-        chaDelLimit: 3,
-        roleDelLimit: 3,
-        kickLimits: 3,
-        roleCrLimits: 3
-    }
-    if (!anti[guild.id + entry.id]) {
-        anti[guild.id + entry.id] = {
-            actions: 1
-        }
-        setTimeout(() => {
-            anti[guild.id + entry.id].actions = "0"
-        }, config[guild.id].time * 1000)
-    } else {
-        anti[guild.id + entry.id].actions = Math.floor(anti[guild.id + entry.id].actions + 1)
-        console.log("TETS");
-        setTimeout(() => {
-            anti[guild.id + entry.id].actions = "0"
-        }, config[guild.id].time * 1000)
-        if (anti[guild.id + entry.id].actions >= config[guild.id].banLimit) {
-            channel.members.get(entry.id).ban().catch(e => channel.owner.send(`**⇏ | ${entry.username} He Tried To Ban Many People**`))
-            anti[guild.id + entry.id].actions = "0"
-            fs.writeFile("./config.json", JSON.stringify(config, null, 2), function (e) {
-                if (e) throw e;
-            });
-            fs.writeFile("./antigreff.json", JSON.stringify(anti, null, 2), function (e) {
-                if (e) throw e;
-            });
-        }
-    }
- 
-    fs.writeFile("./config.json", JSON.stringify(config, null, 2), function (e) {
+ client.on("guildBanAdd", async (guild, user) => {
+  const entry1 = await guild
+    .fetchAuditLogs({
+      type: "MEMBER_BAN_ADD"
+    })
+    .then(audit => audit.entries.first());
+  console.log("ban: " + entry1.executor.username);
+  const entry = entry1.executor;
+  if (!config[guild.id])
+    config[guild.id] = {
+      banLimit: 3,
+      chaDelLimit: 3,
+      chaCrLimit: 3,
+      roleDelLimit: 3,
+      kickLimits: 3,
+      roleCrLimits: 3,
+      time: 0.1
+    };
+  if (!anti[guild.id + entry.id]) {
+    anti[guild.id + entry.id] = {
+      actions: 1
+    };
+    setTimeout(() => {
+      anti[guild.id + entry.id].actions = 0;
+    }, config[guild.id].time * 1000);
+  } else {
+    anti[guild.id + entry.id].actions = Math.floor(
+      anti[guild.id + entry.id].actions + 1
+    );
+    setTimeout(() => {
+      anti[guild.id + entry.id].actions = 0;
+    }, config[guild.id].time * 1000);
+    if (anti[guild.id + entry.id].actions >= config[guild.id].banLimit) {
+      guild.members
+        .get(entry.id)
+        .ban()
+        .catch(e =>
+          guild.owner.send(
+            `** | ${entry.username} Has \`Ban\` Many Members .**`
+          )
+        );
+      anti[guild.id + entry.id].actions = 0;
+      fs.writeFile("./config.json", JSON.stringify(config, null, 2), function(
+        e
+      ) {
         if (e) throw e;
-    });
-    fs.writeFile("./antigreff.json", JSON.stringify(anti, null, 2), function (e) {
+      });
+      fs.writeFile("./antigreff.json", JSON.stringify(anti, null, 2), function(
+        e
+      ) {
         if (e) throw e;
-    });
+      });
+    }
+  }
+
+  fs.writeFile("./config.json", JSON.stringify(config, null, 2), function(e) {
+    if (e) throw e;
+  });
+  fs.writeFile("./antigreff.json", JSON.stringify(anti, null, 2), function(e) {
+    if (e) throw e;
+  });
 });
- 
+
 client.on("guildKickAdd", async (guild, user) => {
-    const entry1 = await guild.fetchAuditLogs({
-        type: 'MEMBER_KICK'
-    }).then(audit => audit.entries.first())
-    console.log(entry1.executor.username)
-    const entry = entry1.executor
-    if (!config[guild.id]) config[guild.id] = {
+  const entry1 = await guild
+    .fetchAuditLogs({
+      type: "MEMBER_KICK"
+    })
+    .then(audit => audit.entries.first());
+  console.log(entry1.executor.username);
+  const entry = entry1.executor;
+  if (!config[guild.id])
+    config[guild.id] = {
+      banLimit: 3,
+      chaDelLimit: 3,
+      chaCrLimit: 3,
+      roleDelLimit: 3,
+      kickLimits: 3,
+      roleCrLimits: 3,
+      time: 0.1
+    };
+  if (!anti[guild.id + entry.id]) {
+    anti[guild.id + entry.id] = {
+      actions: 1
+    };
+    setTimeout(() => {
+      anti[guild.id + entry.id].actions = 0;
+    }, config[guild.id].time * 1000);
+  } else {
+    anti[guild.id + entry.id].actions = Math.floor(
+      anti[guild.id + entry.id].actions + 1
+    );
+    console.log("TETS");
+    setTimeout(() => {
+      anti[guild.id + entry.id].actions = 0;
+    }, config[guild.id].time * 1000);
+    if (anti[guild.id + entry.id].actions >= config[guild.id].banLimit) {
+      guild.members
+        .get(entry.id)
+        .ban()
+        .catch(e =>
+          guild.owner.send(
+            `**❗️ | ${entry.username} Has \`Kick\` Many Members .**`
+          )
+        );
+      anti[guild.id + entry.id].actions = 0;
+      fs.writeFile("./config.json", JSON.stringify(config, null, 2), function(
+        e
+      ) {
+        if (e) throw e;
+      });
+      fs.writeFile("./antigreff.json", JSON.stringify(anti, null, 2), function(
+        e
+      ) {
+        if (e) throw e;
+      });
+    }
+  }
+
+  fs.writeFile("./config.json", JSON.stringify(config, null, 2), function(e) {
+    if (e) throw e;
+  });
+  fs.writeFile("./antigreff.json", JSON.stringify(anti, null, 2), function(e) {
+    if (e) throw e;
+  });
+}); ////////////////mrfix
+
+client.on("guildMemberRemove", async member => {
+  const entry1 = await member.guild
+    .fetchAuditLogs()
+    .then(audit => audit.entries.first());
+  if (entry1.action === "MEMBER_KICK") {
+    const entry2 = await member.guild
+      .fetchAuditLogs({
+        type: "MEMBER_KICK"
+      })
+      .then(audit => audit.entries.first());
+    const entry = entry2.executor;
+    if (!config[member.guild.id])
+      config[guild.id] = {
         banLimit: 3,
         chaDelLimit: 3,
+        chaCrLimit: 3,
         roleDelLimit: 3,
         kickLimits: 3,
-        roleCrLimits: 3
-    }
-    if (!anti[guild.id + entry.id]) {
-        anti[guild.id + entry.id] = {
-            actions: 1
-        }
-        setTimeout(() => {
-            anti[guild.id + entry.id].actions = "0"
-        }, config[guild.id].time * 1000)
+        roleCrLimits: 3,
+        time: 0.1
+      };
+    if (!anti[member.guild.id + entry.id]) {
+      anti[member.guild.id + entry.id] = {
+        actions: 1
+      }; 
+      setTimeout(() => {
+        anti[member.guild.id + entry.id].actions = 0;
+      }, config[member.guild.id].time * 1000);
     } else {
-        anti[guild.id + entry.id].actions = Math.floor(anti[guild.id + entry.id].actions + 1)
-        console.log("TETS");
-        setTimeout(() => {
-            anti[guild.id + entry.id].actions = "0"
-        }, config[guild.id].time * 1000)
-        if (anti[guild.id + entry.id].actions >= config[guild.id].banLimit) {
-            channel.members.get(entry.id).ban().catch(e => channel.owner.send(`**⇏ | ${entry.username} He Tried To Kick Many People**`))
-            anti[guild.id + entry.id].actions = "0"
-            fs.writeFile("./config.json", JSON.stringify(config, null, 2), function (e) {
-                if (e) throw e;
-            });
-            fs.writeFile("./antigreff.json", JSON.stringify(anti, null, 2), function (e) {
-                if (e) throw e;
-            });
-        }
-    }
- 
-    fs.writeFile("./config.json", JSON.stringify(config, null, 2), function (e) {
-        if (e) throw e;
+      anti[member.guild.id + entry.id].actions = Math.floor(
+        anti[member.guild.id + entry.id].actions + 1
+      );
+      console.log("TETS");
+      setTimeout(() => {
+        anti[member.guild.id + entry.id].actions = 0;
+      }, config[member.guild.id].time * 1000 || 30000);
+      if (
+        anti[member.guild.id + entry.id].actions >=
+        config[member.guild.id].kickLimits
+      ) {
+        member.guild.members
+          .get(entry.id)
+          .ban()
+          .catch(e =>
+            member.owner.send(
+              `** | ${entry.username} Has \`Kick\` Many Members .**`
+            )
+          );
+        anti[member.guild.id + entry.id].actions = 0;
+        fs.writeFile("./config.json", JSON.stringify(config, null, 2), function(
+          e
+        ) {
+          if (e) throw e;
+        });
+        fs.writeFile(
+          "./antigreff.json",
+          JSON.stringify(anti, null, 2),
+          function(e) {
+            if (e) throw e;
+          }
+        );
+      }
+    } 
+
+    fs.writeFile("./config.json", JSON.stringify(config, null, 2), function(e) {
+      if (e) throw e;
     });
-    fs.writeFile("./antigreff.json", JSON.stringify(anti, null, 2), function (e) {
-        if (e) throw e;
+    fs.writeFile("./antigreff.json", JSON.stringify(anti, null, 2), function(
+      e
+    ) {
+      if (e) throw e;
     });
+  }
 });
+
+
  
-client.on("guildMemberRemove", async member => {
-    const entry1 = await member.guild.fetchAuditLogs().then(audit => audit.entries.first())
-    if (entry1.action === "MEMBER_KICK") {
-        const entry2 = await member.guild.fetchAuditLogs({
-            type: "MEMBER_KICK"
-        }).then(audit => audit.entries.first())
-        const entry = entry2.executor;
-        if (!config[member.guild.id]) config[guild.id] = {
-            banLimit: 3,
-            chaDelLimit: 3,
-            roleDelLimit: 3,
-            kickLimits: 3,
-            roleCrLimits: 3
-        }
-        if (!anti[member.guild.id + entry.id]) {
-            anti[member.guild.id + entry.id] = {
-                actions: 1
-            }
-            setTimeout(() => {
-                anti[member.guild.id + entry.id].actions = "0"
-            }, config[member.guild.id].time * 1000)
-        } else {
-            anti[member.guild.id + entry.id].actions = Math.floor(anti[member.guild.id + entry.id].actions + 1)
-            console.log("TETS");
-            setTimeout(() => {
-                anti[member.guild.id + entry.id].actions = "0"
-            }, config[member.guild.id].time * 1000)
-            if (anti[member.guild.id + entry.id].actions >= config[member.guild.id].kickLimits) {
-                member.members.get(entry.id).ban().catch(e => member.owner.send(`**⇏ | ${entry.username} He Tried To Ban Many People**`))
-                anti[member.guild.id + entry.id].actions = "0"
-                fs.writeFile("./config.json", JSON.stringify(config, null, 2), function (e) {
-                    if (e) throw e;
-                });
-                fs.writeFile("./antigreff.json", JSON.stringify(anti, null, 2), function (e) {
-                    if (e) throw e;
-                });
-            }
-        }
+
  
-        fs.writeFile("./config.json", JSON.stringify(config, null, 2), function (e) {
-            if (e) throw e;
-        });
-        fs.writeFile("./antigreff.json", JSON.stringify(anti, null, 2), function (e) {
-            if (e) throw e;
-        });
-    }
- 
-})
+
     
 let antibots = JSON.parse(fs.readFileSync('./antibots.json' , 'utf8'));//require antihack.json file
   client.on('message', message => {
     
       if(message.content.startsWith(prefix + "antibots on")) {
           if(!message.channel.guild) return;
-          if(!message.member.hasPermission('ADMINISTRATOR')) return;
+          if (!message.member.hasPermission("Ownership")) return;
   antibots[message.guild.id] = {
   onoff: 'On',
   }
-  message.channel.send(`**AntiBots Join Is On**`)
+  message.channel.send(`**AntiBots Join Is On **`)
             fs.writeFile("./antibots.json", JSON.stringify(antibots), (err) => {
               if (err) console.error(err)
               .catch(err => {
