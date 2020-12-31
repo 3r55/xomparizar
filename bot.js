@@ -1992,7 +1992,6 @@ message.channel.send(`**<@${tomute.id}> has been unmuted!**`);
 break;
 }
 });
-
 client.on('message',async msg => {
         if(msg.channel.type === "dm") return;
      if(msg.author.bot) return;
@@ -2024,8 +2023,8 @@ client.on('message',async msg => {
  
  
         bl.setName(`All member : ${msg.guild.memberCount}`);
-         bla.setName(`Member :${msg.guild.members.filter(m=> !m.user.bot).size}`);
-           black.setName(`Bot : ${msg.guild.bots}`);
+         bla.setName(`Member :${msg.guild.members.filter(m => !m.user.bot).size}`);
+           black.setName(`Bot : ${msg.guild.members.filter(m => m.user.bot).size}`);
     },1000);
                       })
  
@@ -2036,11 +2035,6 @@ client.on('message',async msg => {
      }
  
    });
-
-
-
-
-
 
    
 
