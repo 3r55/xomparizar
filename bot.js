@@ -1665,11 +1665,11 @@ let antibots = JSON.parse(fs.readFileSync('./antibots.json' , 'utf8'));//require
     
       if(message.content.startsWith(prefix + "antibots on")) {
           if(!message.channel.guild) return;
-          if (!message.member.hasPermission("Ownership")) return;
+          if (!message.member.hasPermission("ADMINISTRATOR")) return message.channel.send("**JUST FOR OWNER SHIP**")
   antibots[message.guild.id] = {
   onoff: 'On',
   }
-  message.channel.send(`**AntiBots Join Is On **`)
+  message.channel.send(`**AntiBots Join Is On 🔒**`)
             fs.writeFile("./antibots.json", JSON.stringify(antibots), (err) => {
               if (err) console.error(err)
               .catch(err => {
@@ -1683,11 +1683,11 @@ let antibots = JSON.parse(fs.readFileSync('./antibots.json' , 'utf8'));//require
   client.on('message', message => {
     if(message.content.startsWith(prefix + "antibots off")) {
           if(!message.channel.guild) return;
-          if(!message.member.hasPermission('ADMINISTRATOR')) return;
+          if(!message.member.hasPermission('ADMINISTRATOR')) return message.channel.send("**JUST FOR OWNER SHIP**")
   antibots[message.guild.id] = {
   onoff: 'Off',
   }
-  message.channel.send(`**AntiBots Join Is Off**`)
+  message.channel.send(`**AntiBots Join Is Off 🔓**`)
             fs.writeFile("./antibots.json", JSON.stringify(antibots), (err) => {
               if (err) console.error(err)
               .catch(err => {
@@ -2024,7 +2024,7 @@ client.on('message',async msg => {
  
  
         bl.setName(`All member : ${msg.guild.memberCount}`);
-         bla.setName(`Member :${msg.guild.members.filter(m => !m.user.bot).size}`);
+         bla.setName(`Member :${msg.guild.members.filter(m=> !m.user.bot).size}`);
            black.setName(`Bot : ${msg.guild.members.filter(m => m.user.bot).size}`);
     },1000);
                       })
