@@ -1960,7 +1960,6 @@ client.on("message", message => {
  b!kick
  b!clear <number>
  b!lock
- b!server
  b!uvb
  b!vb
  b!role <role name>
@@ -1990,6 +1989,7 @@ client.on("message", message => {
  b!roles
  b!rooms
  b!botinfo
+ b!server
  b!support
  b!premium
  b!slots
