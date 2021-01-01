@@ -4057,7 +4057,7 @@ let selectUser;
  
  
              
- 
+ var yt = [];
  
 
 
@@ -4078,6 +4078,12 @@ var download = function(uri, filename, callback) {
 
 };
 
+
+
+ 
+   
+
+///////
 client.on('message', function(message) {
 
     const member = message.member;
