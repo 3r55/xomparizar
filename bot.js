@@ -1966,7 +1966,26 @@ client.on("message", message => {
        .setThumbnail(message.author.avatarURL)
        .setFooter("CREATED BY BLACK JACK")
       .setColor("BLACK").setDescription(` 
- **MODERATION**
+
+help1 => moderation command
+help2 => general command
+help3 =>security command
+help4 => funny command
+help5 => music command
+
+`);
+    message.channel.sendEmbed(embed);
+  }
+});
+
+client.on("message", message => {
+  if (message.content === prefix + "help1") { 
+    let embed = new Discord.RichEmbed()
+      .setAuthor(message.author.username)
+       .setThumbnail(message.author.avatarURL)
+       .setFooter("CREATED BY BLACK JACK")
+      .setColor("BLACK").setDescription(` 
+      **MODERATION**
  b!mute,b!unmute
  b!move,moveall
  b!ban
@@ -2002,7 +2021,19 @@ client.on("message", message => {
  b!setTime
  b!setbotv
  b!setmember
- **GENERAL COMMAND**
+      
+       `);
+   message.channel.sendEmbed(embed);
+  }
+});
+client.on("message", message => {
+  if (message.content === prefix + "help2") { 
+    let embed = new Discord.RichEmbed()
+      .setAuthor(message.author.username)
+       .setThumbnail(message.author.avatarURL)
+       .setFooter("CREATED BY BLACK JACK")
+      .setColor("BLACK").setDescription(` 
+       **GENERAL COMMAND**
  b!count
  b!roles
  b!rooms
@@ -2024,7 +2055,19 @@ client.on("message", message => {
  b!about
  b!invite
  b!user
-**SECURITY COMMAND**
+      
+       `);
+   message.channel.sendEmbed(embed);
+  }
+});
+client.on("message", message => {
+  if (message.content === prefix + "help3") { 
+    let embed = new Discord.RichEmbed()
+      .setAuthor(message.author.username)
+       .setThumbnail(message.author.avatarURL)
+       .setFooter("CREATED BY BLACK JACK")
+      .setColor("BLACK").setDescription(` 
+      **SECURITY COMMAND**
 b!anti ban[number]
 b!anti kick [number]
 b!anti roleC [number]
@@ -2033,7 +2076,19 @@ b!anti channelD [number]
 b!anti channelC [number]
 b!anti time [number]
 b!antibots off/on 
- **FUNNY COMAND**
+      
+       `);
+   message.channel.sendEmbed(embed);
+  }
+});
+client.on("message", message => {
+  if (message.content === prefix + "help4") { 
+    let embed = new Discord.RichEmbed()
+      .setAuthor(message.author.username)
+       .setThumbnail(message.author.avatarURL)
+       .setFooter("CREATED BY BLACK JACK")
+      .setColor("BLACK").setDescription(` 
+       **FUNNY COMAND**
  b!slap
  b!hug
  b!tickle
@@ -2043,8 +2098,18 @@ b!antibots off/on
  b!dog
  b!poke
  b!cuddle   
- 
- **MUSIC COMMAND**
+       `);
+   message.channel.sendEmbed(embed);
+  }
+});
+client.on("message", message => {
+  if (message.content === prefix + "help5") { 
+    let embed = new Discord.RichEmbed()
+      .setAuthor(message.author.username)
+       .setThumbnail(message.author.avatarURL)
+       .setFooter("CREATED BY BLACK JACK")
+      .setColor("BLACK").setDescription(` 
+**MUSIC COMMAND**
 b!play 
 b!skip
 b!volume
@@ -2052,14 +2117,11 @@ b!pause
 b!resume
 b!leave
 b!join 
-
-`);
-    message.channel.sendEmbed(embed);
+      
+       `);
+   message.channel.sendEmbed(embed);
   }
 });
-
-
-
 client.on("guildCreate", guild => {
   var embed = new Discord.RichEmbed()
     .setImage("")
