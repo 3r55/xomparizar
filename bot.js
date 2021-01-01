@@ -2267,6 +2267,8 @@ b!volume
 b!pause
 b!resume
 b!leave
+b!repeat
+b!np
 b!join 
       
        `);
@@ -4736,29 +4738,7 @@ client.on('message', message => {
  
   });
  
-client.on('message', message => {
- 
-  if(message.content.startsWith(prefix + "music")) {
-   // message.channel.send(``)
-  message.channel.send( `**:notes:  قائمة الاوامر:  
- 
-> Play : تشغيل الاغنية او اضافتها للقائمة او اكمال الاغنية [p] 
-> Pause : ايقاف مؤقت الاغنية  
-> Resume : اكمال الاغنية 
-> stop : لأيقاف الأغنية وخروج البوت من الروم
-> forceskip : لتخطي الأغنية بشكل مباشر
-> Queue : عرض القائمة 
-> skipto : لتخطي الأغنية الى الأغنية القادمة في طابور الموسيقى القادمة
-> Skip : تخطي للاغنية التالية 
-> Volume : تغيير الصوت [vol] 
-> Nowplaying : عرض مايتم تشغيله الان [np] 
-> Ping : سرعة استجابة البوت 
-> repeat : تكرار الاغنية 
-> Leave : الخروج من الروم الصوتي  
-**`)
-  }
-})
- 
+
  
 //const Discord = require('discord.js');
 
