@@ -12,7 +12,7 @@ const Enmap = require('enmap')
 const db = require('quick.db');
 const getYoutubeID = require("get-youtube-id");
 const fetchVideoInfo = require("youtube-info");
-const yt_api_key = "AIzaSyDeoIH0u1e72AtfpwSKKOSy3IPp2UHzqi4";
+const yt_api_key = "AIzaSyAdORXg7UZUo7sePv97JyoDqtQVi3Ll0b8";
 const nekoclient = require("nekos.life");
 const neko = new nekoclient();
 
@@ -4025,7 +4025,7 @@ client.on('message', function(message) {
     const args = message.content.split(' ').slice(1).join(' ');
 
 
-    if (mess.startsWith(prefix + 'playssss')) {
+    if (mess.startsWith(prefix + 'play')) {
 
         if (!message.member.voiceChannel) return message.channel.send('**❌ You have to be in a voice channel to use this command.**');
 
