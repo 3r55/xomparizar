@@ -1861,20 +1861,20 @@ client.on('message',async msg => {
          SPEAK: false
        });
  
- 
+       client.on("guildMemberAdd" , msg =>{
         bl.setName(`All member : ${msg.guild.memberCount}`);
          bla.setName(`Member :${msg.guild.members.filter(m => !m.user.bot).size}`);
            black.setName(`Bot : ${msg.guild.members.filter(m => m.user.bot).size}`);
     },1000);
+                        
                       })
  
                    })
+                   }  )
               })
- 
- 
+                  
      }
- 
-   });
+     });
 
 
 const weather = require('weather-js');
