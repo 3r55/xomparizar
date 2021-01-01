@@ -71,5 +71,14 @@
     "kickLimits": 3,
     "roleCrLimits": 3,
     "time": 30
+  },
+  "789044348343156736": {
+    "banLimit": 3,
+    "chaDelLimit": 3,
+    "chaCrLimit": 3,
+    "roleDelLimit": 3,
+    "kickLimits": 3,
+    "roleCrLimits": 3,
+    "time": 0.1
   }
 }
