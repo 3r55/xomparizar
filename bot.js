@@ -180,18 +180,33 @@ client.on("message", message => {
     message.channel.send(user);
   }
 });
+
+client.on("message", msg =>{
+ if(!msg.guild.member(msg.author).hasPermissions('ADMINISTRATOR')) return msg.reply('❌ **ببورە ئەدمینسترەیتەرت نییە**');
+if(!msg.guild.member(client.user).hasPermissions(['ADMINISTRATOR'])) return msg.reply('❌ **ببورە من ئەدمینسترەیتەرم نییە**');
+var args = msg.content.split(" ").slice(1).join(" ")
+if(!args) return;
+if(msg.content.startsWith(prefix + "seticon")) {
+msg.guild.setIcon(args)
+ .then(msg.reply("**بە سەرکەوتوی رسمی سێرڤە گۆرا**"))
+ .catch(msg.reply("**ئەو وێنەیە نادروستە**"));
+}else if(msg.content.startsWith(prefix + "setname")) {
+   msg.guild.setName(args)
+ .then(g => msg.reply(`**ناوەکە گۆرا بۆ   ${g} :white_check_mark:**`))
+ .catch(console.error);
+}
+});
+
 const invites = []
 const sWlc = {}
-const premium = ['489342754887827487', '', '', '']
 client.on('message', message => {
-var prefix = "#";
 if(message.channel.type === "dm") return;
 if(message.author.bot) return;
   if(!sWlc[message.guild.id]) sWlc[message.guild.id] = {
     channel: "welcome"
 }
 const channel = sWlc[message.guild.id].channel
-  if (message.content.startsWith(prefix + "setwelcomer")) {
+  if (message.content.startsWith(prefix + "setWelcomer")) {
     if(!message.member.hasPermission(`MANAGE_GUILD`)) return;
     let newChannel = message.content.split(' ').slice(1).join(" ")
     if(!newChannel) return message.reply(`**${prefix}setwelcomer <channel name>**`)
@@ -1993,6 +2008,8 @@ client.on("message", message => {
  b!role bots <role name>
  b!role humans <role name>
  b!role all <role name>
+ b!seticon
+ b!setname
  b!warn,b!listwarns
  b!bc
  b!mutevoice
