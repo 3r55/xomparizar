@@ -1,11 +1,6 @@
 {
   "720261793192345641": {
-    "banLimit": "1",
-    "chaDelLimit": 3,
-    "roleDelLimit": 3,
-    "kickLimits": 3,
-    "roleCrLimits": 3,
-    "time": 30
+    "onoff": true
   },
   "760898699697848350": {
     "onoff": true
