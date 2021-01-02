@@ -1251,7 +1251,8 @@ client.on("message", message => {
     if (message.content.startsWith(prefix + "anti")) {
  
  
-        if (message.author.id !== message.guild.owner.user.id) return message.channel.send('JUST FOR OWNER SHIP')
+        
+      if(message.guild.member(message.author).hasPermission("ADMINISTRATOR")) return message.reply(`❌ببورە ئەو پێرمیشنەت نییە ADMINISTRATOR`);
         if (message.content.startsWith(prefix + "anti ban")) {
             if (!num) return message.channel.send("**⇏ | Type Number**");
             if (isNaN(num)) return message.channel.send("**⇏ | Number Only**");
@@ -1736,10 +1737,8 @@ client.on("message", message => {
     };
   if (message.content.startsWith(prefix + "antibots on")) {
     if (message.author.bot || !message.channel.guild) return;
-    if (message.author.id !== message.guild.owner.user.id)
-      return message.channel.send(
-        "**:closed_lock_with_key: JUST FOR OWNER SHIP**"
-      );
+    if (!message.member.hasPermission("ADMINISTRATOR")) return;
+    
     antibots[message.guild.id] = {
       onoff: true
     };
@@ -1748,10 +1747,9 @@ client.on("message", message => {
   }
   if (message.content.startsWith(prefix + "antibots off")) {
     if (message.author.bot || !message.channel.guild) return;
-    if (message.author.id !== message.guild.owner.user.id)
-      return message.channel.send(
-        "**:closed_lock_with_key: JUST FOR OWNER SHIP**"
-      );
+     if (!message.member.hasPermission("ADMINISTRATOR")) return;
+ 
+      
     antibots[message.guild.id] = {
       onoff: false
     };
