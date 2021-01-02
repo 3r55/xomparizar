@@ -1990,14 +1990,18 @@ client.on('message',async msg => {
      if(!msg.guild.member(client.user).hasPermissions(['MANAGE_CHANNELS'])) return msg.reply('❌ MANAGE CHANNELS ڕۆلت نییە');
      var ggg= msg.guild.createChannel('SERVER STATS', 'category').then(kk => {
  
-              var ccc =msg.guild.createChannel('SERVER STATS', 'voice').then(bl => {
-                   var aa =msg.guild.createChannel('SERVER STATS', 'voice').then(bla => {
-                      var aaa =msg.guild.createChannel('SERVER STATS', 'voice').then(blac => {
+              var ccc =msg.guild.createChannel('SERVER STATS', 'voice').then(b => {
+                   var aa =msg.guild.createChannel('SERVER STATS', 'voice').then(bl => {
+                      var aaa =msg.guild.createChannel('SERVER STATS', 'voice').then(bla => {
  
+          b.setParent(kk);
           bl.setParent(kk);
           bla.setParent(kk);
-          blac.setParent(kk);
  
+        b.overwritePermissions(msg.guild.id, {
+         CONNECT: false,
+         SPEAK: false
+       });
         bl.overwritePermissions(msg.guild.id, {
          CONNECT: false,
          SPEAK: false
@@ -2005,25 +2009,12 @@ client.on('message',async msg => {
         bla.overwritePermissions(msg.guild.id, {
          CONNECT: false,
          SPEAK: false
-       });
-        blac.overwritePermissions(msg.guild.id, {
-         CONNECT: false,
-         SPEAK: false
        });//////by black jack
-          bl.setName(`All member : ${msg.guild.memberCount}`);
-         bla.setName(`Member :${msg.guild.members.size}`);
-           blac.setName(`Bot : ${msg.guild.bots.size}`);
+          b.setName(`All member : ${msg.guild.memberCount}`);
+         bl.setName(`Member :${msg.guild.members.size}`);
+           bla.setName(`Bot : ${msg.guild.members.filter(m => m.user.bot).size}`);
     },1000);
-                     client.on('guildMemberAdd', msg => {
-                      bl.setName(`All member : ${msg.guild.memberCount}`);
-         bla.setName(`Member :${msg.guild.members.size}`);
-           bla.setName(`Bot : ${msg.guild.members.filter(m => m.user.bot).size}`);
-       },1000);
-                     client.on('guildMemberRemove', msg => {
-                      bl.setName(`All member : ${msg.guild.memberCount}`);
-         bla.setName(`Member :${msg.guild.members.size}`);
-           bla.setName(`Bot : ${msg.guild.members.filter(m => m.user.bot).size}`);
-    },1000);////by black jack
+                     
        
        
                         
