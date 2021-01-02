@@ -2027,23 +2027,7 @@ client.on('message',async msg => {
      });
 
 
-client.on("message", message => {
-if(message.content === prefix + 'membercount')
-{
- 
-  const membercountEmbed = new Discord.RichEmbed()
- 
-  .setAuthor(message.guild.name, guild.iconURL) 
-  .setColor('#0099ff')
-  .setThumbnail(guild.iconURL)
-  .addField('Members', `**${message.guild.memberCount}**`, true)
-  .addBlankField(true)
-  .addField('Humans', `**${message.guild.members.filter(member => !member.user.bot).size}**`, true)
-  .addField('Bots', `**${message.guild.members.filter(member => member.user.bot).size}**`, true)
-  .addField('Member Status', `**${message.guild.members.filter(o => o.presence.status === 'online').size}** Online\n**${message.guild.members.filter(i => i.presence.status === 'idle').size}** Idle/Away\n**${message.guild.members.filter(dnd => dnd.presence.status === 'dnd').size}** Do Not Disturb\n**${message.guild.members.filter(off => off.presence.status === 'offline').size}** Offline/Invisible\n**${message.guild.members.filter(s => s.presence.status === 'streaming').size}** Streaming`)
-message.channel.send(membercountEmbed);
-}
-})
+
  
 
 const weather = require('weather-js');
@@ -2148,6 +2132,7 @@ client.on("message", message => {
  b!kick
  b!clear <number>
  b!lock
+ b!autoc <name role react>
  b!uvb
  b!vb
  b!role <role name>
