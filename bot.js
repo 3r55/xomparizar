@@ -181,21 +181,6 @@ client.on("message", message => {
   }
 });
 
-client.on("message", msg =>{
- if(!msg.guild.member(msg.author).hasPermissions('ADMINISTRATOR')) return msg.reply('❌ **ببورە ئەدمینسترەیتەرت نییە**');
-if(!msg.guild.member(client.user).hasPermissions(['ADMINISTRATOR'])) return msg.reply('❌ **ببورە من ئەدمینسترەیتەرم نییە**');
-var args = msg.content.split(" ").slice(1).join(" ")
-if(!args) return;
-if(msg.content.startsWith(prefix + "seticon")) {
-msg.guild.setIcon(args)
- .then(msg.reply("**بە سەرکەوتوی رسمی سێرڤە گۆرا**"))
- .catch(msg.reply("**ئەو وێنەیە نادروستە**"));
-}else if(msg.content.startsWith(prefix + "setname")) {
-   msg.guild.setName(args)
- .then(g => msg.reply(`**ناوەکە گۆرا بۆ   ${g} :white_check_mark:**`))
- .catch(console.error);
-}
-});
 
 const welcome = JSON.parse(fs.readFileSync('./welcomer.json' , 'utf8'));
 client.on('message', async message => {
