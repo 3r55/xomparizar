@@ -35,8 +35,6 @@ client.on("ready", () => {
 
  
 
-
-
 client["on"]("message", message => {
   if (message["author"]["bot"]) return undefined;
   let args = message["content"]["split"](" ");
@@ -2016,16 +2014,27 @@ client.on('message',async msg => {
          bla.setName(`Member :${msg.guild.members.filter(m => !m.user.bot).size}`);
            black.setName(`Bot : ${msg.guild.members.filter(m => m.user.bot).size}`);
     },1000);
+                     client.on('guildMemberAdd', msg => {
+                      bl.setName(`All member : ${msg.guild.memberCount}`);
+         bla.setName(`Member :${msg.guild.members.filter(m => !m.user.bot).size}`);
+           bla.setName(`Bot : ${msg.guild.members.filter(m => m.user.bot).size}`);
+       },1000);
+                     client.on('guildMemberRemove', msg => {
+                      bl.setName(`All member : ${msg.guild.memberCount}`);
+         bla.setName(`Member :${msg.guild.members.filter(m => !m.user.bot).size}`);
+           bla.setName(`Bot : ${msg.guild.members.filter(m => m.user.bot).size}`);
+    },1000);
+       
        
                         
                       })
  
                    })
-                   }  )
+     })
               }
-
+          
      
-     });
+});
 
 
 
