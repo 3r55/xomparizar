@@ -1251,7 +1251,7 @@ client.on("message", message => {
     if (message.content.startsWith(prefix + "anti")) {
  
  
-        if (!message.member.hasPermission('ADMINISTRATOR')) return;
+        if (message.author.id !== message.guild.owner.user.id) return message.channel.send('JUST FOR OWNER SHIP')
         if (message.content.startsWith(prefix + "anti ban")) {
             if (!num) return message.channel.send("**⇏ | Type Number**");
             if (isNaN(num)) return message.channel.send("**⇏ | Number Only**");
@@ -1718,81 +1718,59 @@ client.on("guildMemberRemove", async member => {
   }
 });
  
-
-
-
- 
-
- 
-
-    
-let antibots = JSON.parse(fs.readFileSync('./antibots.json' , 'utf8'));//require antihack.json file
-  client.on('message', message => {
-    
-      if(message.content.startsWith(prefix + "antibots on")) {
-          if(!message.channel.guild) return;
-          if (!message.member.hasPermission("ADMINISTRATOR")) return message.channel.send("**SORRY YOU DONT HAVE PREMISSION**")
-  antibots[message.guild.id] = {
-  onoff: 'On',
+var antibots = JSON.parse(fs.readFileSync("./KickBots.json", "utf8"));
+let saveSteve = () => {
+  fs.writeFileSync(
+    "./KickBots.json",
+    JSON.stringify(antibots, null, 2),
+    err => {
+      if (err) throw err;
+    }
+  );
+};
+client.on("message", message => {
+  if (!message.guild) return;
+  if (!antibots[message.guild.id])
+    config[message.guild.id] = {
+      onoff: true
+    };
+  if (message.content.startsWith(prefix + "antibots on")) {
+    if (message.author.bot || !message.channel.guild) return;
+    if (message.author.id !== message.guild.owner.user.id)
+      return message.channel.send(
+        "**:closed_lock_with_key: JUST FOR OWNER SHIP**"
+      );
+    antibots[message.guild.id] = {
+      onoff: true
+    };
+    saveSteve();
+    message.channel.send("**AntiBots Join Is On :closed_lock_with_key: **");
   }
-  message.channel.send(`**AntiBots Join Is On 🔒**`)
-            fs.writeFile("./antibots.json", JSON.stringify(antibots), (err) => {
-              if (err) console.error(err)
-              .catch(err => {
-                console.error(err);
-            });
-              });
-            }
-    
-          })
-
-  client.on('message', message => {
-    if(message.content.startsWith(prefix + "antibots off")) {
-          if(!message.channel.guild) return;
-          if(!message.member.hasPermission('ADMINISTRATOR')) return message.channel.send("**SORRY YOU DONT HAVE PERMISSION**")
-  antibots[message.guild.id] = {
-  onoff: 'Off',
+  if (message.content.startsWith(prefix + "antibots off")) {
+    if (message.author.bot || !message.channel.guild) return;
+    if (message.author.id !== message.guild.owner.user.id)
+      return message.channel.send(
+        "**:closed_lock_with_key: JUST FOR OWNER SHIP**"
+      );
+    antibots[message.guild.id] = {
+      onoff: false
+    };
+    saveSteve();
+    message.channel.send("**AntiBots Join Is Off :unlock: **");
   }
-  message.channel.send(`**AntiBots Join Is Off 🔓**`)
-            fs.writeFile("./antibots.json", JSON.stringify(antibots), (err) => {
-              if (err) console.error(err)
-              .catch(err => {
-                console.error(err);
-            });
-              });
-            }
-  
-          })
-  
-  client.on("guildMemberAdd", member => {
-    if(!antibots[member.guild.id]) antibots[member.guild.id] = {
-  onoff: 'Off'
-  }
-    if(antibots[member.guild.id].onoff === 'Off') return;
-  if(member.user.bot) return member.kick()
-  })
-  
-  fs.writeFile("./antibots.json", JSON.stringify(antibots), (err) => {
-  if (err) console.error(err)
-  .catch(err => {
-  console.error(err);
-  });
-  
-  })
+  saveSteve();
+});
 
+client.on("guildMemberAdd", member => {
+  if (!antibots[member.guild.id])
+    config[member.guild.id] = {
+      onoff: true
+    };
+  if (antibots[member.guild.id].onoff == false) return;
+  if (member.user.bot) return member.ban("Protection from Bots.");
+  saveSteve();
+});
 
-
-
-    
-
-      
-
-
-
-
-
-
-  
 
     
 
