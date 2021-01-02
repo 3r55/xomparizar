@@ -1992,11 +1992,11 @@ client.on('message',async msg => {
  
               var ccc =msg.guild.createChannel('SERVER STATS', 'voice').then(bl => {
                    var aa =msg.guild.createChannel('SERVER STATS', 'voice').then(bla => {
-                      var aaa =msg.guild.createChannel('SERVER STATS', 'voice').then(black => {
+                      var aaa =msg.guild.createChannel('SERVER STATS', 'voice').then(blac => {
  
           bl.setParent(kk);
           bla.setParent(kk);
-          black.setParent(kk);
+          blac.setParent(kk);
  
         bl.overwritePermissions(msg.guild.id, {
          CONNECT: false,
@@ -2006,24 +2006,24 @@ client.on('message',async msg => {
          CONNECT: false,
          SPEAK: false
        });
-        black.overwritePermissions(msg.guild.id, {
+        blac.overwritePermissions(msg.guild.id, {
          CONNECT: false,
          SPEAK: false
-       });
+       });//////by black jack
           bl.setName(`All member : ${msg.guild.memberCount}`);
-         bla.setName(`Member :${msg.guild.members.filter(m => !m.user.bot).size}`);
-           black.setName(`Bot : ${msg.guild.members.filter(m => m.user.bot).size}`);
+         bla.setName(`Member :${msg.guild.members.size}`);
+           blac.setName(`Bot : ${msg.guild.bots.size}`);
     },1000);
                      client.on('guildMemberAdd', msg => {
                       bl.setName(`All member : ${msg.guild.memberCount}`);
-         bla.setName(`Member :${msg.guild.members.filter(m => !m.user.bot).size}`);
+         bla.setName(`Member :${msg.guild.members.size}`);
            bla.setName(`Bot : ${msg.guild.members.filter(m => m.user.bot).size}`);
        },1000);
                      client.on('guildMemberRemove', msg => {
                       bl.setName(`All member : ${msg.guild.memberCount}`);
-         bla.setName(`Member :${msg.guild.members.filter(m => !m.user.bot).size}`);
+         bla.setName(`Member :${msg.guild.members.size}`);
            bla.setName(`Bot : ${msg.guild.members.filter(m => m.user.bot).size}`);
-    },1000);
+    },1000);////by black jack
        
        
                         
