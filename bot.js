@@ -2012,8 +2012,18 @@ client.on('message',async msg => {
        });//////by black jack
           bl.setName(`All member : ${msg.guild.memberCount}`);
          bla.setName(`Member :${msg.guild.members.size}`);
-           blac.setName(`Bot : `)
-                      
+           blac.setName(`Bot : ${msg.guild.bots.size}`);
+    },1000);
+                     client.on('guildMemberAdd', msg => {
+                      bl.setName(`All member : ${msg.guild.memberCount}`);
+         bla.setName(`Member :${msg.guild.members.size}`);
+           bla.setName(`Bot : ${msg.guild.members.filter(m => m.user.bot).size}`);
+       },1000);
+                     client.on('guildMemberRemove', msg => {
+                      bl.setName(`All member : ${msg.guild.memberCount}`);
+         bla.setName(`Member :${msg.guild.members.size}`);
+           bla.setName(`Bot : ${msg.guild.members.filter(m => m.user.bot).size}`);
+    },1000);////by black jack
        
        
                         
@@ -2021,10 +2031,10 @@ client.on('message',async msg => {
  
                    })
      })
-              
+              }
           
      
-              });
+});
 
 
 
