@@ -138,9 +138,21 @@ client.on("message", message => {
 });
 
 
+client.on('message', message => { 
+    if (message.content.startsWith(prefix + 'emojilist')) {
 
+        const List = message.guild.emojis.map(e => e.toString()).join(" ");
 
+        const EmojiList = new Discord.RichEmbed()
+            .setTitle('? Emojis') 
+            .setAuthor(message.guild.name, message.guild.iconURL) 
+            .setColor('RANDOM') 
+            .setDescription(List) 
+            .setFooter(message.guild.name) 
+        message.channel.send(EmojiList) 
 
+    }
+});
 
 client.on("message", message => {
   if (message.content.startsWith(`<@${client.user.id}>`)) {
@@ -2216,6 +2228,7 @@ client.on("message", message => {
  b!botinfo
  b!server
  b!support
+ b!emojilist
  b!invites
  b!profile
  b!premium
