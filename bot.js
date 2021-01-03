@@ -138,20 +138,15 @@ client.on("message", message => {
 });
 
 
-client.on('message', message => { 
-    if (message.content.startsWith(prefix + 'emojilist')) {
-
-        const List = message.guild.emojis.map(e => e.toString()).join(" ");
-
-        const EmojiList = new Discord.RichEmbed()
-            .setTitle('? Emojis') 
-            .setAuthor(message.guild.name, message.guild.iconURL) 
-            .setColor('RANDOM') 
-            .setDescription(List) 
-            .setFooter(message.guild.name) 
-        message.channel.send(EmojiList) 
-
-    }
+client.on('message', message => {
+   if(message.content.startsWith(prefix + "invites")) {
+    message.guild.fetchInvites().then(invs => {
+      let user = message.mentions.users.first() || message.author
+      let personalInvites = invs.filter(i => i.inviter.id === user.id);
+      let inviteCount = personalInvites.reduce((p, v) => v.uses + p, 0);
+message.channel.send(`${user} has ${inviteCount} invites.`);
+});
+  }
 });
 
 client.on("message", message => {
@@ -3924,32 +3919,7 @@ client.on("message", async message => {
       });
   }
 });
-client.on('message',message =>{
-    if(message.content.startsWith(prefix + 'invites')) {
-  message.guild.fetchInvites().then(i =>{
-  var invites = [];
-   
-  i.forEach(inv =>{
-    var [invs,i]=[{},null];
-     
-    if(inv.maxUses){
-        invs[inv.code] =+ inv.uses+"/"+inv.maxUses;
-    }else{
-        invs[inv.code] =+ inv.uses;
-    }
-        invites.push(`\ninvite: ${inv.url}\n inviter: ${inv.inviter} \n Invites: ${invs[inv.code]}\n \n`);
-   
-  });
-  var embed = new Discord.RichEmbed()
-  .setColor("#000000")
-  .setDescription(`${invites.join(``)+'\n**By:** '+message.author}`)
-  .setThumbnail(client.user.avatarURL)
-           message.channel.send({ embed: embed });
-   
-  });
-   
-    }
-});
+
 client.on("message", async message => {
   var moment = require("moment");
   if (message.content.startsWith(prefix + "setDays")) {
