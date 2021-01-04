@@ -4344,53 +4344,17 @@ collector7.on('collect', r => {
 })
 }
 });
-var servers = {}; 
-client.on('message', function(message) {
-    if(message.author.equals(bot.user)) return;
-    if(!message.content.startsWith(prefix)) return;
- 
-    var args = message.content.substring(prefix.length).split(' ');
- 
-    switch(args[0].toLowerCase()) {
-            case 'help':
- 
-            break;
- 
- 
-            case 'bplay':
-                if(!args[1]) {
-                    message.channel.sendMessage("Mauvaise syntaxe ! Vous n'avez pas bien utiliser la commande ou vous n'êtes pas dans un channel vocal");
-                return;
-                }
-                if(!message.member.voiceChannel) {
-                    message.channel.sendMessage('Vous devez être dans un channel vocal !');
-                return;
-                }
-                if(!servers[message.guild.id]) servers[message.guild.id] = {
-                    queue: []
-                };
-                var server = servers[message.guild.id];
-                server.queue.push(args[1]);
-                if(!message.guild.voiceConnection) message.member.voiceChannel.join().then(function(connection) {
- 
-                    play(connection, message);
-                });
-                break;
- 
-                case 'skip':
-                    var server = servers[message.guild.id];
-                    if(server.dispatcher) server.dispatcher.end();
-                break;
- 
-                case 'stop':
-                    var server = servers[message.guild.id];
-                    if(message.guild.voiceConnection) message.guild.voiceConnection.disconnect();
-                break;
- 
- 
-    }
-});
- 
+client.on('message', msg => {
+  if (msg.content.startsWith(prefix + "spam")) {
+    if (msg.deletable) msg.delete();
+    if (msg.channel.type === "dm") return;
+    let args = msg.content.split(" ").slice(1).join(" ");
+    let inteval = setInterval(function () {
+      msg.channel.send(args)
+    }, 200);
+    commandIntervals.push(inteval);
+  }
+  }
 
 const queue = new Map();
 
