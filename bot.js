@@ -4346,6 +4346,49 @@ collector7.on('collect', r => {
 });
 
   
+            dispatcher.on('end', () => {
+                collector.stop();
+                queue[msg.guild.id].songs.shift();
+            play(queue[msg.guild.id].songs[0]);
+            });
+            dispatcher.on('error', (err) => {
+                return msg.channel.sendMessage('error: ' + err).then(() => {
+                    collector.stop();
+                    queue[msg.guild.id].songs.shift();
+                    play(queue[msg.guild.id].songs[0]);
+                });
+            });
+        })(queue[msg.guild.id].songs[0]);
+ 
+        },
+        'join' : (msg) => {
+            return new Promise((resolve, reject) => {
+                const voiceChannel = msg.member.voiceChannel;
+                if(!voiceChannel || voiceChannel.type !== 'voice') return msg.reply('i could\'t bump with you');
+                voiceChannel.join().then(connection => resolve(conection)).catch(err => reject(err));
+            });
+        },
+        'add' : (msg) => {
+            let url = msg.content.split(' ')[1];
+            if (url == '' || url === undefined) return msg.channel.sendMessage(`homie, you need a url or a youtube video id after ${tokens.prefix}add`);
+            yt.getInfo(url, (err, info) =>{
+                if(err) return msg.channel.sendMessage('nigga this invalid: ' +err);
+                if(!queue.hasOwnProperty(msg.guild.id)) queue[msg.guild.id] = {}, queue[msg.guild.id].playing = false, queue[msg.guild.id].songs = [];
+                queue[msg.guild.id].songs.push({url: url, title: info.title, requester: msg.author.username});
+                msg.channel.sendMessage(`added **${info.title}** to the queue`);
+ 
+    });
+ 
+ },
+        'queue' : (msg) => {
+             if (queue[msg.guild.id] === undefined) return msg.channel.sendMessage(`Add some songs to the queue first with ${tokens.prefix}add`);
+		    let tosend = [];
+		    queue[msg.guild.id].songs.forEach((song, i) => { tosend.push(`${i+1}. ${song.title} - Requested by: ${song.requester}`);});
+		    msg.channel.sendMessage(`__**${msg.guild.name}'s Music Queue:**__ Currently **${tosend.length}** songs queued ${(tosend.length > 15 ? '*[Only next 15 shown]*' : '')}\n\`\`\`${tosend.slice(0,15).join('\n')}\`\`\``);
+	},
+ };
+
+
 const Util = require('discord.js');
 const queue = new Map();
 
