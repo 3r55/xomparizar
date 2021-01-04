@@ -114,26 +114,48 @@ client.on("message", message => {
     message.channel.send(mention);
   }
 });
-
 client.on("message", message => {
-  if (message.content === prefix + "user") {
-    var user = new Discord.RichEmbed()
-      .setThumbnail(message.author.avatarURL)
-      .setFooter("CREATED BY BLACK JACK")
-      .setTitle(message.author.tag, message.author.avatarURL)
-      .addField(`User`, message.author.username)
-    
-      .addField(`Ping`, `${Date.now() - message.createdTimestamp}` + " ms`")
-    
-      .addField(`Joined server`, message.guild.joinedAt ,)  
-    
-      .addField(`tag`, `#` + message.author.discriminator)
-    
-      .addField(`Role`, message.member.colorRole)
-    
-      .addField(`Status`, message.author.presence.status)
-      .setColor("RANDOM");
-    message.channel.send(user);
+  if (message.content.startsWith(prefix + "user")) {
+    var args = message.content.split(" ").slice(1);
+    let user = message.mentions.users.first();
+    var men = message.mentions.users.first();
+    var heg;
+    if (men) {
+      heg = men;
+    } else {
+      heg = message.author;
+    }
+    var mentionned = message.mentions.members.first();
+    var h;
+    if (mentionned) {
+      h = mentionned;
+    } else {
+      h = message.member;
+    }
+    moment.locale("en-TN");
+    var id = new Discord.RichEmbed()
+      .setAuthor(message.author.username, message.author.avatarURL)
+      .setColor("RANDOM")
+      .addField(
+        " Joined Discord At : ",
+        `${moment(heg.createdTimestamp).format(
+          "YYYY/M/D HH:mm:ss"
+        )} **\n** \`${moment(heg.createdTimestamp).fromNow()}\``,
+        true
+      )
+      .addField(
+        " Joined Server At : ",
+        `${moment(h.joinedAt).format("YYYY/M/D HH:mm:ss")} \n \`${moment(
+          h.joinedAt
+        ).fromNow()}\``,
+        true
+      )
+      .setFooter(
+        `${message.author.username}`,
+        "https://media.discordapp.net/attachments/725981750135619594/753420592786702448/image0.gif"
+      )
+      .setThumbnail(heg.avatarURL);
+    message.channel.send(id);
   }
 });
 
