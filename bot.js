@@ -2286,28 +2286,7 @@ client.on("message", message => {
    message.channel.sendEmbed(embed);
   }
 });
-client.on("message", message => {
-  if (message.content === prefix + "help5") { 
-    let embed = new Discord.RichEmbed()
-      .setAuthor(message.author.username)
-       .setThumbnail(message.author.avatarURL)
-       .setFooter("CREATED BY BLACK JACK")
-      .setColor("BLACK").setDescription(` 
-**MUSIC COMMAND**
-b!play 
-b!skip
-b!volume
-b!pause
-b!resume
-b!leave
-b!repeat
-b!np
-b!join 
-      
-       `);
-   message.channel.sendEmbed(embed);
-  }
-});
+
 client.on("guildCreate", guild => {
   var embed = new Discord.RichEmbed()
     .setImage("")
