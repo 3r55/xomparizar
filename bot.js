@@ -4345,82 +4345,8 @@ collector7.on('collect', r => {
 })
 }
 });
-const converter = require('number-to-words');
-client.commands = new Discord.Collection();
-client.aliases = new Discord.Collection();
- 
- 
-let cmds = {
-  play: { cmd: 'play', a: ['p'] },
-  skip: { cmd: 'skip', a: ['s'] },
-  stop: { cmd: 'stop' },
-  pause: { cmd: 'pause' },
-  resume: { cmd: 'resume', a: ['r'] },
-  volume: { cmd: 'volume', a: ['vol'] },
-  queue: { cmd: 'queue', a: ['q'] },
-  repeat: { cmd: 'repeat', a: ['re'] },
-  forceskip: { cmd: 'forceskip', a: ['fs', 'fskip'] },
-  skipto: { cmd: 'skipto', a: ['st'] },
-  nowplaying: { cmd: 'Nowplaying', a: ['np'] }
-};
- 
 
- 
- 
-Object.keys(cmds).forEach(key => {
-var value = cmds[key];
-  var command = value.cmd;
-  client.commands.set(command, command);
- 
-  if(value.a) {
-    value.a.forEach(alias => {
-    client.aliases.set(alias, command)
-  })
-  }
-})
- 
-
- 
-let active = new Map();
- 
-client.on('warn', console.warn);
- 
-client.on('error', console.error);
- 
-client.on('message', async msg => {
-    if(msg.author.bot) return undefined;
-  if(!msg.content.startsWith(prefix)) return undefined;
- 
-  const args = msg.content.slice(prefix.length).trim().split(/ +/g);
-const command = args.shift().toLowerCase();
- 
-    const url = args[1] ? args[1].replace(/<(.+)>/g, '$1') : '';
- 
-    let cmd = client.commands.get(command) || client.commands.get(client.aliases.get(command))
- 
-    let s;
- 
-    if(cmd === 'play') {
-        const voiceChannel = msg.member.voiceChannel;
-        if(!voiceChannel) return msg.channel.send(`:no_entry_sign: You must be listening in a voice channel to use that!`);
-        const permissions = voiceChannel.permissionsFor(msg.client.user);
-        if(!permissions.has('CONNECT')) {
-            return msg.channel.send(`:no_entry_sign: I can't join Your voiceChannel because i don't have ` + '`' + '`CONNECT`' + '`' + ` permission!`);
-        }
- 
-        if(!permissions.has('SPEAK')) {
-            return msg.channel.send(`:no_entry_sign: I can't SPEAK in your voiceChannel because i don't have ` + '`' + '`SPEAK`' + '`' + ` permission!`);
-        }
- 
-        if (url.match(/^https?:\/\/(www.youtube.com|youtube.com)\/playlist(.*)$/)) {
-            const playlist = await youtube.getPlaylist(url);
-            const videos = await playlist.getVideos();
- 
-            for (const video of Object.values(videos)) {
-                const video2 = await youtube.getVideoByID(video.id); // eslint-disable-line no-await-in-loop
-                await handleVideo(video2, msg, voiceChannel, true); // eslint-disable-line no-await-in-loop
-            }
-            return msg.channel.send(`Added to queue: ${playlist.title}`);
+n msg.channel.send(`Added to queue: ${playlist.title}`);
         } else {
             try {
  
