@@ -16,6 +16,7 @@
     "ffmpeg-binaries": "^3.2.2-3",
     "enmap": "^5.0.0",
     "fs": "0.0.2",
+    "pretty-ms": "^5.1.0",
     "mysql": "^2.18.1",
     "anti-spam": "^0.2.7",
     "discord.js-musicbot-addon": "^12.0.6",

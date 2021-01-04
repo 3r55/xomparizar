@@ -20,6 +20,7 @@ dependencies:
   nekos.life: 2.0.7
   number-to-words: 1.2.4
   opusscript: 0.0.6
+  pretty-ms: 5.1.0
   quick.db: 6.3.2
   request: 2.88.2
   simple-youtube-api: 5.2.1
@@ -1786,6 +1787,12 @@ packages:
     dev: false
     resolution:
       integrity: sha512-QhhZ+DCCit2Coi2vmAKbq5RGTRcQUOE2+REgv8vdyu7MnYx2eZztegqtTx99TZ86GTIwqiy3+4nQTWZ2tgmdCA==
+  /parse-ms/2.1.0:
+    dev: false
+    engines:
+      node: '>=6'
+    resolution:
+      integrity: sha512-kHt7kzLoS9VBZfUsiKjv43mr91ea+U05EyKkEtqp7vNbHxmaVuEqN7XxeEVnGrMtYOAxGrDElSi96K7EgO1zCA==
   /parseqs/0.0.5:
     dependencies:
       better-assert: 1.0.2
@@ -1870,6 +1877,14 @@ packages:
     hasBin: true
     resolution:
       integrity: sha512-s8Aai8++QQGi4sSbs/M1Qku62PFK49Jm1CbgXklGz4nmHveDq0wzJkg7Na5QbnO1uNH8K7iqx2EQ/mV0MZEmOg==
+  /pretty-ms/5.1.0:
+    dependencies:
+      parse-ms: 2.1.0
+    dev: false
+    engines:
+      node: '>=8'
+    resolution:
+      integrity: sha512-4gaK1skD2gwscCfkswYQRmddUb2GJZtzDGRjHWadVHtK/DIKFufa12MvES6/xu1tVbUYeia5bmLcwJtZJQUqnw==
   /prism-media/0.0.4:
     dev: false
     resolution:
@@ -2715,6 +2730,7 @@ specifiers:
   nekos.life: ^2.0.7
   number-to-words: ^1.2.4
   opusscript: 0.0.6
+  pretty-ms: ^5.1.0
   quick.db: ^6.2.0
   request: ^2.85.0
   simple-youtube-api: ^5.0.2
