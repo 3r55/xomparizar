@@ -314,7 +314,7 @@ const fs = require("fs") // npm i fs
                 message.channel.send(`**Usage:
             ${prefix}setWlc style <text, image, embed>
             ${prefix}setWlc msg <message>
-            ${prefix}setWlc channal <channel name>**`)
+            ${prefix}setWlc channel <channel name>**`)
             }
  
             if(!mothed) {
