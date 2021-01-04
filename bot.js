@@ -4345,7 +4345,7 @@ collector7.on('collect', r => {
 })
 }
 });
-const superagent = require("superagent");
+const superagent = require("snekfetch");
 client.on("message", async message => {
     if(message.author.bot || message.channel.type === "dm") return;
  
