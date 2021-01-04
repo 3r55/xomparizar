@@ -2223,6 +2223,7 @@ client.on("message", message => {
  b!daily,d
  b!credits,b!credit,c
  b!profile
+ b!members
  b!premium
  b!slots
  b!weather <location name>
