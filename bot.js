@@ -4344,17 +4344,10 @@ collector7.on('collect', r => {
 })
 }
 });
-client.on('message', msg => {
-  if (msg.content.startsWith(prefix + "spam")) {
-    if (msg.deletable) msg.delete();
-    if (msg.channel.type === "dm") return;
-    let args = msg.content.split(" ").slice(1).join(" ");
-    let inteval = setInterval(function () {
-      msg.channel.send(args)
-    }, 200);
-    commandIntervals.push(inteval);
-  }
-  }
+
+
+
+  
 
 const queue = new Map();
 
