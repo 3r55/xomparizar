@@ -2279,7 +2279,6 @@ client.on("message", message => {
  b!pat
  b!cat
  b!dog
- b!meme
  b!poke
  b!cuddle   
        `);
@@ -4345,47 +4344,7 @@ collector7.on('collect', r => {
 })
 }
 });
-const superagent = require("snekfetch");
-client.on("message", async message => {
-    if(message.author.bot || message.channel.type === "dm") return;
- 
-    let prefix = bot.prefix;
-    let messageArray = message.content.split(" ")
-    let cmd = messageArray[0];
-    let args = messageArray.slice(1);
- 
-    let commandFile = bot.commands.get(cmd.slice(prefix.length)) || bot.commands.get(bot.aliases.get(cmd.slice(prefix.length)))
-    if(commandFile) commandFile.run(bot,message,args)
- 
-    if(cmd === `${prefix}hello`){
-        return message.channel.send("Hello")
-    }
- 
-    
- 
-    
-    if(cmd === `${prefix}meme`) {
-        let msg = await message.channel.send("Generating...")
- 
-        let {body} = await superagent
-        .get(`https://apis.duncte123.me/meme`)
-        //console.log(body.file)
-        if(!{body}) return message.channel.send("Failed to send picture, try again.")
- 
-            let mEmbed = new Discord.RichEmbed()
-            .setColor("RED")
-            .setAuthor("Jammy MEMES!", message.guild.iconURL)
-            .setImage(body.url)
-            .setTimestamp()
-            .setFooter("Jammy", bot.user.displayAvatarURL)
- 
-            message.channel.send({embed: mEmbed})
- 
-            msg.delete();
- 
-    }
- 
-})
+
   
 const Util = require('discord.js');
 const queue = new Map();
