@@ -370,7 +370,7 @@ const fs = require("fs") // npm i fs
 if (err) console.error(err);
 })
 })
- 
+
  
 client.on('guildMemberAdd', member => {
     let channel = member.guild.channels.find("name", sw[member.guild.id].cha)
@@ -383,7 +383,7 @@ client.on('guildMemberAdd', member => {
  
         const embed = new Discord.RichEmbed()
         .setTitle("Member joind.")
-        .setColor("GREEN")
+        .setColor("RANDOM")
         .setThumbnail(member.user.avatarURL)
         .setDescription(`**${sw[member.guild.id].msk}**`)
         .addField("**Member name**", `[<@${member.user.id}>]`,true)
@@ -2184,7 +2184,7 @@ client.on("message", message => {
  b!undeafen
  b!deafen
  b!unmute voice
- b!hide,b!unhide
+ b!hide all,b!unhide all
  b!setstats
  b!nick,help nick
  b!banslist
@@ -3492,26 +3492,27 @@ client.on("message", message => {
   }
 });
 client.on("message", msg => {
-  if (msg.content === prefix + "hide") {
+  if (msg.content === prefix + "hide all") {
     msg.guild.channels.forEach(c => {
       c.overwritePermissions(msg.guild.id, {
         SEND_MESSAGES: false,
         READ_MESSAGES: false
       });
     });
-    msg.channel.send(".");
+    msg.channel.send("Done check hide all");
   }
 });
  
 client.on("message", msg => {
-  if (msg.content === prefix + "unhide") {
+  if (msg.content === prefix + "unhide all") {
+    if (!msg.member.hasPermission("MANAGE_ROLES"))   return msg.reply("** پێرمیشن نییە 'Manage Roles' **")
     msg.guild.channels.forEach(c => {
       c.overwritePermissions(msg.guild.id, {
         SEND_MESSAGES: true,
         READ_MESSAGES: true
       });
     });
-    msg.channel.send(".");
+    msg.channel.send("done check hide all");
   }
 });
 
