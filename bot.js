@@ -2176,6 +2176,7 @@ client.on("message", message => {
  b!ban
  b!unban all
  b!unban
+ b!language
  b!ccolor
  b!c text
  b!c vc  
@@ -2356,8 +2357,7 @@ client.on('message', async message =>{
  
  
  
- 
- 
+
  
 	client.on('message', message => {
       
@@ -2691,7 +2691,8 @@ Spanish **[ES]** |  French **[FR]**
 Hungarian **[HU]** |  한국어 **[KR]**
 Spanish (LATAM) **[LA]** |  Dutch **[NL]**
 Polish **[PL]** |  Portuguese **[PT]**
-Russian **[RU]** | Turkish **[TR]**`)
+Russian **[RU]** | Turkish **[TR]**
+Kurdish **[KURD]`)
 .addBlankField()
 .addField(`Change Language:`,`${prefix}language [locale]`, true)
 .addField(`Example:`,`${prefix}language en`, true)
@@ -2780,6 +2781,13 @@ let PT = new Discord.RichEmbed()
 .setDescription(`**Done**! From now on all commands in this server will be translated in **Portuguese**!`)
 msg.channel.send(PT)
 db.set(`language${msg.guild.id}_`, "PT")
+}
+if(lang.includes("KURD")) {
+let KURD = new Discord.RichEmbed()
+.setTitle(`**:white_check_mark: ${client.user.username} Language Command**`)
+.setDescription(`**Done**! From now on all commands in this server will be translated in **Kurdish**!`)
+msg.channel.send(KURD)
+db.set(`language${msg.guild.id}_`, "KURD")
 }
 if(lang.includes("RU")) {
 let RU = new Discord.RichEmbed()
