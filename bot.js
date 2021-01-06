@@ -2301,14 +2301,7 @@ client.on("message", message => {
   }
 });
 
-client.on("guildCreate", guild => {
-  var embed = new Discord.RichEmbed()
-    .setImage("")
-    .setDescription(`  **Thank You for Adding  Bot To Your Server**  
-    **Support Server** [ • https://discord.gg/YtF35CVvQR • ]   `); //تعديل مهم رابط سيرفرك
-  guild.owner.send(embed);
-});
- 
+
 client.on('message', message => {
         if(message.content.startsWith(prefix + 'deafen')) {
       if (message.mentions.users.size === 0 && message.mentions.roles.size === 0) {
