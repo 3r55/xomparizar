@@ -1242,10 +1242,10 @@ client.on("message", message => {
       time: 30
     };
   if (message.content.startsWith(prefix + "anti")) {
-    if (message.author.id !== message.guild.owner.user.id){
+    if (!message.member.hasPermission("ADMINISTRATOR")){
       let embeeed = new Discord.RichEmbed()
       .setTitle("Protection+")
-      .setDescription("**JUST FOR OWNER SHIP**")
+      .setDescription("**JUST FOR ADMINSTRATOR**")
       .setColor("9e1c36");
       return message.channel.send(embeeed);
     }
@@ -1266,71 +1266,71 @@ client.on("message", message => {
       config[message.guild.id].banLimit = num
        { let banLimit1 = new Discord.RichEmbed()
       .setTitle("Protection+")
-      .setDescription(`Changed: **${config[message.guild.id].banLimit}**`)
+      .setDescription(`Changed to : **${config[message.guild.id].banLimit}**`)
       .setColor("9e1c36");
         message.channel.send(banLimit1);}
     }
-    if (message.content.startsWith(prefix + "settings limitskick")) {
+    if (message.content.startsWith(prefix + "anti kick")) {
       if (!num) return message.channel.send(arkam);
       if (isNaN(num)) return message.channel.send(arkam2);
       config[message.guild.id].kickLimits = num
-      let embedddd = new Discord.MessageEmbed()
+      let embedddd = new Discord.RichEmbed()
       .setTitle("Protection+")
-      .setDescription(`تم التغيير اِلي : **${config[message.guild.id].kickLimits}**`)
+      .setDescription(`Changed to : **${config[message.guild.id].kickLimits}**`)
       .setColor("9e1c36");
       message.channel.send(embedddd);
     }
-    if (message.content.startsWith(prefix + "settings limitsroleD")) {
+    if (message.content.startsWith(prefix + "anti roleD")) {
       if (!num) return message.channel.send(arkam);
       if (isNaN(num)) return message.channel.send(arkam2);
       config[message.guild.id].roleDelLimit = num
-      let embeddddddddd = new Discord.MessageEmbed()
+      let embeddddddddd = new Discord.RichEmbed()
       .setTitle("Protection+")
-      .setDescription(`تم التغيير اِلى : **${config[message.guild.id].roleDelLimit}**`)
+      .setDescription(`Changed to : **${config[message.guild.id].roleDelLimit}**`)
       .setColor("9e1c36");
       message.channel.send(embeddddddddd);
     }
-    if (message.content.startsWith(prefix + "settings limitsroleC")) {
+    if (message.content.startsWith(prefix + "anti roleC")) {
       if (!num) return message.channel.send(arkam);
       if (isNaN(num)) return message.channel.send(arkam2);
       config[message.guild.id].roleCrLimits = num
-      let embeed = new Discord.MessageEmbed()
+      let embeed = new Discord.RichEmbed()
       .setTitle("Protection+")
-      .setDescription(`تم التغيير اِلى : **${config[message.guild.id].roleCrLimits}**`)
+      .setDescription(`Changed to : **${config[message.guild.id].roleCrLimits}**`)
       .setColor("9e1c36");
       message.channel.send(embeed);
  
     }
-    if (message.content.startsWith(prefix + "settings limitschannelD")) {
+    if (message.content.startsWith(prefix + "anti channelD")) {
       if (!num) return message.channel.send(arkam);
       if (isNaN(num)) return message.channel.send(arkam2);
       config[message.guild.id].chaDelLimit = num
-            let embeeed = new Discord.MessageEmbed()
+            let embeeed = new Discord.RichEmbed()
       .setTitle("Protection+")
-      .setDescription(`تم التغيير اِلى : **${config[message.guild.id].chaDelLimit}**`)
+      .setDescription(`Changed to  : **${config[message.guild.id].chaDelLimit}**`)
       .setColor("9e1c36");
       message.channel.send(embeeed);
  
  
     }
-    if (message.content.startsWith(prefix + "settings limitschannelC")) {
+    if (message.content.startsWith(prefix + "anti channelC")) {
       if (!num) return message.channel.send(arkam);
       if (isNaN(num)) return message.channel.send(arkam2);
       config[message.guild.id].chaCrLimit = num
       let embd = new Discord.MessageEmbed()
       .setTitle("Protection+")
-      .setDescription(`تم التغيير اِلى : **${config[message.guild.id].chaCrLimit}**`)
+      .setDescription(`Changed to  : **${config[message.guild.id].chaCrLimit}**`)
       .setColor("9e1c36");
       message.channel.send(embd);
  
     }
-    if (message.content.startsWith(prefix + "settings limitstime")) {
+    if (message.content.startsWith(prefix + "anti time")) {
       if (!num) return message.channel.send(arkam);
       if (isNaN(num)) return message.channel.send(arkam2);
       config[message.guild.id].time = num
             let emb = new Discord.MessageEmbed()
       .setTitle("Protection+")
-      .setDescription(`تم التغيير اِلى : **${config[message.guild.id].time}**`)
+      .setDescription(`Changed to: **${config[message.guild.id].time}**`)
       .setColor("9e1c36");
       message.channel.send(emb);
     }
