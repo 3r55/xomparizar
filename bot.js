@@ -880,6 +880,51 @@ client.on("channelDelete", channel => {
     logChannel.send(channelDelete);
   });
 });
+client.on("guildMemberAdd", member => {
+  var logChannel = member.guild.channels.find(c => c.name === `${log[guild.id].channel}`);
+  if (!logChannel) return;
+ 
+  let newMember = new Discord.RichEmbed()
+    .setTitle("**[NEW MEMBER ADDED]**")
+    .setThumbnail(member.user.avatarURL)
+    .setColor("GREEN")
+    .setDescription(
+      `**\n**:arrow_lower_right: Joined **${
+        member.user.username
+      }** To the server!\n\n**User:** <@${member.user.id}> (ID: ${
+        member.user.id
+      })\n**Days In Discord:** ${Days(member.user.createdAt)}`
+    )
+    .setTimestamp()
+    .setFooter(member.user.tag, member.user.avatarURL);
+ 
+  logChannel.send(newMember);
+});
+function Days(date) {
+  let now = new Date();
+  let diff = now.getTime() - date.getTime();
+  let days = Math.floor(diff / 86400000);
+  return days + (days == 1 ? " day" : " days") + " ago";
+}
+client.on("guildMemberRemove", member => {
+  var logChannel = guild.channels.find(
+    c => c.name === `${log[guild.id].channel}`
+  );
+  if (!logChannel) return;
+ 
+  let leaveMember = new Discord.RichEmbed()
+    .setTitle("**[LEAVE MEMBER]**")
+    .setThumbnail(member.user.avatarURL)
+    .setColor("GREEN")
+    .setDescription(
+      `**\n**:arrow_upper_left: Leave **${member.user.username}** From the server.\n\n**User:** <@${member.user.id}> (ID: ${member.user.id})`
+    )
+    .setTimestamp()
+    .setFooter(member.user.tag, member.user.avatarURL);
+ 
+  logChannel.send(leaveMember);
+});
+ 
 client.on("channelUpdate", (oldChannel, newChannel) => {
   if (!oldChannel.guild) return;
   if (!log[oldChannel.guild.id])
