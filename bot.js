@@ -1993,7 +1993,7 @@ let muterole = message.guild.roles.find(`name`, "Shutted");
 if(!muterole){
 try{
 muterole = await message.guild.createRole({
-name: "DAM DAXRAW",
+name: "MUTED",
 color: "#000000",
 permissions:[]
 })
@@ -4152,7 +4152,7 @@ client.on("message", async message => {
    
     )
   ) {
-    if (message.member.hasPermission("MANAGE_GUILD")) return;
+    if (message.member.hasPermission("ADMINISTRATOR")) return;
     if (!message.channel.guild) return;
     message.delete();
     var command = message.content.split(" ")[0];
@@ -4167,7 +4167,11 @@ client.on("message", async message => {
         message.guild.channels.forEach(async (channel, id) => {
           await channel.overwritePermissions(muterole, {
             SEND_MESSAGES: false,
-            ADD_REACTIONS: false
+             CONNECT: false,
+            SPEAK: false,
+            ADD_REACTIONS: false,
+             READ_MESSAGES: false
+            
           });
         });
       } catch (e) {
@@ -4178,12 +4182,12 @@ client.on("message", async message => {
       return message.reply("** This command only for servers**");
     message.member.addRole(muterole);
     const embed500 = new Discord.RichEmbed()
-      .setTitle("Muted Ads")
+      .setTitle("Muted menition")
       .addField(
         `**  You Have Been Muted **`,
         `**Reason : type meniton everyone**`
       )
-      .setColor("c91616")
+      .setColor("RED")
       .setThumbnail(`${message.author.avatarURL}`)
       .setAuthor(message.author.username, message.author.avatarURL)
       .setFooter(`${message.guild.name} `);
@@ -4205,6 +4209,8 @@ client.on("message", async message => {
       "dakt",
       "daikt",
       "bgem",
+      "gawad",
+      "daykt",
       "دایکت"
     )
   ) {
@@ -4216,14 +4222,17 @@ client.on("message", async message => {
     if (!muterole) {
       try {
         muterole = await message.guild.createRole({
-          name: "Muted",
+          name: "ZALAMY PSHT MOBILE",
           color: "#000000",
           permissions: []
         });
         message.guild.channels.forEach(async (channel, id) => {
           await channel.overwritePermissions(muterole, {
             SEND_MESSAGES: false,
-            ADD_REACTIONS: false
+            CONNECT: false,
+           SPEAK: false,
+           ADD_REACTIONS: false,
+           READ_MESSAGES: false
           });
         });
       } catch (e) {
@@ -4234,12 +4243,12 @@ client.on("message", async message => {
       return message.reply("** This command only for servers**");
     message.member.addRole(muterole);
     const embed500 = new Discord.RichEmbed()
-      .setTitle("Muted Ads")
+      .setTitle("Muted BAD WORDS")
       .addField(
         `**  You Have Been Muted **`,
         `**Reason : Using  bad word**`
       )
-      .setColor("c91616")
+      .setColor("BLACK")
       .setThumbnail(`${message.author.avatarURL}`)
       .setAuthor(message.author.username, message.author.avatarURL)
       .setFooter(`${message.guild.name} `);
