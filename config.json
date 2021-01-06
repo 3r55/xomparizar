@@ -63,10 +63,9 @@
     "onoff": true
   },
   "788869779040501760": {
-    "banLimit": 3,
-    "chaDelLimit": 3,
-    "roleDelLimit": 3,
-    "kickLimits": 3,
-    "roleCrLimits": 3
+    "onoff": true
+  },
+  "790269386443194368": {
+    "onoff": true
   }
 }
