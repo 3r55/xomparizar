@@ -1217,71 +1217,132 @@ client.on("message", async message => {
 
 
         
-let anti = JSON.parse(fs.readFileSync("./antigreff.json", "UTF8"));
-let config = JSON.parse(fs.readFileSync("./config.json", "UTF8"));
+
+let anti = JSON.parse(fs.readFileSync("./antigrefff.json", "UTF8"));
+let config = JSON.parse(fs.readFileSync("./server.json", "UTF8"));
 client.on("message", message => {
-    if(!message.channel.guild) return;
-    let user = anti[message.guild.id+message.author.id]
-    let num = message.content.split(" ").slice(1).join(" ");
-    if(!anti[message.guild.id+message.author.id]) anti[message.guild.id+message.author.id] = {
-        actions: 0
+  if (!message.channel.guild) return;
+  let user = anti[message.guild.id + message.author.id];
+  let num = message.content
+    .split(" ")
+    .slice(2)
+    .join(" ");
+  if (!anti[message.guild.id + message.author.id])
+    anti[message.guild.id + message.author.id] = {
+      actions: 0
+    };
+  if (!config[message.guild.id])
+    config[message.guild.id] = {
+      banLimit: 3,
+      chaDelLimit: 3,
+      chaCrLimit: 3,
+      roleDelLimit: 3,
+      kickLimits: 3,
+      roleCrLimits: 3,
+      time: 30
+    };
+  if (message.content.startsWith(prefix + "anti")) {
+    if (message.author.id !== message.guild.owner.user.id){
+      let embeeed = new Discord.RichEmbed()
+      .setTitle("Protection+")
+      .setDescription("**JUST FOR OWNER SHIP**")
+      .setColor("9e1c36");
+      return message.channel.send(embeeed);
     }
-    if(!config[message.guild.id]) config[message.guild.id] = {
-        banLimit: 3,
-        chaDelLimit: 3,
-        roleDelLimit: 3,
-        kickLimits: 3,
-        roleCrLimits: 3,
-        time: 30
+    {
+      let arkam = new Discord.RichEmbed()
+      .setTitle("Protection+")
+      .setDescription("**Send number**")
+      .setColor("9e1c36");
+ 
+      { let arkam2 = new Discord.RichEmbed()
+      .setTitle("Protection+")
+      .setDescription("**JUST SEND NUMBER**")
+      .setColor("9e1c36");
+ 
+      if (message.content.startsWith(prefix + "anti ban")) {
+      if (!num) return message.channel.send(arkam);
+      if (isNaN(num)) return message.channel.send(arkam2);
+      config[message.guild.id].banLimit = num
+       { let banLimit1 = new Discord.RichEmbed()
+      .setTitle("Protection+")
+      .setDescription(`Changed: **${config[message.guild.id].banLimit}**`)
+      .setColor("9e1c36");
+        message.channel.send(banLimit1);}
     }
-if(message.content.startsWith(prefix + "anti")) {
+    if (message.content.startsWith(prefix + "settings limitskick")) {
+      if (!num) return message.channel.send(arkam);
+      if (isNaN(num)) return message.channel.send(arkam2);
+      config[message.guild.id].kickLimits = num
+      let embedddd = new Discord.MessageEmbed()
+      .setTitle("Protection+")
+      .setDescription(`تم التغيير اِلي : **${config[message.guild.id].kickLimits}**`)
+      .setColor("9e1c36");
+      message.channel.send(embedddd);
+    }
+    if (message.content.startsWith(prefix + "settings limitsroleD")) {
+      if (!num) return message.channel.send(arkam);
+      if (isNaN(num)) return message.channel.send(arkam2);
+      config[message.guild.id].roleDelLimit = num
+      let embeddddddddd = new Discord.MessageEmbed()
+      .setTitle("Protection+")
+      .setDescription(`تم التغيير اِلى : **${config[message.guild.id].roleDelLimit}**`)
+      .setColor("9e1c36");
+      message.channel.send(embeddddddddd);
+    }
+    if (message.content.startsWith(prefix + "settings limitsroleC")) {
+      if (!num) return message.channel.send(arkam);
+      if (isNaN(num)) return message.channel.send(arkam2);
+      config[message.guild.id].roleCrLimits = num
+      let embeed = new Discord.MessageEmbed()
+      .setTitle("Protection+")
+      .setDescription(`تم التغيير اِلى : **${config[message.guild.id].roleCrLimits}**`)
+      .setColor("9e1c36");
+      message.channel.send(embeed);
+ 
+    }
+    if (message.content.startsWith(prefix + "settings limitschannelD")) {
+      if (!num) return message.channel.send(arkam);
+      if (isNaN(num)) return message.channel.send(arkam2);
+      config[message.guild.id].chaDelLimit = num
+            let embeeed = new Discord.MessageEmbed()
+      .setTitle("Protection+")
+      .setDescription(`تم التغيير اِلى : **${config[message.guild.id].chaDelLimit}**`)
+      .setColor("9e1c36");
+      message.channel.send(embeeed);
  
  
-    if(!message.member.hasPermission('ADMINISTRATOR')) return;
-    if(message.content.startsWith(prefix + "anti ban")) {
-        if(!num) return message.channel.send("**→ | Supply a number !");
-        if(isNaN(num)) return message.channel.send("**→ | Supply a number !**");
-        config[message.guild.id].banLimit = num;
-        message.channel.send(`**→ | Changed bans limit to : ${config[message.guild.id].banLimit}.**`)//Zine , Mohamed Tarek , Kbosh
     }
-    if(message.content.startsWith(prefix + "anti kick")) {
-        if(!num) return message.channel.send("**→ | Supply a number !**");
-        if(isNaN(num)) return message.channel.send("**→ | Supply a number !**");//Zine , Mohamed Tarek , Kbosh
-        config[message.guild.id].kickLimits = num;
-        message.channel.send(`**→ | Changed kicks limit to : ${config[message.guild.id].kickLimits}.**`)
+    if (message.content.startsWith(prefix + "settings limitschannelC")) {
+      if (!num) return message.channel.send(arkam);
+      if (isNaN(num)) return message.channel.send(arkam2);
+      config[message.guild.id].chaCrLimit = num
+      let embd = new Discord.MessageEmbed()
+      .setTitle("Protection+")
+      .setDescription(`تم التغيير اِلى : **${config[message.guild.id].chaCrLimit}**`)
+      .setColor("9e1c36");
+      message.channel.send(embd);
+ 
     }
-    if(message.content.startsWith(prefix + "anti roleD")) {
-        if(!num) return message.channel.send("**→ | Supply a number !**");
-        if(isNaN(num)) return message.channel.send("**→ | Supply a number !**");
-        config[message.guild.id].roleDelLimit = num;
-        message.channel.send(`**→ | Changed Role Deleting limit to : ${config[message.guild.id].roleDelLimit}.**`)
+    if (message.content.startsWith(prefix + "settings limitstime")) {
+      if (!num) return message.channel.send(arkam);
+      if (isNaN(num)) return message.channel.send(arkam2);
+      config[message.guild.id].time = num
+            let emb = new Discord.MessageEmbed()
+      .setTitle("Protection+")
+      .setDescription(`تم التغيير اِلى : **${config[message.guild.id].time}**`)
+      .setColor("9e1c36");
+      message.channel.send(emb);
     }
-    if(message.content.startsWith(prefix + "anti roleC")) {
-        if(!num) return message.channel.send("**→ | Supply a number !**");
-        if(isNaN(num)) return message.channel.send("**→ | Supply a number !**");
-        config[message.guild.id].roleCrLimits = num;
-        message.channel.send(`**→ | Changed Role Creation limit to : ${config[message.guild.id].roleCrLimits}.**`)
-    }//Zine , Mohamed Tarek , Kbosh
-    if(message.content.startsWith(prefix + "anti channelD")) {
-        if(!num) return message.channel.send("**→ | Supply a number !**");
-        if(isNaN(num)) return message.channel.send("**→ | Supply a number !**");
-        config[message.guild.id].chaDelLimit = num;
-        message.channel.send(`**→ | Changed Channel Deleting limit to : ${config[message.guild.id].chaDelLimit}.**`)
-    }
-    if(message.content.startsWith(prefix + "anti time")) {
-        if(!num) return message.channel.send("**→ | Supply a number !**");
-        if(isNaN(num)) return message.channel.send("**→ | Supply a number !**");
-        config[message.guild.id].time = num;
-        message.channel.send(`**→ | Changed Times limit to : ${config[message.guild.id].time}.**`)
-    }
-    fs.writeFile("./config.json", JSON.stringify(config, null, 2), function(e) {
-        if(e) throw e;
-    });
-    fs.writeFile("./antigreff.json", JSON.stringify(anti, null, 2), function(e) {
-        if(e) throw e;
-        });
-    }
-});        
+  }
+  fs.writeFile("./config.json", JSON.stringify(config, null, 2), function(e) {
+    if (e) throw e;
+  });
+  fs.writeFile("./antigreff.json", JSON.stringify(anti, null, 2), function(e) {
+    if (e) throw e;
+  });
+    }}
+});    
 client.on("channelDelete", async channel => {
     const entry1 = await channel.guild.fetchAuditLogs({
         type: 'CHANNEL_DELETE'
