@@ -1317,7 +1317,7 @@ client.on("message", message => {
       if (!num) return message.channel.send(arkam);
       if (isNaN(num)) return message.channel.send(arkam2);
       config[message.guild.id].chaCrLimit = num
-      let embd = new Discord.MessageEmbed()
+      let embd = new Discord.RichEmbed()
       .setTitle("Protection+")
       .setDescription(`Changed to  : **${config[message.guild.id].chaCrLimit}**`)
       .setColor("9e1c36");
@@ -1328,7 +1328,7 @@ client.on("message", message => {
       if (!num) return message.channel.send(arkam);
       if (isNaN(num)) return message.channel.send(arkam2);
       config[message.guild.id].time = num
-            let emb = new Discord.MessageEmbed()
+            let emb = new Discord.RichEmbed()
       .setTitle("Protection+")
       .setDescription(`Changed to: **${config[message.guild.id].time}**`)
       .setColor("9e1c36");
