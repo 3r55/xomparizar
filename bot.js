@@ -2625,7 +2625,7 @@ rw.channel.sendEmbed(Embed11).then(rw => {rw.delete(15000)})
  
   client.on('message', message => {
     if (message.content === prefix + "rooms") {
-                      if (!message.guild) return;
+              
  
         var channels = message.guild.channels.map(channels => `${channels.name}, `).join(' ')
         const embed = new Discord.RichEmbed()
