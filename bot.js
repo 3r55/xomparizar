@@ -2248,7 +2248,7 @@ client.on("message", message => {
  b!report
  b!paper
  b!scissors
- b!servers
+ b!sbot
  b!say,embed
  b!about
  b!invite
@@ -3435,6 +3435,7 @@ client.on('message', message => {
         .setTitle('Level Up!')
         .setColor('RANDOM')
         .setDescription(`New Level: `+curlvl)
+        .setImage("https://media.discordapp.net/attachments/793750057500278805/796281012719321088/image0.gif")
         .setTimestamp()
         .setFooter(message.author.username+'#'+message.author.discriminator);
         message.channel.send(errorup )
@@ -3482,7 +3483,7 @@ client.on('message', message =>{
 ////black jack
 
 client.on("message", message => {
-  if (message.content.startsWith(prefix + "servers")) {
+  if (message.content.startsWith(prefix + "sbot")) {
     message.channel.send({
       embed: new Discord.RichEmbed()
 
