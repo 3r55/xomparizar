@@ -1215,16 +1215,18 @@ client.on("message", async message => {
    
   
 
+
+        
 let anti = JSON.parse(fs.readFileSync("./antigreff.json", "UTF8"));
 let config = JSON.parse(fs.readFileSync("./config.json", "UTF8"));
 client.on("message", message => {
-    if (!message.channel.guild) return;
-    let user = anti[message.guild.id + message.author.id]
-    let num = message.content.split(" ").slice(2).join(" ");
-    if (!anti[message.guild.id + message.author.id]) anti[message.guild.id + message.author.id] = {
+    if(!message.channel.guild) return;
+    let user = anti[message.guild.id+message.author.id]
+    let num = message.content.split(" ").slice(1).join(" ");
+    if(!anti[message.guild.id+message.author.id]) anti[message.guild.id+message.author.id] = {
         actions: 0
     }
-    if (!config[message.guild.id]) config[message.guild.id] = {
+    if(!config[message.guild.id]) config[message.guild.id] = {
         banLimit: 3,
         chaDelLimit: 3,
         roleDelLimit: 3,
@@ -1232,68 +1234,54 @@ client.on("message", message => {
         roleCrLimits: 3,
         time: 30
     }
-    if (message.content.startsWith(prefix + "anti")) {
+if(message.content.startsWith(prefix + "anti")) {
  
  
-        
-      if(message.guild.member(message.author).hasPermission("ADMINISTRATOR")) return message.reply(`❌ببورە ئەو پێرمیشنەت نییە ADMINISTRATOR`);
-        if (message.content.startsWith(prefix + "anti ban")) {
-            if (!num) return message.channel.send("**⇏ | Type Number**");
-            if (isNaN(num)) return message.channel.send("**⇏ | Number Only**");
-            config[message.guild.id].banLimit = num;
-            message.channel.send(`**⇏ | Done It's Now : ${config[message.guild.id].banLimit} **`)
-        }
-        if (message.content.startsWith(prefix + "anti kick")) {
-            if (!num) return message.channel.send("**⇏ | Type Number**");
-            if (isNaN(num)) return message.channel.send("**⇏ | Numbers Only **");
-            config[message.guild.id].kickLimits = num;
-            message.channel.send(`**⇏ | Done It's Now : ${config[message.guild.id].kickLimits}**`)
-        }
-        if (message.content.startsWith(prefix + "anti roleD")) {
-            if (!num) return message.channel.send("**⇏ | Type Number**");
-            if (isNaN(num)) return message.channel.send("**Numbers Only**");
-            config[message.guild.id].roleDelLimit = num;
-            message.channel.send(`**⇏ | Done It's Now : ${config[message.guild.id].roleDelLimit}**`)
-        }
-        if (message.content.startsWith(prefix + "anti roleC")) {
-            if (!num) return message.channel.send("**⇏ | Type Number**");
-            if (isNaN(num)) return message.channel.send("**⇏ | Numbers Only**");
-            config[message.guild.id].roleCrLimits = num;
-            message.channel.send(`**⇏ | Done It's Now : ${config[message.guild.id].roleCrLimits}**`)
-        }
-        if (message.content.startsWith(prefix + "anti channelD")) {
-            if (!num) return message.channel.send("**⇏ | Type Number **");
-            if (isNaN(num)) return message.channel.send("**⇏ | Numbers Only **");
-            config[message.guild.id].chaDelLimit = num;
-            message.channel.send(`**⇏ | Done It's Now : ${config[message.guild.id].chaDelLimit}**`)
-        }
-      if (message.content.startsWith(prefix + "anti channelC")) {
-      if (!num)
-        return message.channel.send(
-          "** | Type A `Number` After Commands .**"
-        ); ////////////////mrfix
-      if (isNaN(num))
-        return message.channel.send("**| Only Type `Number` .**");
-      config[message.guild.id].chaCrLimit = num;
-      message.channel.send(
-        `**✔️ | Changed \`Channel Create\` To : ${config[message.guild.id].chaCrLimit}**`
-      );
-    } 
-        if (message.content.startsWith(prefix + "anti time")) {
-            if (!num) return message.channel.send("**⇏ | Type Number **");
-            if (isNaN(num)) return message.channel.send("**⇏ | Numbers Only**");
-            config[message.guild.id].time = num;
-            message.channel.send(`**⇏ | Done It's Now : ${config[message.guild.id].time}**`)
-        }
-        fs.writeFile("./config.json", JSON.stringify(config, null, 2), function (e) {
-            if (e) throw e;
-        });
-        fs.writeFile("./antigreff.json", JSON.stringify(anti, null, 2), function (e) {
-            if (e) throw e;
+    if(!message.member.hasPermission('ADMINISTRATOR')) return;
+    if(message.content.startsWith(prefix + "anti ban")) {
+        if(!num) return message.channel.send("**→ | Supply a number !");
+        if(isNaN(num)) return message.channel.send("**→ | Supply a number !**");
+        config[message.guild.id].banLimit = num;
+        message.channel.send(`**→ | Changed bans limit to : ${config[message.guild.id].banLimit}.**`)//Zine , Mohamed Tarek , Kbosh
+    }
+    if(message.content.startsWith(prefix + "anti kick")) {
+        if(!num) return message.channel.send("**→ | Supply a number !**");
+        if(isNaN(num)) return message.channel.send("**→ | Supply a number !**");//Zine , Mohamed Tarek , Kbosh
+        config[message.guild.id].kickLimits = num;
+        message.channel.send(`**→ | Changed kicks limit to : ${config[message.guild.id].kickLimits}.**`)
+    }
+    if(message.content.startsWith(prefix + "anti roleD")) {
+        if(!num) return message.channel.send("**→ | Supply a number !**");
+        if(isNaN(num)) return message.channel.send("**→ | Supply a number !**");
+        config[message.guild.id].roleDelLimit = num;
+        message.channel.send(`**→ | Changed Role Deleting limit to : ${config[message.guild.id].roleDelLimit}.**`)
+    }
+    if(message.content.startsWith(prefix + "anti roleC")) {
+        if(!num) return message.channel.send("**→ | Supply a number !**");
+        if(isNaN(num)) return message.channel.send("**→ | Supply a number !**");
+        config[message.guild.id].roleCrLimits = num;
+        message.channel.send(`**→ | Changed Role Creation limit to : ${config[message.guild.id].roleCrLimits}.**`)
+    }//Zine , Mohamed Tarek , Kbosh
+    if(message.content.startsWith(prefix + "anti channelD")) {
+        if(!num) return message.channel.send("**→ | Supply a number !**");
+        if(isNaN(num)) return message.channel.send("**→ | Supply a number !**");
+        config[message.guild.id].chaDelLimit = num;
+        message.channel.send(`**→ | Changed Channel Deleting limit to : ${config[message.guild.id].chaDelLimit}.**`)
+    }
+    if(message.content.startsWith(prefix + "anti time")) {
+        if(!num) return message.channel.send("**→ | Supply a number !**");
+        if(isNaN(num)) return message.channel.send("**→ | Supply a number !**");
+        config[message.guild.id].time = num;
+        message.channel.send(`**→ | Changed Times limit to : ${config[message.guild.id].time}.**`)
+    }
+    fs.writeFile("./config.json", JSON.stringify(config, null, 2), function(e) {
+        if(e) throw e;
+    });
+    fs.writeFile("./antigreff.json", JSON.stringify(anti, null, 2), function(e) {
+        if(e) throw e;
         });
     }
-});
-        
+});        
 client.on("channelDelete", async channel => {
     const entry1 = await channel.guild.fetchAuditLogs({
         type: 'CHANNEL_DELETE'
