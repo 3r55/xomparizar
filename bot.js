@@ -358,6 +358,17 @@ client.on("message", async message => {
   });
  
 });
+
+
+ 
+
+
+ 
+
+    
+ 
+
+
 let sw = JSON.parse(fs.readFileSync("./setWlc.json", "UTF8"))
  
     client.on('message', message => {
