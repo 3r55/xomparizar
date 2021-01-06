@@ -2920,7 +2920,7 @@ client.on("message", async msg => {
       return msg.reply("❌ **go play minecraft**");
     if (!msg.guild.member(client.user).hasPermission(["MANAGE_CHANNELS"]))
       return msg.reply("❌ **بۆتەکە ئەو کردارەی بە دەست نییە**");
-    var ggg = msg.guild.createChannel("SERVER STATS", "category").then(kk => {
+    var ggg = msg.guild.createChannel("DATE AND TIME", "category").then(kk => {
       var ccc = msg.guild.createChannel("SERVER STATS", "voice").then(al => {
         var aa = msg.guild.createChannel("SERVER STATS", "voice").then(alp => {
           var aaa = msg.guild
@@ -4263,7 +4263,7 @@ client.on("message", async message => {
       "دایکت"
     )
   ) {
-    if (message.member.hasPermission("MANAGE_GUILD")) return;
+    
     if (!message.channel.guild) return;
     message.delete();
     var command = message.content.split(" ")[0];
