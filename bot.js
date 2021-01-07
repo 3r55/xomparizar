@@ -288,76 +288,8 @@ s.delete();
   }
 });
 
-const antispam = JSON.parse(fs.readFileSync("./antispam.json", "utf8"));
- 
-client.on("message", async message => {
-  if (antispam[message.author.id] == undefined) {
-    antispam[message.author.id] = {
-    lastmessage: "none"
-    };
-    fs.writeFile("./antispam.json", JSON.stringify(antispam), function(err) {
-      if (err) throw err;
-    });
-  }else  if (antispam[message.guild.id] == undefined) {
-    antispam[message.guild.id] = {
-    onoff: "off"
-    };
-    fs.writeFile("./antispam.json", JSON.stringify(antispam), function(err) {
-      if (err) throw err;
-    });
-  }
-  let args = message.content.split(" ");
-  let command = args[0]
-  if(command === prefix + "antispam"){
-    if(args[1] === "on"){
-      antispam[message.guild.id].onoff = "on";
-      fs.writeFile("./antispam.json", JSON.stringify(antispam), function(
-        err
-      ) {
-        if (err) throw err;
-      });
-      message.channel.send(">**Done Sir Anti Spam Changed To ON**")
-    }else if(args[1] === "off"){
-      antispam[message.guild.id].onoff = "off";
-      fs.writeFile("./antispam.json", JSON.stringify(antispam), function(
-        err
-      ) {
-        if (err) throw err;
-      });
-      message.channel.send(">**Done Sir Anti Spam Changed To OFF**")
-    }
-  }
-});
- 
-client.on("message", async message => {
-  if (antispam[message.author.id] == undefined) {
-    antispam[message.author.id] = {
-    lastmessage: "none"
-    };
-    fs.writeFile("./antispam.json", JSON.stringify(antispam), function(err) {
-      if (err) throw err;
-    });
-  }else  if (antispam[message.guild.id] == undefined) {
-    antispam[message.guild.id] = {
-    onoff: "off"
-    };
-    fs.writeFile("./antispam.json", JSON.stringify(antispam), function(err) {
-      if (err) throw err;
-    });
-  }else if(antispam[message.author.id].lastmessage === "none") {
-    return;
-  }else if(antispam[message.author.id].lastmessage === message.content){
-    return message.delete();
-  }
- 
-  antispam[message.author.id].lastmessage = message.content;
-  fs.writeFile("./antispam.json", JSON.stringify(antispam), function(
-    err
-  ) {
-    if (err) throw err;
-  });
- 
-});
+
+
 
 let sw = JSON.parse(fs.readFileSync("./setWlc.json", "UTF8"))
  
