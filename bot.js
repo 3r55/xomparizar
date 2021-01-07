@@ -363,7 +363,7 @@ let sw = JSON.parse(fs.readFileSync("./setWlc.json", "UTF8"))
  
     client.on('message', message => {
 const Canvas = require("canvas") // npm i canvas
-const jimp = require('jimp');
+
 const fs = require("fs") // npm i fs
  
         let mothed = ['text', 'embed', 'image'];
@@ -443,7 +443,7 @@ if (err) console.error(err);
 })
 })
  
- 
+ const jimp = require('jimp');
 client.on('guildMemberAdd', member => {
     let channel = member.guild.channels.find("name", sw[member.guild.id].cha)
  
@@ -2343,7 +2343,9 @@ client.on("message", message => {
  b!nick,help nick
  b!banslist
  b!unlock
- b!setwelcomer <channel name>
+ ${prefix}setWlc style <text, image, embed>
+ ${prefix}setWlc msg <message>
+ ${prefix}setWlc channel <channel name>
  b!setCount
  b!setDate
  b!autorole <role name>
