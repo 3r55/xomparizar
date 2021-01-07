@@ -359,100 +359,184 @@ client.on("message", async message => {
  
 });
 
-const invites = {}
-
-let sWlc = JSON.parse(fs.readFileSync("./setWlc.json", "UTF8"))   
-client.on('message', message => {
-if(message.channel.type === "dm") return;
-if(message.author.bot) return;
-  if(!sWlc[message.guild.id]) sWlc[message.guild.id] = {
-    channel: "welcome"
-}
-const channel = sWlc[message.guild.id].channel
-  if (message.content.startsWith(prefix + "setwelcomer")) {
-    if(!message.member.hasPermission(`MANAGE_GUILD`)) return;
-    let newChannel = message.content.split(' ').slice(1).join(" ")
-    if(!newChannel) return message.reply(`**${prefix}setwelcomer <channel name>**`)
-    sWlc[message.guild.id].channel = newChannel
-    message.channel.send(`**${message.guild.name}'s channel has been changed to ${newChannel}**`);
-  }
-   fs.writeFile('./setWlc.json', JSON.stringify(sWlc), (err) => {
+let sw = JSON.parse(fs.readFileSync("./setWlc.json", "UTF8"))
+ 
+    client.on('message', message => {
+const Canvas = require("canvas") // npm i canvas
+const jimp = require('jimp');
+const fs = require("fs") // npm i fs
+ 
+        let mothed = ['text', 'embed', 'image'];
+        let sets = message.content.split(" ").slice(1).join(" ")
+        let style = message.content.split(" ").slice(2).join(" ")
+        let stym = message.content.split(" ").slice(3).join(" ")
+        let msz = message.content.split(" ").slice(2).join(" ")
+        let ch = message.content.split(" ").slice(2).join(" ")
+        let r = message.content.split(" ").slice(4).join(" ")
+ 
+ 
+        if(message.content.startsWith(prefix + "setWlc")) {
+    if(!message.member.hasPermission("MANAGE_CHANNELS")) return message.channel.send("**You need `Manage Channels` permission**")
+            if(!sw[message.guild.id]) sw[message.guild.id] = {
+                cha: "welcome",
+                msz: "Welcome to server",
+                styler: "text"
+            };
+ 
+            if(!sets) {
+                message.channel.send(`**Usage:
+            ${prefix}setWlc style <text, image, embed>
+            ${prefix}setWlc msg <message>
+            ${prefix}setWlc channal <channel name>**`)
+            }
+ 
+            if(!mothed) {
+                message.channel.send(`**Usage: ${prefix}setWlc style <text, imgae, embed>**`)
+            }
+ 
+            if(message.content === prefix + 'setWlc style image') {
+                if(!message.member.hasPermission("MANAGE_CHANNELS")) return message.channel.send("**You need `Manage Channels` permission**")
+                sw[message.guild.id].styler = 'image'
+                message.channel.send(`**Your server welcome mothed has been changed to ${sw[message.guild.id].styler}**`)
+            }
+ 
+            if(message.content === prefix + 'setWlc style embed') {
+                if(!message.member.hasPermission("MANAGE_CHANNELS")) return message.channel.send("**You need `Manage Channels` permission**")
+                 sw[message.guild.id].styler = 'embed'
+                message.channel.send(`**Your server welcome mothed has been changed to ${sw[message.guild.id].styler}**`)            }
+ 
+            if(message.content === prefix + 'setWlc style text') {
+                if(!message.member.hasPermission("MANAGE_CHANNELS")) return message.channel.send("**You need `Manage Channels` permission**")
+                 sw[message.guild.id].styler = 'text'
+                message.channel.send(`**Your server welcome mothed has been changed to ${sw[message.guild.id].styler}**`)
+            }
+ 
+        }
+ 
+        if(message.content.startsWith(prefix + "setWlc msg")) {
+            if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.send("**You need `Manage Messages` permission**")
+            if(!msz) {
+                message.channel.send("Usage: <setWlc msg <message>")
+            } else {
+                message.channel.send(`**Your server welcome message has been changed to __${msz}__**`)
+                sw[message.guild.id].msk = msz
+            }
+        }
+ 
+        if(message.content.startsWith(prefix + "setWlc channel")) {
+            if(!message.member.hasPermission("MANAGE_CHANNELS")) return message.channel.send("**You need `Manage Channels` permission**")
+            if(!ch) {
+                message.channel.send("Usage: <setWlc channel <channel name>")
+            }
+            let chn = message.guild.channels.find("name", ch)
+            if(!chn) {
+                message.channel.send("**I can't find this channel**")
+            }
+            else {
+                 sw[message.guild.id].cha = chn.name
+                 message.channel.send(`**Your server welcome channel has been changed to __${chn.name}__**`)
+                 }
+        }
+ 
+        fs.writeFile('./setWlc.json', JSON.stringify(sw), (err) => {
 if (err) console.error(err);
 })
-});
-client.on("guildMemberAdd", member => {
-      if(!sWlc[member.guild.id]) sWlc[member.guild.id] = {
-    channel: "welcome"
-  }
-  const channel = sWlc[member.guild.id].channel
-    const sChannel = sWlc[member.guild.id].channel
-    let welcomer = member.guild.channels.find('name', sChannel);
-    let memberavatar = member.user.avatarURL
-      if (!welcomer) return;
-      if(welcomer) {
-member.guild.fetchInvites().then(guildInvites => {
-    const ei = invites[member.guild.id];
-    const invite = guildInvites.find(i => ei.get(i.code).uses < i.uses);
-    const inviter = client.users.get(invite.inviter.id);
-    const yumz = member.guild.channels.find("name", `${sChannel}`);
-     yumz.send(`<@${member.user.id}> joined by <@${inviter.id}>`);
-   yumz.send(`<@${member.user.id}> joined using invite code ${invite.code} from <@${inviter.id}>. Invite was used ${invite.uses} times since its creation.`);
-  }); 
-      var Canvas = require('canvas')
-      var jimp = require('jimp')
+})
  
-      const w = ['./w1.png'];
  
-              let Image = Canvas.Image,
-                  canvas = new Canvas(400, 200),
-                  ctx = canvas.getContext('2d');
+client.on('guildMemberAdd', member => {
+    let channel = member.guild.channels.find("name", sw[member.guild.id].cha)
  
-              fs.readFile(`${w[Math.floor(Math.random() * w.length)]}`, function (err, Background) {
-                  if (err) return console.log(err)
-                  let BG = Canvas.Image;
-                  let ground = new Image;
-                  ground.src = Background;
-                  ctx.drawImage(ground, 0, 0, 400, 200);
+    if(sw[member.guild.id].styler === "text") {
+        channel.sendMessage(`<@${member.user.id}>, ${sw[member.guild.id].msk}`)
+    }
  
-      })
+    if(sw[member.guild.id].styler === "embed") {
  
-                      let url = member.user.displayAvatarURL.endsWith(".webp") ? member.user.displayAvatarURL.slice(5, -20) + ".gif" : member.user.displayAvatarURL;
-                      jimp.read(url, (err, ava) => {
-                          if (err) return console.log(err);
-                          ava.getBuffer(jimp.MIME_PNG, (err, buf) => {
-                              if (err) return console.log(err);
+        const embed = new Discord.RichEmbed()
+        .setTitle("Member joind.")
+        .setColor("GREEN")
+        .setThumbnail(member.user.avatarURL)
+        .setDescription(`**${sw[member.guild.id].msk}**`)
+        .addField("**Member name**", `[<@${member.user.id}>]`,true)
+        .addField("**Now we are**", `[${member.guild.memberCount}]`,true)
+        channel.sendMessage(`<@${member.user.id}>`)
+        channel.sendEmbed(embed)
+    }
  
-                                    ctx.font = "bold 12px Arial";
-                              ctx.fontSize = '20px';
-                              ctx.fillStyle = "#f1f1f1";
-                                ctx.fillText(member.user.username, 200, 150);
+    if(sw[member.guild.id].styler === "image") {
+        if (member.user.bot) return;
+const w = ['./w1.png','./w2.png','./w3.png','./w4.png','./w5.png','./w6.png','./w7.png','./w8.png'];
+        let Image = Canvas.Image,
+            canvas = new Canvas(749, 198),
+            ctx = canvas.getContext('2d');
+        ctx.patternQuality = 'bilinear';
+        ctx.filter = 'bilinear';
+        ctx.antialias = 'subpixel';
+        ctx.shadowColor = 'rgba(0, 0, 0, 0.4)';
+        ctx.shadowOffsetY = 2;
+        ctx.shadowBlur = 2;
+        ctx.stroke();
+        ctx.beginPath();
  
-                              //NAMEً
-                              ctx.font = "bold 12px Arial";
-                              ctx.fontSize = '20px';
-                              ctx.fillStyle = "#f1f1f1";
-      ctx.fillText(`Welcome To Server`, 260, 125);
+        fs.readFile(`${w[Math.floor(Math.random() * w.length)]}`, function (err, Background) {
+            if (err) return console.log(err);
+            let BG = Canvas.Image;
+            let ground = new Image;
+            ground.src = Background;
+            ctx.drawImage(ground, 0, 0, 749, 198);
  
-                              //AVATARً
-                              let Avatar = Canvas.Image;
+})
+ 
+                let url = member.user.displayAvatarURL.endsWith(".webp") ? member.user.displayAvatarURL.slice(5, -20) + ".png" : member.user.displayAvatarURL;
+                jimp.read(url, (err, ava) => {
+                    if (err) return console.log(err);
+                    ava.getBuffer(jimp.MIME_PNG, (err, buf) => {
+                 if (err) return console.log(err);
+ 
+ctx.font = '35px Aeland';
+                        ctx.fontSize = '40px';
+                        ctx.fillStyle = "#FFFFFF";
+                        ctx.textAlign = "center";
+                        ctx.fillText(" Welcome to " + member.guild.name , 440, 25);
+ 
+                        //ur name
+                        ctx.font = '40px Impact';
+                        ctx.fontSize = '48px';
+                        ctx.fillStyle = "#FFFFFF";
+                        ctx.textAlign = "center";
+                        ctx.fillText(member.user.username, 420, 100);
+ 
+                         ctx.font = '30px Impact';
+                        ctx.fontSize = '20px';
+                        ctx.fillStyle = "#FFFFFF";
+                        ctx.textAlign = "center";
+                        ctx.fillText(sw[member.guild.id].msk, 410, 170);
+ 
+ 
+                        //Avatar
+                        let Avatar = Canvas.Image;
                               let ava = new Avatar;
                               ava.src = buf;
                               ctx.beginPath();
-                              ctx.arc(77, 101, 62, 0, Math.PI*2);
-                              ctx.stroke();
+                              ctx.arc(115, 100, 90, 0, Math.PI*2);
+                                 ctx.closePath();
                                  ctx.clip();
-                                 ctx.drawImage(ava, 13, 38, 128, 126); 
+                                 ctx.drawImage(ava, 5, 5, 200, 200);
+                                 channel.sendMessage(`<@${member.user.id}>`)
+        channel.sendFile(canvas.toBuffer())
  
  
-    welcomer.sendFile(canvas.toBuffer())
  
+})
+})
  
+    }
  
-      })
-      })
+})
+              
  
-      }
-      }); 
+    
     
 const log = JSON.parse(fs.readFileSync("./log.json", "utf8"));
 
