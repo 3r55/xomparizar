@@ -11,5 +11,8 @@
     "roleDelLimit": 3,
     "kickLimits": 3,
     "roleCrLimits": 3
+  },
+  "722906411209851053": {
+    "onoff": true
   }
 }
