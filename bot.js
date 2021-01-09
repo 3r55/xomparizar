@@ -1832,10 +1832,10 @@ client.on("guildMemberAdd", member => {
 
 client.on("message", message => {
   if (message.content === prefix + "settings") {
-    if (!message.member.hasPermission("Ownership"))
+    if (!message.member.hasPermission("ADMINISTRATOR"))
       if (!message.channel.guild) return;
     if (message.content < 1023) return;
-    const mrfix = new Discord.RichEmbed()
+    const black = new Discord.RichEmbed()
       .setAuthor(client.user.username, client.user.avatarURL)
       .setThumbnail(client.user.avatarURL).setDescription(`AntiBan
 Enabled:🟢 
@@ -1866,7 +1866,7 @@ Enabled:🟢
 Maximum Time : ${config[message.guild.id].time}
 `);
 
-    message.channel.sendEmbed(mrfix);
+    message.channel.sendEmbed(black);
   }
 });    
 
@@ -2388,7 +2388,7 @@ b!anti channelD [number]
 b!anti channelC [number]
 b!anti time [number]
 b!antibots on/off 
-b!antispam on/off
+b!settings
       
        `);
    message.channel.sendEmbed(embed);
@@ -2927,7 +2927,7 @@ client.on("message", message => {
       });
     message.channel.send(
       `\`${
-        message.guild.members.filter(m => m.presence.status !== "online","dnd","idle").size
+        message.guild.members.filter(m => m.presence.status !== "online",).size
       }\` : ** ژمارەی ۆنلاینەکان** `
     );
     message.delete();
@@ -3073,7 +3073,7 @@ client.on("message", message => {
       .member(user)
       .setNickname(args)
       .then(m => {
-        let embed = new Discord.MessageEmbed()
+        let embed = new Discord.RichEmbed()
           .setTitle("Nicknamed User!")
           .setDescription(
             "User: ```" +
