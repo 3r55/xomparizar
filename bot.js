@@ -3570,7 +3570,7 @@ client.on('message', message =>{
     let nextlvlxp = curlvl * 200;
     let difference = nextlvlxp - curxp
  
-    if(message.content == prefix+"profile"){
+    if(message.content == prefix+"xp"){
  
         if(!xp[message.author.id]) {
             xp[message.author.id] = {
