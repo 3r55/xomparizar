@@ -105,10 +105,10 @@ client.on("message", message => {
     let mention = new Discord.RichEmbed()
       .setColor("black")
       .setDescription(
-        ` ✽  **Hi I'm Black Bot **  
-✽  **Support Server** [ https://discord.gg/GmSYVCQMRU ] 
-✽  **Add bot ** [ https://discordapp.com/oauth2/authorize?client_id=${client.user.id}&scope=bot&permissions=2080374975 ] 
-✽  **Bot orders** [ • **b!help** • ]   `
+        `   **Hi I'm Black Bot i'm created by black jack my prefix ${prefix} **  
+  **Support Server** [ https://discord.gg/GmSYVCQMRU ] 
+  **Add bot ** [ https://discordapp.com/oauth2/authorize?client_id=${client.user.id}&scope=bot&permissions=2080374975 ] 
+  **Bot orders** [ • **b!help** • ]   `
       )
  
       .setImage("https://images-ext-1.discordapp.net/external/RXd_Kc0_Ji0JNg67qAZcHPUOL8o60DLt3qecFb5FuC4/https/media.discordapp.net/attachments/777510905041911819/792459601193992202/image0.gif");
@@ -1830,7 +1830,45 @@ client.on("guildMemberAdd", member => {
 });
 
 
-    
+client.on("message", message => {
+  if (message.content === prefix + "settings") {
+    if (!message.member.hasPermission("Ownership"))
+      if (!message.channel.guild) return;
+    if (message.content < 1023) return;
+    const mrfix = new Discord.RichEmbed()
+      .setAuthor(client.user.username, client.user.avatarURL)
+      .setThumbnail(client.user.avatarURL).setDescription(`AntiBan
+Enabled:🟢 
+Maximum Ban : ${config[message.guild.id].banLimit}
+-
+AntiKick
+Enabled:🟢 
+Maximum Kick : ${config[message.guild.id].kickLimits}
+-
+AntiChannelD
+Enabled:🟢 
+Maximum Delete : ${config[message.guild.id].chaDelLimit}
+-
+AntiChannelC
+Enabled:🟢 
+Maximum Create : ${config[message.guild.id].chaCrLimit}
+-
+AntiRoleD
+Enabled:🟢 
+Maximum Delete : ${config[message.guild.id].roleDelLimit}
+-
+AntiRoleC
+Enabled:🟢 
+Maximum Create : ${config[message.guild.id].roleCrLimits}
+-
+AntiTime
+Enabled:🟢 
+Maximum Time : ${config[message.guild.id].time}
+`);
+
+    message.channel.sendEmbed(mrfix);
+  }
+});    
 
 
 
