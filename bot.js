@@ -74,7 +74,7 @@ client.on("message", message => {
 
 ///by black jack
 client.on("message", msg => {
-if (msg.conetnt === prefix + "year"){
+if (msg.content.startsWith(prefix + "year")){
     let now = new Date();
     let next = new Date(now);
     next.setFullYear(now.getFullYear() + 1);
@@ -97,7 +97,7 @@ if (msg.conetnt === prefix + "year"){
 //Best Rainbow Bot .
 
 client.on("message", message => {
-  if (message.content === prefix + "roles") {
+  if (message.content === prefix + "server roles") {
     if (!message.channel.guild) return;
     var roles = message.guild.roles.map(roles => `${roles.name}, `).join(" ");
     const embed = new Discord.RichEmbed()
@@ -2360,7 +2360,7 @@ client.on("message", message => {
       .setColor("BLACK").setDescription(` 
        **GENERAL COMMAND**
  b!count
- b!roles
+ b!server roles
  b!rooms
  b!botinfo
  b!server
