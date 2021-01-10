@@ -2347,7 +2347,7 @@ client.on("ready", () => {
 
 client.on("message", message => {
 
-	                    if (message.content === q1 ) {
+	                    if (message.content === "q1" ) {
                   message.react('🔊')
     const voiceChannel = message.member.voiceChannel;
     if (!voiceChannel) {
@@ -2360,7 +2360,7 @@ client.on("message", message => {
       });
   }
   
-  	                    if (message.content === q2 ) {
+  	                    if (message.content === "q2") {
                   message.react('🔊')
     const voiceChannel = message.member.voiceChannel;
     if (!voiceChannel) {
@@ -2373,7 +2373,7 @@ client.on("message", message => {
       });
   }
   
-    	                    if (message.content === q3 ) {
+    	                    if (message.content === "q3" ) {
                   message.react('🔊')
     const voiceChannel = message.member.voiceChannel;
     if (!voiceChannel) {
@@ -2386,7 +2386,7 @@ client.on("message", message => {
       });
   }
   
-      	                    if (message.content === q4 ) {
+      	                    if (message.content === "q4" ) {
                   message.react('🔊')
     const voiceChannel = message.member.voiceChannel;
     if (!voiceChannel) {
@@ -2411,15 +2411,7 @@ client.on("message", message => {
 	
   }
 
-  if(message.content === ".help") {
-    message.channel.send(` QuranBot
-:mosque: .quran 1  :   القران الكريم كامل بصوت الشيخ عبدالباسط عبدالصمد 
-:mosque: .quran 2  :   سورة البقرة كاملة - القارئ الحاج ميثم التمار (QURAN)
-:mosque: .quran 3  :   القرآن الكريم كامل بصوت الشيخ عبد الرحمن السديس وسعود الشريم 
-:mosque: .quran 4  :   القرآن الكريم كامل بصوت الشيخ المعيقلي
-:mosque: .stop     : لـ أيقاف تشغيل البوت `)
-}
- 
+  
 	    
 });
 client.on('message', message => {
