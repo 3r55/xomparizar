@@ -97,7 +97,7 @@ if (msg.content.startsWith(prefix + "year")){
 //Best Rainbow Bot .
 
 client.on("message", message => {
-  if (message.content === prefix + "server roles") {
+  if (message.content === prefix + "info roles") {
     if (!message.channel.guild) return;
     var roles = message.guild.roles.map(roles => `${roles.name}, `).join(" ");
     const embed = new Discord.RichEmbed()
@@ -2279,7 +2279,6 @@ const weather = require('weather-js');
 });
 
 client.on('message', message => {//Turbo Codes
-  var prefix = "?"//البريفكس
 var args = message.content.split(" ").slice(1);//Turbo Codes  
 if(message.content.startsWith(prefix + 'id')) {//Turbo Codes
 var year = message.author.createdAt.getFullYear()
@@ -2304,21 +2303,21 @@ y = `${z.presence.game.name}`;//Turbo Codes
 y = "No Playing... |💤.";//Turbo Codes
 }
 if (z.bot) {
-var w = 'بوت';//Turbo Codes
+var w = 'Bot';//Turbo Codes
 }else {
-var w = 'عضو';
+var w = 'Member';
 }
 let embed = new Discord.RichEmbed()
 .setColor("#502faf")
 .addField('🔱| Name:',`**<@` + `${z.id}` + `>**`, true)
 .addField('🛡| Id:', "**"+ `${z.id}` +"**",true)
 .addField('♨| Playing:','**'+y+'**' , true)
-.addField('🤖| نوع حسابك:',"**"+ w + "**",true)    
+.addField('🤖| Your account',"**"+ w + "**",true)    
 .addField('📛| Id member:',"**#" +  `${z.discriminator}**`,true)//Turbo Codes
 .addField('**Date| 📆 **: ' ,year + "-"+ month +"-"+ day)//Turbo Codes 
-.addField("**تاريخ دخولك للسيرفر| ⌚   :**", message.member.joinedAt.toLocaleString())//Turbo Codes    
+.addField("**Time joined server| ⌚   :**", message.member.joinedAt.toLocaleString())//Turbo Codes    
  
-.addField('**⌚ | تاريخ انشاء حسابك الكامل:**', message.author.createdAt.toLocaleString())
+.addField('**⌚ | Time created account**', message.author.createdAt.toLocaleString())
 .addField("**End message| 💬  :**", message.author.lastMessage)            
  
 .setThumbnail(`${z.avatarURL}`)
@@ -2413,7 +2412,7 @@ client.on("message", message => {
       .setColor("BLACK").setDescription(` 
        **GENERAL COMMAND**
  b!count
- b!server roles
+ b!info roles
  b!rooms
  b!botinfo
  b!server
@@ -2423,7 +2422,8 @@ client.on("message", message => {
  b!date
  b!daily,d
  b!credits,b!credit,c
- b!profile
+ b!xp
+ b!id
  b!members
  b!premium
  b!slots
