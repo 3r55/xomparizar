@@ -2278,6 +2278,59 @@ const weather = require('weather-js');
   }
 });
 
+client.on('message', message => {//Turbo Codes
+  var prefix = "?"//البريفكس
+var args = message.content.split(" ").slice(1);//Turbo Codes  
+if(message.content.startsWith(prefix + 'id')) {//Turbo Codes
+var year = message.author.createdAt.getFullYear()
+var month = message.author.createdAt.getMonth()
+var day = message.author.createdAt.getDate()
+var men = message.mentions.users.first();//Turbo Codes
+let args = message.content.split(' ').slice(1).join(' ');//Turbo Codes
+if (args == '') {//Turbo Codes
+var z = message.author;//Turbo Codes
+}else {
+var z = message.mentions.users.first();//Turbo Codes
+}
+ 
+let d = z.createdAt;//Turbo Codes          
+let n = d.toLocaleString();//Turbo Codes   
+let x;                       
+let y;                        
+ 
+if (z.presence.game !== null) {//Turbo Codes
+y = `${z.presence.game.name}`;//Turbo Codes
+} else {
+y = "No Playing... |💤.";//Turbo Codes
+}
+if (z.bot) {
+var w = 'بوت';//Turbo Codes
+}else {
+var w = 'عضو';
+}
+let embed = new Discord.RichEmbed()
+.setColor("#502faf")
+.addField('🔱| Name:',`**<@` + `${z.id}` + `>**`, true)
+.addField('🛡| Id:', "**"+ `${z.id}` +"**",true)
+.addField('♨| Playing:','**'+y+'**' , true)
+.addField('🤖| نوع حسابك:',"**"+ w + "**",true)    
+.addField('📛| Id member:',"**#" +  `${z.discriminator}**`,true)//Turbo Codes
+.addField('**Date| 📆 **: ' ,year + "-"+ month +"-"+ day)//Turbo Codes 
+.addField("**تاريخ دخولك للسيرفر| ⌚   :**", message.member.joinedAt.toLocaleString())//Turbo Codes    
+ 
+.addField('**⌚ | تاريخ انشاء حسابك الكامل:**', message.author.createdAt.toLocaleString())
+.addField("**End message| 💬  :**", message.author.lastMessage)            
+ 
+.setThumbnail(`${z.avatarURL}`)
+.setFooter(message.author.username, message.author.avatarURL)
+ 
+message.channel.send({embed});
+  if (!message) return message.reply('**ضع المينشان بشكل صحيح  ❌ **').catch(console.error);//Turbo Codes
+ 
+}
+ 
+});
+
 client.on("message", message => {
   if (message.content === prefix + "help") { 
     let embed = new Discord.RichEmbed()
