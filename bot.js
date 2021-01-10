@@ -179,6 +179,8 @@ client.on("message", message => {
     message.channel.send(id);
   }
 });
+
+
 const pretty = require("pretty-ms");
 const Canvas = require('canvas')
 const credits = JSON.parse(fs.readFileSync("./credits.json"));
@@ -411,7 +413,7 @@ client.on('guildMemberAdd', member => {
  
         const embed = new Discord.RichEmbed()
         .setTitle("Member joind.")
-        .setColor("GREEN")
+        .setColor("RANDOM")
         .setThumbnail(member.user.avatarURL)
         .setDescription(`**${sw[member.guild.id].msk}**`)
         .addField("**Member name**", `[<@${member.user.id}>]`,true)
