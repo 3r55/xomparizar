@@ -2602,6 +2602,7 @@ client.on("message", m => {
     m.channel.send(`Lottery Winner : <@${m.guild.members.random().id}>`)
 });
 
+
 client.on('message', message => {
         if(message.content.startsWith(prefix + 'deafen')) {
       if (message.mentions.users.size === 0 && message.mentions.roles.size === 0) {
