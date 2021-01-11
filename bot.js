@@ -2481,6 +2481,7 @@ client.on("message", message => {
  b!seticon
  b!setname
  b!warn,b!listwarns
+ b!temp on/off
  b!bc
  b!mutevoice
  b!blacklist add
@@ -3746,7 +3747,7 @@ client.on('message', message =>{
     let nextlvlxp = curlvl * 200;
     let difference = nextlvlxp - curxp
  
-    if(message.content == prefix+"xp"){
+    if(message.content == prefix + "xp"){
  
         if(!xp[message.author.id]) {
             xp[message.author.id] = {
@@ -3769,8 +3770,11 @@ client.on('message', message =>{
     }
 });
 
-////////2
+                
+ 
+ 
 
+    
 ////black jack
 
 client.on("message", message => {
@@ -3883,8 +3887,82 @@ client.on("message", message => {
 });
 
 
+ const temp = {}; 
  
-
+client.on('message', async message => {
+ if(message.channel.type === "dm") return;
+  if(message.author.bot) return;
+   if(!temp[message.guild.id]) temp[message.guild.id] = {
+    time: "3000",
+     category : 'Temporary Channels',
+      channel : 'Temp room'
+       }
+        if(message.content.startsWith(prefix + 'temp on')){
+         if(!message.member.hasPermission(`MANAGE_GUILD`)) return;
+          var ggg= message.guild.createChannel('Temporary Channels', 'category').then(cg => {
+           var ccc =message.guild.createChannel('Temp room', 'voice').then(ch => {
+            ch.setParent(cg)
+             message.channel.send('**:white_check_mark:  Done chek created channel  **')
+              client.on('message' , message => {
+               if(message.content === prefix + 'temp off') {
+                if(!message.member.hasPermission(`MANAGE_GUILD`)) return;
+                 cg.delete()
+                  ch.delete()
+                   message.channel.send('**:white_check_mark:  Done chek created channel **  ')
+                    }
+                     });
+                      const time = temp[message.guild.id].time
+                       client.on('message' , message => {
+                        if (message.content.startsWith(prefix + "temp time")) {
+                         if(!message.member.hasPermission(`MANAGE_GUILD`)) return;
+                          let newTime= message.content.split(' ').slice(1);
+                          if(!newTime) return message.reply(`**${prefix}temptime <time>  \`1000 = 1s\`**`)
+                     if(isNaN(newTime)) return message.reply(`** The Time Be Nambers :face_palm: **`);
+                    if(newTime < 1) return message.reply(`**The Time Be Up \`3000s\`**`)
+                       temp[message.guild.id].time = newTime
+                      message.channel.send(`**:white_check_mark:  Done chek new time  - \`${newTime}\`**`);
+                     }
+                    });
+                   client.on('voiceStateUpdate', (old, neww) => {
+                  let newUserChannel = neww.voiceChannel
+                 let oldUserChannel = old.voiceChannel
+                temp[message.guild.id].category = cg.id
+               temp[message.guild.id].channel = ch.id
+              let channel = temp[message.guild.id].channel
+             let category = temp[message.guild.id].category
+            if(oldUserChannel === undefined && newUserChannel !== undefined && newUserChannel.id == channel) {
+           neww.guild.createChannel(neww.displayName , 'voice').then(c => {
+          c.setParent(category)
+         let scan = setTimeout(()=>{
+        if(!neww.voiceChannel) {
+       c.delete();
+      client.channels.get(channel).overwritePermissions(neww, {
+     CONNECT:true,
+    SPEAK:true
+   })
+  }
+ }, temp[neww.guild.id].time);
+  c.overwritePermissions(neww, {
+   CONNECT:true,
+    SPEAK:true,
+     MANAGE_CHANNEL:true,
+      MUTE_MEMBERS:true,
+       DEAFEN_MEMBERS:true,
+    MOVE_MEMBERS:true,
+     VIEW_CHANNEL:true
+      })
+       neww.setVoiceChannel(c)
+            })
+             client.channels.get(channel).overwritePermissions(neww, {
+          CONNECT:false,
+           SPEAK:false
+        })
+               }
+              })
+             })
+           })
+          }
+      });
 
 client.on("message", message => {
   if (message.author.bot) return;
