@@ -180,7 +180,6 @@ client.on("message", message => {
   }
 });
 
-
 const pretty = require("pretty-ms");
 const Canvas = require('canvas')
 const credits = JSON.parse(fs.readFileSync("./credits.json"));
@@ -309,7 +308,9 @@ s.delete();
     }
   }
 });
-
+      
+ 
+  
 
 
  

@@ -1,18 +1,9 @@
 {
-  "720261793192345641": {
-    "onoff": true,
-    "chaCrLimit": "1"
-  },
-  "722906411209851053": {
-    "onoff": true
-  },
-  "797438639411167232": {
-    "onoff": true
-  },
-  "792511444611760158": {
-    "onoff": true
-  },
-  "767475281980031036": {
-    "onoff": true
+  "794693123510632519": {
+    "banLimit": 3,
+    "chaDelLimit": 3,
+    "roleDelLimit": 3,
+    "kickLimits": 3,
+    "roleCrLimits": 3
   }
 }
