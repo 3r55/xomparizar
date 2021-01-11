@@ -2801,6 +2801,8 @@ reaction2.on("collect", r => {
 })
 }
 });
+
+
 client.on("message", msg => {
   if (msg.author.bot) return;
   if (msg.content.startsWith(prefix + "role")) {
