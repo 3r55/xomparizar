@@ -2180,21 +2180,7 @@ client.on('message',async msg => {
 });
 
 
-client.on('message', message => { 
-    if (message.content.startsWith(prefix + 'emojilist')) {
- 
-        const List = message.guild.emojis.map(e => e.toString()).join(" ");
- 
-        const EmojiList = new Discord.RichEmbed()
-            .setTitle('➠ Emojis') 
-            .setAuthor(message.guild.name, message.guild.iconURL) 
-            .setColor('RANDOM') 
-            .setDescription(List) 
-            .setFooter(message.guild.name) 
-        message.channel.send(EmojiList) 
-    }
-});
- 
+
 
 const weather = require('weather-js');
  client.on('message', message => {
@@ -2468,44 +2454,37 @@ client.on("message", message => {
        .setThumbnail(message.author.avatarURL)
        .setFooter("CREATED BY BLACK JACK")
       .setColor("BLACK").setDescription(` 
-      **MODERATION**
+      **ADMIN**
  b!mute,b!unmute
  b!move,moveall
  b!ban
  b!unban all
  b!unban
- b!language
  b!ccolor
- b!c text
- b!c vc  
+ b!c text,voice
  b!kick
  b!clear <number>
- b!lock
+ b!lock,unlock
  b!autoc <name role react>
  b!gstart
- b!uvb
- b!vb
+ b!uvb,vb
  b!role <role name>
  b!role bots <role name>
  b!role humans <role name>
  b!role all <role name>
- b!seticon
- b!setname
  b!warn,b!listwarns
  b!temp on/off
  b!bc
- b!mutevoice
+ b!mutevoice,unmute voice
  b!blacklist add
  b!blacklist remove
  b!blacklist list
- b!undeafen
- b!deafen
- b!unmute voice
+ b!undeafen,deafen
+ b!info arole
  b!hide all,b!unhide all
  b!setstats
  b!nick,help nick
  b!banslist
- b!unlock
  b!setwelcomer <channel name>
  b!setCount
  b!setDate
@@ -2532,7 +2511,7 @@ client.on("message", message => {
  b!botinfo
  b!server
  b!support
- b!emojilist
+ b!year
  b!invites
  b!date
  b!daily,d
@@ -2914,7 +2893,50 @@ client.on("message", msg => {
 });
 
  
+ const rWlc = JSON.parse(fs.readFileSync("./AutoRole.json", "utf8"));
+client.on('message', message => {
+if(message.channel.type === "dm") return;
+if(message.author.bot) return;
+   if(!rWlc[message.guild.id]) rWlc[message.guild.id] = {
+    role: "member"
+  }
+const channel = rWlc[message.guild.id].role
+  if (message.content.startsWith(prefix + "autorole")) {
+    if(!message.member.hasPermission(`MANAGE_GUILD`)) return;
+    let newrole = message.content.split(' ').slice(1).join(" ")
+    if(!newrole) return message.reply(`**${prefix}autorole <role name>**`)
+    rWlc[message.guild.id].role = newrole
+    message.channel.send(`**${message.guild.name}'s role has been changed to ${newrole}**`);
+  }
+fs.writeFile("./AutoRole.json", JSON.stringify(rWlc), function(e){
+    if (e) throw e;
+})
+});
+client.on("guildMemberAdd", member => {
+      if(!rWlc[member.guild.id]) rWlc[member.guild.id] = {
+    role: "member"
+  }
+    const sRole = rWlc[member.guild.id].role
+    let Rrole = member.guild.roles.find('name', sRole);
+  member.addRole(Rrole);
  
+      });
+ 
+client.on("message", msg => {
+    if(msg.content.startsWith(prefix + "info arole")){
+    var sRole = rWlc[msg.guild.id].role
+let emb = new Discord.RichEmbed()
+.setTitle("**AutoRole Info**")
+.setAuthor(msg.guild.name,msg.guild.iconURL)
+.setThumbnail(msg.guild.iconURL)
+.setColor("RANDOM")
+.addField("**Server id**", msg.guild.id)
+.addField("**Name server**", msg.guild.name)
+.addField("**Role Auto role**", sRole)
+.setFooter(client.user.tag,client.user.avatarURL)
+msg.channel.send(emb)
+    }
+});
 
 client.on('message', message => {
 if(message.content.startsWith(prefix + "stone")) {
@@ -2959,140 +2981,9 @@ message.channel.send(`${slots1} - ${we}`)
 });
 
 ////by black jack
-client.on("message", async msg => {
-if(msg.author.bot || msg.channel.type === "dm") return undefined;
-let args = msg.content.split(' ');
-let lang = msg.content.split(" ").slice(1).join(" ")
-if(args[0].toLowerCase() == `${prefix}language`) {
-if(!msg.member.hasPermission('ADMINISTRATOR')) return msg.channel.send(`**❌ | You don\'t have permission**`)
-// fetch data 
-await db.fetch(`language${msg.guild.id}_`)
-// fetch data 
-let e = new Discord.RichEmbed()
-.setTitle(`**:bookmark: Baron Language Command
-This server language is currently set to **English [EN]**!**`)
-.setColor("BLUE")
-.addField(`Available Languages:`,`Arabic **[AR]** | Portuguese **[BR]**
-Deutsch **[DE]** |  English **[EN]**
-Spanish **[ES]** |  French **[FR]**
-Hungarian **[HU]** |  한국어 **[KR]**
-Spanish (LATAM) **[LA]** |  Dutch **[NL]**
-Polish **[PL]** |  Portuguese **[PT]**
-Russian **[RU]** | Turkish **[TR]**
-Kurdish **[KURD]`)
-.addBlankField()
-.addField(`Change Language:`,`${prefix}language [locale]`, true)
-.addField(`Example:`,`${prefix}language en`, true)
-.setFooter(`Only users with the "Administrator" role are able to do this.`)
-msg.channel.send(e).then(e => {
-if(lang.includes("AR")) {
-let AR = new Discord.RichEmbed()
-.setTitle(`**:white_check_mark: ${client.user.username} Language Command**`)
-.setDescription(`**Done**! From now on all commands in this server will be translated in **Arabic**!`)
-msg.channel.send(AR)
-db.set(`language${msg.guild.id}_`, "AR")
-}
-if(lang.includes("BR")) {
-let BR = new Discord.RichEmbed()
-.setTitle(`**:white_check_mark: ${client.user.username} Language Command**`)
-.setDescription(`**Done**! From now on all commands in this server will be translated in **Portuguese**!`)
-msg.channel.send(BR)
-db.set(`language${msg.guild.id}_`, "BR")
-}
-if(lang.includes("DE")) {
-let DE = new Discord.RichEmbed()
-.setTitle(`**:white_check_mark: ${client.user.username} Language Command**`)
-.setDescription(`**Done**! From now on all commands in this server will be translated in **Deutsch**!`)
-msg.channel.send(DE)
-db.set(`language${msg.guild.id}_`, "DE")
-}
-if(lang.includes("EN")) {
-let EN = new Discord.RichEmbed()
-.setTitle(`**:white_check_mark: ${client.user.username} Language Command**`)
-.setDescription(`**Done**! From now on all commands in this server will be translated in **English**!`)
-msg.channel.send(EN)
-db.set(`language${msg.guild.id}_`, "EN")
-}
-if(lang.includes("ES")) {
-let ES = new Discord.RichEmbed()
-.setTitle(`**:white_check_mark: ${client.user.username} Language Command**`)
-.setDescription(`**Done**! From now on all commands in this server will be translated in **Spanish**!`)
-msg.channel.send(ES)
-db.set(`language${msg.guild.id}_`, "ES")
-}
-if(lang.includes("FR")) {
-let FR = new Discord.RichEmbed()
-.setTitle(`**:white_check_mark: ${client.user.username} Language Command**`)
-.setDescription(`**Done**! From now on all commands in this server will be translated in **French**!`)
-msg.channel.send(FR)
-db.set(`language${msg.guild.id}_`, "FR")
-}
-if(lang.includes("HU")) {
-let HU = new Discord.RichEmbed()
-.setTitle(`**:white_check_mark: ${client.user.username} Language Command**`)
-.setDescription(`**Done**! From now on all commands in this server will be translated in **Hungarian**!`)
-msg.channel.send(HU)
-db.set(`language${msg.guild.id}_`, "HU")
-}
-if(lang.includes("KR")) {
-let KR = new Discord.RichEmbed()
-.setTitle(`**:white_check_mark: ${client.user.username} Language Command**`)
-.setDescription(`**Done**! From now on all commands in this server will be translated in **한국어**!`)
-msg.channel.send(KR)
-db.set(`language${msg.guild.id}_`, "KR")
-}
-if(lang.includes("LA")) {
-let LA = new Discord.RichEmbed()
-.setTitle(`**:white_check_mark: ${client.user.username} Language Command**`)
-.setDescription(`**Done**! From now on all commands in this server will be translated in **Spanish (LATAM)**!`)
-msg.channel.send(LA)
-db.set(`language${msg.guild.id}_`, "LA")
-}
-if(lang.includes("NL")) {
-let NL = new Discord.RichEmbed()
-.setTitle(`**:white_check_mark: ${client.user.username} Language Command**`)
-.setDescription(`**Done**! From now on all commands in this server will be translated in **Dutch**!`)
-msg.channel.send(NL)
-db.set(`language${msg.guild.id}_`, "NL")
-}
-if(lang.includes("PL")) {
-let PL = new Discord.RichEmbed()
-.setTitle(`**:white_check_mark: ${client.user.username} Language Command**`)
-.setDescription(`**Done**! From now on all commands in this server will be translated in **Polish**!`)
-msg.channel.send(PL)
-db.set(`language${msg.guild.id}_`, "PL")
-}
-if(lang.includes("PT")) {
-let PT = new Discord.RichEmbed()
-.setTitle(`**:white_check_mark: ${client.user.username} Language Command**`)
-.setDescription(`**Done**! From now on all commands in this server will be translated in **Portuguese**!`)
-msg.channel.send(PT)
-db.set(`language${msg.guild.id}_`, "PT")
-}
-if(lang.includes("KURD")) {
-let KURD = new Discord.RichEmbed()
-.setTitle(`**:white_check_mark: ${client.user.username} Language Command**`)
-.setDescription(`**Done**! From now on all commands in this server will be translated in **Kurdish**!`)
-msg.channel.send(KURD)
-db.set(`language${msg.guild.id}_`, "KURD")
-}
-if(lang.includes("RU")) {
-let RU = new Discord.RichEmbed()
-.setTitle(`**:white_check_mark: ${client.user.username} Language Command**`)
-.setDescription(`**Done**! From now on all commands in this server will be translated in **Russian**!`)
-msg.channel.send(RU)
-db.set(`language${msg.guild.id}_`, "RU")
-}
-if(lang.includes("TR")) {
-let TR = new Discord.RichEmbed()
-.setTitle(`**:white_check_mark: ${client.user.username} Language Command**`)
-.setDescription(`**Done**! From now on all commands in this server will be translated in **Turkish**!`)
-msg.channel.send(TR)
-db.set(`language${msg.guild.id}_`, "TR")
-}
-})
-}
-})
+
+
+
 
 client.on("message", message => {
   if (message.content.startsWith(prefix + "bc")) {
