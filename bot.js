@@ -2542,13 +2542,10 @@ client.on("message", message => {
  b!premium
  b!slots
  b!weather <location name>
- b!stone
  b!guild
  b!avatar
  b!quran
  b!report
- b!paper
- b!scissors
  b!sbot
  b!say,embed
  b!about
@@ -2602,7 +2599,22 @@ client.on("message", message => {
    message.channel.sendEmbed(embed);
   }
 });
-
+client.on("message", message => {
+  if (message.content === prefix + "help6") { 
+    let embed = new Discord.RichEmbed()
+      .setAuthor(message.author.username)
+       .setThumbnail(message.author.avatarURL)
+       .setFooter("CREATED BY BLACK JACK")
+      .setColor("BLACK").setDescription(` 
+       **FUNNY COMAND**
+ b!slots
+ 
+ b!paper
+ b!scissors
+       `);
+   message.channel.sendEmbed(embed);
+  }
+});
 
 client.on('message', message => {
         if(message.content.startsWith(prefix + 'deafen')) {
