@@ -2346,8 +2346,8 @@ client.on("message", message => {
  b!role humans <role name>
  b!role all <role name>
  b!rmrole <role name
- b!role bots <role name>
- b!role 
+ b!rmrole bots <role name>
+ b!rmrole humans <role name>
  b!warn,b!listwarns
  b!temp on/off
  b!bc
@@ -2394,7 +2394,6 @@ client.on("message", message => {
  b!id
  b!members
  b!premium
- b!slots
  b!weather <location name>
  b!guild
  b!avatar
