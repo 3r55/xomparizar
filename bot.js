@@ -193,83 +193,83 @@ client.on("message", async message => {
       credits: 0
     };
   fs.writeFileSync("./credits.json", JSON.stringify(credits, null, 4));
-if (args[0].toLowerCase() == `${prefix}credits` ||
-args[0].toLowerCase() === `${prefix}credit` ||
-args[0].toLowerCase() === `c`
- 
-) {
+  if (args[0].toLowerCase() == `${prefix}credits`,`${prefix}credit`,`c`) {
     const mention = message.mentions.users.first() || message.author;
     const mentionn = message.mentions.users.first();
     if (!args[2]) {
       message.channel.send(
-        `**:bank: | ${mention.username}, Your :credit_card: balance is \`$${credits[mention.id].credits}\`**`
+        `**${mention.username}, your :credit_card: balance is \`$${credits[mention.id].credits}\`**`
       );
     } else if (mentionn && args[2]) {
-      if (isNaN(args[2])) return message.channel.send(`** :interrobang: | ${message.author.username}, i can't find it!**`);
-      if (args[2] < 1) return message.channel.send(`** :interrobang: | ${message.author.username}, type the credit you need to transfer!**`);
-      if (mention.bot) return message.channel.send(`**:thinking: | ${message.author.username}, bots do not have credits**`);
+      if (isNaN(args[2]) || [",", "."].includes(args[2]))
+        return message.channel.send(`**:x: | Error**`);
+
+      if (args[2] < 1) return message.channel.send(`**:x: | Error**`);
+      if (mention.bot) return message.channel.send(`**:x: | Error**`);
       if (mentionn.id === message.author.id)
-        return message.channel.send(`**:interrobang: | ${message.author.username}, I can't find User **`);
+        return message.channel.send(`**:x: | Error**`);
       if (args[2] > credits[author].credits)
         return message.channel.send(
-          `**:thinking: | ${message.author.username}, Your balance is not enough for that!**`
+          `**:x: | Error , You Don't Have Enough Credit**`
         );
-      if (args[2].includes("-")) return message.channel.send(`**:interrobang: | ${message.author.username}, type the credit you need to transfer!**`);
-      //let resulting = Math.floor(args[2] - args[2] * (5 / 100));
-      let tax = Math.floor(args[2] * (5 / 100));
-      let first = Math.floor(Math.random() * 10);
-      let second = Math.floor(Math.random() * 10);
-      let third = Math.floor(Math.random() * 10);
-      let fourth = Math.floor(Math.random() * 10);
-      let num = `${ first }${ second }${ third }${ fourth }`;
-      let canvas = Canvas.createCanvas(100, 50);
+      if (args[2].includes("-")) return message.channel.send(`**:x: | Error**`);
+      let resulting =
+        parseInt(args[2]) == 1
+          ? parseInt(args[2])
+          : Math.floor(args[2] - args[2] * (5 / 100));
+      let tax =
+        parseInt(args[2]) == 1
+          ? parseInt(args[2])
+          : Math.floor(args[2] * (5 / 100));
+      let first = Math.floor(Math.random() * 9);
+      let second = Math.floor(Math.random() * 9);
+      let third = Math.floor(Math.random() * 9);
+      let fourth = Math.floor(Math.random() * 9);
+      let num = `${first}${second}${third}${fourth}`;
+      let Canvas = require("canvas");
+      let canvas = Canvas.createCanvas(108, 40);
       let ctx = canvas.getContext("2d");
- //let tax = message.content.split(" ")[1]
-let Price = message.content.split(" ")[2];
- //tax = tax.replace(/%5/g,"");
-let resulting = Math.floor(Price-(Price*(5/100)));      const background = await Canvas.loadImage(
-        "https://cdn.discordapp.com/attachments/365219235288317962/656362038884565014/captcha.png"
+      const background = await Canvas.loadImage(
+        "https://cdn.discordapp.com/attachments/608278049091223552/617791172810899456/hmmm.png"
       );
-      ctx.drawImage(background, 6, 3, canvas.width, canvas.height);
-      ctx.font = "25px Tahoma";
-          ctx.fontSize = "7px";
-          ctx.fillStyle = "Yellow";
-message.delete();
-     //let resulting = Math.floor(Price-(Price*(5/100)));
-      message.channel.send(`**${message.author.username}, Transfer Fees \`${tax}\`, Amount :\`${resulting}\` **
-   type these numbers to confirm : `
-).then(m => {
- 
-          ctx.fillText(num, canvas.width / 4.8, canvas.height / 1.5);
-          message.channel.sendFile(canvas.toBuffer()).then(s => {
+      ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
+      ctx.font = "20px Arial Bold";
+      ctx.fontSize = "20px";
+      ctx.fillStyle = "#ffffff";
+      message.channel
+        .send(
+          `**${
+            message.author.username
+          }, Transfer Fees: \`${tax}\`, Amount: \`$${resulting.toLocaleString()}\`**
+type these numbers to confirm: `
+        )
+        .then(async essss => {
+          message.channel.send(`\`${num}\``).then(m => {
             message.channel
               .awaitMessages(r => r.author.id === message.author.id, {
                 max: 1,
                 time: 20000,
                 errors: ["time"]
- 
-              }) 
- 
+              })
               .then(collected => {
- 
                 if (collected.first().content === num) {
- 
+                  essss.delete()
                   message.channel.send(
                     `**:moneybag: | ${
                       message.author.username
-                    }, has transferred \`$${resulting}\` to ${mentionn}**`
-                  );           m.delete();
-s.delete();
+                    }, Done Trans \`$${resulting.toLocaleString()}\` To ${mentionn}**`
+                  );
                   mention.send(
-                    `**:atm: | Transfer Receipt**\`\`\`You Have Received \$${resulting}\ From User ${message.author.username}; (ID ${    message.author.id     })\`\`\``);
-  m.delete();
-s.delete();
- 
+                    `**:money_with_wings: | Transfer Receipt **\`\`\`You Have Received \`$${resulting.toLocaleString()}\` From User ${
+                      message.author.username
+                    }; (ID (${message.author.id})\`\`\``
+                  );
+                  m.delete();
                   credits[author].credits += Math.floor(
-                    -resulting
+                    -resulting.toLocaleString()
                   );
                   credits[mentionn.id].credits += Math.floor(
-                    +resulting
+                    +resulting.toLocaleString()
                   );
                   fs.writeFileSync(
                     "./credits.json",
@@ -277,21 +277,29 @@ s.delete();
                   );
                 } else {
                   m.delete();
+                  essss.delete();
                 }
               });
           });
         });
-    } 
+    } else {
+      message.channel.send(
+        `**:x: | Error , Please Command True Ex: \`${prefix}credits [MentionUser] [Balance]\`**`
+      );
+    }
   }
- 
-  if (args[0].toLowerCase() === `${prefix}daily` ||
- args[0].toLowerCase() === `d`
-) {
+  if (args[0].toLowerCase() === `${prefix}daily`,`d`) {
     let cooldown = 8.64e7;
     let Daily = time[message.author.id];
     if (Daily !== null && cooldown - (Date.now() - Daily) > 0) {
       let times = cooldown - (Date.now() - Daily);
-      message.channel.send( `**:rolling_eyes: | ${ message.author.username }, your daily credits refreshes in \'${pretty(times, { verbose: true })}'.\**`);
+      message.channel.send(
+        `**:stopwatch: |  ${
+          message.author.username
+        }, your daily :dollar: credits refreshes in ${pretty(times, {
+          verbose: true
+        })}.**`
+      );
       fs.writeFile("./time.json", JSON.stringify(time), function(e) {
         if (e) throw e;
       });
@@ -300,15 +308,17 @@ s.delete();
       credits[author].credits += ammount;
       time[message.author.id] = Date.now();
       message.channel.send(
-        `**:moneybag: ${message.author.username}, You got :dollar: ${ammount} daily credits!**`
+        `**:atm:  | ${message.author.username}, you received your :yen: ${ammount} daily credits!**`
       );
       fs.writeFile("./credits.json", JSON.stringify(credits), function(e) {
         if (e) throw e;
       });
     }
   }
-});
-      
+}); //
+
+
+                  
  
   
 
