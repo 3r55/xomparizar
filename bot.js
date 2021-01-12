@@ -2341,13 +2341,8 @@ client.on("message", message => {
  b!autoc <name role react>
  b!gstart
  b!uvb,vb
- b!role <role name>
- b!role bots <role name>
- b!role humans <role name>
- b!role all <role name>
- b!rmrole <role name
- b!rmrole bots <role name>
- b!rmrole humans <role name>
+ b!role
+ b!helprole
  b!warn,b!listwarns
  b!temp on/off
  b!bc
@@ -2523,7 +2518,28 @@ client.on('message', async message =>{
     });
  
  
- 
+ client.on('message', message => {
+  if(message.content.startsWith(prefix + 'helprole')) {
+      if(!message.member.hasPermission('MANAGE_ROLES')) return
+    let role = new Discord.RichEmbed()
+  .setDescription(`
+   Add role
+  _________________________________
+  ${prefix}role @mention <role name>
+  ${prefix}role all <role name>  
+  ${prefix}role humans <role name> 
+  ${prefix}role bots <role name>
+  ___________________________
+
+   Remove role
+  ___________________________
+  ${prefix}rmrole <@mention> <role name>
+  ${prefix}rmrole all <role name> 
+  ${prefix}rmrole humans <role name>  
+  ${prefix}rmrole bots <role name> `)
+  .setFooter('Requested by '+ message.author.username, message.author.avatarURL)
+message.channel.sendEmbed(role)
+  }})
  
 
  
