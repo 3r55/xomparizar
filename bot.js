@@ -37,10 +37,6 @@ client.on("ready", () => {
  
 
 
-
-
- 
-
 client.on("message", message => {
   let command = message.content.split(" ")[0];
   if (command == prefix + "unban") {
@@ -1062,7 +1058,7 @@ client.on("message", async message => {
 
         
 
-let anti = JSON.parse(fs.readFileSync("./antigrefff.json", "UTF8"));
+let anti = JSON.parse(fs.readFileSync("./antigreff.json", "UTF8"));
 let config = JSON.parse(fs.readFileSync("./config.json", "UTF8"));
 client.on("message", message => {
   if (!message.channel.guild) return;
