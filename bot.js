@@ -2389,8 +2389,6 @@ client.on("message", message => {
  b!year
  b!invites
  b!date
- b!daily,d
- b!credits,b!credit,c
  b!xp
  b!id
  b!members
