@@ -1516,7 +1516,7 @@ client.on("guildKickAdd", async (guild, user) => {
   fs.writeFile("./antigreff.json", JSON.stringify(anti, null, 2), function(e) {
     if (e) throw e;
   });
-}); ////////////////mrfix
+}); 
 var guild = []
 
 client.on("guildMemberRemove", async member => {
@@ -1562,7 +1562,7 @@ client.on("guildMemberRemove", async member => {
           .ban()
           .catch(e =>
             member.owner.send(
-              `**⇏ | ${entry.username} حاول حظر جميع الأعضاء **`
+              `**⇏ | ${entry.username} Has kick Many Members**`
             )
           );
         anti[member.guild.id + entry.id].actions = "0";
