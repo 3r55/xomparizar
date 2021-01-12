@@ -2345,6 +2345,9 @@ client.on("message", message => {
  b!role bots <role name>
  b!role humans <role name>
  b!role all <role name>
+ b!rmrole <role name
+ b!role bots <role name>
+ b!role 
  b!warn,b!listwarns
  b!temp on/off
  b!bc
@@ -2746,88 +2749,442 @@ client.on('message' , message => {
  });  
 
 
-client.on("message", msg => {
-  if (msg.author.bot) return;
-  if (msg.content.startsWith(prefix + "role")) {
-    let params = msg.content
-      .slice(prefix.length)
-      .trim()
-      .split(/ +/g);
-    if (!params[0])
-      return msg.channel.send(
-        `**syntax: ${prefix}role <all/humans/bots/@user> <name role/@role>`
-      );
-    if (params[0] === "all") {
-      if (!params[1])
-        return msg.channel.send(
-          `**ڕۆڵەکەی یان ناوەکەی تاگ بکە \n syntax: ${prefix}role all <@role / name role>**`
-        );
-      let role =
-        msg.mentions.roles.first() ||
-        msg.guild.roles.find(r =>
-          r.name.toLowerCase().startsWith(params[1].toLowerCase())
-        );
-      if (!role) return msg.channel.send(`**ئەم ڕۆڵە نە دۆزرایەوە**`);
-      msg.guild.members.forEach(m => {
-        if (m.roles.some(r => r.id == role.id)) return;
-        m.addRole(role);
-      });
-      msg.channel.send(`**done give all role @${role.name}**`);
-    } else if (params[0] === "bots") {
-      if (!params[1])
-        return msg.channel.send(
-          `**ڕۆڵەکەی یان ناوەکەی تاگ بکە \n syntax: ${prefix}role bots <@role / name role>**`
-        );
-      let role =
-        msg.mentions.roles.first() ||
-        msg.guild.roles.find(r =>
-          r.name.toLowerCase().startsWith(params[1].toLowerCase())
-        );
-      if (!role) return msg.channel.send(`**ناتوانیت ئەم ڕۆڵە بدۆزیتەوە**`);
-      let bots = msg.guild.members.filter(m => m.user.bot);
-      bots.forEach(bot => {
-        if (bot.roles.some(r => r.id == role.id)) return;
-        bot.addRole(role);
-      });
-      msg.channel.send(`**done give all bots role @${role.name}**`);
-    } else if (params[0] === "humans") {
-      if (!params[1])
-        return msg.channel.send(
-          `**ڕۆڵەکەی یان ناوەکەی تاگ بکە \n syntax: ${prefix}role humans <@role / name role>**`
-        );
-      let role =
-        msg.mentions.roles.first() ||
-        msg.guild.roles.find(r =>
-          r.name.toLowerCase().startsWith(params[1].toLowerCase())
-        );
-      if (!role) return msg.channel.send(`**ناتوانیت ئەم ڕۆڵە بدۆزیتەوە**`);
-      let humans = msg.guild.members.filter(m => !m.user.bot);
-      humans.forEach(h => {
-        if (h.roles.some(r => r.id == role.id)) return;
-        h.addRole(role);
-      });
-      msg.channel.send(`**done give all humans role @${role.name}**`);
-    } else {
-      if (!params[1])
-        return msg.channel.send(
-          `**ڕۆڵەکەی یان ناوەکەی تاگ بکە \n syntax: ${prefix}role @user <@role / name role>**`
-        );
-      let role =
-        msg.mentions.roles.first() ||
-        msg.guild.roles.find(r =>
-          r.name.toLowerCase().startsWith(params[1].toLowerCase())
-        );
-      if (!role) return msg.channel.send(`** ناتوانیت ئەم ڕۆڵە بدۆزیتەوە**`);
-      let userID = params[0].slice(2, -1);
-      let user = msg.guild.members.get(userID);
-      if (!user) return;
-      user.addRole(role);
-      msg.channel.send(`**Done give ${user} @${role.name}**`);
+
+      
+
+ client.on("message", message => {
+  let args = message.content.split(" ").slice(1);
+  if (message.content.startsWith(prefix + "role")) {
+    if (!message.member.hasPermission("MANAGE_ROLES"))
+      return message.channel.send("**You dont have** `MANAGE_ROLES`");
+    let member = message.mentions.users.first();
+    let role = args
+      .join(" ")
+      .replace(member, "")
+      .replace(args[0], "")
+      .replace(" ", "");
+    console.log(role);
+    if (member) {
+      if (role.startsWith("v!")) {
+        let roleRe = args
+          .join(" ")
+          .replace(member, "")
+          .replace(args[0], "")
+          .replace("-", "")
+          .replace(" ", "");
+        console.log(roleRe);
+        let role1 = message.guild.roles.find("name", roleRe);
+        console.log(`hi`);
+        const ee = new Discord.RichEmbed()
+          .setDescription(
+            "**<a:no:643037582296612864> I can’t find the role.**"
+          )
+          .setFooter(
+            "Requested By " + message.author.username,
+            message.author.avatarURL
+          );
+        if (!role1) return message.channel.send(ee);
+        message.guild.member(member).removeRole(role1.id);
+ 
+        const e = new Discord.RichEmbed()
+ 
+          .setDescription(
+            "<a:yes:643037581222739978>** Changed Roles For **" +
+              member +
+              "**,** " +
+              "**" +
+              "-" +
+              role1.name +
+              "**"
+          )
+          .setFooter(
+            "Requested By " + message.author.username,
+            message.author.avatarURL
+          )
+          .setColor("BLACK");
+        message.channel.send(e);
+      } else if (!role.startsWith("v!")) {
+        let roleRe = args
+          .join(" ")
+          .replace(member, "")
+          .replace(args[0], "")
+          .replace("-", "")
+          .replace(" ", "");
+        let role1 = message.guild.roles.find("name", roleRe);
+        const ee = new Discord.RichEmbed()
+          .setDescription(
+            "**<a:no:643037582296612864> I can’t find the role.**"
+          )
+          .setFooter(
+            "Requested By : " + message.author.username,
+            message.author.avatarURL
+          );
+        if (!role1) return message.channel.send(ee);
+        message.guild.member(member).addRole(role1);
+        const e = new Discord.RichEmbed()
+ 
+          .setDescription(
+            "<a:yes:643037581222739978>** Changed Roles For **" +
+              member +
+              "**,** " +
+              "**" +
+              "+" +
+              role1.name +
+              "**"
+          )
+          .setFooter(
+            "Requested By : " + message.author.username,
+            message.author.avatarURL
+          )
+          .setColor("BLACK");
+        message.channel.send(e);
+      } else {
+        message.reply(`You Should Type The Role Name`);
+      }
+    } else if (args[0] == "all") {
+      if (role.startsWith("v!")) {
+        let roleRe = args
+          .join(" ")
+          .replace(member, "")
+          .replace(args[0], "")
+          .replace("-", "")
+          .replace(" ", "");
+        let role1 = message.guild.roles.find("name", roleRe);
+        message.channel
+          .send(`Please wait until the order is finished`)
+          .then(msg => {
+            message.guild.members.forEach(m => {
+              message.guild.member(m).removeRole(role1.id);
+            });
+            msg.edit(
+              `** <a:yes:643037581222739978>   Done...\n**` +
+                role1.name +
+                `** Has Taken From __${message.guild.members.size}__ Member**`
+            );
+          });
+      }
+      if (role) {
+        let role1 = message.guild.roles.find("name", role);
+        if (!role1) return;
+        message.channel
+          .send(`Please wait until the order is finished`)
+          .then(msg => {
+            message.guild.members.forEach(m => {
+              message.guild.member(m).addRole(role1);
+            });
+            msg.edit(
+              `** <a:yes:643037581222739978>   Done...\n**` +
+                role1.name +
+                `** Has Given To __${message.guild.members.size}__ Members **`
+            );
+          });
+      }
+    } else if (args[0] == "humans") {
+      if (role.startsWith("v!")) {
+        let roleRe = args
+          .join(" ")
+          .replace(member, "")
+          .replace(args[0], "")
+          .replace("-", "")
+          .replace(" ", "");
+        let role1 = message.guild.roles.find("name", roleRe);
+        message.channel
+          .send(`Please wait until the order is finished`)
+          .then(msg => {
+            message.guild.members.forEach(m => {
+              message.guild.member(m).removeRole(role1.id);
+            });
+            msg.edit(
+              `** <a:yes:643037581222739978>   Done...\n**` +
+                role1.name +
+                `** Has Taken From __${message.guild.members.size}__ Member**`
+            );
+          });
+      }
+ 
+      if (role) {
+        let role1 = message.guild.roles.find("name", role);
+ 
+        const ee = new Discord.RichEmbed()
+          .setDescription("I Cann’t Find This Role")
+          .setFooter(
+            "Requested By : " + message.author.username,
+            message.author.avatarURL
+          );
+        if (!role1) return message.channel.send(ee);
+        message.channel
+          .send(`Please wait until the order is finished`)
+          .then(msg => {
+            message.guild.members
+              .filter(m => m.user.bot == false)
+              .forEach(m => {
+                message.guild.member(m).addRole(role1);
+              });
+            msg.edit(`** <a:yes:643037581222739978>   Done...**`);
+          });
+      }
+    } else if (args[0] == "bots") {
+      if (role.startsWith("v!")) {
+        let roleRe = args
+          .join(" ")
+          .replace(member, "")
+          .replace(args[0], "")
+          .replace("-", "")
+          .replace(" ", "");
+        let role1 = message.guild.roles.find("name", roleRe);
+        message.channel
+          .send(`Please wait until the order is finished`)
+          .then(msg => {
+            message.guild.members.forEach(m => {
+              message.guild.member(m).removeRole(role1.id);
+            });
+            msg.edit(`** <a:yes:643037581222739978>  Done...**`);
+          });
+      }
+      if (role) {
+        let role1 = message.guild.roles.find("name", role);
+        const ee = new Discord.RichEmbed()
+          .setDescription("I Cann’t Find This Role")
+          .setFooter(
+            "Requested By : " + message.author.username,
+            message.author.avatarURL
+          );
+        if (!role1) return message.channel.send(ee);
+        message.channel
+          .send(`Please wait until the order is finished`)
+          .then(msg => {
+            message.guild.members
+              .filter(m => m.user.bot == true)
+              .forEach(m => {
+                message.guild.member(m).addRole(role1);
+              });
+            msg.edit(
+              `** <a:yes:643037581222739978>  Done...\n**` +
+                role1.name +
+                `** Has Given To __${message.guild.members.size}__ Member**`
+            );
+          });
+      }
     }
   }
 });
-
  
+client.on("message", message => {
+  let args = message.content.split(" ").slice(1);
+  if (message.content.startsWith(prefix + "rmrole")) {
+    if (!message.member.hasPermission("MANAGE_ROLES"))
+      return message.channel.send("**You dont have** `MANAGE_ROLES`");
+    let member = message.mentions.users.first();
+    let role = args
+      .join(" ")
+      .replace(member, "")
+      .replace(args[0], "")
+      .replace(" ", "");
+    console.log(role);
+    if (member) {
+      if (role.startsWith(".")) {
+        let roleRe = args
+          .join(" ")
+          .replace(member, "")
+          .replace(args[0], "")
+          .replace("-", "")
+          .replace(" ", "");
+        console.log(roleRe);
+        let role1 = message.guild.roles.find("name", roleRe);
+        console.log(`hi`);
+        const ee = new Discord.RichEmbed()
+          .setDescription(
+            "**<a:no:643037582296612864> I can’t find the role.**"
+          )
+          .setFooter(
+            "Requested By " + message.author.username,
+            message.author.avatarURL
+          );
+        if (!role1) return message.channel.send(ee);
+        message.guild.member(member).removeRole(role1.id);
+ 
+        const e = new Discord.RichEmbed()
+ 
+          .setDescription(
+            ":white_check_mark:** Pull Role For **" +
+              member +
+              "**,** " +
+              "**" +
+              "-" +
+              role1.name +
+              "**"
+          )
+          .setFooter(
+            "Requested By " + message.author.username,
+            message.author.avatarURL
+          )
+          .setColor("BLACK");
+        message.channel.send(e);
+      } else if (!role.startsWith(">")) {
+        let roleRe = args
+          .join(" ")
+          .replace(member, "")
+          .replace(args[0], "")
+          .replace("-", "")
+          .replace(" ", "");
+        let role1 = message.guild.roles.find("name", roleRe);
+        const ee = new Discord.RichEmbed()
+          .setDescription(
+            "**<a:no:643037582296612864> I can’t find the role.**"
+          )
+          .setFooter(
+            "Requested By : " + message.author.username,
+            message.author.avatarURL
+          );
+        if (!role1) return message.channel.send(ee);
+        message.guild.member(member).removeRole(role1);
+        const e = new Discord.RichEmbed()
+ 
+          .setDescription(
+            "<a:yes:643037581222739978>** Pull Role For **" +
+              member +
+              "**,** " +
+              "**" +
+              "+" +
+              role1.name +
+              "**"
+          )
+          .setFooter(
+            "Requested By : " + message.author.username,
+            message.author.avatarURL
+          )
+          .setColor("BLACK");
+        message.channel.send(e);
+      } else {
+        message.reply(`Please name role`);
+      }
+    } else if (args[0] == "all") {
+      if (role.startsWith(".")) {
+        let roleRe = args
+          .join(" ")
+          .replace(member, "")
+          .replace(args[0], "")
+          .replace("-", "")
+          .replace(" ", "");
+        let role1 = message.guild.roles.find("name", roleRe);
+        message.channel
+          .send(`Please wait until the order is finished`)
+          .then(msg => {
+            message.guild.members.forEach(m => {
+              message.guild.member(m).removeRole(role1.id);
+            });
+            msg.edit(
+              `** <a:yes:643037581222739978>   Done...\n**` +
+                role1.name +
+                `** Has Pull From __${message.guild.members.size}__ Member**`
+            );
+          });
+      }
+      if (role) {
+        let role1 = message.guild.roles.find("name", role);
+        if (!role1) return;
+        message.channel
+          .send(`Please wait until the order is finished`)
+          .then(msg => {
+            message.guild.members.forEach(m => {
+              message.guild.member(m).removeRole(role1);
+            });
+            msg.edit(
+              `** <a:yes:643037581222739978>   Done...\n**` +
+                role1.name +
+                `** Has Pull To __${message.guild.members.size}__ Members **`
+            );
+          });
+      }
+    } else if (args[0] == "humans") {
+      if (role.startsWith(".")) {
+        let roleRe = args
+          .join(" ")
+          .replace(member, "")
+          .replace(args[0], "")
+          .replace("-", "")
+          .replace(" ", "");
+        let role1 = message.guild.roles.find("name", roleRe);
+        message.channel
+          .send(`Please wait until the order is finished`)
+          .then(msg => {
+            message.guild.members.forEach(m => {
+              message.guild.member(m).removeRole(role1.id);
+            });
+            msg.edit(
+              `** <a:yes:643037581222739978>   Done...\n**` +
+                role1.name +
+                `** Has Pull From __${message.guild.members.size}__ Member**`
+            );
+          });
+      }
+ 
+      if (role) {
+        let role1 = message.guild.roles.find("name", role);
+ 
+        const ee = new Discord.RichEmbed()
+          .setDescription("I Cann’t Find This Role")
+          .setFooter(
+            "Requested By : " + message.author.username,
+            message.author.avatarURL
+          );
+        if (!role1) return message.channel.send(ee);
+        message.channel
+          .send(`Please wait until the order is finished`)
+          .then(msg => {
+            message.guild.members
+              .filter(m => m.user.bot == false)
+              .forEach(m => {
+                message.guild.member(m).removeRole(role1);
+              });
+            msg.edit(`** <a:yes:643037581222739978> Done...**`);
+          });
+      }
+    } else if (args[0] == "bots") {
+      if (role.startsWith(".")) {
+        let roleRe = args
+          .join(" ")
+          .replace(member, "")
+          .replace(args[0], "")
+          .replace("-", "")
+          .replace(" ", "");
+        let role1 = message.guild.roles.find("name", roleRe);
+        message.channel
+          .send(`Please wait until the order is finished`)
+          .then(msg => {
+            message.guild.members.forEach(m => {
+              message.guild.member(m).removeRole(role1.id);
+            });
+            msg.edit(`** <a:yes:643037581222739978> Done...**`);
+          });
+      }
+      if (role) {
+        let role1 = message.guild.roles.find("name", role);
+        const ee = new Discord.RichEmbed()
+          .setDescription("I Cann’t Find This Role")
+          .setFooter(
+            "Requested By : " + message.author.username,
+            message.author.avatarURL
+          );
+        if (!role1) return message.channel.send(ee);
+        message.channel
+          .send(`Please wait until the order is finished`)
+          .then(msg => {
+            message.guild.members
+              .filter(m => m.user.bot == true)
+              .forEach(m => {
+                message.guild.member(m).removeRole(role1);
+              });
+            msg.edit(
+              `** <a:yes:643037581222739978>  Done...\n**` +
+                role1.name +
+                `** rank has been pull To __${message.guild.members.size}__ Member**`
+            );
+          });
+      }
+    }
+  }
+});
  const rWlc = JSON.parse(fs.readFileSync("./AutoRole.json", "utf8"));
 client.on('message', message => {
 if(message.channel.type === "dm") return;
