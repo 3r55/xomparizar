@@ -1516,7 +1516,7 @@ client.on("guildKickAdd", async (guild, user) => {
   fs.writeFile("./antigreff.json", JSON.stringify(anti, null, 2), function(e) {
     if (e) throw e;
   });
-
+}); ////////////////mrfix
 var guild = []
 
 client.on("guildMemberRemove", async member => {
