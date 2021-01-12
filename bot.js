@@ -2524,15 +2524,14 @@ client.on('message', async message =>{
     let role = new Discord.RichEmbed()
   .setDescription(`
    Add role
-  _________________________________
+ 
   ${prefix}role @mention <role name>
   ${prefix}role all <role name>  
   ${prefix}role humans <role name> 
   ${prefix}role bots <role name>
-  ___________________________
-
-   Remove role
-  ___________________________
+   
+  Remove role
+ 
   ${prefix}rmrole <@mention> <role name>
   ${prefix}rmrole all <role name> 
   ${prefix}rmrole humans <role name>  
