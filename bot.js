@@ -179,7 +179,7 @@ client.on("message", message => {
 const antispam = JSON.parse(fs.readFileSync("./antispam.json", "utf8"));
  
 client.on("message", async message => {
-var prefix = "#"
+
   if (antispam[message.author.id] == undefined) {
     antispam[message.author.id] = {
     lastmessage: "none"
