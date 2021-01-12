@@ -3334,26 +3334,24 @@ client.on("message", message => {
     );
   }
 });
+client.on('message', message => {
+  if (message.content.startsWith(prefix +"avatar")) {
+if(!message.channel.guild) return;
+      var mentionned = message.mentions.users.first();
+  var client;
+    if(mentionned){
+        var client = mentionned; } else {
+        var client = message.author;
+    }
+      const embed = new Discord.RichEmbed()
+                         .addField('Requested by:', "<@" + message.author.id + ">")
+      .setColor("BLACK")
+      .setImage(`${client.avatarURL}`)
+      .setFooter("BLACK BOT")
+    message.channel.sendEmbed(embed);
+  }
+});
 
-client.on("message", message => {
-  if (message.content.startsWith(prefix + "avatar")) {
-    if (message.author.bot || message.channel.type == "dm") return;
-    var args = message.content.split(" ")[1];
-    var avt = args || message.author.id;
-    client
-      .fetchUser(avt)
-      .then(user => {
-        avt = user;
-        let avtEmbed = new Discord.RichEmbed()
-          .setColor("#36393e")
-          .setAuthor(`${avt.username}'s Avatar`, message.author.avatarURL)
-          .setImage(avt.avatarURL)
-          .setFooter(`BLACK BOT`, message.client.user.avatarURL);
-        message.channel.send(avtEmbed);
-      })
-      .catch(() => message.channel.send(`Error`));
-  } // 
-}); // 
 client.on("message", async msg => {
   if (msg.channel.type === "dm") return;
   if (msg.author.bot) return;
