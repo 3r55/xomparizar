@@ -47,8 +47,8 @@ client.on("message", async msg => {
       .addField("**📅Time guild created**: ", w3 + "/" + w2 + "/" + w1)
       .addField("**👑Owner ship **: ", msg.guild.owner)
       .addField("**👥Member count**: ", msg.guild.memberCount)
-      .addField("**Level server**: ", msg.guild.verificationLevel)
-      .addField("**Region server**: ", msg.guild.region)
+      .addField("**↗️Level server**: ", msg.guild.verificationLevel)
+      .addField("**🌎Region server**: ", msg.guild.region)
       .addField("**Channel counts**: ", msg.guild.channels.size)
       .addField("**Roles counts**: ", msg.guild.roles.size)
       .setColor("BLACK")
@@ -2551,6 +2551,7 @@ client.on("message", message => {
  b!paper
  b!scissors
  b!xo
+ b!kill
  b!win
        `);
    message.channel.sendEmbed(embed);
@@ -3724,7 +3725,6 @@ client.on("message", message => {
       .setFooter(message.author.username, message.author.avatarURL)
       .setTitle("🌍| زانیاری سێرڤەر ", `__${message.guild.name}__`)
       .addBlankField(true) //Black jack
-      .addField("ژمارەی بۆتەکان",`__${message.guild.members.filter(m => m.user.bot).size}__`)
       .addField("ژمارەی میبەرەکان", `__${message.guild.memberCount}__`);
   message.channel.send(Black);
 });
@@ -3969,23 +3969,49 @@ client.on("message", message => {
     message.channel.send(move);
   }
 }); ////black jack
-client.on('message', function(msg) {
-    if(msg.content.startsWith (prefix  + 'server')) {
-      let embed = new Discord.RichEmbed()
-      .setColor('RANDOM')
-      .setThumbnail(msg.guild.iconURL)
-      .setTitle(`**Showing Details Of** ${msg.guild.name}`)
-      .addField('`Server Region`',`[${msg.guild.region}]`,true)
-      .addField('`Roles Count`',`[${msg.guild.roles.size}]`,true)
-      .addField('`Members Count`',`[${msg.guild.memberCount}]`,true)
-      .addField('`Online Members`',`[${msg.guild.members.filter(m=>m.presence.status == 'online').size}]`,true)
-      .addField('`Text Channels`',`[${msg.guild.channels.filter(m => m.type === 'text').size}]`,true)
-      .addField('`Voice Channels`',`[${msg.guild.channels.filter(m => m.type === 'voice').size}]`,true)
-      .addField('`Server Owner`',`**${msg.guild.owner}**`,true)
-      .addField('`Server Id`',`**${msg.guild.id}**`,true)
-      .addField('`Server was created in`',msg.guild.createdAt.toLocaleString())
-      msg.channel.send({embed:embed})
+client.on("message", message => {
+  if (!message.content.startsWith(prefix)) return;
+  if (!message.channel.guild)
+    return message.reply("** This command only for servers **");
+  let command = message.content.split(" ")[0];
+  command = command.slice(prefix.length);
+  if (command === "kill") {
+    var sabotage = message.mentions.users.first();
+    if (sabotage == message.author)
+      return message.reply(`**No please menition user**`);
+    if (sabotage === client.user) return message.reply(`**Why?**`);
+    if (sabotage < 1) {
+      message.delete();
+      return message.channel.sendMessage(
+        "Put something to kill like mention your username or use an emoji"
+      );
     }
+    if (!sabotage)
+      return message.channel.send(`Please Mention A Member to Kill :warning:`);
+    message.channel.send("▄︻̷̿┻̿═━一 ${sabotage").then(msg => {
+      msg.edit(`▄︻̷̿┻̿═━一 ${sabotage} :three:`);
+      setTimeout(function() {
+        msg.edit(`▄︻̷̿┻̿═━一 ${sabotage} :two:`);
+      }, 1000);
+      setTimeout(function() {
+        msg.edit(`▄︻̷̿┻̿═━一 ${sabotage} :one:`);
+      }, 2000);
+      setTimeout(function() {
+        msg.edit(`▄︻̷̿┻̿═━一 :boom:`);
+      }, 3000);
+      setTimeout(function() {
+        msg.edit(`▄︻̷̿┻̿═━一 :fire:`);
+      }, 4000);
+      setTimeout(function() {
+        msg.edit(`▄︻̷̿┻̿═━一 :skull:`);
+      }, 5000);
+      msg.delete(6000);
+      message.delete();
+    });
+    message.channel
+      .send("**** The crime has been successfully hidden 🕳 **")
+      .then(msg => msg.delete(7000));
+  }
 });
 
 let xp = require('./xp.json'); // {} و ضع به xp.json اصنع ملف باسم
