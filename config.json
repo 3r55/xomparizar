@@ -61,5 +61,8 @@
     "kickLimits": 3,
     "roleCrLimits": 3,
     "time": 30
+  },
+  "692047596075745280": {
+    "onoff": true
   }
 }
