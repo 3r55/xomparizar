@@ -34,6 +34,28 @@ client.on("ready", () => {
   console.log(`Logined`);
 });
 
+client.on("message", async msg => {
+ 
+  if (msg.content === prefix + "server") {
+    var w1 = msg.guild.createdAt.getFullYear();
+    var w2 = msg.guild.createdAt.getMonth();
+    var w3 = msg.guild.createdAt.getDate();
+    let embed = new Discord.RichEmbed()
+      .addField("**🆎Name server** :", msg.guild.name)
+      .addField("**📷Photo server**: ", msg.guild.iconURL)
+      .addField("**🆔Id server**:", msg.guild.id)
+      .addField("**📅Time guild created**: ", w3 + "/" + w2 + "/" + w1)
+      .addField("**👑Owner ship **: ", msg.guild.owner)
+      .addField("**👥Member count**: ", msg.guild.memberCount)
+      .addField("**Level server**: ", msg.guild.verificationLevel)
+      .addField("**Region server**: ", msg.guild.region)
+      .addField("**Channel counts**: ", msg.guild.channels.size)
+      .addField("**Roles counts**: ", msg.guild.roles.size)
+      .setColor("BLACK")
+      .setFooter(`${msg.guild.name}`);
+    msg.channel.sendEmbed(embed);
+  }
+});
 
 client.on("message", message => {
   let command = message.content.split(" ")[0];
