@@ -63,6 +63,7 @@
     "onoff": true
   },
   "781145027866001429": {
-    "onoff": true
+    "onoff": true,
+    "roleDelLimit": "1"
   }
 }
