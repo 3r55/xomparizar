@@ -34,8 +34,6 @@ client.on("ready", () => {
   console.log(`Logined`);
 });
 
- 
-
 
 client.on("message", message => {
   let command = message.content.split(" ")[0];
