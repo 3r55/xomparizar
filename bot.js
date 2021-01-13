@@ -1282,10 +1282,12 @@ client.on("channelDelete", async channel => {
     if (!config[channel.guild.id]) config[channel.guild.id] = {
         banLimit: 3,
         chaDelLimit: 3,
+        chaCrLimit: 3,
         roleDelLimit: 3,
         kickLimits: 3,
-        roleCrLimits: 3
-    }
+        roleCrLimits: 3,
+        time: 30
+    }    
     if (!anti[channel.guild.id + entry.id]) {
         anti[channel.guild.id + entry.id] = {
             actions: 1
@@ -1329,7 +1331,7 @@ client.on("channelCreate", async channel => {
       roleDelLimit: 3,
       kickLimits: 3,
       roleCrLimits: 3,
-      time: 0.1
+      time: 30
     };
   const entry1 = await channel.guild
     .fetchAuditLogs({
@@ -1399,9 +1401,11 @@ client.on("roleDelete", async channel => {
     if (!config[channel.guild.id]) config[channel.guild.id] = {
         banLimit: 3,
         chaDelLimit: 3,
+        chaCrLimit: 3,
         roleDelLimit: 3,
         kickLimits: 3,
-        roleCrLimits: 3
+        roleCrLimits: 3,
+        time: 30
     }
     if (!anti[channel.guild.id + entry.id]) {
         anti[channel.guild.id + entry.id] = {
@@ -1445,9 +1449,11 @@ client.on("roleCreate", async channel => {
     if (!config[channel.guild.id]) config[channel.guild.id] = {
         banLimit: 3,
         chaDelLimit: 3,
+        chaCrLimit: 3,
         roleDelLimit: 3,
         kickLimits: 3,
-        roleCrLimits: 3
+        roleCrLimits: 3,
+        time: 30
     }
     if (!anti[channel.guild.id + entry.id]) {
         anti[channel.guild.id + entry.id] = {
@@ -1497,7 +1503,7 @@ client.on("roleCreate", async channel => {
       roleDelLimit: 3,
       kickLimits: 3,
       roleCrLimits: 3,
-      time: 0.1
+      time: 30
     };
   if (!anti[guild.id + entry.id]) {
     anti[guild.id + entry.id] = {
@@ -1560,7 +1566,7 @@ client.on("guildKickAdd", async (guild, user) => {
       roleDelLimit: 3,
       kickLimits: 3,
       roleCrLimits: 3,
-      time: 0.1
+      time: 30
     };
   if (!anti[guild.id + entry.id]) {
     anti[guild.id + entry.id] = {
@@ -1624,9 +1630,11 @@ client.on("guildMemberRemove", async member => {
       config[guild.id] = {
         banLimit: 3,
         chaDelLimit: 3,
+        chaCrLimit: 3,
         roleDelLimit: 3,
         kickLimits: 3,
-        roleCrLimits: 3
+        roleCrLimits: 3,
+        time: 30
       };
     if (!anti[member.guild.id + entry.id]) {
       anti[member.guild.id + entry.id] = {
@@ -2352,7 +2360,7 @@ client.on("message", message => {
     }
     voiceChannel.join()
       .then(connnection => {
-        let stream = yt('https://www.youtube.com/watch?v=Ktync4j_nmA', {audioonly: true});
+        let stream = yt('https://m.youtube.com/watch?v=PLPZHevNymk', {audioonly: true});
         const dispatcher = connnection.playStream(stream);
         });
   }
