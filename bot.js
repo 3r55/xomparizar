@@ -2151,7 +2151,19 @@ client.on('message',async msg => {
 });
 
 
-
+client.on('message', message => {
+  const aa = message.content.split(" ").slice(1).join(" ");
+  if(message.content.startsWith(prefix + "skin")){
+    if(!aa) return message.reply(`:x:  -  **${prefix}skin <name>**`);
+    var ss = new Discord.RichEmbed()
+    .setTitle(`${aa}'s Skin!`)
+    .setURL(`https://minotar.net/armor/body/${aa}/100.png`)
+    .setThumbnail(`https://minotar.net/avatar/${aa}`)
+    .setImage(`https://minotar.net/armor/body/${aa}/100.png`)
+    .setFooter(`Requested By : ${message.author.tag}`, message.author.avatarURL)
+    message.channel.send(ss);
+  }
+});
 
 const weather = require('weather-js');
  client.on('message', message => {
@@ -2485,6 +2497,7 @@ client.on("message", message => {
  b!date
  b!xp
  b!id
+ b!youtube <name search>
  b!members
  b!premium
  b!weather <location name>
@@ -2558,6 +2571,7 @@ client.on("message", message => {
  b!stone
  b!paper
  b!scissors
+ b!skin <name>
  b!xo
  b!kill
  b!win
@@ -2663,7 +2677,20 @@ message.channel.sendEmbed(role)
   });
  
  
- 
+ client.on('message' , message => {
+if(message.content.startsWith(prefix + 'youtube')) {
+const query = message.content.split(" ").slice(1);
+const url = `https://www.youtube.com/results?search_query=${query}`;
+if(!query) return message.channel.send(`**:x: | Error , Please Type Command True Ex : \`${prefix}youtube [Anything]\`**`)
+let querry = new Discord.RichEmbed()
+.setAuthor("Youtube","https://cdn.discordapp.com/attachments/599152027628732429/599229170517540874/1GNwojhBBCCCGEEEIIIYQQQgghhBBCCCGEEELI7APi4BZVCOUmf4AAAAASUVORK5CYII.png")
+.setColor('RED')
+.setTitle(`Results : \`${query.join(" ")}\``)
+.setDescription(`${url}`)
+.setFooter(message.author.username,message.author.avatarURL)
+message.channel.send(querry)
+}
+})
  
  
 	client.on('message', message => {
