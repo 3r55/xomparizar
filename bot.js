@@ -2391,7 +2391,68 @@ fs.writeFile("./blacklist.json", JSON.stringify(blacklist, null, 2), function (e
 client.on('guildMemberAdd',member=>{if(blacklist[member.guild.id+member.id])return member.ban('blacklist')})                          
 
 ///////////////
-
+client.on("message", message => {
+  if (message.author.bot) return;
+ 
+  let command = message.content.split(" ")[0];
+ 
+  if (command === "b!mute") {
+    if (!message.member.hasPermission("MANAGE_ROLES"))
+      return message
+        .reply("** You dont have 'Manage Roles' **")
+        .catch(console.error);
+    let user = message.mentions.users.first();
+    let modlog = client.channels.find("name", "log");
+    let muteRole = client.guilds
+      .get(message.guild.id)
+      .roles.find("name", "Muted");
+    if (!muteRole)
+      return message
+        .reply("**  dont have role 'Muted' **")
+        .catch(console.error);
+    if (message.mentions.users.size < 1)
+      return message
+        .reply("** Please menition user**")
+        .catch(console.error);
+ 
+    const embed = new Discord.RichEmbed()
+      .setColor(0x00ae86)
+      .setTimestamp()
+      .addField("Mute/ummute", "Uses")
+      .addField(
+        "Muted",
+        `${user.username}#${user.discriminator} (${user.id})`
+      )
+      .addField(
+        "By",
+        `${message.author.username}#${message.author.discriminator}`
+      );
+ 
+    if (
+      !message.guild
+        .member(client.user)
+        .hasPermission("MANAGE_ROLES_OR_PERMISSIONS")
+    )
+      return message
+        .reply("**You dont have Manage Roles **")
+        .catch(console.error);
+ 
+    if (message.guild.member(user).roles.has(muteRole.id)) {
+      return message
+        .reply("**:white_check_mark: .. Muted user**")
+        .catch(console.error);
+    } else {
+      message.guild
+        .member(user)
+        .addRole(muteRole)
+        .then(() => {
+          return message
+            .reply("**:white_check_mark: .. Muted user with text**")
+            .catch(console.error);
+        });
+    }
+  }
+});
 
 client.on('message',async msg => {
         if(msg.channel.type === "dm") return;
@@ -4719,7 +4780,7 @@ client.on("message", message => {
   if (command === prefix + "unmute") {
     if (!message.member.hasPermission("MANAGE_ROLES"))
       return message
-        .reply("** پێرمیشن نییە 'Manage Roles' **")
+        .reply("** You dont have 'Manage Roles' **")
         .catch(console.error);
     let user = message.mentions.users.first();
     let modlog = client.channels.find("name", "log");
@@ -4728,22 +4789,22 @@ client.on("message", message => {
       .roles.find("name", "Muted");
     if (!muteRole)
       return message
-        .reply("** ڕۆڵی میوتت نییە 'Muted' **")
+        .reply("** Don't have role Muted' **")
         .catch(console.error);
     if (message.mentions.users.size < 1)
       return message
-        .reply("** ئەبێت سەرەتا ناوی کەسەکە تاگ بکەی**")
+        .reply("** Menition user please**")
         .catch(console.error);
     const embed = new Discord.RichEmbed()
       .setColor(0x00ae86)
       .setTimestamp()
-      .addField("بەکارھێنان:", " بێدەنگ بە/قسەبکو")
+      .addField("Mute/unmute", "Uses")
       .addField(
-        "میوتەکە کرایەوە لە:",
+        "Unmute",
         `${user.username}#${user.discriminator} (${user.id})`
       )
       .addField(
-        "لە ڕێگەی:",
+        "By",
         `${message.author.username}#${message.author.discriminator}`
       );
  
@@ -4753,12 +4814,12 @@ client.on("message", message => {
         .hasPermission("MANAGE_ROLES_OR_PERMISSIONS")
     )
       return message
-        .reply("** پێرمیشنت نییە Manage Roles **")
+        .reply("** You dont have Manage Roles **")
         .catch(console.error);
  
     if (message.guild.member(user).removeRole(muteRole.id)) {
       return message
-        .reply("**:white_check_mark: .. میوتەکە لابرا لەسەر کەسەکە **")
+        .reply("**:white_check_mark: .. Unmuted user**")
         .catch(console.error);
     } else {
       message.guild
@@ -4766,7 +4827,7 @@ client.on("message", message => {
         .removeRole(muteRole)
         .then(() => {
           return message
-            .reply("**:white_check_mark: .. میوتەکە لابرا لەسەر کەسەکە **")
+            .reply("**:white_check_mark: .. Unmuted user**")
             .catch(console.error);
         });
     }
