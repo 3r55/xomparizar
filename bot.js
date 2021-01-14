@@ -270,32 +270,102 @@ client.on("message", async message => {
 
 
                   
+ const welcome = JSON.parse(fs.readFileSync('./welcomer.json' , 'utf8'));
  
-  
-
-const sWlc = {}
 client.on('message', message => {
-if(message.channel.type === "dm") return;
-if(message.author.bot) return;
-  if(!sWlc[message.guild.id]) sWlc[message.guild.id] = {
-    channel: "welcome"
+           if (!message.channel.guild) return;
+ 
+    let room = message.content.split(" ").slice(1);
+    let findroom = message.guild.channels.find('name', `${room}`)
+    if(message.content.startsWith(prefix + "setWelcomer")) {
+        if(!message.channel.guild) return message.reply('**This Command Only For Servers**');
+        if(!message.member.hasPermission('MANAGE_GUILD')) return message.channel.send('**Sorry But You Dont Have Permission** `MANAGE_GUILD`' );
+if(!room) return message.channel.send('Please Type The Channel Name')
+if(!findroom) return message.channel.send('Cant Find This Channel')
+let embed = new Discord.RichEmbed()
+.setTitle('**You Have been sucsfully selected a Welcome Channel.**')
+.addField('__Channel Name__:', `${room}`)
+.addField('__Requested By__:', `${message.author}`)
+.setThumbnail(message.author.avatarURL)
+.setFooter(`${client.user.username}`)
+message.channel.sendEmbed(embed)
+welcome[message.guild.id] = {
+channel: room,
+onoff: 'On',
+by: 'On',
+dm: 'Off'
 }
-const channel = sWlc[message.guild.id].channel
-  if (message.content.startsWith(prefix + "setwelcomer")) {
-    if(!message.member.hasPermission(`MANAGE_GUILD`)) return;
-    let newChannel = message.content.split(' ').slice(1).join(" ")
-    if(!newChannel) return message.reply(`**${prefix}setwelcomer <channel name>**`)
-    sWlc[message.guild.id].channel = newChannel
-    message.channel.send(`**${message.guild.name}'s channel has been changed to ${newChannel}**`);
-  }
-});
+fs.writeFile("./welcomer.json", JSON.stringify(welcome), (err) => {
+if (err) console.error(err)
+})
+    }})
+client.on('message', message => {
+ 
+    if(message.content.startsWith(prefix + "toggleWelcome")) {
+        if(!message.channel.guild) return message.reply('**This Command Only For Servers**');
+        if(!message.member.hasPermission('MANAGE_GUILD')) return message.channel.send('**Sorry But You Dont Have Permission** `MANAGE_GUILD`' );
+        if(!welcome[message.guild.id]) welcome[message.guild.id] = {
+          onoff: 'Off'
+        }
+          if(welcome[message.guild.id].onff === 'Off') return [message.channel.send(`**The Welcome Is __𝐎𝐍__ !**`), welcome[message.guild.id].onoff = 'On']
+          if(welcome[message.guild.id].onoff === 'On') return [message.channel.send(`**The Welcome Is __𝐎𝐅𝐅__ !**`), welcome[message.guild.id].onoff = 'Off']
+          fs.writeFile("./welcome.json", JSON.stringify(welcome), (err) => {
+            if (err) console.error(err)
+            .catch(err => {
+              console.error(err);
+          });
+            })
+          }
+ 
+        })
+ 
+        client.on('message', message => {
+ 
+    if(message.content.startsWith(prefix + "toggleDmWelcome")) {
+        if(!message.channel.guild) return message.reply('**This Command Only For Servers**');
+        if(!message.member.hasPermission('MANAGE_GUILD')) return message.channel.send('**Sorry But You Dont Have Permission** `MANAGE_GUILD`' );
+        if(!welcome[message.guild.id]) welcome[message.guild.id] = {
+          dm: 'Off'
+        }
+          if(welcome[message.guild.id].dm === 'Off') return [message.channel.send(`**The Welcome Dm Is __𝐎𝐍__ !**`), welcome[message.guild.id].dm = 'On']
+          if(welcome[message.guild.id].dm === 'On') return [message.channel.send(`**The Welcome Dm Is __𝐎𝐅𝐅__ !**`), welcome[message.guild.id].dm = 'Off']
+          fs.writeFile("./welcome.json", JSON.stringify(welcome), (err) => {
+            if (err) console.error(err)
+            .catch(err => {
+              console.error(err);
+          });
+            })
+          }
+ 
+        })
+ 
+        client.on('message', message => {
+ 
+            if(message.content.startsWith(prefix + "toggleInvitedby")) {
+                if(!message.channel.guild) return message.reply('**This Command Only For Servers**');
+                if(!message.member.hasPermission('MANAGE_GUILD')) return message.channel.send('**Sorry But You Dont Have Permission** `MANAGE_GUILD`' );
+                if(!welcome[message.guild.id]) welcome[message.guild.id] = {
+                  by: 'Off'
+                }
+                  if(welcome[message.guild.id].by === 'Off') return [message.channel.send(`**The Invited By Is __𝐎𝐍__ !**`), welcome[message.guild.id].by = 'On']
+                  if(welcome[message.guild.id].by === 'On') return [message.channel.send(`**The Invited By Is __𝐎𝐅𝐅__ !**`), welcome[message.guild.id].by = 'Off']
+                  fs.writeFile("./welcome.json", JSON.stringify(welcome), (err) => {
+                    if (err) console.error(err)
+                    .catch(err => {
+                      console.error(err);
+                  });
+                    })
+                  }
+ 
+                })
+ 
+ 
 client.on("guildMemberAdd", member => {
-      if(!sWlc[member.guild.id]) sWlc[member.guild.id] = {
-    channel: "welcome"
-  }
-  const channel = sWlc[member.guild.id].channel
-    const sChannel = sWlc[member.guild.id].channel
-    let welcomer = member.guild.channels.find('name', sChannel);
+            if(!welcome[member.guild.id]) welcome[member.guild.id] = {
+          onoff: 'Off'
+        }
+        if(welcome[member.guild.id].onoff === 'Off') return;
+    let welcomer = member.guild.channels.find('name', `${welcome[member.guild.id].channel}`)
     let memberavatar = member.user.avatarURL
       if (!welcomer) return;
       if(welcomer) {
@@ -305,68 +375,124 @@ client.on("guildMemberAdd", member => {
         .setColor('RANDOM')
         .setThumbnail(h.avatarURL)
         .setAuthor(h.username,h.avatarURL)
-        .addField(': Time created account',`${moment(member.user.createdAt).format('D/M/YYYY h:mm a')} **\n** \`${moment(member.user.createdAt).fromNow()}\``,true)
-         .addField(': Time joined server',`${moment(member.joinedAt).format('D/M/YYYY h:mm a ')} \n\`\`${moment(member.joinedAt).startOf(' ').fromNow()}\`\``, true)
+        .addField('Time created account',`${moment(member.user.createdAt).format('D/M/YYYY h:mm a')} **\n** \`${moment(member.user.createdAt).fromNow()}\``,true)
          .setFooter(`${h.tag}`,"https://images-ext-2.discordapp.net/external/JpyzxW2wMRG2874gSTdNTpC_q9AHl8x8V4SMmtRtlVk/https/orcid.org/sites/default/files/files/ID_symbol_B-W_128x128.gif")
      welcomer.send({embed:heroo});
-
-      var Canvas = require('canvas')
-      var jimp = require('jimp')
-
-      const w = ['./w1.png'];
+      }})
  
-      let Image = Canvas.Image,
-         canvas = new Canvas(400, 200),
-         ctx = canvas.getContext('2d');
-     fs.readFile(`${w[Math.floor(Math.random() * w.length)]}`, function (err, Background) {
-         if (err) return console.log(err);
-         let BG = Canvas.Image;
-         let ground = new Image;
-         ground.src = Background;
-         ctx.drawImage(ground, 0, 0, 400, 200);
-          
-      
+ 
+client.on('guildMemberAdd',async member => {
+            if(!welcome[member.guild.id]) welcome[member.guild.id] = {
+          onoff: 'Off'
+        }
+    if(welcome[member.guild.id].onoff === 'Off') return;
+    const Canvas = require('canvas');
+    const jimp = require('jimp');
+    const w = ['welcome_4.png'];
+          let Image = Canvas.Image,
+              canvas = new Canvas(800, 300),
+              ctx = canvas.getContext('2d');
+          ctx.patternQuality = 'bilinear';
+          ctx.filter = 'bilinear';
+          ctx.antialias = 'subpixel';
+          ctx.shadowColor = 'rgba(0, 0, 0, 0.4)';
+          ctx.shadowOffsetY = 2;
+          ctx.shadowBlur = 2;
+          ctx.stroke();
+          ctx.beginPath();
+ 
+          fs.readFile(`${w[Math.floor(Math.random() * w.length)]}`, function (err, Background) {
+              if (err) return console.log(err);
+              let BG = Canvas.Image;
+              let ground = new Image;
+              ground.src = Background;
+              ctx.drawImage(ground, 0, 0, 800, 300);
+ 
+  })
+ 
+                  let url = member.user.displayAvatarURL.endsWith(".webp") ? member.user.displayAvatarURL.slice(5, -20) + ".png" : member.user.displayAvatarURL;
+                  jimp.read(url, (err, ava) => {
+                      if (err) return console.log(err);
+                      ava.getBuffer(jimp.MIME_PNG, (err, buf) => {
+                   if (err) return console.log(err);
+ 
+            ctx.font = '36px Arial';
+            ctx.fontSize = '72px';
+            ctx.fillStyle = "#ffffff";
+            ctx.textAlign = "center";
+            ctx.fillText(member.user.username, 545, 177);
+ 
+            ctx.font = '16px Arial Bold';
+            ctx.fontSize = '72px';
+            ctx.fillStyle = "#ffffff";
+            ctx.textAlign = "center";
+            ctx.fillText(`${member.guild.memberCount} Members`, 580, 200);
+ 
+            let Avatar = Canvas.Image;
+            let ava = new Avatar;
+            ava.src = buf;
+            ctx.beginPath();
+            ctx.arc(169.5, 148, 126.9, -100, Math.PI * 2, true);
+            ctx.closePath();
+            ctx.clip();
+            ctx.drawImage(ava, 36, 21, 260, 260);
+ 
+            let c = member.guild.channels.find('name', `${welcome[member.guild.id].channel}`)
+            if(!c) return;
+            c.sendFile(canvas.toBuffer());
+ 
+  });
+  });
+  });
+ 
+  const invites = {};
+ 
+const wait = require('util').promisify(setTimeout);
+ 
+client.on('ready', () => {
+  wait(1000);
+ 
+  client.guilds.forEach(g => {
+    g.fetchInvites().then(guildInvites => {
+      invites[g.id] = guildInvites;
+    });
+  });
+});
+ 
+client.on('guildMemberAdd', member => {
+                    if(!welcome[member.guild.id]) welcome[member.guild.id] = {
+                  by: 'Off'
+                }
+    if(welcome[member.guild.id].by === 'Off') return;
+  member.guild.fetchInvites().then(guildInvites => {
+    const ei = invites[member.guild.id];
+    invites[member.guild.id] = guildInvites;
+    const invite = guildInvites.find(i => ei.get(i.code).uses < i.uses);
+    const inviter = client.users.get(invite.inviter.id);
+    const logChannel = member.guild.channels.find(channel => channel.name === `${welcome[member.guild.id].channel}`);
+    if(!logChannel) return;
+      setTimeout(() => {
+    logChannel.send(`**Invited By :** <@${inviter.id}>`);
+  },2000)
+  });
+});
+ 
+client.on("guildMemberAdd", member => {
+                    if(!welcome[member.guild.id]) welcome[member.guild.id] = {
+                  dm: 'Off'
+                }
+        if(welcome[member.guild.id].dm === 'Off') return;
+  member.createDM().then(function (channel) {
+  return channel.send(` Welcome to the Server :bouquet: 
+.
+**__Name__ : ${member} :dove: 
+__Member No.__ : ${member.guild.memberCount} :herb: 
+** `)
+}).catch(console.error)
+})
+  
 
-             let url = member.user.displayAvatarURL.endsWith(".webp") ? member.user.displayAvatarURL.slice(100) + ".png" : member.user.displayAvatarURL;
-             jimp.read(url, (err, ava) => {
-                 if (err) return console.log(err);
-                 ava.getBuffer(jimp.MIME_PNG, (err, buf) => {
-                     if (err) return console.log(err);
-                    
-                     ctx.font = "bold 12px Arial";
-                     ctx.fontSize = '20px';
-                     ctx.fillStyle = "#f1f1f1";
-                     ctx.textAlign = "center";
-                     ctx.fillText(`Welcome To ${member.guild.name}`, 300, 130);
-                    
-                     ctx.font = "bold 12px Arial";
-                     ctx.fontSize = '20px';
-                     ctx.fillStyle = "#f1f1f1";
-                     ctx.textAlign = "center";
-                     ctx.fillText(member.user.username, 200, 150);
 
-             let Avatar = Canvas.Image;
-                           let ava = new Avatar;
-                           ava.src = buf;
-                           ctx.beginPath();
-                           ctx.arc(77, 101, 62, 0, Math.PI*2);
-                           ctx.stroke();
-                              ctx.clip();
-                              ctx.drawImage(ava, 13, 38, 128, 126);  
-                      
-            
-         
-    welcomer.sendFile(canvas.toBuffer())
-
-
-
-      })
-      })
-
-      }
-     )}
-
-    })
 
  
  
@@ -2266,48 +2392,7 @@ client.on('guildMemberAdd',member=>{if(blacklist[member.guild.id+member.id])retu
 
 ///////////////
 
-client.on("message", async function (message) {
-if(message.author.bot) return;
-if(!message.guild) return;
-var args = message.content.split(" ");
-var cmd = args[0].slice(prefix.length).toLowerCase();
-if(!message.content.startsWith(prefix)) return;
-switch (cmd) {
-case 'mute':
-let tomute = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[1]));
-if(!tomute) return message.reply("**❌ | Couldn't find user**");
-if(tomute.hasPermission("MANAGE_MESSAGES")) return message.reply("**❌ | Can't mute them!**");
-if(!message.member.hasPermission('MUTE_MEMBERS')) return message.channel.send(`**❌ | You don\'t have permission**`)
-if(!message.guild.member(client.user).hasPermission("MUTE_MEMBERS")) return message.channel.send(`**❌ | I don\'t have permission**`)
-let muterole = message.guild.roles.find(`name`, "Shutted");
-if(!muterole){
-try{
-muterole = await message.guild.createRole({
-name: "MUTED",
-color: "#000000",
-permissions:[]
-})
-message.guild.channels.forEach(async (channel, id) => {
-await channel.overwritePermissions(muterole, {
-SEND_MESSAGES: false,
-ADD_REACTIONS: false
-});
-});
-}catch(e){
-console.log(e.stack);
-}
-}
-let mutetime = args[2];
-if(!mutetime) return message.reply("**❌ | Please type time**");
-await(tomute.addRole(muterole.id));
-message.reply(`**<@${tomute.id}> has been muted for ${ms(ms(mutetime))} **`);
-setTimeout(function(){
-tomute.removeRole(muterole.id);
-message.channel.send(`**<@${tomute.id}> has been unmuted!**`);
-}, ms(mutetime));
-break;
-}
-});
+
 client.on('message',async msg => {
         if(msg.channel.type === "dm") return;
      if(msg.author.bot) return;
@@ -2669,7 +2754,10 @@ client.on("message", message => {
  b!setstats
  b!nick,help nick
  b!listbans
- b!setwelcomer <channel name>
+ b!setWelcomer <channel name>
+ b!toggleWelcome on/off
+ b!toggleDmWelcome on/off
+ b!toggleInvitedBy on/off
  b!setCount
  b!setDate
  b!autorole <role name>
