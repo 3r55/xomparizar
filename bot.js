@@ -2158,6 +2158,7 @@ client.on("message", async function (message) {
     var args = message.content.split(" ");
     var cmd = args[0].toLowerCase();
     if (!message.content.startsWith(prefix)) return;
+ 
   if(message.content.startsWith(prefix + "top text")) {
             var topArray = Object.values(top[message.guild.id]);
             var num = 0;
