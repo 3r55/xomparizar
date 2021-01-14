@@ -1,6 +1,7 @@
 {
   "720261793192345641": {
-    "onoff": true
+    "onoff": true,
+    "banLimit": "1"
   },
   "797438639411167232": {
     "onoff": true
