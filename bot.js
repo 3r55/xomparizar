@@ -398,8 +398,14 @@ client.on("guildMemberAdd", member => {
         .setColor('RANDOM')
         .setThumbnail(h.avatarURL)
         .setAuthor(h.username,h.avatarURL)
-        .addField('Time created account',`${moment(member.user.createdAt).format('D/M/YYYY h:mm a')} **\n** \`${moment(member.user.createdAt).fromNow()}\``,true)
-         .setFooter(`${h.tag}`,"https://images-ext-2.discordapp.net/external/JpyzxW2wMRG2874gSTdNTpC_q9AHl8x8V4SMmtRtlVk/https/orcid.org/sites/default/files/files/ID_symbol_B-W_128x128.gif")
+        .addField(':bust_in_silhouette: | name : ', `${member}`)
+        .addField(':microphone2: | Welcome!', `Welcome to the server, ${member}`)
+        .addField(':id: | User :', "**[" + `${member.id}` + "]**")
+        .addField(':family_mwgb: | Your are the member', `${member.guild.memberCount}`)
+        .addField('Server', `${member.guild.name}`, true )
+        .addField("⌚️Time joined server", member.guild.joinedAt ,)
+        .addField("⌚️Time created Account", member.user.createdAt ,)
+        .setFooter(`${h.tag}`,"https://images-ext-2.discordapp.net/external/JpyzxW2wMRG2874gSTdNTpC_q9AHl8x8V4SMmtRtlVk/https/orcid.org/sites/default/files/files/ID_symbol_B-W_128x128.gif")
      welcomer.send({embed:heroo});
       }})
  
