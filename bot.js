@@ -2738,19 +2738,15 @@ client.on("message", message => {
  b!undeafen,deafen
  b!info arole
  b!hide all,b!unhide all
- b!setstats
  b!nick,help nick
  b!listbans
  b!setWelcomer <channel name>
  b!toggleWelcome on/off
  b!toggleDmwelcome on/off
  b!toggleInvitedby on/off
- b!setCount
- b!setDate
  b!autorole <role name>
  b!setTime
- b!setbotv
- b!setmember
+ b!setstats
       
        `);
    message.channel.sendEmbed(embed);
@@ -2777,15 +2773,12 @@ client.on("message", message => {
  b!draw <name>
  b!id
  b!youtube <name search>
- b!members
- b!premium
  b!weather <location name>
  b!guild
  b!avatar
  b!top 
  b!top voice 
  b!top text
- b!quran
  b!report
  b!sbot
  b!say,embed
@@ -2871,17 +2864,17 @@ client.on("message", m => {
 client.on('message', message => {
         if(message.content.startsWith(prefix + 'deafen')) {
       if (message.mentions.users.size === 0 && message.mentions.roles.size === 0) {
-        return message.reply('**کەسەکە دیاری بکە**❌').catch(console.error);
+        return message.reply('**Menition member**❌').catch(console.error);
       }
       if (!message.guild.member(client.user).hasPermission('DEAFEN_MEMBERS')) {
-        return message.reply('ناتوانم میوتی بکەم**❌').catch(console.error);
+        return message.reply('I dont have premission**❌').catch(console.error);
       }
  
       const deafenMember = (member) => {
         if (!member || !member.voiceChannel) return;
         if (member.serverDeaf) return message.channel.send(`${member} **دیفێند کرا**:x:`);
         member.setDeaf(true).catch(console.error);
-        if(!message.member.hasPermission("DEAFEN_MEMBERS")) return message.channel.sendMessage("**ببورە ئەو رۆلەت نیە DEAFEN_MEMBER**❌ ").then(m => m.delete(5000));
+        if(!message.member.hasPermission("DEAFEN_MEMBERS")) return message.channel.sendMessage("**You dont have DEAFEN_MEMBER**❌ ").then(m => m.delete(5000));
       };
  
       message.mentions.users.forEach(user => deafenMember(message.guild.member(user)));
@@ -2895,11 +2888,11 @@ client.on('message', async message =>{
       if(message.content.startsWith(prefix + 'undeafen')) {
  
     if (message.mentions.users.size === 0 && message.mentions.roles.size === 0) {
-      return message.reply('**تکایە کەسەکە تاگ بکە**❌').catch(console.error);
+      return message.reply('**Please menition member**❌').catch(console.error);
     }
     if (!message.guild.member(client.user).hasPermission('DEAFEN_MEMBERS')) {
-      return message.reply('**ناتوانم دیفەیندی بکەم**❌ ').catch(console.error);
-      if(!message.member.hasPermission("DEAFEN_MEMBERS")) return message.channel.sendMessage("**ناتوانی ئەو کارە بکەی**❌ ").then(m => m.delete(5000));
+      return message.reply('**I dont undeafen member**❌ ').catch(console.error);
+      if(!message.member.hasPermission("DEAFEN_MEMBERS")) return message.channel.sendMessage("**You dont have premission Deafen member**❌ ").then(m => m.delete(5000));
     }
  
     const undeafenMember = (member) => {
@@ -2945,7 +2938,7 @@ message.channel.sendEmbed(role)
         if(!message.guild.member(client.user).hasPermission("MUTE_MEMBERS")) return message.reply("**من ئەو پێرمیشنەم نیە `MUTE_MEMBERS` Permission**").then(msg => msg.delete(6000))
  
       if(message.mentions.users.size === 0) {
-        return message.reply("کەسەکە تاگ بکە");
+        return message.reply("");
       }
       let muteMember = message.guild.member(message.mentions.users.first());
       if(!muteMember) {
@@ -4485,37 +4478,7 @@ client.on("guildDelete", guild => {
   client.channels.get("792426159367127061").send(kickedbot);
 }); ////BY BLACK JACK
 
-client.on("message", message => {
-  if (!message.channel.guild) return;
-  if (message.content == prefix + "members")
-    var black = new Discord.RichEmbed()
-      .setThumbnail(message.author.avatarURL)
-      .setFooter(message.author.username, message.author.avatarURL)
-      .setTitle("🙆| INFO MEMBER")
-      .addBlankField(true)
-      .addField(
-        "🐸| ONLINE MEMBER",
-        `${
-          message.guild.members.filter(m => m.presence.status == "online").size
-        }`
-      )
-      .addField(
-        "😡| DND",
-        `${message.guild.members.filter(m => m.presence.status == "dnd").size}`
-      )
-      .addField(
-        "🐨| IDLE",
-        `${message.guild.members.filter(m => m.presence.status == "idle").size}`
-      )
-      .addField(
-        "😴| OFFLINE",
-        `${
-          message.guild.members.filter(m => m.presence.status == "offline").size
-        }`
-      )
-      .addField("👨‍👨‍👧‍👧| ALL MEMBERS", `${message.guild.memberCount}`);
-  message.channel.send(black);
-});
+
 
 
  const temp = {}; 
@@ -4892,152 +4855,11 @@ client.on("message", message => {
   }
 });
 
-client.on("message", async message => {
-  if (message.content.startsWith(prefix + "setVoice")) {
-    if (!message.guild.member(message.author).hasPermissions("MANAGE_CHANNELS"))
-      return message.reply("BBWRA ROLET NYA");
-    if (
-      !message.guild
-        .member(client.user)
-        .hasPermissions(["MANAGE_CHANNELS", "MANAGE_ROLES_OR_PERMISSIONS"])
-    )
-      return message.reply("BBWRA ROLET NYA");
-    message.channel.send("ZHWRAKA DRWST BW");
-    message.guild
-      .createChannel(
-        `Voice Online : [ ${
-          message.guild.members.filter(m => m.voiceChannel).size
-        } ]`,
-        "voice"
-      )
-      .then(c => {
-        console.log(
-          `Voice online channel setup for guild: \n ${message.guild.name}`
-        );
-        c.overwritePermissions(message.guild.id, {
-          CONNECT: false,
-          SPEAK: false
-        });
-        setInterval(function() {
-          c.setName(
-            `Voice Online : [ ${
-              message.guild.members.filter(m => m.voiceChannel).size
-            } ]`
-          );
-        }, 1000);
-      });
-  }
-});
 
-client.on("message", async message => {
-  if (message.content.startsWith(prefix + "setCount")) {
-    if (!message.guild.member(message.author).hasPermissions("MANAGE_CHANNELS"))
-      return message.reply("BBWRA AW ROLAT NYA");
-    if (
-      !message.guild
-        .member(client.user)
-        .hasPermissions(["MANAGE_CHANNELS", "MANAGE_ROLES_OR_PERMISSIONS"])
-    )
-      return message.reply("BBWRA AW ROLAT NYA");
-    message.channel.send("ZHWRAKA DRWST BW");
-    message.guild
-      .createChannel(
-        `Members Count : [ ${message.guild.members.size} ]`,
-        "voice"
-      )
-      .then(c => {
-        console.log(
-          `Count Members channel setup for guild: \n ${message.guild.name}`
-        );
-        c.overwritePermissions(message.guild.id, {
-          CONNECT: false,
-          SPEAK: false
-        });
-        setInterval(function() {
-          c.setName(`Members Count :  ${message.guild.memberCount} `);
-        }, 1000);
-      });
-  }
-});
 
-client.on("message", async message => {
-  if (message.content.startsWith(prefix + "setTime")) {
-    if (!message.guild.member(message.author).hasPermission("MANAGE_CHANNELS"))
-      return message.reply("BBWRA ROLET NYA");
-    if (
-      !message.guild
-        .member(client.user)
-        .hasPermission(["MANAGE_CHANNELS", "MANAGE_ROLES_OR_PERMISSIONS"])
-    )
-      return message.reply("BBWRA ROLET NYA");
-    message.channel.send("ZHWRAKA DRWST BW");
-    message.guild.createChannel("?? - Time  00", "voice").then(c => {
-      console.log(`Time channel setup for guild: \n ${message.guild.name}`);
-      c.overwritePermissions(message.guild.id, {
-        CONNECT: false,
-        SPEAK: false
-      });
-      setInterval(function() {
-        var currentTime = new Date(),
-          hours = currentTime.getHours() + 3,
-          minutes = currentTime.getMinutes(),
-          seconds = currentTime.getSeconds(),
-          years = currentTime.getFullYear(),
-          month = currentTime.getMonth(),
-          day = currentTime.getDate(),
-          week = currentTime.getDay();
 
-        if (minutes < 10) {
-          minutes = "0" + minutes;
-        }
-        var suffix = "AM";
-        if (hours >= 12) {
-          suffix = "PM";
-          hours = hours - 12;
-        }
-        if (hours == 0) {
-          hours = 12;
-        }
 
-        c.setName("?? - Time   ?" + hours + ":" + minutes + " " + suffix + "?");
-      }, 1000);
-    });
-  }
-});
 
-client.on("message", async message => {
-  if (message.content.startsWith(prefix + "setDate")) {
-    var currentTime = new Date(),
-      years = currentTime.getFullYear(),
-      month = currentTime.getMonth() + 1,
-      day = currentTime.getDate(),
-      week = currentTime.getDay();
-    if (!message.guild.member(message.author).hasPermissions("MANAGE_CHANNELS"))
-      return message.reply("? **ليس لديك الصلاحيات الكافية**");
-    if (
-      !message.guild
-        .member(client.user)
-        .hasPermissions(["MANAGE_CHANNELS", "MANAGE_ROLES_OR_PERMISSIONS"])
-    )
-      return message.reply("? **ليس معي الصلاحيات الكافية**");
-    message.channel.send("?| **تم عمل الروم بنجاح**");
-    message.guild
-      .createChannel(
-        "?? - Date " + "?" + day + "-" + month + "-" + years + "?",
-        "voice"
-      )
-      .then(c => {
-        console.log(`Date channel setup for guild: \n ${message.guild.name}`);
-        c.overwritePermissions(message.guild.id, {
-          CONNECT: false,
-          SPEAK: false
-        });
-        setInterval(function() {
-          c.setName("?? - Date " + "?" + day + "-" + month + "-" + years + "?");
-        }, 1000);
-      });
-  }
-});
 client.on('message', message => {
          if (message.content === prefix + "date") {
          if (!message.channel.guild) return message.reply('** This command only for servers **');  
@@ -5123,27 +4945,7 @@ client.on("message", async message => {
   }
 });
 
-client.on('typingStart', (ch, user) => {
-      if(user.presence.status === 'ofline') {
- 
-          ch.send(`${user}(:    خۆت ۆنلاین کەوە ساقیت`)    
-          .then(msg => {
-              msg.delete(10000)
-          })
-      }
-  })
 
-client.on("message", message => {
-  if (message.content === prefix + "premium") {
-    var start = moment()[(2019, 8, 6)];
-    var end = moment([2019, 9, 6]);
-    let embed = new Discord.RichEmbed().setColor("BLACK")
-      .setDescription(`Today is: \`${moment().format("dddd, MMMM Do YYYY")}\`
-School Date: \`2021/1/7\`
-Time left: \`${moment("20190901", "YYYYMMDD", true).fromNow()}\``);
-    message.channel.send(embed);
-  }
-});
 client.on("message", async message => {
   if (
     message.content.includes(
@@ -5222,7 +5024,7 @@ client.on("message", async message => {
     if (!muterole) {
       try {
         muterole = await message.guild.createRole({
-          name: "ZALAMY PSHT MOBILE",
+          name: "User bad Word",
           color: "#000000",
           permissions: []
         });
@@ -5310,171 +5112,9 @@ var mention= message.mentions.members.first()
             message.channel.sendEmbed(errora)
     })
 }});
-client.on('message', message => {
-	if(message.content.startsWith(prefix + 'quran')) {
-		message.delete();
-    const voiceChannel = message.member.voiceChannel;
-    if (!voiceChannel) return message.reply(`**بچۆ ڤۆیسێک**`);
-
-	let embed = new Discord.RichEmbed()
-    .setAuthor(`${message.author.tag}`, message.author.avatarURL)
-	.setColor('#000000')
-	.setFooter("صدقه جاريه للجميع", 'https://cdn.discordapp.com/avatars/474687430872793089/692c2796377c84d4edee0dcd1b59d7a9.jpg?size=128')
-      .setDescription(`
-     🕋 اوامر بوت القرآن الكريم 🕋
-🇦 القرآن كاملاً ماهر المعيقلي
-🇧 سورة البقرة كاملة للشيخ مشاري العفاسي
-🇨 سورة الكهف كاملة بصوت مشارى بن راشد العفاسي
-⏹ لإيقاف القرآن الكريم
-🇩 القرآن كاملاً عبدالباسط عبدالصمد
-🇪 القرآن كاملاً ياسر الدوسري
-🇫 سورة الواقعه بصوت الشيخ مشاري بن راشد العفاسي`)
-
-	message.channel.sendEmbed(embed).then(msg => {
-			msg.react('🇦')
-		.then(() => msg.react('🇧'))
-		.then(() => msg.react('🇨'))
-		.then(() => msg.react('⏹'))
-		.then(() => msg.react('🇩'))
-		.then(() => msg.react('🇪'))
-		.then(() => msg.react('🇫'))
-
-// Filters
-	let filter1 = (reaction, user) => reaction.emoji.name === '🇦' && user.id === message.author.id;
-	let filter2 = (reaction, user) => reaction.emoji.name === '🇧' && user.id === message.author.id;
-	let filter3 = (reaction, user) => reaction.emoji.name === '🇨' && user.id === message.author.id;
-	let filter4 = (reaction, user) => reaction.emoji.name === '⏹' && user.id === message.author.id;
-	let filter5 = (reaction, user) => reaction.emoji.name === '🇩' && user.id === message.author.id;
-	let filter6 = (reaction, user) => reaction.emoji.name === '🇪' && user.id === message.author.id;
-	let filter7 = (reaction, user) => reaction.emoji.name === '🇫' && user.id === message.author.id;
-
-// Collectors
-	let collector1 = msg.createReactionCollector(filter1, { time: 120000 });
-	let collector2 = msg.createReactionCollector(filter2, { time: 120000 });
-	let collector3 = msg.createReactionCollector(filter3, { time: 120000 });
-	let collector4 = msg.createReactionCollector(filter4, { time: 120000 });
-	let collector5 = msg.createReactionCollector(filter5, { time: 120000 });
-	let collector6 = msg.createReactionCollector(filter6, { time: 120000 });
-	let collector7 = msg.createReactionCollector(filter7, { time: 120000 });
 
 // Events
-collector1.on('collect', r => {
-    voiceChannel.join()
-      .then(connnection => {
-        const stream = ytdl("https://www.youtube.com/watch?v=Ktync4j_nmA", { filter: 'audioonly' });
-        const dispatcher = connnection.playStream(stream);
-        dispatcher.on('end', () => voiceChannel.leave());
-		collector1.stop();
-		collector2.stop();
-		collector3.stop();
-		collector4.stop();
-		collector5.stop();
-		collector6.stop();
-		collector7.stop();
-		embed.setDescription(`<@${message.author.id}> **تم تشغيل القرآن الكريم**`);
-		msg.edit(embed).then(msg.delete(5000));
-   });
-});
-collector2.on('collect', r => {
-    voiceChannel.join()
-      .then(connnection => {
-        const stream = ytdl("https://www.youtube.com/watch?v=qFq5h4wtjaM&t=30s", { filter: 'audioonly' });
-        const dispatcher = connnection.playStream(stream);
-        dispatcher.on('end', () => voiceChannel.leave());
-		collector1.stop();
-		collector2.stop();
-		collector3.stop();
-		collector4.stop();
-		collector5.stop();
-		collector6.stop();
-		collector7.stop();
-		embed.setDescription(`<@${message.author.id}> **تم تشغيل القرآن الكريم**`);
-		msg.edit(embed).then(msg.delete(5000));
-      });
-});
-collector3.on('collect', r => {
-    voiceChannel.join()
-      .then(connnection => {
-        const stream = ytdl("https://www.youtube.com/watch?v=8UWKiKGQmsE", { filter: 'audioonly' });
-        const dispatcher = connnection.playStream(stream);
-        dispatcher.on('end', () => voiceChannel.leave());
-		collector1.stop();
-		collector2.stop();
-		collector3.stop();
-		collector4.stop();
-		collector5.stop();
-		collector6.stop();
-		collector7.stop();
-		embed.setDescription(`<@${message.author.id}> **تم تشغيل القرآن الكريم**`);
-		msg.edit(embed).then(msg.delete(5000));
-      });
-});
-collector4.on('collect', r => {
-	if (message.guild.voiceConnection) message.guild.voiceConnection.disconnect();
-		collector1.stop();
-		collector2.stop();
-		collector3.stop();
-		collector4.stop();
-		collector5.stop();
-		collector6.stop();
-		collector7.stop();
-		embed.setDescription(`<@${message.author.id}> **تم إيقاف القرآن الكريم**`);
-		msg.edit(embed).then(msg.delete(5000));
-});
-collector5.on('collect', r => {
-    voiceChannel.join()
-      .then(connnection => {
-        const stream = ytdl("https://www.youtube.com/watch?v=vqXLGtZcUm8", { filter: 'audioonly' });
-        const dispatcher = connnection.playStream(stream);
-        dispatcher.on('end', () => voiceChannel.leave());
-		collector1.stop();
-		collector2.stop();
-		collector3.stop();
-		collector4.stop();
-		collector5.stop();
-		collector6.stop();
-		collector7.stop();
-		embed.setDescription(`<@${message.author.id}> **تم تشغيل القرآن الكريم**`);
-		msg.edit(embed).then(msg.delete(5000));
-      });
-});
-collector6.on('collect', r => {
-    voiceChannel.join()
-      .then(connnection => {
-        const stream = ytdl("https://www.youtube.com/watch?v=WYT0pQne-7w", { filter: 'audioonly' });
-        const dispatcher = connnection.playStream(stream);
-        dispatcher.on('end', () => voiceChannel.leave());
-		collector1.stop();
-		collector2.stop();
-		collector3.stop();
-		collector4.stop();
-		collector5.stop();
-		collector6.stop();
-		collector7.stop();
-		embed.setDescription(`<@${message.author.id}> **تم تشغيل القرآن الكريم**`);
-		msg.edit(embed).then(msg.delete(5000));
-      });
-});
-collector7.on('collect', r => {
-    voiceChannel.join()
-      .then(connnection => {
-        const stream = ytdl("https://www.youtube.com/watch?v=LTRcg-gR78o", { filter: 'audioonly' });
-        const dispatcher = connnection.playStream(stream);
-        dispatcher.on('end', () => voiceChannel.leave());
-		collector1.stop();
-		collector2.stop();
-		collector3.stop();
-		collector4.stop();
-		collector5.stop();
-		collector6.stop();
-		collector7.stop();
-		embed.setDescription(`<@${message.author.id}> **تم تشغيل القرآن الكريم**`);
-		msg.edit(embed).then(msg.delete(5000));
-      });
-});
-})
-}
-});
+
 
 
 
