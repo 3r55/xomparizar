@@ -2938,15 +2938,15 @@ message.channel.sendEmbed(role)
         if(!message.guild.member(client.user).hasPermission("MUTE_MEMBERS")) return message.reply("**من ئەو پێرمیشنەم نیە `MUTE_MEMBERS` Permission**").then(msg => msg.delete(6000))
  
       if(message.mentions.users.size === 0) {
-        return message.reply("");
+        return message.reply("Menition user");
       }
       let muteMember = message.guild.member(message.mentions.users.first());
       if(!muteMember) {
-        return message.reply("دووبارە");
+        return message.reply("Restart");
       }
       muteMember.setMute(false);
       if(muteMember) {
-        message.channel.sendMessage("بەسەرکەوتوی میوت لادرا");
+        message.channel.sendMessage("Un mute member");
       }
     }
   });
@@ -2974,15 +2974,15 @@ message.channel.send(querry)
           if(!message.guild.member(client.user).hasPermission("MUTE_MEMBERS")) return message.reply("**I Don't Have `MUTE_MEMBERS` Permission**").then(msg => msg.delete(6000))
  
         if(message.mentions.users.size === 0) {
-          return message.reply("کەسەکە تاگ بکە");
+          return message.reply("Menition member");
         }
         let muteMember = message.guild.member(message.mentions.users.first());
         if(!muteMember) {
-          return message.reply("دووبارە");
+          return message.reply("Restart");
         }
         muteMember.setMute(true);
         if(muteMember) {
-          message.channel.sendMessage("بە سەرکەوتوی میوت کرا");
+          message.channel.sendMessage("Muted voice ");
         }
       }
     });
@@ -3101,68 +3101,6 @@ reaction2.on("collect", r => {
 })
 }
 });
-client.on('message' , message => {
-  if(message.author.bot) return;
-  if(message.content.startsWith(prefix + "xo")) {
- let array_of_mentions = message.mentions.users.array();
-  let symbols = [':o:', ':heavy_multiplication_x:']
-  var grid_message;
- 
-  if (array_of_mentions.length == 1 || array_of_mentions.length == 2) {
-    let random1 = Math.floor(Math.random() * (1 - 0 + 1)) + 0;
-    let random2 = Math.abs(random1 - 1);
-    if (array_of_mentions.length == 1) {
-      random1 = 0;
-      random2 = 0;
-    }
-    var player1_id = message.author.id
-    let player2_id = array_of_mentions[random2].id;
-    var turn_id = player1_id;
-    var symbol = symbols[0];
-    let initial_message = `٢ پلەیێر<@${player1_id}> and <@${player2_id}>!`;
-    if (player1_id == player2_id) {
-      initial_message += '\n_(لقد خسرت, العب مع نفسك :joy:)_'
-    }
-    message.channel.send(`Xo ${initial_message}`)
-    .then(console.log("Successful tictactoe introduction"))
-    .catch(console.error);
-    message.channel.send(':one::two::three:' + '\n' +
-                         ':four::five::six:' + '\n' +
-                         ':seven::eight::nine:')
-    .then((new_message) => {
-      grid_message = new_message;
-    })
-    .then(console.log("Successful tictactoe game initialization"))
-    .catch(console.error);
-    message.channel.send('Loading... Please wait for the :ok: reaction.')
-    .then(async (new_message) => {
-      await new_message.react('1⃣');
-      await new_message.react('2⃣');
-      await new_message.react('3⃣');
-      await new_message.react('4⃣');
-      await new_message.react('5⃣');
-      await new_message.react('6⃣');
-      await new_message.react('7⃣');
-      await new_message.react('8⃣');
-      await new_message.react('9⃣');
-      await new_message.react('🆗');
-      await new_message.edit(`It\'s <@${turn_id}>\'s اشتغل! الرمز هو ${symbol}`)
-      .then((new_new_message) => {
-        require('./xo.js')(client, message, new_new_message, player1_id, player2_id, turn_id, symbol, symbols, grid_message);
-      })
-      .then(console.log("Successful tictactoe listeprefix initialization"))
-      .catch(console.error);
-    })
-    .then(console.log("Successful tictactoe react initialization"))
-    .catch(console.error);
-  }
-  else {
-    message.channel.send(`زەرب *xo @uesr`)
-    .then(console.log("Successful error reply"))
-    .catch(console.error);
-  }
-}
- });  
 
 
 
@@ -3706,7 +3644,7 @@ client.on("message", message => {
     message.channel.send(
       `\`${
         message.guild.members.filter(m => m.presence.status !== "online",).size
-      }\` : ** ژمارەی ۆنلاینەکان** `
+      }\` : ** Member online count** `
     );
     message.delete();
   }
@@ -3761,7 +3699,7 @@ client.on("message", async msg => {
     if (!msg.guild.member(msg.author).hasPermission("MANAGE_CHANNELS"))
       return msg.reply("❌ **go play minecraft**");
     if (!msg.guild.member(client.user).hasPermission(["MANAGE_CHANNELS"]))
-      return msg.reply("❌ **بۆتەکە ئەو کردارەی بە دەست نییە**");
+      return msg.reply("❌ **I dont have premission MANAGE CHANNELS**");
     var ggg = msg.guild.createChannel("DATE AND TIME", "category").then(kk => {
       var ccc = msg.guild.createChannel("SERVER STATS", "voice").then(al => {
         var aa = msg.guild.createChannel("SERVER STATS", "voice").then(alp => {
@@ -4033,9 +3971,9 @@ client.on("message", message => {
     var Black = new Discord.RichEmbed()
       .setThumbnail(message.author.avatarURL)
       .setFooter(message.author.username, message.author.avatarURL)
-      .setTitle("🌍| زانیاری سێرڤەر ", `__${message.guild.name}__`)
+      .setTitle("🌍| Info member", `__${message.guild.name}__`)
       .addBlankField(true) //Black jack
-      .addField("ژمارەی میبەرەکان", `__${message.guild.memberCount}__`);
+      .addField("Member count", `__${message.guild.memberCount}__`);
   message.channel.send(Black);
 });
 client.on("message", async message => {
@@ -4201,30 +4139,7 @@ client.on("message", m => {
     m.channel.send({ embed });
   }
 });
-client.on("message", async message => {
-  if (message.content.startsWith(prefix + "setbotv")) {
-    if (!message.guild.member(message.author).hasPermissions("MANAGE_CHANNELS"))
-      return message.reply("**بداخۆ پێرمیشنەمەت MANAGE CHANNEL نیە**");
-    message.channel.send("✅| **بە سەرکەوتوی دروست بوو**");
-    message.guild
-      .createChannel(
-        `Online : [ ${message.guild.members.filter(m => m.user.bot).size} `,
-        "voice"
-      )
-      .then(c => {
-        console.log(`Done make room in: \n ${message.guild.name}`);
-        c.overwritePermissions(message.guild.id, {
-          CONNECT: false,
-          SPEAK: false
-        });
-        setInterval(() => {
-          c.setName(
-            `Bots:  ${message.guild.members.filter(m => m.user.bot).size} `
-          );
-        }, 1000);
-      });
-  }
-});
+
 
 client.on('message', message => {
 if (message.content.startsWith(prefix + 'my perms')) {
@@ -4249,11 +4164,11 @@ client.on("message", message => {
     );
     if (!message.channel.guild || message.author.bot) return;
     if (!message.guild.member(message.author).hasPermission("MOVE_MEMBERS"))
-      return message.channel.send("ببورە ئەم پێرمیشنەت نییە MOVE MEMBERS");
+      return message.channel.send("You dont have MOVE MEMBERS");
     if (!message.guild.member(client.user).hasPermission("MOVE_MEMBERS"))
-      return message.channel.send("ببورە ئەم پێرمیشنەت نییە MOVE MEMBERS");
+      return message.channel.send("I dont have MOVE MEMBERS");
     if (!message.member.voice.channel)
-      return message.channel.send("تکایە برۆ ڤۆیس ");
+      return message.channel.send("Go to voice please");
     if (!user)
       return message.channel.send(`**>>> ${prefix}move <@mention or id>`);
     if (!message.guild.member(user.id).voice.channel)
@@ -4265,7 +4180,7 @@ client.on("message", message => {
       .voice.setChannel(message.member.voice.channel.id)
       .then(() => {
         message.channel.send(
-          `**${user.user.username}** موڤ کرا✅ **${
+          `**${user.user.username}** Succes move member✅ **${
             message.guild.member(message.author).voice.channel.name
           }**`
         );
@@ -4413,31 +4328,7 @@ client.on("message", message => {
   }
 });
 
-client.on("message", async message => {
-  if (message.content.startsWith(prefix + "setmember")) {
-    if (!message.guild.member(message.author).hasPermissions("MANAGE_CHANNELS"))
-      return message.reply("❌ **بداخۆ ئەو رۆلەو نییە**");
-    if (
-      !message.guild
-        .member(client.user)
-        .hasPermissions(["MANAGE_CHANNELS", "MANAGE_ROLES_OR_PERMISSIONS"])
-    )
-      return message.reply("❌ **بداخۆ ئەو رۆلەو نیە**");
-    message.channel.send("✅| **ژورەکە دروست بوو**");
-    message.guild
-      .createChannel(`Members [${message.guild.members.size}]`, "voice")
-      .then(c => {
-        console.log(`Done make room in: \n ${message.guild.name}`);
-        c.overwritePermissions(message.guild.id, {
-          CONNECT: false,
-          SPEAK: false
-        });
-        setInterval(() => {
-          c.setName(`Members [${message.guild.members.size}]`);
-        }, 1000);
-      });
-  }
-});
+
 
 
 client.on("message", message => {
@@ -4642,24 +4533,7 @@ ${botssize.join("\n")}`
   }
 });
 
-client.on("message", message => {
-  if (message.content === prefix + "ping") {
-    const embed = new Discord.RichEmbed()
 
-      .setColor("#FF0000")
-      .addField(
-        "``خێرای خەتت`` ",
-        `${Date.now() - message.createdTimestamp}` + " ms`"
-      )
-      .setFooter(
-        ` BLACK BOT
- .`,
-        "https://aladdintravel.com/wp-content/uploads/2014/11/pinterest-logo-2-1074x1067.png"
-      );
-
-    message.channel.sendEmbed(embed);
-  }
-});
 
 client.on("message", message => {
   if (message.author.bot) return;
@@ -4743,7 +4617,7 @@ client.on("message", message => {
     message.guild
       .fetchBans()
       .then(bans =>
-        message.channel.send(`\`${bans.size}\` ***: ژمارەی باند بوەکان ***`)
+        message.channel.send(`\`${bans.size}\` ***: List bans count***`)
       )
       .then(message => message.delete(5000))
 
@@ -4781,7 +4655,7 @@ client.on("message", message => {
         message.delete(5100);
       });
     } else {
-      message.channel.send("ببورە ئەم پێرمیشنەت نییەMANAGE ROLES |❌");
+      message.channel.send("You dont have MANAGE ROLES |❌");
     }
   }
 });
@@ -4834,7 +4708,7 @@ client.on("message", message => {
 client.on("message", message => {
   if (message.author.bot) return;
   if (!message.content.startsWith(prefix)) return;
-
+  if(!message.member.hasPermission('ADMINISTRATOR'))  return 
   let command = message.content.split(" ")[0];
   command = command.slice(prefix.length);
 
@@ -4893,9 +4767,9 @@ client.on('message', message => {
             if (minutes < 10) {
                 minutes = '0' + minutes;
             }
-            var suffix = 'صباحاَ';
+            var suffix = 'AM';
             if (hours >= 12) {
-                suffix = 'مساء';
+                suffix = 'PM';
                 hours = hours - 12;
             }
             if (hours == 0) {
@@ -4918,32 +4792,7 @@ client.on('message', message => {
                  message.channel.sendEmbed(Date15);
         }
     });
-client.on("message", async message => {
-  var moment = require("moment");
-  if (message.content.startsWith(prefix + "setDays")) {
-    if (!message.guild.member(message.author).hasPermissions("MANAGE_CHANNELS"))
-      return message.reply("ببورە ئەو رۆلەت نیە");
-    if (
-      !message.guild
-        .member(client.user)
-        .hasPermissions(["MANAGE_CHANNELS", "MANAGE_ROLES_OR_PERMISSIONS"])
-    )
-      return message.reply("? **ليس معي الصلاحيات الكافية**");
-    message.channel.send("?| **تم عمل الروم بنجاح**");
-    message.guild
-      .createChannel(`Day : ${moment().format("dddd")}`, "voice")
-      .then(c => {
-        console.log(`Day channel setup for guild: \n ${message.guild.name}`);
-        c.overwritePermissions(message.guild.id, {
-          CONNECT: false,
-          SPEAK: false
-        });
-        setInterval(function() {
-          c.setName(`?? - Day : ?${moment().format("dddd")}?`);
-        }, 1000);
-      });
-  }
-});
+
 
 
 client.on("message", async message => {
