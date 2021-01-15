@@ -26,16 +26,10 @@ dependencies:
   request: 2.88.2
   simple-youtube-api: 5.2.1
   snekfetch: 3.6.4
-  sqlite: 2.9.3
-  sqlite3: 4.2.0
   weather-js: 2.0.0
   youtube-info: 1.3.2
   ytdl-core: 0.20.4
 packages:
-  /abbrev/1.1.1:
-    dev: false
-    resolution:
-      integrity: sha512-nne9/IiQ/hzIhY6pdDnbBtz7DjPTKrY00P/zvPSm5pOFkl6xuGrGnXn/VtTNNfNtAfZ9/1RtehkszU9qcTii0Q==
   /abort-controller/3.0.0:
     dependencies:
       event-target-shim: 5.0.1
@@ -198,10 +192,6 @@ packages:
     dev: false
     resolution:
       integrity: sha1-MasayLEpNjRj41s+u2n038+6eUc=
-  /balanced-match/1.0.0:
-    dev: false
-    resolution:
-      integrity: sha1-ibTRmasr7kneFk6gK4nORi1xt2c=
   /base64-arraybuffer/0.1.4:
     dev: false
     engines:
@@ -321,13 +311,6 @@ packages:
       node: '>=0.10.40'
     resolution:
       integrity: sha1-OciRjO/1eZ+D+UkqhI9iWt0Mdm8=
-  /brace-expansion/1.1.11:
-    dependencies:
-      balanced-match: 1.0.0
-      concat-map: 0.0.1
-    dev: false
-    resolution:
-      integrity: sha512-iCuPHDFgrHX7H2vEI/5xpz07zSHB00TpugqhmYtVmMO6518mCuRMoOYFldEBl0g187ufozdaHgWKcYFb61qGiA==
   /buffer-equal-constant-time/1.0.1:
     dev: false
     resolution:
@@ -530,10 +513,6 @@ packages:
     dev: false
     resolution:
       integrity: sha1-ZF/ErfWLcrZJ1crmUTVhnbJv8UM=
-  /concat-map/0.0.1:
-    dev: false
-    resolution:
-      integrity: sha1-2Klr13/Wjfd5OnMDajug1UBdR3s=
   /console-control-strings/1.1.0:
     dev: false
     resolution:
@@ -640,12 +619,6 @@ packages:
     dev: false
     resolution:
       integrity: sha512-OX8XqP7/1a9cqkxYw2yXss15f26NKWBpDXQd0/uK/KPqdQhxbPa994hnzjcE2VqQpDslf55723cKPUOGSmMY3g==
-  /debug/3.2.7:
-    dependencies:
-      ms: 2.1.3
-    dev: false
-    resolution:
-      integrity: sha512-CFjzYYAi4ThfiQvizrFQevTTXHtnCqWfe7x1AhgEscTz6ZbLbfoLRLPugTQyBth6f8ZERVUSyWHFD/7Wu4t1XQ==
   /debug/4.1.1:
     dependencies:
       ms: 2.1.3
@@ -1084,12 +1057,6 @@ packages:
     dev: false
     resolution:
       integrity: sha512-y6OAwoSIf7FyjMIv94u+b5rdheZEjzR63GTyZJm5qh4Bi+2YgwLCcI/fPFZkL5PSixOt6ZNKm+w+Hfp/Bciwow==
-  /fs-minipass/1.2.7:
-    dependencies:
-      minipass: 2.9.0
-    dev: false
-    resolution:
-      integrity: sha512-GWSSJGFy4e9GUeCcbIkED+bgAoFyj7XF1mV8rma3QW4NIqX9Kyx79N/PF61H5udOV3aY1IaMLs6pGbH71nlCTA==
   /fs-minipass/2.1.0:
     dependencies:
       minipass: 3.1.3
@@ -1098,10 +1065,6 @@ packages:
       node: '>= 8'
     resolution:
       integrity: sha512-V/JgOLFCS+R6Vcq0slCuaeWEdNC3ouDlJMNIsacH2VtALiu9mV4LPrHc5cDl8k5aw6J8jwgWWpiTo5RYhmIzvg==
-  /fs.realpath/1.0.0:
-    dev: false
-    resolution:
-      integrity: sha1-FQStJSMVjKpA20onh8sBQRmU6k8=
   /fs/0.0.2:
     dev: false
     resolution:
@@ -1154,17 +1117,6 @@ packages:
     dev: false
     resolution:
       integrity: sha1-l/tdlr/eiXMxPyDoKI75oWf6ZM4=
-  /glob/7.1.6:
-    dependencies:
-      fs.realpath: 1.0.0
-      inflight: 1.0.6
-      inherits: 2.0.4
-      minimatch: 3.0.4
-      once: 1.4.0
-      path-is-absolute: 1.0.1
-    dev: false
-    resolution:
-      integrity: sha512-LwaxwyZ72Lk7vZINtNNrywX0ZuLyStrdDtabefZKAY5ZGJhVtgdznluResxNmPitE0SAO+O26sWTHeKSI2wMBA==
   /global/4.4.0:
     dependencies:
       min-document: 2.19.0
@@ -1414,23 +1366,10 @@ packages:
     dev: false
     resolution:
       integrity: sha512-dcyqhDvX1C46lXZcVqCpK+FtMRQVdIMN6/Df5js2zouUsqG7I6sFxitIC+7KYK29KdXOLHdu9zL4sFnoVQnqaA==
-  /ignore-walk/3.0.3:
-    dependencies:
-      minimatch: 3.0.4
-    dev: false
-    resolution:
-      integrity: sha512-m7o6xuOaT1aqheYHKf8W6J5pYH85ZI9w077erOzLje3JsB1gkafkAhHHY19dqjulgIZHFm32Cp5uNZgcQqdJKw==
   /indexof/0.0.1:
     dev: false
     resolution:
       integrity: sha1-gtwzbSMrkGIXnQWrMpOmYFn9Q10=
-  /inflight/1.0.6:
-    dependencies:
-      once: 1.4.0
-      wrappy: 1.0.2
-    dev: false
-    resolution:
-      integrity: sha1-Sb1jMdfQLQwJvJEKEHW6gWW1bfk=
   /inherits/2.0.3:
     dev: false
     resolution:
@@ -1736,12 +1675,6 @@ packages:
       node: '>=10'
     resolution:
       integrity: sha512-USPNNK2bnHLOplX8BZVMehUkyQizS/DFpBdoH0TS+fM+hQoLNg9tWg4MeY9wE8gfY0pbzmx5UBEODujt3Lz8AA==
-  /minimatch/3.0.4:
-    dependencies:
-      brace-expansion: 1.1.11
-    dev: false
-    resolution:
-      integrity: sha512-yJHVQEhyqPLUTgt9B83PXu6W3rx4MvvHvSUvToogpwoGDOUQ+yDrR0HRot+yOCdCO7u4hX3pWft6kWBBcqh0UA==
   /minimist/0.0.8:
     dev: false
     resolution:
@@ -1750,13 +1683,6 @@ packages:
     dev: false
     resolution:
       integrity: sha512-FM9nNUYrRBAELZQT3xeZQ7fmMOBg6nWNmJKTcgsJeaLstP/UODVpGsr5OhXhhXg6f+qtJ8uiZ+PUxkDWcgIXLw==
-  /minipass/2.9.0:
-    dependencies:
-      safe-buffer: 5.2.1
-      yallist: 3.1.1
-    dev: false
-    resolution:
-      integrity: sha512-wxfUjg9WebH+CUDX/CdbRlh5SmfZiy/hpkxaRI16Y9W56Pa75sWgd/rvFilSgrauD9NyFymP/+JFV3KwzIsJeg==
   /minipass/3.1.3:
     dependencies:
       yallist: 4.0.0
@@ -1765,12 +1691,6 @@ packages:
       node: '>=8'
     resolution:
       integrity: sha512-Mgd2GdMVzY+x3IJ+oHnVM+KG3lA5c8tnabyJKmHSaG2kAGpudxuOf8ToDkhumF7UzME7DecbQE9uOZhNm7PuJg==
-  /minizlib/1.3.3:
-    dependencies:
-      minipass: 2.9.0
-    dev: false
-    resolution:
-      integrity: sha512-6ZYMOEnmVsdCeTJVE0W9ZD+pVnE8h9Hma/iOwwRDsdQoePpoX56/8B6z3P9VNwppJuBKNRuFDRNRqRWexT9G9Q==
   /minizlib/2.1.2:
     dependencies:
       minipass: 3.1.3
@@ -1792,13 +1712,6 @@ packages:
     hasBin: true
     resolution:
       integrity: sha1-MAV0OOrGz3+MR2fzhkjWaX11yQM=
-  /mkdirp/0.5.5:
-    dependencies:
-      minimist: 1.2.5
-    dev: false
-    hasBin: true
-    resolution:
-      integrity: sha512-NKmAlESf6jMGym1++R0Ra7wvhV+wFW63FaSOFPwRahvea0gMUcGUhVeAg/0BC0wiv9ih5NYPB1Wn1UEI1/L+xQ==
   /mkdirp/1.0.4:
     dev: false
     engines:
@@ -1849,17 +1762,6 @@ packages:
     dev: false
     resolution:
       integrity: sha512-ONmRUqK7zj7DWX0D9ADe03wbwOBZxNAfF20PlGfCWQcD3+/MakShIHrMqx9YwPTfxDdF1zLeL+RGZiR9kGMLdg==
-  /needle/2.5.2:
-    dependencies:
-      debug: 3.2.7
-      iconv-lite: 0.4.24
-      sax: 1.2.4
-    dev: false
-    engines:
-      node: '>= 4.4.x'
-    hasBin: true
-    resolution:
-      integrity: sha512-LbRIwS9BfkPvNwNHlsA41Q29kL2L/6VaOJ0qisM5lLWsTV3nP15abO5ITL6L81zqFhzjRKDAYjpcBcwM0AVvLQ==
   /negotiator/0.6.2:
     dev: false
     engines:
@@ -1888,52 +1790,10 @@ packages:
       node: '>= 6.0.0'
     resolution:
       integrity: sha512-PPmu8eEeG9saEUvI97fm4OYxXVB6bFvyNTyiUOBichBpFG8A1Ljw3bY62+5oOjDEMHRnd0Y7HQ+x7uzxOzC6JA==
-  /node-pre-gyp/0.11.0:
-    dependencies:
-      detect-libc: 1.0.3
-      mkdirp: 0.5.5
-      needle: 2.5.2
-      nopt: 4.0.3
-      npm-packlist: 1.4.8
-      npmlog: 4.1.2
-      rc: 1.2.8
-      rimraf: 2.7.1
-      semver: 5.7.1
-      tar: 4.4.13
-    dev: false
-    hasBin: true
-    resolution:
-      integrity: sha512-TwWAOZb0j7e9eGaf9esRx3ZcLaE5tQ2lvYy1pb5IAaG1a2e2Kv5Lms1Y4hpj+ciXJRofIxxlt5haeQ/2ANeE0Q==
   /noop-logger/0.1.1:
     dev: false
     resolution:
       integrity: sha1-lKKxYzxPExdVMAfYlm/Q6EG2pMI=
-  /nopt/4.0.3:
-    dependencies:
-      abbrev: 1.1.1
-      osenv: 0.1.5
-    dev: false
-    hasBin: true
-    resolution:
-      integrity: sha512-CvaGwVMztSMJLOeXPrez7fyfObdZqNUK1cPAEzLHrTybIua9pMdmmPR5YwtfNftIOMv3DPUhFaxsZMNTQO20Kg==
-  /npm-bundled/1.1.1:
-    dependencies:
-      npm-normalize-package-bin: 1.0.1
-    dev: false
-    resolution:
-      integrity: sha512-gqkfgGePhTpAEgUsGEgcq1rqPXA+tv/aVBlgEzfXwA1yiUJF7xtEt3CtVwOjNYQOVknDk0F20w58Fnm3EtG0fA==
-  /npm-normalize-package-bin/1.0.1:
-    dev: false
-    resolution:
-      integrity: sha512-EPfafl6JL5/rU+ot6P3gRSCpPDW5VmIzX959Ob1+ySFUuuYHWHekXpwdUZcKP5C+DS4GEtdJluwBjnsNDl+fSA==
-  /npm-packlist/1.4.8:
-    dependencies:
-      ignore-walk: 3.0.3
-      npm-bundled: 1.1.1
-      npm-normalize-package-bin: 1.0.1
-    dev: false
-    resolution:
-      integrity: sha512-5+AZgwru5IevF5ZdnFglB5wNlHG1AOOuw28WhUq8/8emhBmLv6jX5by4WJCh7lW0uSYZYS6DXqIsyZVIXRZU9A==
   /npmlog/4.1.2:
     dependencies:
       are-we-there-yet: 1.1.5
@@ -2030,25 +1890,6 @@ packages:
       node: '>=8'
     resolution:
       integrity: sha512-sjYP8QyVWBpBZWD6Vr1M/KwknSw6kJOz41tvGMlwWeClHBtYKTbHMki1PsLZnxKpXMPbTKv9b3pjQu3REib96A==
-  /os-homedir/1.0.2:
-    dev: false
-    engines:
-      node: '>=0.10.0'
-    resolution:
-      integrity: sha1-/7xJiDNuDoM94MFox+8VISGqf7M=
-  /os-tmpdir/1.0.2:
-    dev: false
-    engines:
-      node: '>=0.10.0'
-    resolution:
-      integrity: sha1-u+Z0BseaqFxc/sdm/lc0VV36EnQ=
-  /osenv/0.1.5:
-    dependencies:
-      os-homedir: 1.0.2
-      os-tmpdir: 1.0.2
-    dev: false
-    resolution:
-      integrity: sha512-0CWcCECdMVc2Rw3U5w9ZjqX6ga6ubk1xDVKxtBQPK7wis/0F2r9T6k4ydGYhecl7YUBxBVxhL5oisPsNxAPe2g==
   /parse-bmfont-ascii/1.0.6:
     dev: false
     resolution:
@@ -2110,12 +1951,6 @@ packages:
       node: '>= 0.8'
     resolution:
       integrity: sha512-CiyeOxFT/JZyN5m0z9PfXw4SCBJ6Sygz1Dpl0wqjlhDEGGBP1GnsUVEL0p63hoG1fcj3fHynXi9NYO4nWOL+qQ==
-  /path-is-absolute/1.0.1:
-    dev: false
-    engines:
-      node: '>=0.10.0'
-    resolution:
-      integrity: sha1-F0uSaHNVNP+8es5r9TpanhtcX18=
   /path-to-regexp/0.1.7:
     dev: false
     resolution:
@@ -2420,13 +2255,6 @@ packages:
       node: '>=8'
     resolution:
       integrity: sha512-l+sSefzHpj5qimhFSE5a8nufZYAM3sBSVMAPtYkmC+4EH2anSGaEMXSD0izRQbu9nfyQ9y5JrVmp7E8oZrUjvA==
-  /rimraf/2.7.1:
-    dependencies:
-      glob: 7.1.6
-    dev: false
-    hasBin: true
-    resolution:
-      integrity: sha512-uWjbaKIK3T1OSVptzX7Nl6PvQ3qAGtKEtVRjRuazjfL3Bx5eI409VZSqgND+4UNnmzLVdPj9FqFJNPqBZFve4w==
   /safe-buffer/5.1.2:
     dev: false
     resolution:
@@ -2580,20 +2408,6 @@ packages:
     dev: false
     resolution:
       integrity: sha512-2A892lrj0GcgR/9Qk81EaY2gYhCBxurV0PfmmESO6p27QPrUK1J3zdns+5QPqvUYK2q657nSj0guoIil9+7eFg==
-  /sqlite/2.9.3:
-    dependencies:
-      sqlite3: 4.2.0
-    dev: false
-    resolution:
-      integrity: sha512-2LJxdgtXsif9xR2D8KnM8Ki3g0dmOktba1B/6TanYCKx697J0sKfw+i28yRjtjPz5O/uzbEa1m1RXXgR2p9G0Q==
-  /sqlite3/4.2.0:
-    dependencies:
-      nan: 2.14.2
-      node-pre-gyp: 0.11.0
-    dev: false
-    requiresBuild: true
-    resolution:
-      integrity: sha512-roEOz41hxui2Q7uYnWsjMOTry6TcNUNmp8audCx18gF10P2NknwdpF+E+HKvz/F2NvPKGGBF4NGc+ZPQ+AABwg==
   /sqlstring/2.3.1:
     dev: false
     engines:
@@ -2749,20 +2563,6 @@ packages:
       node: '>=6'
     resolution:
       integrity: sha512-o3pS2zlG4gxr67GmFYBLlq+dM8gyRGUOvsrHclSkvtVtQbjV0s/+ZE8OpICbaj8clrX3tjeHngYGP7rweaBnuw==
-  /tar/4.4.13:
-    dependencies:
-      chownr: 1.1.4
-      fs-minipass: 1.2.7
-      minipass: 2.9.0
-      minizlib: 1.3.3
-      mkdirp: 0.5.5
-      safe-buffer: 5.2.1
-      yallist: 3.1.1
-    dev: false
-    engines:
-      node: '>=4.5'
-    resolution:
-      integrity: sha512-w2VwSrBoHa5BsSyH+KxEqeQBAllHhccyMFVHtGtdMpF4W7IRWfZjFiQceJPChOeTsSDVUpER2T8FA93pr0L+QA==
   /tar/6.0.5:
     dependencies:
       chownr: 2.0.0
@@ -2988,10 +2788,6 @@ packages:
       node: '>=0.4'
     resolution:
       integrity: sha512-LKYU1iAXJXUgAXn9URjiu+MWhyUXHsvfp7mcuYm9dSUKK0/CjtrUwFAxD82/mCWbtLsGjFIad0wIsod4zrTAEQ==
-  /yallist/3.1.1:
-    dev: false
-    resolution:
-      integrity: sha512-a4UGQaWPH59mOXUYnAG2ewncQS4i4F43Tv3JoAM+s2VDAmS9NsK8GpDMLrCHPksFT7h3K6TOoUNn2pb7RoXx4g==
   /yallist/4.0.0:
     dev: false
     resolution:
@@ -3072,8 +2868,6 @@ specifiers:
   request: ^2.85.0
   simple-youtube-api: ^5.0.2
   snekfetch: ^3.6.4
-  sqlite: ^2.9.1
-  sqlite3: ^4.0.0
   weather-js: 2.0.0
   youtube-info: ^1.2.0
   ytdl-core: ^0.20.3
