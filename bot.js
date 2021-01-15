@@ -4239,7 +4239,7 @@ client.on("message", message => {
   }
 });
 
-let xp = require('./xp.json'); // {} و ضع به xp.json اصنع ملف باسم
+let xp = require('./xp.json'); // 
  
 client.on('message', message => {
     if(message.author.bot) return;
@@ -4600,30 +4600,6 @@ client.on("message", message => {
 
 
 
-client.on("message", message => {
-  const args = message.content
-    .slice(prefix.length)
-    .trim()
-    .split(/ +/g);
-  const command = args.shift().toLowerCase();
-  if (command === prefix + "banslist") {
-    message.delete(5000);
-    if (!message.guild.member(client.user).hasPermission("ADMINISTRATOR"))
-      return message
-        .reply("Error : ` I Dont Have ADMINISTRATOR Permission`")
-        .then(message => message.delete(5000));
-    if (!message.member.hasPermission("ADMINISTRATOR")) return;
-    if (!message.channel.guild) return;
-    message.guild
-      .fetchBans()
-      .then(bans =>
-        message.channel.send(`\`${bans.size}\` ***: List bans count***`)
-      )
-      .then(message => message.delete(5000))
-
-      .catch(console.error);
-  }
-});
 
 
 
