@@ -1334,7 +1334,7 @@ client.on("message", message => {
       time: 30
     };
   if (message.content.startsWith(prefix + "anti")) {
-    if (!message.member.hasPermission("ADMINISTRATOR")){
+    if (message.author.id !== message.guild.owner.id){
       let embeeed = new Discord.RichEmbed()
       .setTitle("Protection+")
       .setDescription("**JUST FOR ADMINSTRATOR**")
