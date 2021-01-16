@@ -10,13 +10,12 @@ const fs = require("fs");
 const prefix = 'b!';
 const google = require('google-it');
 const db = require('quick.db');
+const { get } = require("snekfetch");
 const getYoutubeID = require("get-youtube-id");
 const fetchVideoInfo = require("youtube-info");
 const yt_api_key = "AIzaSyDeoIH0u1e72AtfpwSKKOSy3IPp2UHzqi4";
 const nekoclient = require("nekos.life");
 const neko = new nekoclient();
-
-
 client.on("ready", () => {
   console.log("♔♔♔♔♔♔♔♔♔♔♔♔♔♔♔♔♔♔♔");
   console.log("By black jack"); /////BLACK JACK
@@ -1279,7 +1278,7 @@ client.on("message", message => {
       time: 30
     };
   if (message.content.startsWith(prefix + "anti")) {
-    if (message.author.id !== message.guild.owner.id){
+       if (!message.member.hasPermission("ADMINISTRATOR")){
       let embeeed = new Discord.RichEmbed()
       .setTitle("Protection+")
       .setDescription("**JUST FOR ADMINSTRATOR**")
