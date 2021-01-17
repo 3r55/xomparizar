@@ -54,30 +54,15 @@ client.on("message", async msg => {
   }
 });
 
-client.on('message', message => {
-if(message.content.startsWith(prefix + 'qfl')) {
-(!message.guild.member(message.author).hasPermission("MANAGE_CHANNELS"))
-message.channel.updateOverwrite(message.channel.id, { SEND_MESSAGES: false, VIEW_CHANNEL: false});
+client.on("guildMemberAdd", member => {
+if(member.presence.status === 'offline') {
 const embed = new Discord.RichEmbed()
- .setColor("#00FF00")
- .addField("Locked channel")
-
- message.channel.send(embed)
-
+.addField(`<@{member.id}> Joined server but ban member because status  ofline `)
+member.guild.owner.send(embed)
+member.ban
 }
 })
-client.on('message', message => {
-if(message.content.startsWith(prefix + 'unlock')){
-(!message.guild.member(message.author).hasPermission("MANAGE_CHANNELS")) 
-message.channel.updateOverwrite(message.channel.id, { SEND_MESSAGES: true, VIEW_CHANNEL: true});
-const embed = new Discord.RichEmbed()
- .setColor("#00FF00")
- .addField("unlock channel")
 
- message.channel.send(embed)
-
-}
-})
 
 client.on("message", message => {
   let command = message.content.split(" ")[0];
