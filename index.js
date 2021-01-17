@@ -54,14 +54,7 @@ client.on("message", async msg => {
   }
 });
 
-client.on("guildMemberAdd", member => {
-if(member.presence.status === 'offline') {
-const embed = new Discord.RichEmbed()
-.addField(`<@{member.id}> Joined server but ban member because status  ofline `)
-member.guild.owner.send(embed)
-member.ban
-}
-})
+
 
 
 client.on("message", message => {
