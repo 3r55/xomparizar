@@ -25,7 +25,7 @@ client.on("ready", () => {
   console.log(`Logged in as ${client.user.tag}!`);
   console.log("بِسْمِ اللَّـهِ الرَّحْمَـٰنِ الرَّحِيمِ");
   client.user.setActivity(
-    `${prefix}help | BLACK BOT IS HERE: SERVERS ${client.guilds.size}`
+    `${prefix}help | Raiteng BOT IS HERE: SERVERS ${client.guilds.size}`
   ); 
   client.user.setStatus("idle"); /////by black jack
   console.log(`Logined`);
