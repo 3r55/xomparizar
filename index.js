@@ -18,14 +18,14 @@ const nekoclient = require("nekos.life");
 const neko = new nekoclient();
 client.on("ready", () => {
   console.log("♔♔♔♔♔♔♔♔♔♔♔♔♔♔♔♔♔♔♔");
-  console.log("By black jack"); /////BLACK JACK
-  console.log("BLACK BOT");
+  console.log("By COBRA"); /////BLACK JACK
+  console.log("DOSKO BOT");
   console.log("ALLAH AKBAR");
   console.log("♔♔♔♔♔♔♔♔♔♔♔♔♔♔♔♔♔♔♔");
   console.log(`Logged in as ${client.user.tag}!`);
   console.log("بِسْمِ اللَّـهِ الرَّحْمَـٰنِ الرَّحِيمِ");
   client.user.setActivity(
-    `${prefix}help | Raiteng BOT IS HERE: SERVERS ${client.guilds.size}`
+    `${prefix}help | DOSKO BOT IS HERE: SERVERS ${client.guilds.size}`
   ); 
   client.user.setStatus("idle"); /////by black jack
   console.log(`Logined`);
