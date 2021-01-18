@@ -2868,6 +2868,7 @@ message.channel.send(querry)
 }
 })
  
+  
  
 	client.on('message', message => {
         if(message.content.startsWith(prefix + 'mutevoice')) {
@@ -4937,7 +4938,74 @@ var mention= message.mentions.members.first()
 
 
 
+ قم بلصق الكود هناvar cooldown = require('./cooldown.json');
+function saveCoolDown(){
+    fs.writeFile("./cooldown.json", JSON.stringify(cooldown, null, 4), function (err) {
+        if(err) throw err;
+    })
+}
  
+client.on('message', message => {
+    if(!cooldown[message.guild.id])cooldown[message.guild.id] ={
+        toggled: "off",
+        time: "none"
+    }
+    saveCoolDown();// By 3Mo_Steve && Alpha Codes
+    var command = message.content.split(" ")[0],
+    args = message.content.split(" ");// By 3Mo_Steve && Alpha Codes
+    switch(command){// By 3Mo_Steve && Alpha Codes
+        case prefix+"setCoolDown":// By 3Mo_Steve && Alpha Codes
+    if(!message.guild.member(message.author).hasPermission("MANAGE_GUILD"))return message.reply('You dont have MANAGE_SEERVER Permission.');// By 3Mo_Steve && Alpha Codes
+            if(args[1].startsWith("on")){// By 3Mo_Steve && Alpha Codes
+                cooldown[message.guild.id] = {// By 3Mo_Steve && Alpha Codes
+                    toggled: "on",// By 3Mo_Steve && Alpha Codes
+                    time: cooldown[message.guild.id].time// By 3Mo_Steve && Alpha Codes
+                }// By 3Mo_Steve && Alpha Codes
+              // By 3Mo_Steve && Alpha Codes
+                saveCoolDown();// By 3Mo_Steve && Alpha Codes
+                message.reply('done toggled cooldown to on.')// By 3Mo_Steve && Alpha Codes
+            }// By 3Mo_Steve && Alpha Codes
+            else if(args[1].startsWith("off")){// By 3Mo_Steve && Alpha Codes
+                cooldown[message.guild.id] = {// By 3Mo_Steve && Alpha Codes
+                    toggled: "off",// By 3Mo_Steve && Alpha Codes
+                    time: cooldown[message.guild.id].time// By 3Mo_Steve && Alpha Codes
+                }// By 3Mo_Steve && Alpha Codes
+                saveCoolDown();// By 3Mo_Steve && Alpha Codes
+                message.reply('done toggled cooldown to off.')// By 3Mo_Steve && Alpha Codes
+            }// By 3Mo_Steve && Alpha Codes
+            else if(args[1].startsWith("settime")){// By 3Mo_Steve && Alpha Codes
+                var newtime = args[2];// By 3Mo_Steve && Alpha Codes
+                if(!newtime)return message.reply('Specify a time')// By 3Mo_Steve && Alpha Codes
+                if(!newtime.match[/['0-60', 's,min,h,d]/g])return message.reply('Time formats: 1s, 1min, 1h, 1day')// By 3Mo_Steve && Alpha Codes
+                cooldown[message.guild.id] = {// By 3Mo_Steve && Alpha Codes
+                    toggled: cooldown[message.guild.id].toggled,// By 3Mo_Steve && Alpha Codes
+                    time: ms(newtime)// By 3Mo_Steve && Alpha Codes
+                }// By 3Mo_Steve && Alpha Codes
+                saveCoolDown();// By 3Mo_Steve && Alpha Codes
+                message.reply('Done you have set the time of cooldown to ``'+newtime+'``');// By 3Mo_Steve && Alpha Codes
+            }// By 3Mo_Steve && Alpha Codes
+            break;// By 3Mo_Steve && Alpha Codes
+    }// By 3Mo_Steve && Alpha Codes
+})// By 3Mo_Steve && Alpha Codes
+var cooldowntimer = new Set();// By 3Mo_Steve && Alpha Codes
+client.on('message', async message => {// By 3Mo_Steve && Alpha Codes
+    if(cooldown[message.guild.id].toggled == "off" || cooldown[message.guild.id].toggled == "none")return;// By 3Mo_Steve && Alpha Codes
+  if(!message.author.bot){// By 3Mo_Steve && Alpha Codes
+    if(cooldowntimer.has(message.author)){// By 3Mo_Steve && Alpha Codes
+        message.delete();// By 3Mo_Steve && Alpha Codes
+        message.reply('You can\'t send another message now, please wait.').then(m => m.delete(3000));// By 3Mo_Steve && Alpha Codes
+    }else{// By 3Mo_Steve && Alpha Codes
+        cooldowntimer.add(message.author);// By 3Mo_Steve && Alpha Codes
+        setTimeout(() => {// By 3Mo_Steve && Alpha Codes
+            cooldowntimer.delete(message.author);// By 3Mo_Steve && Alpha Codes
+        }, ms(cooldown[message.guild.id].timer));// By 3Mo_Steve && Alpha Codes
+    }// By 3Mo_Steve && Alpha Codes
+  }else{// By 3Mo_Steve && Alpha Codes
+    return;// By 3Mo_Steve && Alpha Codes
+  }// By 3Mo_Steve && Alpha Codes
+}) // By 3Mo_Steve && Alpha Codes
+RAW Paste Data
+
 
   
     
