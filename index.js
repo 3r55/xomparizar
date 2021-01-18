@@ -171,6 +171,10 @@ client.on("message", message => {
   }
 });
 
+
+
+
+
 ///by black jack
 client.on("message", msg => {
 if (msg.content.startsWith(prefix + "year")){
@@ -2656,12 +2660,12 @@ client.on("message", message => {
        .setFooter("CREATED BY BLACK JACK")
       .setColor("BLACK").setDescription(` 
 
-b!help1 => moderation command
-b!help2 => general command
-b!help3 => security command
-b!help4 => funny command
-b!help5 => music command
-b!help6 => game command
+f!help1 => moderation command
+f!help2 => general command
+f!help3 => security command
+f!help4 => funny command
+f!help5 => music command
+f!help6 => game command
 
 `);
     message.channel.sendEmbed(embed);
@@ -2676,39 +2680,39 @@ client.on("message", message => {
        .setFooter("CREATED BY BLACK JACK")
       .setColor("BLACK").setDescription(` 
       **ADMIN**
- b!mute,b!unmute
- b!move,moveall
- b!ban
- b!unban all
- b!unban
- b!ccolor
- b!c text,voice
- b!kick
- b!clear <number>
- b!lock,unlock
- b!autoc <name role react>
- b!gstart
- b!uvb,vb
- b!role
- b!helprole
- b!warn
- b!temp on/off
- b!mutevoice,unmute voice
- b!blacklist add
- b!blacklist remove
- b!blacklist list
- b!undeafen,deafen
- b!info arole
- b!hide all,b!unhide all
- b!nick,help nick
- b!listbans
- b!setWelcomer <channel name>
- b!toggleWelcome on/off
- b!toggleDmwelcome on/off
- b!toggleInvitedby on/off
- b!autorole <role name>
- b!setTime
- b!setstats
+ f!mute,b!unmute
+ f!move,moveall
+ f!ban
+ f!unban all
+ f!unban
+ f!ccolor
+ f!c text,voice
+ f!kick
+ f!clear <number>
+ f!lock,unlock
+ f!autoc <name role react>
+ f!gstart
+ f!uvb,vb
+ f!role
+ f!helprole
+ f!warn
+ f!temp on/off
+ f!mutevoice,unmute voice
+ f!blacklist add
+ f!blacklist remove
+ f!blacklist list
+ f!undeafen,deafen
+ f!info arole
+ f!hide all,b!unhide all
+ f!nick,help nick
+ f!listbans
+ f!setWelcomer <channel name>
+ f!toggleWelcome on/off
+ f!toggleDmwelcome on/off
+ f!toggleInvitedby on/off
+ f!autorole <role name>
+ f!setTime
+ f!setstats
       
        `);
    message.channel.sendEmbed(embed);
@@ -2725,30 +2729,30 @@ client.on("message", message => {
  b!count
  b!info roles
  b!rooms
- b!botinfo
- b!server
- b!support
- b!year
- b!daily
- b!credit
- b!invites
- b!date
- b!xp
- b!draw <name>
- b!id
- b!youtube <name search>
- b!weather <location name>
- b!guild
- b!avatar
- b!top 
- b!top voice 
- b!top text
- b!report
- b!sbot
- b!say,embed
- b!about
- b!invite
- b!user
+ f!botinfo
+ f!server
+ f!support
+ f!year
+ f!daily
+ f!credit
+ f!invites
+ f!date
+ f!xp
+ f!draw <name>
+ f!id
+ f!youtube <name search>
+ f!weather <location name>
+ f!guild
+ f!avatar
+ f!top 
+ f!top voice 
+ f!top text
+ f!report
+ f!sbot
+ f!say,embed
+ f!about
+ f!invite
+ f!user
       
        `);
    message.channel.sendEmbed(embed);
@@ -2762,16 +2766,16 @@ client.on("message", message => {
        .setFooter("CREATED BY BLACK JACK")
       .setColor("BLACK").setDescription(` 
       **SECURITY COMMAND**
-b!anti ban[number]
-b!anti kick [number]
-b!anti roleC [number]
-b!anti roleD [number]
-b!anti channelD [number]
-b!anti channelC [number]
-b!anti time [number]
-b!antispam on/off
-b!antibots on/off 
-b!settings
+f!anti ban[number]
+f!anti kick [number]
+f!anti roleC [number]
+f!anti roleD [number]
+f!anti channelD [number]
+f!anti channelC [number]
+f!anti time [number]
+f!antispam on/off
+f!antibots on/off 
+f!settings
       
        `);
    message.channel.sendEmbed(embed);
@@ -2785,15 +2789,15 @@ client.on("message", message => {
        .setFooter("CREATED BY BLACK JACK")
       .setColor("BLACK").setDescription(` 
        **FUNNY COMAND**
- b!slap
- b!hug
- b!tickle
- b!feed
- b!pat
- b!cat
- b!dog
- b!poke
- b!cuddle   
+ f!slap
+ f!hug
+ f!tickle
+ f!feed
+ f!pat
+ f!cat
+ f!dog
+ f!poke
+ f!cuddle   
        `);
    message.channel.sendEmbed(embed);
   }
@@ -2806,14 +2810,14 @@ client.on("message", message => {
        .setFooter("CREATED BY BLACK JACK")
       .setColor("BLACK").setDescription(` 
        **FUNNY COMAND**
- b!slots
- b!stone
- b!paper
- b!scissors
- b!skin <name>
- b!xo
- b!kill
- b!win
+ f!slots
+ f!stone
+ f!paper
+ f!scissors
+ f!skin <name>
+ f!xo
+ f!kill
+ f!win
        `);
    message.channel.sendEmbed(embed);
   }
