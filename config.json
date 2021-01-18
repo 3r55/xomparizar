@@ -82,7 +82,8 @@
     "onoff": true
   },
   "779878255083520031": {
-    "onoff": true
+    "onoff": true,
+    "banLimit": "1"
   },
   "792914905803784192": {
     "onoff": true
