@@ -217,30 +217,10 @@ message.channel.send(`${user} has ${inviteCount} invites.`);
 });
   }
 });
-client.on("message", Black => {
-  if (Black.content === "Hi") {
-    Black.author.send("");
-    Black.channel.send("Hello");
-  }
-});
-client.on("message", Black => {
-  if (Black.content === "ھلا") {
-    Black.author.send("");
-    Black.channel.send('ھلا حبیبي');
-  }
-});
-client.on("message", Black => {
-  if (Black.content === "سلاو") {
-    Black.author.send("");
-    Black.channel.send("Baxerbey dllakam");
-  }
-});
-client.on("message", Black => {
-  if (Black.content === "Slaw") {
-    Black.author.send("");
-    Black.channel.send("Baxerbey dllakam");
-  }
-});
+
+
+
+
 client.on("message", message => {
   if (message.content.startsWith(`<@${client.user.id}>`)) {
     if (message.author.bot || message.channel.type == "dm") return;
@@ -343,7 +323,9 @@ client.on("message", async message => {
     }
   }
 });
+
  
+
 client.on("message", async message => {
   if (antispam[message.author.id] == undefined) {
     antispam[message.author.id] = {
