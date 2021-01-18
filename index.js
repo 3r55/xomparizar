@@ -77,7 +77,7 @@ client.on("message", message => {
  
   if(args[2]) {
     if(isNaN(args[2]) || args[2] < 0) return message.channel.send(`:interrobang: **| ${message.author.username}, type the credit you need to transfer! **`);
-    if(mention.bot) return message.channel.send(`**:heavy_multiplication_x:| ${message.content.split(' ')[1]} لم يتم العثور على**`);
+    if(mention.bot) return message.channel.send(`**:heavy_multiplication_x:| ${message.content.split(' ')[1]} The bot is not have credit please menition member**`);
     if(mention.id === message.author.id) return message.channel.send('**:heavy_multiplication_x:| You Cant Transformation To Your Self**');
     if(credits[author].credits < balance) return message.channel.send(`** :thinking: | ${message.author.username}, Your balance is not enough for that!**`);
     var one = Math.floor(Math.random() * 9) + 1;
@@ -87,12 +87,12 @@ client.on("message", message => {
  
     var number = `${one}${two}${three}${four}`;
    
-    message.channel.send(`**<a:loding:652585456751607820>| \`${number}\`, Write The Number To Complete the process
+    message.channel.send(`:interrobang:**| \`${number}\`, Write The Number To Complete the process
 **`).then(m => {
       message.channel.awaitMessages(m => m.author.id === message.author.id, {max: 1, time: 10000}).then(c => {
         if(c.first().content === number) {
           m.delete();
-          message.channel.send(`**<a:651611220415348736:651770363038138368> | ${message.author.username}, has transferred \`${balance}\` to ${mention}**`);
+          message.channel.send(`**💰 | ${message.author.username}, has transferred \`${balance}\` to ${mention}**`);
           credits[author].credits += (-balance);
           credits[mention.id].credits += (+balance);
           fs.writeFile(path, JSON.stringify(credits, null, 5), function(err) {if(err) console.log(err)});
@@ -105,7 +105,7 @@ client.on("message", message => {
   }
   if(!args[2]) {
     if(mention.bot) return message.channel.send(`:interrobang:**| ${message.author.username}, I can't find** ${message.content.split(' ')[1]}**!**`);
-    message.channel.send(`**${mention.username}, your <a:651611220415348736:651770363038138368> balance is** \`$${credits[mention.id].credits}\`**.** `);
+    message.channel.send(`**${mention.username}, your 💰 balance is** \`$${credits[mention.id].credits}\`**.** `);
   }
  
   }
@@ -121,13 +121,13 @@ if(credits[message.author.id].daily != moment().format('L')) {
           credits[author].credits += ammount;
        
        
-          message.channel.send(`**:atm: | ${message.author.username}, you received your :yen: ${ammount} daily credits!**`);
+          message.channel.send(`**:💰 | ${message.author.username}, you received your :yen: ${ammount} daily credits!**`);
         fs.writeFile("./creditsCode.json", JSON.stringify(credits), function(e) {
             if (e) throw e;
         })
  
       }else{
-      message.channel.send(`<a:636646821141151771:651758245974900747> : **Please cool down  ${moment().endOf('day').fromNow()}**`);
+      message.channel.send(`⌚️: **Please cool down  ${moment().endOf('day').fromNow()}**`);
  
       }
    
