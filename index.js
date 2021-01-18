@@ -2635,7 +2635,7 @@ message.channel.send({embed});
 });
 
 client.on('message', message => {
-if(message.content == 'b!help') {
+if(message.content == 'f!help') {
 message.channel.startTyping()
 setTimeout(() => { 
 message.channel.stopTyping()
@@ -2644,7 +2644,7 @@ message.channel.stopTyping()
 });
  
   client.on('message', message => {
-if(message.content == 'b!help') {
+if(message.content == 'f!help') {
 message.channel.startTyping()
 setTimeout(() => { 
 message.channel.stopTyping()
@@ -2657,7 +2657,7 @@ client.on("message", message => {
     let embed = new Discord.RichEmbed()
       .setAuthor(message.author.username)
        .setThumbnail(message.author.avatarURL)
-       .setFooter("CREATED BY BLACK JACK")
+       .setFooter("CREATED BY COBRA")
       .setColor("BLACK").setDescription(` 
 
 f!help1 => moderation command
@@ -2677,7 +2677,7 @@ client.on("message", message => {
     let embed = new Discord.RichEmbed()
       .setAuthor(message.author.username)
        .setThumbnail(message.author.avatarURL)
-       .setFooter("CREATED BY BLACK JACK")
+       .setFooter("CREATED BY COBRA")
       .setColor("BLACK").setDescription(` 
       **ADMIN**
  f!mute,b!unmute
@@ -2723,12 +2723,12 @@ client.on("message", message => {
     let embed = new Discord.RichEmbed()
       .setAuthor(message.author.username)
        .setThumbnail(message.author.avatarURL)
-       .setFooter("CREATED BY BLACK JACK")
+       .setFooter("CREATED BY COBRA")
       .setColor("BLACK").setDescription(` 
        **GENERAL COMMAND**
- b!count
- b!info roles
- b!rooms
+ f!count
+ f!info roles
+ f!rooms
  f!botinfo
  f!server
  f!support
@@ -2763,7 +2763,7 @@ client.on("message", message => {
     let embed = new Discord.RichEmbed()
       .setAuthor(message.author.username)
        .setThumbnail(message.author.avatarURL)
-       .setFooter("CREATED BY BLACK JACK")
+       .setFooter("CREATED BY COBRA")
       .setColor("BLACK").setDescription(` 
       **SECURITY COMMAND**
 f!anti ban[number]
@@ -2786,7 +2786,7 @@ client.on("message", message => {
     let embed = new Discord.RichEmbed()
       .setAuthor(message.author.username)
        .setThumbnail(message.author.avatarURL)
-       .setFooter("CREATED BY BLACK JACK")
+       .setFooter("CREATED BY COBRA")
       .setColor("BLACK").setDescription(` 
        **FUNNY COMAND**
  f!slap
@@ -2807,7 +2807,7 @@ client.on("message", message => {
     let embed = new Discord.RichEmbed()
       .setAuthor(message.author.username)
        .setThumbnail(message.author.avatarURL)
-       .setFooter("CREATED BY BLACK JACK")
+       .setFooter("CREATED BY COBRA")
       .setColor("BLACK").setDescription(` 
        **FUNNY COMAND**
  f!slots
