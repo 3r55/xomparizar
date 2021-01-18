@@ -585,8 +585,6 @@ __Member No.__ : ${member.guild.memberCount} :herb:
 }).catch(console.error)
 })
  
-        
-        
  
 let warns = JSON.parse(fs.readFileSync("./warnings.json"));
  
