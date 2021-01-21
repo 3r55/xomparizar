@@ -16,7 +16,7 @@ const fetchVideoInfo = require("youtube-info");
 const yt_api_key = "AIzaSyDeoIH0u1e72AtfpwSKKOSy3IPp2UHzqi4";
 const nekoclient = require("nekos.life");
 const neko = new nekoclient();
-client.login("")
+client.login("Nzk4Mjk4MDI5Nzk0Nzg3MzM4.X_y--Q.ngW1HuLfLc7eO1fn6wf9fXmNGX0")
 client.on("ready", () => {
   console.log("♔♔♔♔♔♔♔♔♔♔♔♔♔♔♔♔♔♔♔");
   console.log("By COBRA"); /////BLACK JACK
